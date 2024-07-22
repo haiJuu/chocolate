@@ -2,15 +2,18 @@
     font-family: "LXGW WenKai TC", cursive;
     font-weight: 400;
     font-style: normal;
-  }
-  
+}
+
 
 header {
+    border: 1px solid black;
+    box-sizing: border-box;
     background-color: #fff;
 }
 
 header #logo .col-md-4 {
     border: 1px solid black;
+    box-sizing: border-box;
     height: 15vh;
 }
 
@@ -29,46 +32,101 @@ header #logo .col-md-4 table tr td {
 }
 
 header #logo .col-md-1 {
-    /* border: 1px solid black; */
+    border: 1px solid black;
     height: 10vh;
     font-size: 2.5vh;
+    line-height: 10vh;
 }
 
 header #logo .col-md-1 i {
+    margin: 0 1vh;
     cursor: pointer;
 }
 
+header #nav {
+    font-size: 1.25rem;
+}
+
 section#carousel {
-    /* border: 1px solid black; */
-    height: 39vw;
-    width: 100vw;
-    margin-top: 22vh;
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 50vw;
+    margin: 30vh auto 1rem;
 }
 
-section#carousel img {
-    height: 39vw;
-    width: 100vw;
+section#carousel .carousel {
+    margin: auto;
 }
 
-section#card .card{
+section#carousel .carousel-item img {
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 50vw;
+}
+
+section#card {
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+section#card .row .card {
+    border: none;
+    box-sizing: border-box;
     height: 35vw;
-    line-height: 0;
+    margin: 1rem auto;
 }
 
-section#card .card a img{
+section#card .row .card img {
+    border: none;
+    border-radius: none !important;
+    box-sizing: border-box;
     height: 35vw;
 }
 
-section#card .card .card-img-overlay{
-    height: 10vw;
-    background-color: rgba(255, 255, 255,75%);
+section#card .row .card .card-img-overlay {
+    background-color: rgba(255, 255, 255, 0%);
+    align-content: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+section#card .row .card .card-img-overlay p {
+    padding: 0 1rem;
+}
+
+section#card .row .card .card-img-overlay a {
+    text-decoration: none;
+    color: black;
+}
+
+section#card .row .card .card-img-overlay a button {
+    background-color: rgba(255, 255, 255, 75%);
+    border: none;
+    /* border-radius: 15px; */
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+}
+
+footer {
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+footer div {
+    /* border: 1px solid black;
+    box-sizing: border-box; */
+    margin: auto;
 }
 
 footer .logo {
     /* border: 1px solid black; */
+    /* box-sizing: border-box; */
     width: 14vw;
     height: 7vw;
-    margin-left: 3.5vw;
     font-size: 3.5vw;
     line-height: 3.5vw;
 }
@@ -78,9 +136,31 @@ footer .logo a {
     color: #4a1709;
 }
 
-footer i {
+footer #contact div {
+    /* border: 1px solid black;
+    box-sizing: border-box; */
+    display: inline-block;
+    text-align: left;
+    margin: auto;
+}
+
+
+footer #contact i {
     /* border: 1px solid black; */
+    /* box-sizing: border-box; */
     height: 1.5vw;
 }
 
 
+@media screen and (max-width:767px) {
+
+    section#card .row .card {
+        height: 60vw;
+    }
+
+    section#card .row .card img {
+        height: 60vw;
+    }
+
+
+}
