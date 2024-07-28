@@ -6,15 +6,17 @@
 
 
 header {
-    border: 1px solid black;
-    box-sizing: border-box;
+    height: 20vh;
     background-color: #fff;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
 }
 
 header #logo .col-md-4 {
+    height: 15vh;
     border: 1px solid black;
     box-sizing: border-box;
-    height: 15vh;
+    line-height: 15vh;
 }
 
 header #logo .col-md-4 a {
@@ -22,36 +24,30 @@ header #logo .col-md-4 a {
     color: #4a1709;
 }
 
-header #logo .col-md-4 table {
+header #logo .col-md-2 {
     height: 15vh;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    line-height: 15vh;
 }
 
-header #logo .col-md-4 table tr td {
-    border: 1px solid black;
-    font-size: 7.5vh;
-}
-
-header #logo .col-md-1 {
-    border: 1px solid black;
-    height: 10vh;
-    font-size: 2.5vh;
-    line-height: 10vh;
-}
-
-header #logo .col-md-1 i {
-    margin: 0 1vh;
+header #logo .col-md-2 a {
+    font-size: 1.5rem;
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }
 
 header #nav {
-    font-size: 1.25rem;
+    height: 5vh;
+    font-size: 1rem;
 }
 
 section#carousel {
-    border: 1px solid black;
+    height: 75vh;
+    /* border: 1px solid black; */
     box-sizing: border-box;
-    height: 50vw;
-    margin: 30vh auto 1rem;
+    margin: 25vh auto 1rem;
 }
 
 section#carousel .carousel {
@@ -59,64 +55,81 @@ section#carousel .carousel {
 }
 
 section#carousel .carousel-item img {
-    border: 1px solid black;
-    box-sizing: border-box;
-    height: 50vw;
-}
-
-section#card {
-    border: 1px solid black;
+    height: 75vh;
+    /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
-section#card .row .card {
+section#cards {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+}
+
+section#cards .row>.card {
+    height: 40vw;
+    background-color: #fff !important;
     border: none;
+    /* border: 1px solid black; */
     box-sizing: border-box;
-    height: 35vw;
     margin: 1rem auto;
 }
 
-section#card .row .card img {
-    border: none;
-    border-radius: none !important;
+section#cards .row>.card img {
+    height: 25vw;
+    width: 25vw;
+    /* border: 1px solid black; */
     box-sizing: border-box;
-    height: 35vw;
+    border-radius: 10%;
+    margin-left: -0.8rem;
 }
 
-section#card .row .card .card-img-overlay {
-    background-color: rgba(255, 255, 255, 0%);
+section#cards .row .card .card-img-overlay {
+    height: 25vw;
     align-content: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px black, 2px 2px 2px black;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    background-color: rgba(255, 255, 255, 0%);
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    color: black;
+    text-shadow: 1px 1px 1px white;
+    font-size: 16px;
+    line-height: 2rem;
 }
 
-section#card .row .card .card-img-overlay p {
-    padding: 0 1rem;
-}
-
-section#card .row .card .card-img-overlay a {
+section#cards .row .card .card-img-overlay a {
     text-decoration: none;
     color: black;
 }
 
-section#card .row .card .card-img-overlay a button {
-    background-color: rgba(255, 255, 255, 75%);
-    border: none;
-    /* border-radius: 15px; */
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
+section#cards .row .card .card-img-overlay a button {
+    background-color: rgba(255, 255, 255, 80%);
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 5px 10px;
+    margin: 1rem;
+    font-size: 16px;
     text-decoration: none;
     color: black;
+}
+
+section#cards .row .card .incards {
+    height: 10vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+section#cards .row .card .incards>.card {
+    height: 8vw;
+    width: 8vw;
 }
 
 footer {
+    height: 15vh;
     border: 1px solid black;
     box-sizing: border-box;
 }
 
-footer div {
+footer div>div  {
     /* border: 1px solid black;
     box-sizing: border-box; */
     margin: auto;
@@ -124,11 +137,9 @@ footer div {
 
 footer .logo {
     /* border: 1px solid black; */
-    /* box-sizing: border-box; */
-    width: 14vw;
-    height: 7vw;
+    box-sizing: border-box;
     font-size: 3.5vw;
-    line-height: 3.5vw;
+    line-height: 15vh;
 }
 
 footer .logo a {
@@ -137,28 +148,28 @@ footer .logo a {
 }
 
 footer #contact div {
+    display: inline-block;
     /* border: 1px solid black;
     box-sizing: border-box; */
-    display: inline-block;
-    text-align: left;
     margin: auto;
+    text-align: left;
 }
 
 
 footer #contact i {
-    /* border: 1px solid black; */
-    /* box-sizing: border-box; */
     height: 1.5vw;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
 }
 
 
 @media screen and (max-width:767px) {
 
-    section#card .row .card {
+    section#cards .row .card {
         height: 60vw;
     }
 
-    section#card .row .card img {
+    section#cards .row .card img {
         height: 60vw;
     }
 

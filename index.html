@@ -21,29 +21,16 @@
     <header class="container-fluid fixed-top">
         <div id="logo" class="row">
             <div class="col-md-4 offset-md-4 text-center"><a href="./index.html">
-                    <table border="1">
-                        <tr>
-                            <td rowspan="2" style="font-size: 15vh;">C</td>
-                            <td>h</td>
-                            <td>o</td>
-                            <td rowspan="2" style="font-size: 15vh;">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>o</td>
-                            <td>a</td>
-                            <td>t</td>
-                            <td>e</td>
-                        </tr>
-                    </table>
+                    Choose Chocolate
                 </a>
             </div>
-            <div class="col-md-1 offset-md-2 align-content-end text-center">
-                <i class="fas fa-regular fa-cart-shopping"></i>
-                <i class="fas fa-regular fa-user"></i>
+            <div class="col-md-2 offset-md-2 align-content-end text-center">
+                <a href="#">
+                    <i class="fas fa-regular fa-cart-shopping"></i>
+                </a>
+                <a href="#">
+                    <i class="fas fa-regular fa-user"></i>
+                </a>
             </div>
         </div>
         <div id="nav" class="row">
@@ -56,9 +43,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mx-auto">
-                            <li class="nav-item ms-5 me-5">
-                                <a class="nav-link active" aria-current="page" href="#">商品介紹</a>
+
+                            <li class="nav-item ms-5 me-5 dropdown ">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    精選品牌
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">ORIGIN</a></li>
+                                    <li><a class="dropdown-item" href="#">土庫驛TUKUYI</a></li>
+                                    <li><a class="dropdown-item" href="#">好田家</a></li>
+                                    <li><a class="dropdown-item" href="#">福灣巧克力</a></li>
+                                </ul>
                             </li>
+
                             <li class="nav-item ms-5 me-5 dropdown ">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -100,28 +98,31 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./images/carousel01.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/carousels/origintcc.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>七夕情人節</h5>
-                        <p>用世界級的巧克力，陪你一起雙向奔赴，不論要奔赴去哪，有愛情的地方都得帶上巧克力。</p>
+                        <h5>一片巧克力
+                            感受人生層次</h5>
+                        <p>透過獨家專利的微米粉碎技術
+                            將茶葉、咖啡甚至其他香料
+                            與巧克力做到完美的結合</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/carousel02.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/carousels/tukuyicocoa.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5></h5>
                         <p></p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/carousel03.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/carousels/goodfarms.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>7月7日「國際巧克力日」</h5>
-                        <p>為紀念在西元1550年7月7日，可可豆被引進歐洲，自此為歐洲的飲食習慣文化上帶來炫風式的改變。</p>
+                        <h5></h5>
+                        <p></p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="./images/carousel04.jpg" class="d-block w-100" alt="...">
+                    <img src="./images/carousels/fuwanchocolate.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5></h5>
                         <p></p>
@@ -141,56 +142,115 @@
         </div>
     </section>
 
-    <section id="card">
+    <section id="cards">
 
         <div class="row">
-            <div class="card text-bg-light col-md-5 col-10 text-center">
-                <img src="./images/card01.jpg" class="card-img img-fluid" alt="紅寶石巧克力">
+            <div class="card text-bg-light col-md-5 col-sm-10 text-end">
+                <img src="./images/cards/origintcc.jpg" class="card-img img-fluid" alt="紅寶石巧克力">
                 <div class="card-img-overlay ">
-                    <p class="card-text">紅寶石巧克力<br>
-                        <small>知名可可產品製造商百樂嘉利寶宣布成功研發巧克力的第四種形態—由紅寶石可可豆製成的“紅寶石”巧克力(Ruby Chocolate)。</small>
+
+                    <p class="card-text">
+                        ORIGIN，<br>帶你深入產地，<br>了解這些美好的風味從何而來，<br>我們相信當你親身體驗了這些職人以及土地的故事，<br>手中的那一抹滋味將截然不同。
                     </p>
                     <a href="#">
-                        <button class="card-title">最新消息</button>
+                        <button class="card-title">更多關於 ORIGIN</button>
                     </a>
                 </div>
+
+                <div class="incards">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                </div>
             </div>
-            <div class="card text-bg-light col-md-5 col-10 text-center">
-                <img src="./images/card02.jpg" class="card-img img-fluid" alt="75%經典生巧克力">
+
+            <div class="card text-bg-light col-md-5 col-sm-10 text-end">
+                <img src="./images/cards/tukuyicocoa.jpg" class="card-img img-fluid" alt="75%經典生巧克力">
                 <div class="card-img-overlay ">
                     <p class="card-text">
-                        75%經典生巧克力<br>
-                        <small>品質優良的法國可可原豆，混合綿密法國奶油，點綴香醇的威士忌提味，苦甜適中並帶有淡淡奶香，口感滑順，入口即化！</small>
+                        土庫驛可可莊園，<br>承載了世界頂尖的人與技術，<br>致力於帶動地方小鎮重生的可能，<br>希望您用心感受這裡的美好。
                     </p>
                     <a href="#">
-                        <button class="card-title">主打商品</button>
+                        <button class="card-title">更多關於 土庫驛可可莊園</button>
                     </a>
+                </div>
+                <div class="incards">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="card text-bg-light col-md-5 col-10 text-center">
-                <img src="./images/card03.jpg" class="card-img img-fluid" alt="巧克力的由來">
+            <div class="card text-bg-light col-md-5 col-sm-10 text-end">
+                <img src="./images/cards/goodfarms.jpg" class="card-img img-fluid" alt="巧克力的由來">
                 <div class="card-img-overlay ">
-                    <p class="card-text">巧克力的由來<br>
-                        <small>阿茲特克人們為皇室專門製作熱的飲料稱之為Chocolatl，意思是「熱飲」，是「巧克力」這個詞的來源。</small>
+                    <p class="card-text">
+                        好田家，<br>是以 "好" 跟 "田" 為出發，<br>好的田能生產出好的原料，<br>好的原料再經過好的加工，<br>則能成為好的食物。
                     </p>
                     <a href="#">
-                        <button class="card-title">閱讀知識</button>
+                        <button class="card-title">更多關於 好田家</button>
                     </a>
+                </div>
+                <div class="incards">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
                 </div>
             </div>
-            <div class="card text-bg-light col-md-5 col-10 text-center">
-                <img src="./images/card04.jpg" class="card-img img-fluid" alt="送禮諮詢">
+            <div class="card text-bg-light col-md-5 col-sm-10 text-end">
+                <img src="./images/cards/fuwanchocolate.jpg" class="card-img img-fluid" alt="送禮諮詢">
                 <div class="card-img-overlay ">
-                    <p class="card-text">送禮諮詢<br>
-                        <small>可以滿足您的任何願望，從最酷的派對甜點到量身定做的巧克力禮盒，都將提供你最好的方案選擇。 </small>
+                    <p class="card-text">
+                        福灣巧克力，<br>致力於以突破性的巧克力製作工藝，<br>帶給世界美妙的巧克力飲食文化體驗，<br>期望讓巧克力為每個靈魂帶來美好愉悅的生命時刻。
                     </p>
                     <a href="#">
-                        <button class="card-title">聯絡我們</button>
+                        <button class="card-title">更多關於 福灣巧克力</button>
                     </a>
                 </div>
+                <div class="incards">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="..." title="">
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -198,12 +258,12 @@
 
     <footer>
         <div class="row">
-            <div class="col-md-4 col-10 text-center">
+            <div class="col-md-4 col-sm-10 text-center">
                 <div class="logo text-start align-content-center">
-                    <a href="./index.html">ChoColate</a>
+                    <a href="./index.html">Choose Chocolate</a>
                 </div>
             </div>
-            <div id="contact" class="col-md-4 col-10 text-center">
+            <div id="contact" class="col-md-4 col-sm-10 text-center">
                 <div>
                     <i class="fas fa-regular fa-phone"></i> 0900999000<br>
                     <i class="fas fa-regular fa-clock"></i> 星期一至日 10:00～18:00<br>
@@ -211,7 +271,7 @@
                     <i class="fa-solid fa-location-arrow"></i> 南投縣草屯鎮
                 </div>
             </div>
-            <div class="col-md-4 col-10 text-center align-content-end pe-5">
+            <div class="col-md-4 col-sm-10 text-center align-content-end pe-5">
                 Copyright © 2024 Haijuu
             </div>
         </div>
