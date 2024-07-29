@@ -20,7 +20,7 @@
 
     <header class="container-fluid fixed-top">
         <div id="logo" class="row">
-            <div class="col-md-4 offset-md-4 text-center"><a href="./index.html">
+            <div class="col-md-4 offset-md-4 text-center"><a href="./index.php">
                     Choose Chocolate
                 </a>
             </div>
@@ -50,7 +50,7 @@
                                     精選品牌
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">ORIGIN</a></li>
+                                    <li><a class="dropdown-item" href="#">起源ORIGIN</a></li>
                                     <li><a class="dropdown-item" href="#">土庫驛TUKUYI</a></li>
                                     <li><a class="dropdown-item" href="#">好田家</a></li>
                                     <li><a class="dropdown-item" href="#">福灣巧克力</a></li>
@@ -146,7 +146,7 @@
 
         <div class="row">
             <div class="card text-bg-light col-md-5 col-sm-10 text-end">
-                <img src="./images/cards/origintcc.jpg" class="card-img img-fluid" alt="紅寶石巧克力">
+                <img src="./images/brand/origintcc.jpg" class="card-img img-fluid" alt="">
                 <div class="card-img-overlay ">
 
                     <p class="card-text">
@@ -174,7 +174,7 @@
             </div>
 
             <div class="card text-bg-light col-md-5 col-sm-10 text-end">
-                <img src="./images/cards/tukuyicocoa.jpg" class="card-img img-fluid" alt="75%經典生巧克力">
+                <img src="./images/brand/tukuyicocoa.jpg" class="card-img img-fluid" alt="">
                 <div class="card-img-overlay ">
                     <p class="card-text">
                         土庫驛可可莊園，<br>承載了世界頂尖的人與技術，<br>致力於帶動地方小鎮重生的可能，<br>希望您用心感受這裡的美好。
@@ -202,7 +202,7 @@
 
         <div class="row">
             <div class="card text-bg-light col-md-5 col-sm-10 text-end">
-                <img src="./images/cards/goodfarms.jpg" class="card-img img-fluid" alt="巧克力的由來">
+                <img src="./images/brand/goodfarms.jpg" class="card-img img-fluid" alt="">
                 <div class="card-img-overlay ">
                     <p class="card-text">
                         好田家，<br>是以 "好" 跟 "田" 為出發，<br>好的田能生產出好的原料，<br>好的原料再經過好的加工，<br>則能成為好的食物。
@@ -227,7 +227,7 @@
                 </div>
             </div>
             <div class="card text-bg-light col-md-5 col-sm-10 text-end">
-                <img src="./images/cards/fuwanchocolate.jpg" class="card-img img-fluid" alt="送禮諮詢">
+                <img src="./images/brand/fuwanchocolate.jpg" class="card-img img-fluid" alt="送禮諮詢">
                 <div class="card-img-overlay ">
                     <p class="card-text">
                         福灣巧克力，<br>致力於以突破性的巧克力製作工藝，<br>帶給世界美妙的巧克力飲食文化體驗，<br>期望讓巧克力為每個靈魂帶來美好愉悅的生命時刻。
@@ -260,7 +260,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-10 text-center">
                 <div class="logo text-start align-content-center">
-                    <a href="./index.html">Choose Chocolate</a>
+                    <a href="./index.php">Choose Chocolate</a>
                 </div>
             </div>
             <div id="contact" class="col-md-4 col-sm-10 text-center">
