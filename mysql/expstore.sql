@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024-08-03 11:50:10
+-- 產生時間： 2024-08-04 05:15:46
 -- 伺服器版本： 8.3.0
 -- PHP 版本： 8.2.18
 
@@ -62,10 +62,10 @@ CREATE TABLE IF NOT EXISTS `brand` (
 --
 
 INSERT INTO `brand` (`b_id`, `cname`, `ename`, `b_logo`, `b_content`, `create_date`) VALUES
-(4, '福灣巧克力', 'FU WAN CHOCOLATE', 'fuwanchocolate.jpg', '福灣巧克力，致力於以突破性的巧克力製作工藝，帶給世界美妙的巧克力飲食文化體驗，期望讓巧克力為每個靈魂帶來美好愉悅的生命時刻。', '2024-08-03 11:11:15'),
-(3, '好田家', 'Good Farms', 'goodfarms.jpg', '好田家，是以 \"好\" 跟 \"田\" 為出發，好的田能生產出好的原料，好的原料再經過好的加工，則能成為好的食物。', '2024-08-03 11:11:33'),
-(1, '起源', 'ORIGIN', 'origintcc.jpg', 'ORIGIN，帶你深入產地，了解這些美好的風味從何而來，我們相信當你親身體驗了這些職人以及土地的故事，手中的那一抹滋味將截然不同。', '2024-08-03 11:11:44'),
-(2, '土庫驛可可莊園', 'TuKuYi', 'tukuyicocoa.jpg', '土庫驛可可莊園，承載了世界頂尖的人與技術，致力於帶動地方小鎮重生的可能，希望您用心感受這裡的美好。', '2024-08-03 11:11:50');
+(4, '福灣巧克力', 'FU WAN CHOCOLATE', 'fuwanchocolate.jpg', '福灣巧克力，<br>致力於以突破性的巧克力製作工藝，<br>帶給世界美妙的巧克力飲食文化體驗，<br>期望讓巧克力為每個靈魂帶來美好愉悅的生命時刻。', '2024-08-03 11:11:15'),
+(3, '好田家', 'Good Farms', 'goodfarms.jpg', '好田家，<br>是以 \"好\" 跟 \"田\" 為出發，<br>好的田能生產出好的原料，<br>好的原料再經過好的加工，<br>則能成為好的食物。', '2024-08-03 11:11:33'),
+(1, '起源', 'ORIGIN', 'origintcc.jpg', 'ORIGIN，<br>帶你深入產地，<br>了解這些美好的風味從何而來，<br>我們相信當你親身體驗了這些職人以及土地的故事，<br>手中的那一抹滋味將截然不同。', '2024-08-03 11:11:44'),
+(2, '土庫驛可可莊園', 'TuKuYi', 'tukuyicocoa.jpg', '土庫驛可可莊園，<br>承載了世界頂尖的人與技術，<br>致力於帶動地方小鎮重生的可能，<br>希望您用心感受這裡的美好。', '2024-08-03 11:11:50');
 
 -- --------------------------------------------------------
 
@@ -77,12 +77,12 @@ DROP TABLE IF EXISTS `carousel`;
 CREATE TABLE IF NOT EXISTS `carousel` (
   `caro_id` int NOT NULL AUTO_INCREMENT COMMENT '輪播編號',
   `b_id` int NOT NULL COMMENT '品牌編號',
+  `p_id` int NOT NULL COMMENT '產品編號',
   `caro_title` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '輪播標題',
   `caro_content` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '輪播內容介紹',
   `caro_online` tinyint(1) NOT NULL DEFAULT '1' COMMENT '上下架',
   `caro_sort` int NOT NULL COMMENT '輪播排序',
   `caro_pic` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '輪播圖檔名稱',
-  `p_id` int NOT NULL COMMENT '產品編號',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`caro_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
@@ -91,11 +91,11 @@ CREATE TABLE IF NOT EXISTS `carousel` (
 -- 傾印資料表的資料 `carousel`
 --
 
-INSERT INTO `carousel` (`caro_id`, `b_id`, `caro_title`, `caro_content`, `caro_online`, `caro_sort`, `caro_pic`, `p_id`, `create_date`) VALUES
-(1, 1, '一片巧克力感受人生層次', '透過獨家專利的微米粉碎技術將茶葉、咖啡甚至其他香料與巧克力做到完美的結合', 1, 1, 'origintcc.jpg', 1, '2024-08-03 11:16:26'),
-(2, 2, '', '', 1, 2, 'tukuyicocoa.jpg', 2, '2024-08-03 11:16:33'),
-(3, 3, '', '', 1, 3, 'goodfarms.jpg', 3, '2024-08-03 11:16:38'),
-(4, 4, '', '', 1, 4, 'fuwanchocolate.jpg', 4, '2024-08-03 11:16:44');
+INSERT INTO `carousel` (`caro_id`, `b_id`, `p_id`, `caro_title`, `caro_content`, `caro_online`, `caro_sort`, `caro_pic`, `create_date`) VALUES
+(1, 1, 1, '一片巧克力感受人生層次', '透過獨家專利的微米粉碎技術將茶葉、咖啡甚至其他香料與巧克力做到完美的結合', 1, 1, 'origintcc.jpg', '2024-08-03 11:16:26'),
+(2, 2, 2, '', '', 1, 2, 'tukuyicocoa.jpg', '2024-08-03 11:16:33'),
+(3, 3, 3, '', '', 1, 3, 'goodfarms.jpg', '2024-08-03 11:16:38'),
+(4, 4, 4, '', '', 1, 4, 'fuwanchocolate.jpg', '2024-08-03 11:16:44');
 
 -- --------------------------------------------------------
 
@@ -169,10 +169,33 @@ INSERT INTO `city` (`auto_no`, `name`, `city_order`, `state`) VALUES
 DROP TABLE IF EXISTS `hot`;
 CREATE TABLE IF NOT EXISTS `hot` (
   `h_id` int NOT NULL AUTO_INCREMENT COMMENT '熱銷商品流水號',
+  `b_id` int NOT NULL COMMENT '品牌編號',
   `p_id` int NOT NULL COMMENT '產品編號',
   `h_sort` int DEFAULT NULL COMMENT '熱銷商品排名',
   PRIMARY KEY (`h_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- 傾印資料表的資料 `hot`
+--
+
+INSERT INTO `hot` (`h_id`, `b_id`, `p_id`, `h_sort`) VALUES
+(1, 1, 3, 1),
+(2, 1, 6, 2),
+(3, 1, 9, 3),
+(4, 1, 12, 4),
+(5, 2, 18, 1),
+(6, 2, 28, 2),
+(7, 2, 38, 3),
+(8, 2, 48, 4),
+(9, 3, 55, 1),
+(10, 3, 60, 2),
+(11, 3, 65, 3),
+(12, 3, 70, 4),
+(13, 4, 75, 1),
+(14, 4, 85, 2),
+(15, 4, 95, 3),
+(16, 4, 105, 4);
 
 -- --------------------------------------------------------
 
@@ -397,71 +420,71 @@ CREATE TABLE IF NOT EXISTS `product_img` (
 --
 
 INSERT INTO `product_img` (`img_id`, `p_id`, `img_file`, `sort`, `create_date`) VALUES
-(1, 1, '85% Peru Chuncho Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(2, 1, '85% Peru Chuncho Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(1, 1, '85_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(2, 1, '85_Peru_Chuncho_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (3, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_02.png', 3, '2024-08-03 11:38:03'),
 (4, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_03.png', 4, '2024-08-03 11:38:03'),
-(5, 2, '70% Peru Chuncho Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(6, 2, '70% Peru Chuncho Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(5, 2, '70_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(6, 2, '70_Peru_Chuncho_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (7, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_02.png', 3, '2024-08-03 11:38:03'),
 (8, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_03.png', 4, '2024-08-03 11:38:03'),
-(9, 3, '75% Exclusive ORIGIN No.1 Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(10, 3, '75% Exclusive ORIGIN No.1 Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(9, 3, '75_Exclusive_ORIGIN_No.1_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(10, 3, '75_Exclusive_ORIGIN_No.1_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (11, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_02.png', 3, '2024-08-03 11:38:03'),
 (12, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_03.png', 4, '2024-08-03 11:38:03'),
-(13, 4, '100% Peru Chuncho Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(14, 4, '100% Peru Chuncho Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(13, 4, '100_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(14, 4, '100_Peru_Chuncho_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (15, 4, 'product_chocolate_peru_chuncho_dark_chocolate_100_01.png', 3, '2024-08-03 11:38:03'),
-(16, 5, '85% Ecuador Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(17, 5, '85% Ecuador Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(16, 5, '85_Ecuador_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(17, 5, '85_Ecuador_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (18, 5, 'product_chocolate_ecuador_dark_chocolate_85_01.png', 3, '2024-08-03 11:38:03'),
-(19, 6, '70% Ecuador Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(20, 6, '70% Ecuador Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(19, 6, '70_Ecuador_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(20, 6, '70_Ecuador_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (21, 6, 'product_chocolate_ecuador_dark_chocolate_70_02.jpg', 3, '2024-08-03 11:38:03'),
 (22, 6, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 4, '2024-08-03 11:38:03'),
-(23, 7, '70% Dominican Dark Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(24, 7, '70% Dominican Dark Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(23, 7, '70_Dominican_Dark_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(24, 7, '70_Dominican_Dark_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (25, 7, 'product_chocolate_dominican_dark_chocolate_02.png', 3, '2024-08-03 11:38:03'),
-(26, 8, '70% Kampot Red Peppercorns Flavored Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(27, 8, '70% Kampot Red Peppercorns Flavored Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(26, 8, '70_Kampot_Red_Peppercorns_Flavored_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(27, 8, '70_Kampot_Red_Peppercorns_Flavored_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (28, 8, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_02.png', 3, '2024-08-03 11:38:03'),
 (29, 8, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_03.png', 4, '2024-08-03 11:38:03'),
-(30, 9, '70% Taiwan Ruby Tea Flavored Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(31, 9, '70% Taiwan Ruby Tea Flavored Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(30, 9, '70_Taiwan_Ruby_Tea_Flavored_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(31, 9, '70_Taiwan_Ruby_Tea_Flavored_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (32, 9, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_02.png', 3, '2024-08-03 11:38:03'),
 (33, 9, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_03.png', 4, '2024-08-03 11:38:03'),
 (34, 9, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_04.png', 5, '2024-08-03 11:38:03'),
-(35, 10, '70% Taiwan Honey Flavored Red Oolong01.jpg', 1, '2024-08-03 11:38:03'),
-(36, 10, '70% Taiwan Honey Flavored Red Oolong02.jpg', 2, '2024-08-03 11:38:03'),
+(35, 10, '70_Taiwan_Honey_Flavored_Red_Oolong01.jpg', 1, '2024-08-03 11:38:03'),
+(36, 10, '70_Taiwan_Honey_Flavored_Red_Oolong02.jpg', 2, '2024-08-03 11:38:03'),
 (37, 10, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_02.png', 3, '2024-08-03 11:38:03'),
 (38, 10, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_04.png', 4, '2024-08-03 11:38:03'),
 (39, 10, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_03.png', 5, '2024-08-03 11:38:03'),
-(40, 11, '70% Fleur de sel Flavored Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(41, 11, '70% Fleur de sel Flavored Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(40, 11, '70_Fleur_de_sel_Flavored_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(41, 11, '70_Fleur_de_sel_Flavored_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (42, 11, 'product_chocolate_fleur_de_sel_flavored_chocolate_02.png', 3, '2024-08-03 11:38:03'),
 (43, 11, 'product_chocolate_fleur_de_sel_flavored_chocolate_01.png', 4, '2024-08-03 11:38:03'),
-(44, 12, '70% Taitung Roselle Flavored Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(45, 12, '70% Taitung Roselle Flavored Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(44, 12, '70_Taitung_Roselle_Flavored_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(45, 12, '70_Taitung_Roselle_Flavored_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (46, 12, 'product_chocolate_taitung_roselle_flavored_chocolate_02.png', 3, '2024-08-03 11:38:03'),
 (47, 12, 'product_chocolate_taitung_roselle_flavored_chocolate_03.png', 4, '2024-08-03 11:38:03'),
-(48, 13, '70% Light Roasted Coffee Flavored Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(49, 13, '70% Light Roasted Coffee Flavored Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(48, 13, '70_Light_Roasted_Coffee_Lavored_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(49, 13, '70_Light_Roasted_Coffee_Lavored_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (50, 13, 'product_chocolate_light_roasted_coffee_flavored_chocolate_02.png', 3, '2024-08-03 11:38:03'),
-(51, 14, '70% Deep Roasted Coffee Flavored Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(52, 14, '70% Deep Roasted Coffee Flavored Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(51, 14, '70_Deep_Roasted_Coffee_Flavored_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(52, 14, '70_Deep_Roasted_Coffee_Flavored_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (53, 14, 'product_chocolate_giftbox_deep_roasted_coffee.png', 3, '2024-08-03 11:38:03'),
 (54, 14, 'product_chocolate_deep_roasted_coffee_flavored_chocolate_03.png', 4, '2024-08-03 11:38:03'),
-(55, 15, '50% Peru Chuncho Milk Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(56, 15, '50% Peru Chuncho Milk Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(55, 15, '50_Peru_Chuncho_Milk_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(56, 15, '50_Peru_Chuncho_Milk_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (57, 15, 'product_chocolate_peru_chuncho_milk_chocolate_01.png', 3, '2024-08-03 11:38:03'),
 (58, 15, 'product_chocolate_peru_chuncho_milk_chocolate_02.png', 4, '2024-08-03 11:38:03'),
-(59, 16, '50% Taiwan Longan Honey Flavored Oolong01.jpg', 1, '2024-08-03 11:38:03'),
-(60, 16, '50% Taiwan Longan Honey Flavored Oolong02.jpg', 2, '2024-08-03 11:38:03'),
+(59, 16, '50_Taiwan_Longan_Honey_Flavored_Oolong01.jpg', 1, '2024-08-03 11:38:03'),
+(60, 16, '50_Taiwan_Longan_Honey_Flavored_Oolong02.jpg', 2, '2024-08-03 11:38:03'),
 (61, 16, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_50_02.png', 3, '2024-08-03 11:38:03'),
 (62, 16, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_04.png', 4, '2024-08-03 11:38:03'),
 (63, 16, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_06.png', 5, '2024-08-03 11:38:03'),
-(64, 17, '60% Ecuador Milk Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
-(65, 17, '60% Ecuador Milk Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
+(64, 17, '60_Ecuador_Milk_Chocolate01.jpg', 1, '2024-08-03 11:38:03'),
+(65, 17, '60_Ecuador_Milk_Chocolate02.jpg', 2, '2024-08-03 11:38:03'),
 (66, 17, 'product_chocolate_ecuador_dark_chocolate_85_01.png', 3, '2024-08-03 11:38:03'),
 (67, 17, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 4, '2024-08-03 11:38:03'),
 (68, 18, '1698216040_da9a0f0c059b7651cf33.jpg', 1, '2024-08-03 11:38:03'),

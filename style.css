@@ -6,66 +6,67 @@
 
 
 header {
-    height: 20vh;
+    height: 22.5vh;
     background-color: #fff;
     /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
-header #logo .col-md-4 {
+header .logo {
     height: 15vh;
-    border: 1px solid black;
-    box-sizing: border-box;
     line-height: 15vh;
 }
 
-header #logo .col-md-4 a {
+header .logo .col-md-4 {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+}
+
+header .logo .col-md-4 a {
     text-decoration: none;
     color: #4a1709;
 }
 
-header #logo .col-md-2 {
-    height: 15vh;
+header .logo .col-md-2 {
     /* border: 1px solid black; */
     box-sizing: border-box;
-    line-height: 15vh;
 }
 
-header #logo .col-md-2 a {
+header .logo .col-md-2 a {
     font-size: 1.5rem;
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-header #nav {
-    height: 5vh;
+header .nav {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
     font-size: 1rem;
 }
 
-section#carousel {
+section#content {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+}
+
+section#content .carousel {
+    height: 75vh;
+    margin: 25vh auto 5vh;
+}
+
+section#content .carousel-item img {
     height: 75vh;
     /* border: 1px solid black; */
     box-sizing: border-box;
-    margin: 25vh auto 1rem;
 }
 
-section#carousel .carousel {
-    margin: auto;
-}
-
-section#carousel .carousel-item img {
-    height: 75vh;
+section#content .brand {
     /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
-section#cards {
-    /* border: 1px solid black; */
-    box-sizing: border-box;
-}
-
-section#cards .row>.card {
+section#content .brand.row>.card {
     height: 40vw;
     background-color: #fff !important;
     border: none;
@@ -74,7 +75,7 @@ section#cards .row>.card {
     margin: 1rem auto;
 }
 
-section#cards .row>.card img {
+section#content .brand.row>.card img {
     height: 25vw;
     width: 25vw;
     /* border: 1px solid black; */
@@ -83,7 +84,7 @@ section#cards .row>.card img {
     margin-left: -0.8rem;
 }
 
-section#cards .row .card .card-img-overlay {
+section#content .brand.row .card .card-img-overlay {
     height: 25vw;
     align-content: center;
     background-color: rgba(255, 255, 255, 0%);
@@ -95,12 +96,12 @@ section#cards .row .card .card-img-overlay {
     line-height: 2rem;
 }
 
-section#cards .row .card .card-img-overlay a {
+section#content .brand.row .card .card-img-overlay a {
     text-decoration: none;
     color: black;
 }
 
-section#cards .row .card .card-img-overlay a button {
+section#content .brand.row .card .card-img-overlay a button {
     background-color: rgba(255, 255, 255, 80%);
     border: 1px solid black;
     border-radius: 0.5rem;
@@ -111,25 +112,33 @@ section#cards .row .card .card-img-overlay a button {
     color: black;
 }
 
-section#cards .row .card .incards {
-    height: 10vw;
+section#content .brand.row .card .hot {
+    height: 8vw;
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
 }
 
-section#cards .row .card .incards>.card {
+section#content .brand.row .card .hot>.card {
+    border: none;
+}
+
+section#content .brand.row .card .hot>.card img {
     height: 8vw;
     width: 8vw;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    margin-left: 0.1rem;
 }
 
 footer {
     height: 15vh;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
+    margin-top: 1.5rem;
 }
 
-footer div>div  {
+footer div>div {
     /* border: 1px solid black;
     box-sizing: border-box; */
     margin: auto;
@@ -165,11 +174,11 @@ footer #contact i {
 
 @media screen and (max-width:767px) {
 
-    section#cards .row .card {
+    section#content .brand.row .card {
         height: 60vw;
     }
 
-    section#cards .row .card img {
+    section#content .brand.row .card img {
         height: 60vw;
     }
 
