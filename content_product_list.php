@@ -22,7 +22,7 @@ while ($pLFetch = $productList->fetch()) { ?>
             <div class="card-body">
                 <h5 class="card-title"><?php echo $pLFetch['p_name']; ?></h5>
                 <p class="card-text"><?php echo mb_substr($pLFetch['p_intro'], 0, 30, "utf-8"); ?></p>
-                <p class="card-text">NT<?php echo $pLFetch['p_price']; ?></p>
+                <p class="card-text">NT$ <?php echo $pLFetch['p_price']; ?></p>
                 <a href="#" class="btn btn-primary">更多資訊</a>
                 <a href="#" class="btn btn-success">放購物車</a>
             </div>
