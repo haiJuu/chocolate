@@ -67,7 +67,7 @@ section#content .brand {
 }
 
 section#content .brand.row>.card {
-    height: 40vw;
+    /* height: 40vw; */
     background-color: #fff !important;
     border: none;
     /* border: 1px solid black; */
@@ -77,8 +77,8 @@ section#content .brand.row>.card {
 
 section#content .brand.row>.card img {
     height: 25vw;
-    width: 25vw;
-    /* border: 1px solid black; */
+    width:  25vw;
+    border: 1px solid black;
     box-sizing: border-box;
     border-radius: 10%;
     margin-left: -0.8rem;
@@ -88,7 +88,7 @@ section#content .brand.row .card .card-img-overlay {
     height: 25vw;
     align-content: center;
     background-color: rgba(255, 255, 255, 0%);
-    /* border: 1px solid black; */
+    border: 1px solid black;
     box-sizing: border-box;
     color: black;
     text-shadow: 1px 1px 1px white;
@@ -101,7 +101,7 @@ section#content .brand.row .card .card-img-overlay a {
     color: black;
 }
 
-section#content .brand.row .card .card-img-overlay a button {
+/* section#content .brand.row .card .card-img-overlay a button {
     background-color: rgba(255, 255, 255, 80%);
     border: 1px solid black;
     border-radius: 0.5rem;
@@ -110,10 +110,9 @@ section#content .brand.row .card .card-img-overlay a button {
     font-size: 16px;
     text-decoration: none;
     color: black;
-}
+} */
 
 section#content .brand.row .card .hot {
-    height: 8vw;
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;

@@ -8,16 +8,16 @@
     while ($brand_result = $brand->fetch()) {
     ?>
 
-        <div class="card text-bg-light col-md-5 col-sm-10 text-end">
+        <div class="card text-bg-light col-md-5 col-sm-10 col-10 text-end">
             <img src="./images/brand/<?php echo $brand_result['b_logo'] ?>" class="card-img img-fluid" alt="<?php echo $brand_result['cname'] ?>">
             <div class="card-img-overlay ">
 
                 <p class="card-text">
                     <?php echo $brand_result['b_content'] ?>
                 </p>
-                <a href="#">
+                <!-- <a href="#">
                     <button class="card-title">更多關於 <?php echo $brand_result['ename'] ?></button>
-                </a>
+                </a> -->
             </div>
 
             <div class="hot">
