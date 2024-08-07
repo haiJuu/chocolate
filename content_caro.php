@@ -1,4 +1,4 @@
-<div id="carouselExampleCaptions" class="carousel slide col-md-11 col-11" data-bs-ride="carousel">
+<div id="carouselExampleCaptions" class="carousel slide col-md-12 col-sm-12 col-12" data-bs-ride="carousel">
 
     <div class="carousel-indicators">
         <?php
@@ -20,13 +20,12 @@
         //     return (($num == $cheak_num) ? "active" : "");
         // }
         ?>
-        <img src="./images/product/" alt="">
         <?php
         $i = 0;
         while ($carousel_result_online = $carousel_online->fetch()) {
         ?>
             <div class="carousel-item <?php echo activeShow($i, 0) ?>">
-                <img src="./images/carousels/<?php echo $carousel_result_online['caro_pic'] ?>" class="d-block w-100" alt="<?php echo $carousel_result_online["caro_title"] ?>">
+                <img src="./images/carousels/<?php echo $carousel_result_online['caro_pic'] ?>" class="d-block w-100 img-fluid" alt="<?php echo $carousel_result_online["caro_title"] ?>">
                 <div class="carousel-caption d-none d-md-block">
                     <h5><?php echo $carousel_result_online["caro_title"] ?></h5>
                     <p><?php echo $carousel_result_online["caro_content"] ?></p>

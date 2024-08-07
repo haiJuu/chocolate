@@ -1,3 +1,31 @@
+<hr>
+<div class="product-start">
+    <div class="row text-center">
+        <div class="col-md-12 col-sm-12 col-12">
+            <h2>商品一覽</h2>
+        </div>
+    </div>
+
+    <br>
+    <div class="row text-center">
+        <div class="col-md-12 col-sm-12 col-12">
+            <?php
+            $query_brand = "SELECT * FROM brand ORDER BY b_id";
+            $brand = $link->query($query_brand);
+            while ($brand_result = $brand->fetch()) {
+            ?>
+                <img src="./images/brand/<?php echo $brand_result['b_logo'] ?>" alt="<?php echo $brand_result['cname'] ?>" style="width:3vw;margin-right:2rem;border-radius:10%">
+            <?php } ?>
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-md-12 col-sm-12 col-12">
+            <div>黑巧克力 | 風味巧克力 | 牛奶巧克力 | 巧克力豆 | 生巧克力</div>
+        </div>
+    </div>
+</div>
+<hr>
 <?php
 $maxRows_rs = 12;
 $pageNum_rs = 0;
@@ -14,21 +42,25 @@ $i = 1;
 ?>
 <?php
 while ($pLFetch = $productList->fetch()) { ?>
-    <?php if ($i % 4 == 1) { ?>
-        <div class="row text-center">
+    <?php if ($i % 6 == 1) { ?>
+        <div class="product row text-center">
         <?php } ?>
-        <div class="card col-md-3">
-            <img src="./images/product/<?php echo $pLFetch['img_file']; ?>" class="card-img-top" alt="<?php echo $pLFetch['p_name']; ?>" title="<?php echo $pLFetch['p_name']; ?>">
+
+        <div class="card col-md-2 col-sm-4 col-6">
+            <img src="./images/product/<?php echo $pLFetch['img_file']; ?>" class="card-img-top" alt="<?php echo $pLFetch['p_name']; ?>" title="<?php echo $pLFetch['p_name']; ?>" onmouseover="">
             <div class="card-body">
-                <h5 class="card-title"><?php echo $pLFetch['p_name']; ?></h5>
-                <p class="card-text"><?php echo mb_substr($pLFetch['p_intro'], 0, 30, "utf-8"); ?></p>
-                <p class="card-text">NT$ <?php echo $pLFetch['p_price']; ?></p>
-                <a href="#" class="btn btn-primary">更多資訊</a>
-                <a href="#" class="btn btn-success">放購物車</a>
+                <a href="#">
+                    <h5 class="card-title"><?php echo $pLFetch['p_name']; ?></h5>
+                </a>
+                <p class="card-text"><?php echo mb_substr($pLFetch['p_intro'], 0, 60, "utf-8"); ?></p>
+                <p class="card-text">NT$ <?php echo $pLFetch['p_price']; ?> <a href="#">
+                    <i class="fas fa-regular fa-cart-shopping"></i>
+                </a></p>
+                
             </div>
         </div>
 
-        <?php if ($i % 4 == 0 || $i == $productList->rowCount()) { ?>
+        <?php if ($i % 6 == 0 || $i == $productList->rowCount()) { ?>
         </div>
     <?php } ?>
 

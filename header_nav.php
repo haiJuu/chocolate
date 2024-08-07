@@ -1,11 +1,17 @@
 <div class="nav row">
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item ms-4 me-4">
+                        <a class="nav-link" href="#" role="button" aria-expanded="false">
+                            關於 CHO
+                        </a>
+                    </li>
 
                     <?php
                     function navbarRepeat()
@@ -35,6 +41,12 @@
                     <?php } ?>
 
                     <?php navbarRepeat() ?>
+
+                    <li class="nav-item ms-4 me-4">
+                        <a class="nav-link" href="#" role="button" aria-expanded="false">
+                            最新消息
+                        </a>
+                    </li>
 
                 </ul>
             </div>

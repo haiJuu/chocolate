@@ -3,12 +3,12 @@
             Choose Chocolate
         </a>
     </div>
-    <div class="col-md-2 col-sm-2 col-2 offset-2 align-content-end text-center">
+    <div class="col-md-2 col-sm-2 col-2 offset-2 align-content-start text-center">
         <a href="#">
-            <i class="fas fa-regular fa-cart-shopping"></i>
+            <i class="fas fa-shopping-bag"></i>
         </a>
         <a href="#">
-            <i class="fas fa-regular fa-user"></i>
+            <i class="fas fa-portrait"></i>
         </a>
     </div>
 </div>

@@ -14,12 +14,12 @@ header {
 
 header .logo {
     height: 15vh;
-    line-height: 15vh;
 }
 
 header .logo .col-md-4 {
     /* border: 1px solid black; */
     box-sizing: border-box;
+    line-height: 15vh;
 }
 
 header .logo .col-md-4 a {
@@ -30,13 +30,18 @@ header .logo .col-md-4 a {
 header .logo .col-md-2 {
     /* border: 1px solid black; */
     box-sizing: border-box;
+    padding-top: 1rem;
 }
 
 header .logo .col-md-2 a {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+header .logo .col-md-2 i {
+    margin-right: 1rem;
 }
 
 header .nav {
@@ -61,6 +66,12 @@ section#content .carousel-item img {
     box-sizing: border-box;
 }
 
+section#content .brand-start {
+    /* border: 1px solid black; */
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
 section#content .brand {
     /* border: 1px solid black; */
     box-sizing: border-box;
@@ -77,8 +88,8 @@ section#content .brand.row>.card {
 
 section#content .brand.row>.card img {
     height: 25vw;
-    width:  25vw;
-    border: 1px solid black;
+    width: 25vw;
+    /* border: 1px solid black; */
     box-sizing: border-box;
     border-radius: 10%;
     margin-left: -0.8rem;
@@ -86,12 +97,13 @@ section#content .brand.row>.card img {
 
 section#content .brand.row .card .card-img-overlay {
     height: 25vw;
-    align-content: center;
     background-color: rgba(255, 255, 255, 0%);
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
     color: black;
+    writing-mode: vertical-rl;
     text-shadow: 1px 1px 1px white;
+
     font-size: 16px;
     line-height: 2rem;
 }
@@ -100,17 +112,6 @@ section#content .brand.row .card .card-img-overlay a {
     text-decoration: none;
     color: black;
 }
-
-/* section#content .brand.row .card .card-img-overlay a button {
-    background-color: rgba(255, 255, 255, 80%);
-    border: 1px solid black;
-    border-radius: 0.5rem;
-    padding: 5px 10px;
-    margin: 1rem;
-    font-size: 16px;
-    text-decoration: none;
-    color: black;
-} */
 
 section#content .brand.row .card .hot {
     display: flex;
@@ -130,17 +131,41 @@ section#content .brand.row .card .hot>.card img {
     margin-left: 0.1rem;
 }
 
+section#content .product-start {
+    /* border: 1px solid black; */
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
+section#content .product.row .card {
+    align-content: center;
+    border: none;
+    padding: 1rem 2rem;
+}
+
+section#content .product.row .card a {
+    color: black;
+    text-decoration: none;
+}
+
+section#content .product.row .card h5.card-title {
+    font-size: 18px;
+}
+
+section#content .product.row .card p {
+    font-size: 14px;
+}
+
 footer {
-    height: 15vh;
     /* border: 1px solid black; */
     box-sizing: border-box;
     margin-top: 1.5rem;
 }
 
-footer div>div {
-    /* border: 1px solid black;
-    box-sizing: border-box; */
-    margin: auto;
+footer .contact-start {
+    /* border: 1px solid black; */
+    padding: 1rem;
+    margin: 1rem auto;
 }
 
 footer .logo {
@@ -153,33 +178,4 @@ footer .logo {
 footer .logo a {
     text-decoration: none;
     color: #4a1709;
-}
-
-footer #contact div {
-    display: inline-block;
-    /* border: 1px solid black;
-    box-sizing: border-box; */
-    margin: auto;
-    text-align: left;
-}
-
-
-footer #contact i {
-    height: 1.5vw;
-    /* border: 1px solid black; */
-    box-sizing: border-box;
-}
-
-
-@media screen and (max-width:767px) {
-
-    section#content .brand.row .card {
-        height: 60vw;
-    }
-
-    section#content .brand.row .card img {
-        height: 60vw;
-    }
-
-
 }

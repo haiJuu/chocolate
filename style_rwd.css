@@ -1,0 +1,77 @@
+@media screen and (max-width:960px) {
+
+    section#content .carousel {
+        height: 60vh;
+    }
+    
+    section#content .carousel-item img {
+        height: 60vh;
+    }
+    
+    section#content .brand.row .card .card-img-overlay {
+        font-size: 14px;
+        line-height: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+
+    section#content .carousel {
+        height: 40vh;
+    }
+    
+    section#content .carousel-item img {
+        height: 40vh;
+    }
+
+    section#content .brand.row>.card img {
+        height: 40vw;
+        width:  40vw;
+    }
+    
+    section#content .brand.row .card .card-img-overlay {
+        height: 40vw;
+    }
+    
+    section#content .brand.row .card .hot>.card img {
+        height: 15vw;
+        width: 15vw;
+    }
+
+    section#content .product.row .card h5.card-title {
+        font-size: 16px;
+    }
+    
+    section#content .product.row .card p {
+        margin: 1rem auto;
+    }
+
+}
+
+@media screen and (max-width:420px) {
+
+    header {
+        height: 22.5vh;
+    }
+    
+    header .logo {
+        height: 15vh;
+        line-height: 15vh;
+    }
+    
+    
+    header .logo .col-md-2 a {
+        font-size: 1rem;
+    }
+    
+    header .nav {
+        font-size: 0.8rem;
+    }
+    
+    section#content .brand.row .card .card-img-overlay {
+        font-size: 10px;
+        line-height: 1.25rem;
+    }
+
+}
