@@ -62,6 +62,8 @@ section#content .carousel {
 
 section#content .carousel-item img {
     height: 75vh;
+    /* object-fit: cover;
+    object-position: center center; */
     /* border: 1px solid black; */
     box-sizing: border-box;
 }
