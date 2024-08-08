@@ -2,12 +2,12 @@
 <div class="brand-start">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 col-12">
-            <h2>優選品牌</h2>
+            <h2>進駐品牌</h2>
         </div>
     </div>
 
     <br>
-    <div class="row text-center">
+    <div class="row text-center align-items-end">
         <div class="col-md-2 col-sm-4 col-4 offset-md-3">
             <img src="./images/SGS.png" style="width:5vw">
             <div>從產地嚴選原料經 SGS 檢驗合格</div>
@@ -22,7 +22,6 @@
         </div>
     </div>
 </div>
-<hr>
 
 <div class="brand row">
     <?php
@@ -45,6 +44,7 @@
                     <button class="card-title">更多關於 <?php echo $brand_result['ename'] ?></button>
                 </a> -->
             </div>
+            <div class="hot-start"><i class="fas fa-crown"></i> 熱銷商品</div>
 
             <div class="hot">
                 <?php

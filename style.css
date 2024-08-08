@@ -1,4 +1,4 @@
-* {
+body {
     font-family: "LXGW WenKai TC", cursive;
     font-weight: 400;
     font-style: normal;
@@ -6,42 +6,25 @@
 
 
 header {
-    height: 22.5vh;
     background-color: #fff;
     /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
 header .logo {
-    height: 15vh;
+    font-size: 4rem;
+    font-family: "Tangerine", cursive;
 }
 
-header .logo .col-md-4 {
-    /* border: 1px solid black; */
-    box-sizing: border-box;
-    line-height: 15vh;
-}
-
-header .logo .col-md-4 a {
+header a {
     text-decoration: none;
-    color: #4a1709;
-}
-
-header .logo .col-md-2 {
-    /* border: 1px solid black; */
-    box-sizing: border-box;
-    padding-top: 1rem;
-}
-
-header .logo .col-md-2 a {
-    font-size: 1rem;
     color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
-header .logo .col-md-2 i {
-    margin-right: 1rem;
+header .font {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    font-size: 1.25rem;
 }
 
 header .nav {
@@ -50,18 +33,22 @@ header .nav {
     font-size: 1rem;
 }
 
+header .nav li.nav-item {
+    padding: 1rem;
+}
+
 section#content {
     /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
 section#content .carousel {
-    height: 75vh;
-    margin: 25vh auto 5vh;
+    /* height: 75vh; */
+    margin: 20vh auto 5vh;
 }
 
 section#content .carousel-item img {
-    height: 75vh;
+    /* height: 75vh; */
     /* object-fit: cover;
     object-position: center center; */
     /* border: 1px solid black; */
@@ -71,7 +58,7 @@ section#content .carousel-item img {
 section#content .brand-start {
     /* border: 1px solid black; */
     padding: 1rem;
-    margin: 1rem auto;
+    margin: 1rem auto 2rem;
 }
 
 section#content .brand {
@@ -105,7 +92,6 @@ section#content .brand.row .card .card-img-overlay {
     color: black;
     writing-mode: vertical-rl;
     text-shadow: 1px 1px 1px white;
-
     font-size: 16px;
     line-height: 2rem;
 }
@@ -113,6 +99,12 @@ section#content .brand.row .card .card-img-overlay {
 section#content .brand.row .card .card-img-overlay a {
     text-decoration: none;
     color: black;
+}
+
+section#content .brand.row .card .hot-start {
+    padding-left: 1rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
 }
 
 section#content .brand.row .card .hot {
@@ -136,25 +128,26 @@ section#content .brand.row .card .hot>.card img {
 section#content .product-start {
     /* border: 1px solid black; */
     padding: 1rem;
-    margin: 1rem auto;
+    margin: 1rem auto 2rem;
 }
 
 section#content .product.row .card {
-    align-content: center;
+    align-self: baseline;
     border: none;
     padding: 1rem 2rem;
 }
 
-section#content .product.row .card a {
-    color: black;
-    text-decoration: none;
+section#content .product.row img {
+    border-radius: 5%;
 }
 
-section#content .product.row .card h5.card-title {
-    font-size: 18px;
+section#content .row.product .card h5.card-title {
+    font-size: 16px;
 }
 
-section#content .product.row .card p {
+section#content .product.row .card .btn {
+    border: 1px solid black;
+    border-color: black;
     font-size: 14px;
 }
 
@@ -163,6 +156,8 @@ footer {
     box-sizing: border-box;
     margin-top: 1.5rem;
 }
+
+
 
 footer .contact-start {
     /* border: 1px solid black; */
@@ -175,6 +170,7 @@ footer .logo {
     box-sizing: border-box;
     font-size: 3.5vw;
     line-height: 15vh;
+    font-family: "Tangerine", cursive;
 }
 
 footer .logo a {

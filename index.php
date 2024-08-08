@@ -18,8 +18,7 @@ require_once("php_lib.php");
 
     <header class="container-fluid fixed-top">
 
-        <?php require_once("./header_logo.php") ?>
-        <?php require_once("./header_nav.php") ?>
+        <?php require_once("./header_logo&nav.php") ?>
 
     </header>
 

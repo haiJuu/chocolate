@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>
-<hr>
+
 <?php
 $maxRows_rs = 12;
 $pageNum_rs = 0;
@@ -47,16 +47,12 @@ while ($pLFetch = $productList->fetch()) { ?>
         <?php } ?>
 
         <div class="card col-md-2 col-sm-4 col-6">
-            <img src="./images/product/<?php echo $pLFetch['img_file']; ?>" class="card-img-top" alt="<?php echo $pLFetch['p_name']; ?>" title="<?php echo $pLFetch['p_name']; ?>" onmouseover="">
+            <a href="#"><img src="./images/product/<?php echo $pLFetch['img_file']; ?>" class="card-img-top" alt="<?php echo $pLFetch['p_name']; ?>" title="<?php echo $pLFetch['p_intro']; ?>"></a>
             <div class="card-body">
-                <a href="#">
-                    <h5 class="card-title"><?php echo $pLFetch['p_name']; ?></h5>
-                </a>
-                <p class="card-text"><?php echo mb_substr($pLFetch['p_intro'], 0, 60, "utf-8"); ?></p>
-                <p class="card-text">NT$ <?php echo $pLFetch['p_price']; ?> <a href="#">
-                    <i class="fas fa-regular fa-cart-shopping"></i>
-                </a></p>
-                
+                <h5 class="card-title"><?php echo $pLFetch['p_name']; ?></h5>
+                <p class="card-text">NT$ <?php echo $pLFetch['p_price']; ?></p>
+                <a href="#" class="btn">加入購物車</a>
+                <!-- <a href="#" class="btn"><i class="fas fa-regular fa-cart-shopping"></i></a> -->
             </div>
         </div>
 

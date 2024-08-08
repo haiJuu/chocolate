@@ -29,7 +29,7 @@
 
 <div class="logo row">
     <div class="col-md-12 col-sm-12 text-center">
-        <a href="./index.php">Choose Chocolate</a>
+        <a href="./index.php">CHO</a>
     </div>
 
 </div>

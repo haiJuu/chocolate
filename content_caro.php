@@ -12,7 +12,7 @@
         <?php } ?>
     </div>
 
-    <div class="carousel-inner">
+    <div class="carousel-inner img-fluid">
 
         <?php
         // function activeShow($num, $cheak_num)
@@ -25,7 +25,7 @@
         while ($carousel_result_online = $carousel_online->fetch()) {
         ?>
             <div class="carousel-item <?php echo activeShow($i, 0) ?>">
-                <img src="./images/carousels/<?php echo $carousel_result_online['caro_pic'] ?>" class="d-block w-100 img-fluid" alt="<?php echo $carousel_result_online["caro_title"] ?>">
+                <img src="./images/carousels/<?php echo $carousel_result_online['caro_pic'] ?>" class="d-block w-100" alt="<?php echo $carousel_result_online["caro_title"] ?>">
 
                 <div class="carousel-caption d-none d-md-block">
                     <h5><?php echo $carousel_result_online["caro_title"] ?></h5>

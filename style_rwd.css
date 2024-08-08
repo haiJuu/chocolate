@@ -1,12 +1,4 @@
 @media screen and (max-width:960px) {
-
-    section#content .carousel {
-        height: 60vh;
-    }
-    
-    section#content .carousel-item img {
-        height: 60vh;
-    }
     
     section#content .brand.row .card .card-img-overlay {
         font-size: 14px;
@@ -16,14 +8,6 @@
 }
 
 @media screen and (max-width:767px) {
-
-    section#content .carousel {
-        height: 40vh;
-    }
-    
-    section#content .carousel-item img {
-        height: 40vh;
-    }
 
     section#content .brand.row>.card img {
         height: 40vw;
@@ -50,15 +34,6 @@
 }
 
 @media screen and (max-width:420px) {
-
-    header {
-        height: 22.5vh;
-    }
-    
-    header .logo {
-        height: 15vh;
-        line-height: 15vh;
-    }
     
     
     header .logo .col-md-2 a {
