@@ -3,7 +3,8 @@
             CHO
         </a>
     </div>
-    <div class="font col-md-2 col-sm-2 col-2 offset-md-2 offset-sm-6 align-content-center text-center">
+
+    <div class="font col-md-2 col-sm-2 offset-md-2 offset-sm-6 col-2 align-content-center text-center">
         <a href="#">
             <i class="fas fa-shopping-bag"></i>　
         </a>
@@ -11,9 +12,7 @@
             <i class="fas fa-portrait"></i>
         </a>
     </div>
-
-
-    <div class="nav col-md-12 col-sm-2 text-center">
+    <div class="nav col-md-10 col-sm-2 text-center">
         <nav class="navbar navbar-expand-lg">
             <div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,9 +85,17 @@
                             </a>
                         </li>
 
+
                     </ul>
                 </div>
             </div>
         </nav>
+    </div>
+
+    <div class="search col-md-2">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
     </div>
 </div>
