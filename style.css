@@ -4,16 +4,11 @@ body {
     font-style: normal;
 }
 
-
 header {
     background-color: #fff;
     /* border: 1px solid black; */
-    box-sizing: border-box;
-}
-
-header .logo {
-    font-size: 4rem;
-    font-family: "Tangerine", cursive;
+    box-shadow: 0 1px 3px lightgray;
+    padding-bottom: 1rem;
 }
 
 header a {
@@ -21,165 +16,204 @@ header a {
     color: black;
 }
 
+header a:hover {
+    color: black;
+}
+
+header .logo {
+    font-size: 4rem;
+    font-family: "Tangerine", cursive;
+}
+
 header .font {
     /* border: 1px solid black; */
-    box-sizing: border-box;
     font-size: 1.25rem;
 }
 
 header .nav {
     /* border: 1px solid black; */
-    box-sizing: border-box;
     font-size: 1rem;
 }
 
-header .nav li.nav-item {
+header .nav .nav-item {
     padding: 0 1rem;
 }
 
 header .search {
     /* border: 1px solid black; */
     align-content: center;
+}
 
+header .search .form-control:focus {
+    border-color: gray;
+    box-shadow: none;
+}
+
+header .search .btn {
+    /* border: 1px solid black; */
+    align-content: center;
+    outline: 1px solid lightgray;
+}
+
+header .search .btn:hover {
+    color: white;
+    background-color: lightgray;
+    outline-color: white;
 }
 
 section#content {
     /* border: 1px solid black; */
-    box-sizing: border-box;
+    padding-top: 18vh;
+    padding-bottom: 2rem;
 }
 
 section#content .carousel {
-    /* height: 75vh; */
-    margin: 20vh auto 5vh;
-}
-
-section#content .carousel-item img {
-    /* height: 75vh; */
-    /* object-fit: cover;
-    object-position: center center; */
-    /* border: 1px solid black; */
-    box-sizing: border-box;
+    width: 100vw;
+    margin-left: -0.8rem;
 }
 
 section#content .brand-start {
     /* border: 1px solid black; */
-    padding: 1rem;
-    margin: 1rem auto 2rem;
+    padding: 4rem;
 }
 
 section#content .brand {
+    border: none;
     /* border: 1px solid black; */
-    box-sizing: border-box;
 }
 
-section#content .brand.row>.card {
-    /* height: 40vw; */
+section#content .brand>.card {
     background-color: #fff !important;
     border: none;
     /* border: 1px solid black; */
-    box-sizing: border-box;
-    margin: 1rem auto;
+    margin: auto;
 }
 
-section#content .brand.row>.card img {
+section#content .brand .card>img {
     height: 20vw;
     width: 20vw;
     /* border: 1px solid black; */
-    box-sizing: border-box;
-    border-radius: 10%;
     margin-left: -0.8rem;
 }
 
-section#content .brand.row .card .card-img-overlay {
+section#content .brand .card .card-img-overlay {
     height: 20vw;
     background-color: rgba(255, 255, 255, 0%);
     /* border: 1px solid black; */
-    box-sizing: border-box;
-    color: black;
     writing-mode: vertical-rl;
     text-shadow: 1px 1px 1px white;
     font-size: 16px;
     line-height: 2rem;
 }
 
-section#content .brand.row .card .card-img-overlay a {
-    text-decoration: none;
-    color: black;
-}
-
-section#content .brand.row .card .hot-start {
+section#content .brand .card .hot-start {
     padding-left: 1rem;
-    margin-top: 2rem;
+    margin: 2rem 0;
     font-size: 1.2rem;
+    text-align: center;
 }
 
-section#content .brand.row .card .hot {
+section#content .brand .card .hot-start i {
+    font-size: 1rem;
+    color: red;
+}
+
+section#content .brand .card .hot {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
-}
-
-section#content .brand.row .card .hot>.card {
     border: none;
 }
 
-section#content .brand.row .card .hot>.card img {
+section#content .brand .card .hot .card {
+    border: none;
+}
+
+
+section#content .brand .card .hot .card img {
     height: 8vw;
     width: 8vw;
     /* border: 1px solid black; */
-    box-sizing: border-box;
-    margin-left: 0.1rem;
+    border-radius: 10%;
 }
 
 section#content .product-start {
     /* border: 1px solid black; */
-    padding: 1rem;
-    margin: 1rem auto 2rem;
+    padding: 4rem;
 }
 
-section#content .product.row .card {
-    align-self: baseline;
+section#content .product .card {
     border: none;
     padding: 1rem 2rem;
 }
 
-section#content .product.row img {
+section#content .product img {
+    height: 12.5vw;
     border-radius: 5%;
 }
 
-section#content .row.product .card h5.card-title {
+section#content .product .card .card-title {
     font-size: 16px;
 }
 
-section#content .product.row .card .btn {
-    border: 1px solid black;
-    border-color: black;
+section#content .product .card .card-text {
     font-size: 14px;
+}
+
+section#content .product .card .btn {
+    border: 1px solid gray;
+    font-size: 12px;
+}
+
+.pagination {
+    --bs-pagination-padding-x: 0.75rem;
+    --bs-pagination-padding-y: 0.375rem;
+    --bs-pagination-font-size: 1rem;
+    --bs-pagination-color: black;
+    --bs-pagination-bg: #fff;
+    --bs-pagination-border-width: 1px;
+    --bs-pagination-border-color: #dee2e6;
+    --bs-pagination-border-radius: 0.375rem;
+    --bs-pagination-hover-color: var(--bs-link-hover-color);
+    --bs-pagination-hover-bg: #e9ecef;
+    --bs-pagination-hover-border-color: #dee2e6;
+    --bs-pagination-focus-color: var(--bs-link-hover-color);
+    --bs-pagination-focus-bg: #e9ecef;
+    /* --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(100, 100, 100, 0.25); */
+    --bs-pagination-active-color: #fff;
+    --bs-pagination-active-bg: black;
+    --bs-pagination-active-border-color: lightgray;
+    --bs-pagination-disabled-color: lightgray;
+    --bs-pagination-disabled-bg: #fff;
+    --bs-pagination-disabled-border-color: #dee2e6;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.page-link:hover {
+    color: white;
+    background-color: var(--bs-pagination-hover-bg);
+    border-color: var(--bs-pagination-hover-border-color);
 }
 
 footer {
     /* border: 1px solid black; */
-    box-sizing: border-box;
-    margin-top: 1.5rem;
+    padding-top: 2rem;
+    box-shadow: 0 -1px 3px lightgray;
 }
 
-
-
-footer .contact-start {
+footer .contact {
     /* border: 1px solid black; */
-    padding: 1rem;
-    margin: 1rem auto;
+    margin: 2rem auto;
 }
 
 footer .logo {
     /* border: 1px solid black; */
-    box-sizing: border-box;
-    font-size: 3.5vw;
-    line-height: 15vh;
+    font-size: 4rem;
     font-family: "Tangerine", cursive;
 }
 
 footer .logo a {
     text-decoration: none;
-    color: #4a1709;
+    color: black;
 }

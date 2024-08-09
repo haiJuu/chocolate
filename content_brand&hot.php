@@ -1,4 +1,3 @@
-<hr>
 <div class="brand-start">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 col-12">
@@ -44,7 +43,7 @@
                     <button class="card-title">更多關於 <?php echo $brand_result['ename'] ?></button>
                 </a> -->
             </div>
-            <div class="hot-start"><i class="fas fa-crown"></i> 熱銷商品</div>
+            <div class="hot-start"><i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i></div>
 
             <div class="hot">
                 <?php

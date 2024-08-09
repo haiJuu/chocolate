@@ -1,4 +1,3 @@
-<hr>
 <div class="product-start">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 col-12">

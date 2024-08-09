@@ -1,5 +1,4 @@
-<hr>
-<div class="contact-start">
+<div class="contact">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 col-12">
             <h2>聯絡我們</h2>
@@ -25,7 +24,6 @@
         </div>
     </div>
 </div>
-<hr>
 
 <div class="logo row">
     <div class="col-md-12 col-sm-12 text-center">

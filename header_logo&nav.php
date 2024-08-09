@@ -94,8 +94,8 @@
 
     <div class="search col-md-2">
         <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input class="form-control me-2" type="search" placeholder="找商品" aria-label="Search">
+            <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
 </div>
