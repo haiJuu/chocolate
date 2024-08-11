@@ -43,6 +43,8 @@
                     <button class="card-title">更多關於 <?php echo $brand_result['ename'] ?></button>
                 </a> -->
             </div>
+
+
             <div class="hot-start"><i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i></div>
 
             <div class="hot">
@@ -59,6 +61,7 @@
                     </div>
                 <?php } ?>
             </div>
+
         </div>
     <?php } ?>
 </div>

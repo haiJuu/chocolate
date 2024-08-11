@@ -6,9 +6,10 @@
         $carousel_online = $link->query($query_carousel_online);
         ?>
         <?php
-        $i = 0;
-        for ($i = 0; $i < $carousel_online->rowCount(); $i++) { ?>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?php echo $i ?>" class="<?php echo activeShow($i, 0) ?>" aria-current="true" aria-label="Slide <?php echo $i ?>"></button>
+        $caro_num = 0;
+
+        for ($caro_num = 0; $caro_num < $carousel_online->rowCount(); $caro_num++) { ?>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?php echo $caro_num ?>" class="<?php echo activeShow($caro_num, 0) ?>" aria-current="true" aria-label="Slide <?php echo $caro_num ?>"></button>
         <?php } ?>
     </div>
 
@@ -21,10 +22,10 @@
         // }
         ?>
         <?php
-        $i = 0;
+        $caro_num = 0;
         while ($carousel_result_online = $carousel_online->fetch()) {
         ?>
-            <div class="carousel-item <?php echo activeShow($i, 0) ?>">
+            <div class="carousel-item <?php echo activeShow($caro_num, 0) ?>">
                 <img src="./images/carousels/<?php echo $carousel_result_online['caro_pic'] ?>" class="d-block w-100" alt="<?php echo $carousel_result_online["caro_title"] ?>">
 
                 <div class="carousel-caption d-none d-md-block">
@@ -32,7 +33,7 @@
                     <p><?php echo $carousel_result_online["caro_content"] ?></p>
                 </div>
             </div>
-        <?php $i++;
+        <?php $caro_num++;
         } ?>
     </div>
 

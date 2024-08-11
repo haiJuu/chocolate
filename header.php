@@ -39,6 +39,7 @@
                             <ul class="dropdown-menu">
                                 <?php
                                 $query_pyclass_level_1 = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
+
                                 $pyclass_level_1 = $link->query($query_pyclass_level_1); ?>
 
                                 <?php
@@ -49,7 +50,50 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                商品分類
+                            </a>
+
+                            <?php
+                            $pyclass_level_1 = $link->query($query_pyclass_level_1);
+                            ?>
+
+                            <ul class="dropdown-menu">
+
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="./drugstore.php" role="button" aria-expanded="false">
+                                        所有商品
+                                    </a>
+                                </li>
+                                <?php while ($pyclass_result_level_1 = $pyclass_level_1->fetch()) { ?>
+                                    <li class="nav-item dropend">
+                                        <a href="drugstore.php?class_id=<?php echo $pyclass_result_level_1['class_id']; ?>&level=<?php echo $pyclass_result_level_1['level']; ?>" class="dropdown-item dropdown-toggle">
+                                            <?php echo $pyclass_result_level_1['cname']; ?>
+                                        </a>
+                                        <ul class="dropdown-menu">
+
+                                            <?php
+
+                                            $query_pyclass_level_2 = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $pyclass_result_level_1['class_id']);
+
+
+                                            $pyclass_level_2 = $link->query($query_pyclass_level_2);
+
+                                            ?>
+
+                                            <?php while ($pyclass_result_level_2 = $pyclass_level_2->fetch()) { ?>
+                                                <li><a class="dropdown-item" href="drugstore.php?class_id=<?php echo $pyclass_result_level_2['class_id']; ?>"><?php echo $pyclass_result_level_2['cname']; ?></a></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+
+
                         <?php
+
                         function navbarRepeat()
                         {
                             global $link;
@@ -77,7 +121,8 @@
                                 </li> <?php } ?>
                         <?php } ?>
 
-                        <?php navbarRepeat() ?>
+                        <?php // navbarRepeat() 
+                        ?>
 
                         <li class="nav-item">
                             <a class="nav-link" href="#" role="button" aria-expanded="false">
@@ -85,6 +130,11 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" role="button" aria-expanded="false">
+                                聯絡我們
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -93,8 +143,8 @@
     </div>
 
     <div class="search col-md-2">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="找商品" aria-label="Search">
+        <form action="./drugstore.php" method="get" name="search" id="search" class="d-flex" role="search">
+            <input name="search_name" id="search_name" class="form-control me-2" type="search" placeholder="找商品" aria-label="Search" value="<?php echo (isset($_GET['search_name']) ? $_GET['search_name'] : '') ?>" required>
             <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>

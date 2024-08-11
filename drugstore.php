@@ -19,13 +19,14 @@ require_once("php_lib.php");
     <header class="container-fluid fixed-top">
 
         <?php require_once("./header.php") ?>
+        <?php require_once("./breadcrumb.php") ?>
 
     </header>
 
     <section id="content" class="container-fluid">
 
-        <?php require_once("./caro.php") ?>
-        <?php require_once("./brand&hot.php") ?>
+        <?php require_once("./imgbar.php") ?>
+        <?php require_once("./product_list.php") ?>
 
     </section>
 

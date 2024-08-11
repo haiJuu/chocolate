@@ -1,14 +1,26 @@
 <?php
 
 // carousel
-function activeShow($num, $cheak_num)
+function activeShow($num, $check_num)
 {
-	return (($num == $cheak_num) ? "active" : "");
+	return (($num == $check_num) ? "active" : "");
+}
+
+
+// imgbar 
+function boxShadow($now_brand, $check_brand)
+{
+	return (($now_brand == $check_brand) ? "box-shadow" : "");
+}
+
+function nowClass($now_class, $check_class)
+{
+	return (($now_class == $check_class) ? "<i class='fa-solid fa-location-dot'> </i>" : "");
 }
 
 
 // page navigation
-function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Recordset1, $next_Recordset1, $separator = " | ", $max_links = 10, $show_page = true, $selmode = 1, $sname)
+function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Recordset1, $next_Recordset1, $separator = " | ", $sname, $max_links = 10, $show_page = true, $selmode = 1,)
 {
 	$gmaxRows = "maxRows_" . $sname;
 	$gtotalRows = "totalRows_" . $sname;
@@ -38,7 +50,7 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 			if (!empty($_GET) || !empty($HTTP_GET_VARS)) {
 				$_GET = empty($_GET) ? $HTTP_GET_VARS : $_GET;
 				foreach ($_GET as $_get_name => $_get_value) {
-					if ($_get_name != "pageNum_" . $sname) {
+					if ($_get_name != "page_num_" . $sname) {
 						$_get_vars .= "&$_get_name=$_get_value";
 					}
 				}
@@ -48,13 +60,13 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 
 			switch ($selmode) {
 				case 1:
-					$firstArray = ($pageNum_Recordset1 > 0) ? "<a href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$precedente$_get_vars\">$prev_Recordset1</a>" : "$prev_Recordset1";
+					$firstArray = ($pageNum_Recordset1 > 0) ? "<a href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$precedente$_get_vars\">$prev_Recordset1</a>" : "$prev_Recordset1";
 					break;
 				case 2:
-					$firstArray = ($pageNum_Recordset1 > 0) ? "<li><a href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$precedente$_get_vars\" aria-label='Previous'><span aria-hidden='true'>$prev_Recordset1</span></a></li>" : "<li class='disabled'><span aria-hidden='true'>$prev_Recordset1</span></li>";
+					$firstArray = ($pageNum_Recordset1 > 0) ? "<li><a href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$precedente$_get_vars\" aria-label='Previous'><span aria-hidden='true'>$prev_Recordset1</span></a></li>" : "<li class='disabled'><span aria-hidden='true'>$prev_Recordset1</span></li>";
 					break;
 				case 3:
-					$firstArray = ($pageNum_Recordset1 > 0) ? "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$precedente$_get_vars\" aria-label='Previous'><span aria-hidden='true'>$prev_Recordset1</span></a></li>" : "<li class='page-item disabled'><span class='page-link' aria-label='Previous' aria-hidden='true'>$prev_Recordset1</span></li>";
+					$firstArray = ($pageNum_Recordset1 > 0) ? "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$precedente$_get_vars\" aria-label='Previous'><span aria-hidden='true'>$prev_Recordset1</span></a></li>" : "<li class='page-item disabled'><span class='page-link' aria-label='Previous' aria-hidden='true'>$prev_Recordset1</span></li>";
 					break;
 			}
 			# ----------------------
@@ -73,15 +85,15 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 				if ($theNext != $pageNum_Recordset1) {
 					switch ($selmode) {
 						case 1:
-							$pagesArray .= "<a href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$theNext$_get_vars\">";
+							$pagesArray .= "<a href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$theNext$_get_vars\">";
 							$pagesArray .= "$textLink</a>" . ($theNext < $egp - 1 ? $separator : "");
 							break;
 						case 2:
-							$pagesArray .= "<li><a href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$theNext$_get_vars\">";
+							$pagesArray .= "<li><a href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$theNext$_get_vars\">";
 							$pagesArray .= "$textLink</a></li>";
 							break;
 						case 3:
-							$pagesArray .= "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$theNext$_get_vars\">";
+							$pagesArray .= "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$theNext$_get_vars\">";
 							$pagesArray .= "$textLink</a></li>";
 							break;
 					}
@@ -103,13 +115,13 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 			$offset_end = $totalPages_Recordset1;
 			switch ($selmode) {
 				case 1:
-					$lastArray = ($pageNum_Recordset1 < $totalPages_Recordset1) ? "<a href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$successivo$_get_vars\">$next_Recordset1</a>" : "$next_Recordset1";
+					$lastArray = ($pageNum_Recordset1 < $totalPages_Recordset1) ? "<a href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$successivo$_get_vars\">$next_Recordset1</a>" : "$next_Recordset1";
 					break;
 				case 2:
-					$lastArray = ($pageNum_Recordset1 < $totalPages_Recordset1) ? "<li><a href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$successivo$_get_vars\" aria-label='Next'><span aria-hidden='true'>$next_Recordset1</span></a></li>" : "<li class='disabled'><span aria-hidden='true'>$next_Recordset1</span></li>";
+					$lastArray = ($pageNum_Recordset1 < $totalPages_Recordset1) ? "<li><a href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$successivo$_get_vars\" aria-label='Next'><span aria-hidden='true'>$next_Recordset1</span></a></li>" : "<li class='disabled'><span aria-hidden='true'>$next_Recordset1</span></li>";
 					break;
 				case 3:
-					$lastArray = ($pageNum_Recordset1 < $totalPages_Recordset1) ? "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?pageNum_" . $sname . "=$successivo$_get_vars\" aria-label='Next'><span aria-hidden='true'>$next_Recordset1</span></a></li>" : "<li class='page-item disabled'><span class='page-link' aria-label='Next' aria-hidden='true'>$next_Recordset1</span></li>";
+					$lastArray = ($pageNum_Recordset1 < $totalPages_Recordset1) ? "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$successivo$_get_vars\" aria-label='Next'><span aria-hidden='true'>$next_Recordset1</span></a></li>" : "<li class='page-item disabled'><span class='page-link' aria-label='Next' aria-hidden='true'>$next_Recordset1</span></li>";
 					break;
 			}
 		}
