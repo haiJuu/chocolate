@@ -73,7 +73,7 @@ while ($product_result = $product_limit->fetch()) { ?>
     $next_rs = "&raquo";
     $separator = "|";
     $max_links = 20;
-    $pages_rs = buildNavigation($page_num_rs, $total_pages_rs, $prev_rs, $next_rs, $separator, "rs",$max_links, true, 3, );
+    $pages_rs = buildNavigation($page_num_rs, $total_pages_rs, $prev_rs, $next_rs, $separator, "rs",$max_links, true, 3 );
     ?>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
