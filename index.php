@@ -13,7 +13,7 @@ require_once("php_lib.php");
 <head>
 
     <?php require_once("./head_file.php") ?>
-    
+
 </head>
 
 <body>
@@ -26,8 +26,8 @@ require_once("php_lib.php");
 
     <section id="content" class="container-fluid">
 
-        <?php require_once("./caro.php") ?>
-        <?php require_once("./brand&hot.php") ?>
+        <?php require_once("./carousel.php") ?>
+        <?php require_once("./brand_hot.php") ?>
 
     </section>
 

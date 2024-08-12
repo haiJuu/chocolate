@@ -1,12 +1,12 @@
 <?php
 
 // carousel
-function activeShow($num, $check_num)
+function classActive($now_carousel, $check_carousel)
 {
-	return (($num == $check_num) ? "active" : "");
+	return (($now_carousel == $check_carousel) ? "active" : "");
 }
 
-function hrefProduct($caro)
+function carouselsHref($caro)
 {
 	if ($caro['p_id'] != "") {
 		return "goods.php?p_id=" . $caro['p_id'];
@@ -20,7 +20,7 @@ function boxShadow($now_brand, $check_brand)
 	return (($now_brand == $check_brand) ? "box-shadow" : "");
 }
 
-function nowClass($now_class, $check_class)
+function locationDot($now_class, $check_class)
 {
 	return (($now_class == $check_class) ? "<i class='fa-solid fa-location-dot'> </i>" : "");
 }

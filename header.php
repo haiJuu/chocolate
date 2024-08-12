@@ -26,11 +26,6 @@
                             </a>
                         </li>
 
-                        <?php
-                        $query_pyclass_level_1 = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
-                        $pyclass_level_1 = $link->query($query_pyclass_level_1);
-                        ?>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 進駐品牌
@@ -38,14 +33,12 @@
 
                             <ul class="dropdown-menu">
                                 <?php
-                                $query_pyclass_level_1 = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
+                                $select_pyclass1 = "SELECT * FROM pyclass WHERE level=1 ORDER BY sort";
+                                $pyclass1 = $link->query($select_pyclass1);
 
-                                $pyclass_level_1 = $link->query($query_pyclass_level_1); ?>
-
-                                <?php
-                                while ($pyclass_result_level_1 = $pyclass_level_1->fetch()) {
+                                while ($fetch_pyclass1 = $pyclass1->fetch()) {
                                 ?>
-                                    <li><a class="dropdown-item" href="#"><?php echo $pyclass_result_level_1['cname']; ?></a></li>
+                                    <li><a class="dropdown-item" href="#"><?php echo $fetch_pyclass1['cname']; ?></a></li>
                                 <?php } ?>
                             </ul>
                         </li>
@@ -56,7 +49,7 @@
                             </a>
 
                             <?php
-                            $pyclass_level_1 = $link->query($query_pyclass_level_1);
+                            $pyclass1 = $link->query($select_pyclass1);
                             ?>
 
                             <ul class="dropdown-menu">
@@ -66,24 +59,24 @@
                                         所有商品
                                     </a>
                                 </li>
-                                <?php while ($pyclass_result_level_1 = $pyclass_level_1->fetch()) { ?>
+                                <?php while ($fetch_pyclass1 = $pyclass1->fetch()) { ?>
                                     <li class="nav-item dropend">
-                                        <a href="drugstore.php?class_id=<?php echo $pyclass_result_level_1['class_id']; ?>&level=<?php echo $pyclass_result_level_1['level']; ?>" class="dropdown-item dropdown-toggle">
-                                            <?php echo $pyclass_result_level_1['cname']; ?>
+                                        <a href="drugstore.php?class_id=<?php echo $fetch_pyclass1['class_id']; ?>&level=<?php echo $fetch_pyclass1['level']; ?>" class="dropdown-item dropdown-toggle">
+                                            <?php echo $fetch_pyclass1['cname']; ?>
                                         </a>
                                         <ul class="dropdown-menu">
 
                                             <?php
 
-                                            $query_pyclass_level_2 = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $pyclass_result_level_1['class_id']);
+                                            $select_pyclass2 = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $fetch_pyclass1['class_id']);
 
 
-                                            $pyclass_level_2 = $link->query($query_pyclass_level_2);
+                                            $pyclass2 = $link->query($select_pyclass2);
 
                                             ?>
 
-                                            <?php while ($pyclass_result_level_2 = $pyclass_level_2->fetch()) { ?>
-                                                <li><a class="dropdown-item" href="drugstore.php?class_id=<?php echo $pyclass_result_level_2['class_id']; ?>"><?php echo $pyclass_result_level_2['cname']; ?></a></li>
+                                            <?php while ($fetch_pyclass2 = $pyclass2->fetch()) { ?>
+                                                <li><a class="dropdown-item" href="drugstore.php?class_id=<?php echo $fetch_pyclass2['class_id']; ?>"><?php echo $fetch_pyclass2['cname']; ?></a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>
@@ -97,25 +90,25 @@
                         function navbarRepeat()
                         {
                             global $link;
-                            global $query_pyclass_level_1;
+                            global $select_pyclass1;
 
-                            $pyclass_level_1 = $link->query($query_pyclass_level_1); ?>
+                            $pyclass1 = $link->query($select_pyclass1); ?>
 
-                            <?php while ($pyclass_result_level_1 = $pyclass_level_1->fetch()) { ?>
+                            <?php while ($fetch_pyclass1 = $pyclass1->fetch()) { ?>
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <?php echo $pyclass_result_level_1['cname']; ?>
+                                        <?php echo $fetch_pyclass1['cname']; ?>
                                     </a>
 
                                     <ul class="dropdown-menu">
                                         <?php
-                                        $query_pyclass_level_2 = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $pyclass_result_level_1['class_id']);
-                                        $pyclass_level_2 = $link->query($query_pyclass_level_2);
+                                        $select_pyclass2 = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $fetch_pyclass1['class_id']);
+                                        $pyclass2 = $link->query($select_pyclass2);
 
-                                        while ($pyclass_result_level_2 = $pyclass_level_2->fetch()) {
+                                        while ($fetch_pyclass2 = $pyclass2->fetch()) {
                                         ?>
-                                            <li><a class="dropdown-item" href="#"><?php echo $pyclass_result_level_2['cname']; ?></a></li>
+                                            <li><a class="dropdown-item" href="#"><?php echo $fetch_pyclass2['cname']; ?></a></li>
                                         <?php } ?>
                                     </ul>
                                 </li> <?php } ?>
