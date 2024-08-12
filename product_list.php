@@ -32,7 +32,7 @@ while ($product_result = $product_limit->fetch()) { ?>
         <?php } ?>
 
         <div class="card col-md-2 col-sm-4 col-6">
-            <a href="#"><img src="./images/product/<?php echo $product_result['img_file']; ?>" class="card-img-top" alt="<?php echo $product_result['p_name']; ?>" title="<?php echo $product_result['p_intro']; ?>"></a>
+            <a href="goods.php?p_id=<?php echo $product_result['p_id']; ?>"><img src="./images/product/<?php echo $product_result['img_file']; ?>" class="card-img-top" alt="<?php echo $product_result['p_name']; ?>" title="<?php echo $product_result['p_intro']; ?>"></a>
             <div class="card-body">
                 <h5 class="card-title"><?php echo $product_result['p_name']; ?></h5>
                 <p class="card-text">NT$ <?php echo $product_result['p_price']; ?></p>
@@ -73,7 +73,7 @@ while ($product_result = $product_limit->fetch()) { ?>
     $next_rs = "&raquo";
     $separator = "|";
     $max_links = 20;
-    $pages_rs = buildNavigation($page_num_rs, $total_pages_rs, $prev_rs, $next_rs, $separator, "rs",$max_links, true, 3 );
+    $pages_rs = buildNavigation($page_num_rs, $total_pages_rs, $prev_rs, $next_rs, $separator, "rs", $max_links, true, 3);
     ?>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">

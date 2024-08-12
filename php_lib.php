@@ -6,6 +6,13 @@ function activeShow($num, $check_num)
 	return (($num == $check_num) ? "active" : "");
 }
 
+function hrefProduct($caro)
+{
+	if ($caro['p_id'] != "") {
+		return "goods.php?p_id=" . $caro['p_id'];
+	}
+}
+
 
 // imgbar 
 function boxShadow($now_brand, $check_brand)
@@ -19,7 +26,7 @@ function nowClass($now_class, $check_class)
 }
 
 
-// page navigation
+// product_list
 function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Recordset1, $next_Recordset1, $separator = " | ", $sname, $max_links = 10, $show_page = true, $selmode = 1)
 {
 	$gmaxRows = "maxRows_" . $sname;

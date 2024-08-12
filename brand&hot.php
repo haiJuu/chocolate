@@ -57,7 +57,7 @@
                 while ($brand_hot_result = $brand_hot->fetch()) {
                 ?>
                     <div class="card">
-                        <a href="#"><img src="./images/product/<?php echo $brand_hot_result['img_file']; ?>" class="card-img-top" alt="BRAND HOT PRODUCT <?php echo $brand_hot_result['h_sort']; ?>" title="<?php echo $brand_hot_result['p_name']; ?>"></a>
+                        <a href="goods.php?p_id=<?php echo $brand_hot_result['p_id'] ?>"><img src="./images/product/<?php echo $brand_hot_result['img_file']; ?>" class="card-img-top" alt="BRAND HOT PRODUCT <?php echo $brand_hot_result['h_sort']; ?>" title="<?php echo $brand_hot_result['p_name']; ?>"></a>
                     </div>
                 <?php } ?>
             </div>
