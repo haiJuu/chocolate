@@ -11,6 +11,7 @@ require_once("php_lib.php");
 <html lang="zh-TW">
 
 <head>
+    test
     <?php require_once("./head_file.php") ?>
 </head>
 
