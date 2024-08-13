@@ -5,8 +5,13 @@
     </div>
 
     <div class="font col-md-2 col-sm-2 offset-md-2 offset-sm-6 col-2 align-content-center text-center">
+        <?php
+        $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
+        $cart = $link->query($select_cart);
+        ?>
+
         <a href="#">
-            <i class="fas fa-shopping-bag"></i>　
+            <i class="fas fa-shopping-bag"></i><span class="badge">+<?php echo ($cart) ? $cart->rowCount() : ''; ?></span>　
         </a>
         <a href="#">
             <i class="fas fa-portrait"></i>

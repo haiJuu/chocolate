@@ -36,7 +36,7 @@ while ($fetch_product2 = $product2->fetch()) { ?>
             <div class="card-body">
                 <h5 class="card-title"><?php echo $fetch_product2['p_name']; ?></h5>
                 <p class="card-text">NT$ <?php echo $fetch_product2['p_price']; ?></p>
-                <button name="add_cart[]" id="add_cart[]" type="button" class="btn" onclick="add_cart(<?php echo $fetch_product2['p_id']; ?>)">加入購物車</button>
+                <button name="add_cart[]" id="add_cart" type="button" class="btn" onclick="addCart(<?php echo $fetch_product2['p_id']; ?>)">加入購物車</button>
             </div>
         </div>
 

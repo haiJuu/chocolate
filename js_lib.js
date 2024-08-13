@@ -1,28 +1,29 @@
 // 
-$(function () {
-    $(".card .row.mt-2 .col-md-4 a").mouseover(function () {
-        var imgsrc = $(this).children("img").attr("src");
-        $("#showGoods").attr({
-            "src": imgsrc
-        });
-    });
+// $(function () {
+//     $(".card .row.mt-2 .col-md-4 a").mouseover(function () {
+//         var imgsrc = $(this).children("img").attr("src");
+//         $("#showGoods").attr({
+//             "src": imgsrc
+//         });
+//     });
 
-    $(".fancybox").fancybox();
-})
+//     $(".fancybox").fancybox();
+// })
 
 
-// 
-function add_cart(product_id) {
+// product_list
+// goods_content
+function addCart(p_id) {
     var qty = $("#qty").val();
     if (qty <= 0) {
-        alert("產品數量不得為0或為負數，請在修改數量!");
+        alert("輸入的產品數量必須大於 0 ");
         return (false);
     }
 
     if (qty == undefined) {
         qty = 1;
     } else if (qty >= 50) {
-        alert("由於採購限，產品數量將限制在50以下!");
+        alert("購買的產品總數量上限為 50 ");
         return (false);
     }
 
@@ -46,7 +47,7 @@ function add_cart(product_id) {
         },
 
         error: function (data) {
-            alert("系統目前無法連接到後台資料庫");
+            alert("目前無法連接到系統");
         }
 
         // error: function(xhr, status, error) {
