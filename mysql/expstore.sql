@@ -1,1170 +1,1291 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.3
--- http://www.phpmyadmin.net
--- 
--- 主機: localhost
--- 建立日期: Aug 12, 2024, 08:33 AM
--- 伺服器版本: 5.0.51
--- PHP 版本: 5.2.6
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1:3306
+-- 產生時間： 2024-08-14 13:48:35
+-- 伺服器版本： 8.3.0
+-- PHP 版本： 8.2.18
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- 
--- 資料庫: `expstore`
--- 
 
--- --------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- 
--- 資料表格式： `addbook`
--- 
-
-CREATE TABLE `addbook` (
-  `address_id` int(11) NOT NULL auto_increment COMMENT '地址ID',
-  `setdefault` tinyint(1) NOT NULL default '0' COMMENT '預設收件人',
-  `email_id` int(11) NOT NULL COMMENT '會員編號',
-  `cname` varchar(30) collate utf8_unicode_ci NOT NULL COMMENT '收件者姓名',
-  `mobile` varchar(20) collate utf8_unicode_ci NOT NULL COMMENT '收件者電話',
-  `myzip` varchar(10) collate utf8_unicode_ci default NULL COMMENT '郵遞區號',
-  `address` varchar(200) collate utf8_unicode_ci NOT NULL COMMENT '收件地址',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '建立日期',
-  PRIMARY KEY  (`address_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- 
--- 列出以下資料庫的數據： `addbook`
--- 
-
+--
+-- 資料庫： `expstore`
+--
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `brand`
--- 
+--
+-- 資料表結構 `addbook`
+--
 
-CREATE TABLE `brand` (
-  `b_id` int(11) NOT NULL auto_increment COMMENT '品牌編號',
-  `class_id` varchar(3) collate utf8_unicode_ci NOT NULL COMMENT '類別編號',
-  `cname` varchar(20) collate utf8_unicode_ci NOT NULL COMMENT '品牌中稱',
-  `ename` varchar(50) collate utf8_unicode_ci NOT NULL COMMENT '品牌英稱',
-  `b_logo` varchar(50) collate utf8_unicode_ci NOT NULL COMMENT '品牌商標',
-  `b_content` varchar(100) collate utf8_unicode_ci NOT NULL COMMENT '品牌簡介',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '創建日期',
-  PRIMARY KEY  (`b_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
--- 
--- 列出以下資料庫的數據： `brand`
--- 
-
-INSERT INTO `brand` VALUES (4, '4', '福灣巧克力', 'FU WAN CHOCOLATE', 'fuwanchocolate.jpg', '福灣巧克力，<br>致力於以突破性的巧克力製作工藝，<br>帶給世界美妙的巧克力飲食文化體驗，<br>期望讓巧克力為每個靈魂帶來美好愉悅的生命時刻。', '2024-08-03 19:11:15');
-INSERT INTO `brand` VALUES (3, '3', '好田家', 'Good Farms', 'goodfarms.jpg', '好田家，<br>是以「好」跟「田」為出發，<br>好的田能生產出好的原料，<br>好的原料再經過好的加工，<br>則能成為好的食物。', '2024-08-03 19:11:33');
-INSERT INTO `brand` VALUES (1, '1', '起源', 'ORIGIN', 'origintcc.jpg', 'ORIGIN，<br>帶你深入產地，<br>了解這些美好的風味從何而來，<br>我們相信當你親身體驗了這些職人以及土地的故事，<br>手中的那一抹滋味將截然不同。', '2024-08-03 19:11:44');
-INSERT INTO `brand` VALUES (2, '2', '土庫驛可可莊園', 'TuKuYi', 'tukuyicocoa.jpg', '土庫驛可可莊園，<br>承載了世界頂尖的人與技術，<br>致力於帶動地方小鎮重生的可能，<br>希望您用心感受這裡的美好。', '2024-08-03 19:11:50');
+DROP TABLE IF EXISTS `addbook`;
+CREATE TABLE IF NOT EXISTS `addbook` (
+  `address_id` int NOT NULL AUTO_INCREMENT COMMENT '地址ID',
+  `setdefault` tinyint(1) NOT NULL DEFAULT '0' COMMENT '預設收件人',
+  `email_id` int NOT NULL COMMENT '會員編號',
+  `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件者姓名',
+  `mobile` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件者電話',
+  `myzip` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '郵遞區號',
+  `address` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件地址',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
+  PRIMARY KEY (`address_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `carousel`
--- 
+--
+-- 資料表結構 `brand`
+--
 
-CREATE TABLE `carousel` (
-  `caro_id` int(11) NOT NULL auto_increment COMMENT '輪播編號',
-  `b_id` int(11) NOT NULL COMMENT '品牌編號',
-  `p_id` int(11) default NULL COMMENT '產品編號',
-  `caro_title` varchar(50) collate utf8_unicode_ci default NULL COMMENT '輪播標題',
-  `caro_content` varchar(100) collate utf8_unicode_ci default NULL COMMENT '輪播內容介紹',
-  `caro_online` tinyint(1) NOT NULL default '1' COMMENT '上下架',
-  `caro_sort` int(11) NOT NULL COMMENT '輪播排序',
-  `caro_pic` varchar(50) collate utf8_unicode_ci NOT NULL COMMENT '輪播圖檔名稱',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '建立日期',
-  PRIMARY KEY  (`caro_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+DROP TABLE IF EXISTS `brand`;
+CREATE TABLE IF NOT EXISTS `brand` (
+  `b_id` int NOT NULL AUTO_INCREMENT COMMENT '品牌編號',
+  `class_id` int NOT NULL COMMENT '類別編號',
+  `cname` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌中稱',
+  `ename` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌英稱',
+  `b_logo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌商標',
+  `b_content` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌簡介',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建日期',
+  PRIMARY KEY (`b_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- 
--- 列出以下資料庫的數據： `carousel`
--- 
+--
+-- 傾印資料表的資料 `brand`
+--
 
-INSERT INTO `carousel` VALUES (1, 1, NULL, '一片巧克力感受人生層次', '透過獨家專利的微米粉碎技術將茶葉、咖啡甚至其他香料與巧克力做到完美的結合', 1, 1, 'origintcc.jpg', '2024-08-03 19:16:26');
-INSERT INTO `carousel` VALUES (2, 2, NULL, '', '', 1, 2, 'tukuyicocoa.jpg', '2024-08-03 19:16:33');
-INSERT INTO `carousel` VALUES (3, 3, 50, '', '', 1, 3, 'goodfarms.jpg', '2024-08-03 19:16:38');
-INSERT INTO `carousel` VALUES (4, 4, NULL, '', '', 1, 4, 'fuwanchocolate.jpg', '2024-08-03 19:16:44');
-
--- --------------------------------------------------------
-
--- 
--- 資料表格式： `cart`
--- 
-
-CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL auto_increment COMMENT '購物車編號',
-  `email_id` int(11) default NULL COMMENT '會員編號',
-  `p_id` int(11) NOT NULL COMMENT '產品編號',
-  `qty` int(11) NOT NULL COMMENT '產品數量',
-  `order_id` varchar(30) collate utf8_unicode_ci default NULL COMMENT '訂單編號',
-  `status` tinyint(4) NOT NULL default '1' COMMENT '訂單處理狀態',
-  `ip` varchar(200) collate utf8_unicode_ci NOT NULL COMMENT '訂購者的IP',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '加入購物車時間',
-  PRIMARY KEY  (`cart_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- 
--- 列出以下資料庫的數據： `cart`
--- 
-
+INSERT INTO `brand` (`b_id`, `class_id`, `cname`, `ename`, `b_logo`, `b_content`, `create_date`) VALUES
+(4, 4, '福灣巧克力', 'FU WAN CHOCOLATE', 'fuwanchocolate.jpg', '福灣巧克力，<br>致力於以突破性的巧克力製作工藝，<br>帶給世界美妙的巧克力飲食文化體驗，<br>期望讓巧克力為每個靈魂帶來美好愉悅的生命時刻。', '2024-08-03 11:11:15'),
+(3, 3, '好田家', 'Good Farms', 'goodfarms.jpg', '好田家，<br>是以「好」跟「田」為出發，<br>好的田能生產出好的原料，<br>好的原料再經過好的加工，<br>則能成為好的食物。', '2024-08-03 11:11:33'),
+(1, 1, '起源', 'ORIGIN', 'origintcc.jpg', 'ORIGIN，<br>帶你深入產地，<br>了解這些美好的風味從何而來，<br>我們相信當你親身體驗了這些職人以及土地的故事，<br>手中的那一抹滋味將截然不同。', '2024-08-03 11:11:44'),
+(2, 2, '土庫驛可可莊園', 'TuKuYi', 'tukuyicocoa.jpg', '土庫驛可可莊園，<br>承載了世界頂尖的人與技術，<br>致力於帶動地方小鎮重生的可能，<br>希望您用心感受這裡的美好。', '2024-08-03 11:11:50');
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `city`
--- 
+--
+-- 資料表結構 `carousel`
+--
 
-CREATE TABLE `city` (
-  `auto_no` int(11) NOT NULL auto_increment COMMENT '城市編號',
-  `name` varchar(150) collate utf8_unicode_ci NOT NULL COMMENT '城市名稱',
-  `city_order` tinyint(4) NOT NULL COMMENT '標記',
-  `state` smallint(6) NOT NULL COMMENT '狀態',
-  PRIMARY KEY  (`auto_no`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
+DROP TABLE IF EXISTS `carousel`;
+CREATE TABLE IF NOT EXISTS `carousel` (
+  `caro_id` int NOT NULL AUTO_INCREMENT COMMENT '輪播編號',
+  `b_id` int NOT NULL COMMENT '品牌編號',
+  `p_id` int DEFAULT NULL COMMENT '產品編號',
+  `caro_title` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '輪播標題',
+  `caro_content` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '輪播內容介紹',
+  `caro_online` tinyint(1) NOT NULL DEFAULT '1' COMMENT '上下架',
+  `caro_sort` int NOT NULL COMMENT '輪播排序',
+  `caro_pic` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '輪播圖檔名稱',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
+  PRIMARY KEY (`caro_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- 
--- 列出以下資料庫的數據： `city`
--- 
+--
+-- 傾印資料表的資料 `carousel`
+--
 
-INSERT INTO `city` VALUES (1, '臺北市', 0, 0);
-INSERT INTO `city` VALUES (2, '基隆市', 0, 0);
-INSERT INTO `city` VALUES (3, '新北市', 0, 0);
-INSERT INTO `city` VALUES (4, '宜蘭縣', 0, 0);
-INSERT INTO `city` VALUES (5, '新竹市', 0, 0);
-INSERT INTO `city` VALUES (6, '新竹縣', 0, 0);
-INSERT INTO `city` VALUES (7, '桃園市', 0, 0);
-INSERT INTO `city` VALUES (8, '苗栗縣', 0, 0);
-INSERT INTO `city` VALUES (9, '台中市', 0, 0);
-INSERT INTO `city` VALUES (10, '彰化縣', 0, 0);
-INSERT INTO `city` VALUES (11, '南投縣', 0, 0);
-INSERT INTO `city` VALUES (12, '雲林縣', 0, 0);
-INSERT INTO `city` VALUES (13, '嘉義市', 0, 0);
-INSERT INTO `city` VALUES (14, '嘉義縣', 0, 0);
-INSERT INTO `city` VALUES (15, '台南市', 0, 0);
-INSERT INTO `city` VALUES (16, '高雄市', 0, 0);
-INSERT INTO `city` VALUES (17, '南海諸島', 0, 0);
-INSERT INTO `city` VALUES (18, '澎湖縣', 0, 0);
-INSERT INTO `city` VALUES (19, '屏東縣', 0, 0);
-INSERT INTO `city` VALUES (20, '台東縣', 0, 0);
-INSERT INTO `city` VALUES (21, '花蓮縣', 0, 0);
-INSERT INTO `city` VALUES (22, '金門縣', 0, 0);
-INSERT INTO `city` VALUES (23, '連江縣', 0, 0);
+INSERT INTO `carousel` (`caro_id`, `b_id`, `p_id`, `caro_title`, `caro_content`, `caro_online`, `caro_sort`, `caro_pic`, `create_date`) VALUES
+(1, 1, NULL, '一片巧克力感受人生層次', '透過獨家專利的微米粉碎技術將茶葉、咖啡甚至其他香料與巧克力做到完美的結合', 1, 1, 'origintcc.jpg', '2024-08-03 11:16:26'),
+(2, 2, NULL, '', '', 1, 2, 'tukuyicocoa.jpg', '2024-08-03 11:16:33'),
+(3, 3, 50, '', '', 1, 3, 'goodfarms.jpg', '2024-08-03 11:16:38'),
+(4, 4, NULL, '', '', 1, 4, 'fuwanchocolate.jpg', '2024-08-03 11:16:44');
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `hot`
--- 
+--
+-- 資料表結構 `cart`
+--
 
-CREATE TABLE `hot` (
-  `h_id` int(11) NOT NULL auto_increment COMMENT '熱銷商品流水號',
-  `b_id` int(11) NOT NULL COMMENT '品牌編號',
-  `p_id` int(11) NOT NULL COMMENT '產品編號',
-  `h_sort` int(11) default NULL COMMENT '熱銷商品排名',
-  PRIMARY KEY  (`h_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT COMMENT '購物車編號',
+  `email_id` int DEFAULT NULL COMMENT '會員編號',
+  `p_id` int NOT NULL COMMENT '產品編號',
+  `qty` int NOT NULL COMMENT '產品數量',
+  `order_id` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '訂單編號',
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '訂單處理狀態',
+  `ip` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '訂購者的IP',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入購物車時間',
+  PRIMARY KEY (`cart_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- 
--- 列出以下資料庫的數據： `hot`
--- 
+--
+-- 傾印資料表的資料 `cart`
+--
 
-INSERT INTO `hot` VALUES (1, 1, 3, 1);
-INSERT INTO `hot` VALUES (2, 1, 6, 2);
-INSERT INTO `hot` VALUES (3, 1, 9, 3);
-INSERT INTO `hot` VALUES (4, 1, 12, 4);
-INSERT INTO `hot` VALUES (5, 2, 18, 1);
-INSERT INTO `hot` VALUES (6, 2, 28, 2);
-INSERT INTO `hot` VALUES (7, 2, 38, 3);
-INSERT INTO `hot` VALUES (8, 2, 48, 4);
-INSERT INTO `hot` VALUES (9, 3, 55, 1);
-INSERT INTO `hot` VALUES (10, 3, 60, 2);
-INSERT INTO `hot` VALUES (11, 3, 65, 3);
-INSERT INTO `hot` VALUES (12, 3, 70, 4);
-INSERT INTO `hot` VALUES (13, 4, 75, 1);
-INSERT INTO `hot` VALUES (14, 4, 85, 2);
-INSERT INTO `hot` VALUES (15, 4, 95, 3);
-INSERT INTO `hot` VALUES (16, 4, 105, 4);
+INSERT INTO `cart` (`cart_id`, `email_id`, `p_id`, `qty`, `order_id`, `status`, `ip`, `create_date`) VALUES
+(1, NULL, 16, 2, NULL, 1, '::1', '2024-08-13 14:13:10'),
+(2, NULL, 10, 1, NULL, 1, '::1', '2024-08-13 14:13:26'),
+(3, NULL, 13, 1, NULL, 1, '::1', '2024-08-13 14:20:23'),
+(4, NULL, 15, 1, NULL, 1, '::1', '2024-08-13 14:22:53'),
+(5, NULL, 2, 1, NULL, 1, '::1', '2024-08-13 14:33:19'),
+(6, NULL, 6, 1, NULL, 1, '::1', '2024-08-13 14:33:22'),
+(7, NULL, 71, 1, NULL, 1, '::1', '2024-08-13 14:33:33');
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `member`
--- 
+--
+-- 資料表結構 `city`
+--
 
-CREATE TABLE `member` (
-  `email_id` int(11) NOT NULL auto_increment COMMENT 'email流水號',
-  `email` varchar(100) collate utf8_unicode_ci NOT NULL COMMENT 'email帳號',
-  `pw1` varchar(50) collate utf8_unicode_ci NOT NULL COMMENT '密碼',
-  `active` tinyint(1) NOT NULL default '1' COMMENT '是否啟動',
-  `cname` varchar(30) collate utf8_unicode_ci NOT NULL COMMENT '中文姓名',
-  `tssn` varchar(20) collate utf8_unicode_ci NOT NULL COMMENT '身份證字號',
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `auto_no` int NOT NULL AUTO_INCREMENT COMMENT '城市編號',
+  `name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '城市名稱',
+  `city_order` tinyint NOT NULL COMMENT '標記',
+  `state` smallint NOT NULL COMMENT '狀態',
+  PRIMARY KEY (`auto_no`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- 傾印資料表的資料 `city`
+--
+
+INSERT INTO `city` (`auto_no`, `name`, `city_order`, `state`) VALUES
+(1, '臺北市', 0, 0),
+(2, '基隆市', 0, 0),
+(3, '新北市', 0, 0),
+(4, '宜蘭縣', 0, 0),
+(5, '新竹市', 0, 0),
+(6, '新竹縣', 0, 0),
+(7, '桃園市', 0, 0),
+(8, '苗栗縣', 0, 0),
+(9, '台中市', 0, 0),
+(10, '彰化縣', 0, 0),
+(11, '南投縣', 0, 0),
+(12, '雲林縣', 0, 0),
+(13, '嘉義市', 0, 0),
+(14, '嘉義縣', 0, 0),
+(15, '台南市', 0, 0),
+(16, '高雄市', 0, 0),
+(17, '南海諸島', 0, 0),
+(18, '澎湖縣', 0, 0),
+(19, '屏東縣', 0, 0),
+(20, '台東縣', 0, 0),
+(21, '花蓮縣', 0, 0),
+(22, '金門縣', 0, 0),
+(23, '連江縣', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `hot`
+--
+
+DROP TABLE IF EXISTS `hot`;
+CREATE TABLE IF NOT EXISTS `hot` (
+  `h_id` int NOT NULL AUTO_INCREMENT COMMENT '熱銷商品流水號',
+  `b_id` int NOT NULL COMMENT '品牌編號',
+  `p_id` int NOT NULL COMMENT '產品編號',
+  `h_sort` int DEFAULT NULL COMMENT '熱銷商品排名',
+  PRIMARY KEY (`h_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- 傾印資料表的資料 `hot`
+--
+
+INSERT INTO `hot` (`h_id`, `b_id`, `p_id`, `h_sort`) VALUES
+(1, 1, 3, 1),
+(2, 1, 6, 2),
+(3, 1, 9, 3),
+(4, 1, 12, 4),
+(5, 2, 19, 1),
+(6, 2, 28, 2),
+(7, 2, 38, 3),
+(8, 2, 48, 4),
+(9, 3, 55, 1),
+(10, 3, 60, 2),
+(11, 3, 65, 3),
+(12, 3, 70, 4),
+(13, 4, 75, 1),
+(14, 4, 85, 2),
+(15, 4, 95, 3),
+(16, 4, 105, 4);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `member`
+--
+
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE IF NOT EXISTS `member` (
+  `email_id` int NOT NULL AUTO_INCREMENT COMMENT 'email流水號',
+  `email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT 'email帳號',
+  `pw1` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '密碼',
+  `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否啟動',
+  `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '中文姓名',
+  `tssn` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '身份證字號',
   `birthday` date NOT NULL COMMENT '生日',
-  `imgname` varchar(20) collate utf8_unicode_ci default NULL COMMENT '相片檔名',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '建立日期',
-  PRIMARY KEY  (`email_id`),
+  `imgname` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '相片檔名',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
+  PRIMARY KEY (`email_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- 
--- 列出以下資料庫的數據： `member`
--- 
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `multiselect`
--- 
+--
+-- 資料表結構 `multiselect`
+--
 
-CREATE TABLE `multiselect` (
-  `ms_id` int(11) NOT NULL auto_increment COMMENT '多功能選擇ID',
-  `mslevel` int(11) NOT NULL COMMENT '多功能選擇層級',
-  `msuplink` int(11) NOT NULL COMMENT '上層連結',
-  `opcode` varchar(10) collate utf8_unicode_ci default NULL COMMENT '外掛參數',
-  `msname` varchar(50) collate utf8_unicode_ci NOT NULL COMMENT '多功能選擇名稱',
-  `msort` int(11) default NULL COMMENT '各功能列表排序',
-  `url1` varchar(200) collate utf8_unicode_ci default NULL COMMENT '外掛網址1',
-  `url2` varchar(200) collate utf8_unicode_ci default NULL COMMENT '外掛網址2',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '建立日期',
-  `update_date` varchar(50) collate utf8_unicode_ci default NULL COMMENT '修改日期',
-  PRIMARY KEY  (`ms_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+DROP TABLE IF EXISTS `multiselect`;
+CREATE TABLE IF NOT EXISTS `multiselect` (
+  `ms_id` int NOT NULL AUTO_INCREMENT COMMENT '多功能選擇ID',
+  `mslevel` int NOT NULL COMMENT '多功能選擇層級',
+  `msuplink` int NOT NULL COMMENT '上層連結',
+  `opcode` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛參數',
+  `msname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '多功能選擇名稱',
+  `msort` int DEFAULT NULL COMMENT '各功能列表排序',
+  `url1` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛網址1',
+  `url2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛網址2',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
+  `update_date` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '修改日期',
+  PRIMARY KEY (`ms_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- 
--- 列出以下資料庫的數據： `multiselect`
--- 
+--
+-- 傾印資料表的資料 `multiselect`
+--
 
-INSERT INTO `multiselect` VALUES (1, 1, 0, NULL, '付款方式', 0, NULL, NULL, '2023-08-11 17:46:53', '2023-08-17 03:42:28');
-INSERT INTO `multiselect` VALUES (2, 1, 0, NULL, '訂單處理狀態', 0, NULL, NULL, '2023-08-11 17:52:29', '2023-08-17 03:42:41');
-INSERT INTO `multiselect` VALUES (3, 2, 1, NULL, '貨到付款', 1, NULL, NULL, '2023-08-11 17:55:45', '2023-08-17 03:43:37');
-INSERT INTO `multiselect` VALUES (4, 2, 1, NULL, '信用卡付款', 2, NULL, NULL, '2023-08-11 17:55:45', '2023-08-17 03:43:54');
-INSERT INTO `multiselect` VALUES (5, 2, 1, NULL, '銀行轉帳', 3, NULL, NULL, '2023-08-11 17:55:45', '2023-08-17 03:44:37');
-INSERT INTO `multiselect` VALUES (6, 2, 1, NULL, '電子支付', 4, NULL, NULL, '2023-08-11 17:55:45', '2023-08-17 03:44:51');
-INSERT INTO `multiselect` VALUES (7, 2, 2, NULL, '處理中', 1, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 03:45:03');
-INSERT INTO `multiselect` VALUES (8, 2, 2, NULL, '待出貨', 2, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 03:45:32');
-INSERT INTO `multiselect` VALUES (9, 2, 2, NULL, '運送中', 3, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 03:45:45');
-INSERT INTO `multiselect` VALUES (10, 2, 2, NULL, '收貨完成', 4, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 03:46:10');
-INSERT INTO `multiselect` VALUES (11, 2, 2, NULL, '退貨中', 5, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 03:46:24');
-INSERT INTO `multiselect` VALUES (12, 2, 2, NULL, '已關閉訂單', 6, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 03:46:35');
-INSERT INTO `multiselect` VALUES (13, 2, 2, NULL, '無效訂單', 7, NULL, NULL, '2023-08-11 18:06:42', '2023-08-17 05:39:26');
-INSERT INTO `multiselect` VALUES (14, 2, 2, NULL, '訂單確認', 8, NULL, NULL, '2023-08-18 14:13:47', '2023-10-23 12:37:36');
-INSERT INTO `multiselect` VALUES (15, 2, 2, NULL, '平台出貨', 9, NULL, NULL, '2023-08-18 14:13:47', '2023-10-25 08:29:31');
-INSERT INTO `multiselect` VALUES (34, 1, 0, NULL, '付款處理狀態', 0, NULL, NULL, '2023-08-11 17:52:29', '2023-08-17 03:42:41');
-INSERT INTO `multiselect` VALUES (35, 2, 34, NULL, '侍貨到付款', 1, NULL, NULL, '2023-08-11 17:55:45', '2023-10-25 08:39:12');
-INSERT INTO `multiselect` VALUES (36, 2, 34, NULL, '完成付款', 2, NULL, NULL, '2023-08-11 17:55:45', '2023-10-25 08:39:12');
-INSERT INTO `multiselect` VALUES (37, 2, 34, NULL, '未完成付款', 3, NULL, NULL, '2023-08-11 17:55:45', '2023-10-25 08:39:12');
-INSERT INTO `multiselect` VALUES (38, 2, 34, NULL, '貨到付款已完成', 4, NULL, NULL, '2023-08-11 17:55:45', '2023-10-25 08:39:12');
-
--- --------------------------------------------------------
-
--- 
--- 資料表格式： `product`
--- 
-
-CREATE TABLE `product` (
-  `p_id` int(11) NOT NULL auto_increment COMMENT '產品編號',
-  `b_id` int(11) NOT NULL COMMENT '品牌編號',
-  `class_id` int(11) NOT NULL COMMENT '產品類別',
-  `p_name` varchar(200) collate utf8_unicode_ci NOT NULL COMMENT '產品名稱',
-  `p_ename` varchar(100) collate utf8_unicode_ci default NULL COMMENT '產品英名',
-  `p_intro` varchar(200) collate utf8_unicode_ci default NULL COMMENT '產品簡介',
-  `p_price` int(11) default NULL COMMENT '產品單價',
-  `p_open` tinyint(1) NOT NULL default '1' COMMENT '上架',
-  `p_content` text collate utf8_unicode_ci COMMENT '產品詳細規格',
-  `p_medal` text collate utf8_unicode_ci COMMENT '產品獎牌',
-  `p_other` text collate utf8_unicode_ci COMMENT '其他資訊',
-  `p_date` timestamp NULL default CURRENT_TIMESTAMP COMMENT '產品輸入日期',
-  PRIMARY KEY  (`p_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=107 ;
-
--- 
--- 列出以下資料庫的數據： `product`
--- 
-
-INSERT INTO `product` VALUES (1, 1, 5, '85% 祕魯Chuncho 黑巧克力', '85% Peru Chuncho Dark Chocolate', '微微花香，帶有新鮮柑橘酸質。\n楓糖的甜香在鼻腔中散發。', 450, 1, '採用安地斯高地 Chuncho 可可豆，\r\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n融化時如糖蜜甜，風味新鮮且活潑、絲滑的口感。\n如紅色莓果、柑橘酸、新鮮的草莓、櫻桃般柔和。\n甜美蜂蜜和各種水果，在舌間來回擺動，還有瞬間消逝的花香。\n最後完全融化後，令人驚訝的柔軟餘味，如烤榛果、巧克力味、果香味清淡細膩，悠長愉悅。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回首面金牌！', '成分：可可膏、可可脂、砂糖\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\n內容量：42 公克\n葷素別：全素\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (2, 1, 5, '70% 祕魯Chuncho 黑巧克力', '70% Peru Chuncho Dark Chocolate', '新鮮莓果香，帶有微微橘子酸質。\r\n蜜糖的甜香在鼻腔中散發。', 380, 1, '採用安地斯高地 Chuncho 可可豆，\r\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n融化時如糖蜜甜，風味新鮮且活潑、絲滑的口感。\n如紅色莓果、柑橘酸、新鮮的草莓、櫻桃般柔和。\n甜美蜂蜜和各種水果，在舌間來回擺動，還有瞬間消逝的花香。\n最後完全融化後，令人驚訝的柔軟餘味，如烤榛果、巧克力味、果香味清淡細膩，悠長愉悅。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (3, 1, 5, '75% ORIGIN #1 黑巧克力', '75% Exclusive ORIGIN No.1 Dark Chocolate', '嚴選多支產區精品可可豆，以最佳比例調配完成。\r\n初嚐帶有微果酸，伴隨奶油堅果香氣、香蕉甜感。', 350, 1, 'ORIGIN #1 是目前全品牌唯一採用複數產區可可豆，以最佳比例調配而成的品項，\n可以說是ORIGIN的第一個孩子。\n奶油堅果香氣如絲般繞在味蕾間，香蕉般的溫和風味。', '於 ICA世界巧克力大賽（2021-22亞太區），首次代表品牌參加便獲得銅牌佳績。', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (4, 1, 5, '100% 祕魯Chuncho 黑巧克力', '100% Peru Chuncho Dark Chocolate', '木質調香氣，與櫻桃般突出的酸質。\r\n濃厚的口感與奶油般的滑順度。', 380, 1, '採用安地斯高地 Chuncho 可可豆，\r\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n風味新鮮且活潑、絲滑的口感，\n如紅色莓果、柑橘酸、新鮮的草莓、櫻桃般柔和。\n各種水果在舌間來回擺動，還有瞬間消逝的花香。\n最後完全融化後，令人驚訝的柔軟餘味，如烤榛果、巧克力味、果香味清淡細膩，悠長愉悅。', '', '成分：可可膏、可可脂\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (5, 1, 5, '85% 厄瓜多黑巧克力', '85% Ecuador Dark Chocolate', '以可可調為基礎，伴隨奶油堅果香。\r\n入口有淡淡花香與烤花生味。', 350, 1, '採用厄瓜多 Nacional 可可豆，是世界上為數不多的優質品種豆之一。\n厄瓜多產的可可豆僅佔全世界可可豆的 4%，但是卻占精品巧克力產地的 70%，是厄瓜多的代表性作物。\n因其卓越、濃郁、獨特的香氣而受到巧克力行家的青睞，並因其豐富而柔滑的味道而備受推崇。', '', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (6, 1, 5, '70% 厄瓜多黑巧克力', '70% Ecuador Dark Chocolate', '以可可調為基礎，伴隨奶油堅果香。\r\n入口有淡淡花香與烤花生味。', 350, 1, '採用厄瓜多 Nacional 可可豆，是世界上為數不多的優質品種豆之一。\n厄瓜多產的可可豆僅佔全世界可可豆的4%，但是卻占精品巧克力產地的70%，是厄瓜多的代表性作物。\n因其卓越、濃郁、獨特的香氣而受到巧克力行家的青睞，並因其豐富而柔滑的味道而備受推崇。', '', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (7, 1, 5, '70% 多明尼加黑巧克力', '70% Dominican Dark Chocolate', '帶有柑橘類香氣，伴隨黑糖甜感。\r\n熱帶水果的明亮酸質與木質調韻味。', 350, 1, '', '', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (8, 1, 6, '70% 貢布粉紅胡椒風味巧克力', '70% Kampot Red Peppercorns Flavored Chocolate', '將貢布粉紅胡椒粒磨碎至微米級粉末，與單方精品可可豆融合。\r\n從溫和的甜味到辛辣，時而透露出花香與果味。', 380, 1, '入口先是微甜感，花香與柑橘接連冒出。\n含在口中利用舌頭的溫度將巧克力慢慢融化，在口中停留 30 秒後，胡椒的辣味逐漸增強，如同在口中放煙火般的味覺盛宴。\n粉紅胡椒是胡椒中的精品，外觀像葡萄乾，具有強烈的辛辣與花果香，熱辣的口感帶有淡淡的尤加利與薄荷味。\r\n種植的過程及其苛刻，使作物成熟的氣候條件必須非常完美，只有以胡椒聞名的柬埔寨貢布地區才能提供這種組合。\r\n粉紅胡椒獨特的風味和氣味，以及鮮紅多汁的果實，經常吸引小鳥與昆蟲前來偷吃，所以每一顆胡椒粒都非常珍貴。\r\n與黑胡椒不同，採收的方式並不是將完整的莖取下，而是透過人工將果實一粒一粒摘下，因此一個農場每天只能生產一杯粉紅胡椒粒。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為 ORIGIN 抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖、柬埔寨胡椒\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (9, 1, 6, '70% 台灣紅玉風味巧克力', '70% Taiwan Ruby Tea Flavored Chocolate', '將杉林溪紅玉紅茶葉磨碎至微米級粉末，與單方精品可可豆融合。\r\n微微的苦味襯托出紅玉本身帶有的香氣。', 380, 1, '杉林溪紅玉相對於日月潭紅玉，肉桂與薄荷味較淡雅，\n取而代之是鳳梨般的明亮酸感。\n品嚐時建議含於口中，用舌頭輕輕將巧克力化開，茶香在品嚐中段尤為突出。\n台茶十八號，又稱紅玉。\n目前全世界僅台灣獨有，堪稱世界頂級的紅茶種，有著「台灣香」的美名。\n日治時期，日本人發現在南投魚池區的氣候與阿薩姆紅茶原始的種植區域氣候非常相似，因此把阿薩姆紅茶引入該處開始大量種植，也因此使魚池鄉成為培育紅茶的重點區域。\n1999年，台灣農委會-茶業改良場-魚池分所 發表了由緬甸大葉種與臺灣原生山茶育種而成，帶有獨特薄荷肉桂香及甜甜焦糖味的全新茶種，並將之命名為台茶十八號。\n這個品種不僅是台灣創造育出的特殊種，還有著獨特奇香，會帶有涼氣、木質、蕈類、甜果香，是其他紅茶產區茶無法取代的氣息，可說是紅茶界的台灣之光。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (10, 1, 6, '70% 台灣蜜香紅烏龍風味巧克力', '70% Taiwan Honey Flavored Red Oolong', '將台東蜜香紅烏龍茶葉磨碎至微米級粉末，與單方精品可可豆融合。\r\n可可脂充分包覆茶粉，帶出紅烏龍無法以水沖泡出的厚度。', 350, 1, '一入口便是濃厚的熟果香，帶有烘焙的韻味。滋味醇厚圓滑，蜜香在舌尖纏繞。\n2008年，台灣農委會-茶葉改良場-台東分場 為了突破海拔較低的鹿野茶區困境，積極建立鹿野茶區特色，研發出本土特色烏龍茶。\r\n利用較不利製茶的夏、秋兩季，生產發酵程度較重的紅烏龍，也是所有烏龍茶中發酵程度最高的，非常接近紅茶但不是紅茶。\r\n具有紅茶般的茶湯色澤，卻是烏龍茶的滋味。茶質厚重充滿水果香，同時帶有甜感，滋味醇厚圓滑、耐泡、甘醇，冷泡、熱泡皆適宜，是近年來極具市場發展潛力的茶種。\r\n根據茶人洪飛騰先生所形容：「紅色茶湯鮮果香，甘醇回味撲鼻樑，一心二葉手工採，冷泡滋味透心涼」。', '紅烏龍獨特的多層次風味，獲得 ICA世界巧克力大賽（2021-22亞太區）評審的青睞，為首次參賽的ORIGIN抱回銅牌佳績。', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (11, 1, 6, '70% 鹽之花風味巧克力', '70% Fleur de sel Flavored Chocolate', '將法國葛宏德鹽之花磨碎至微米級粉末，與單方精品可可豆融合。\r\n溫和的鹹味提出甘甜，鹹甜交錯的驚喜口感。', 350, 1, '鹽之花富含礦物質，使其本身自帶多層次的風味與鮮味。\n融入巧克力時，鹹味圓潤輕柔、回甘悠長，散發著似有若無的紫羅蘭花氣息，鹹甜在舌尖交錯浮現。\n鹽之花，得名於其片狀如花瓣的結晶，重量極輕可漂浮在鹽水表面，並形成中空的倒金字塔形。\r\n傳統採集鹽之花的工人都是女性，因為鹽之花的晶體非常脆弱，人們認為必須由「柔軟的性別」來採集。採集方式是鹽沼中刮取，就像牛奶上漂浮著一層奶油，因此鹽之花被稱為「鹽田的奶油」。\r\n只有在陽光充足、乾燥且有緩慢穩定的風的情況下才能採集鹽之花。在法國葛宏德，每個鹽田每天僅能生產約一公斤。產量稀少且勞力密集，使得鹽之花成為最昂貴的鹽，珍貴性也使它獲得「海鹽中的魚子醬」的別名。	 ', '', '成分：可可膏、可可脂、砂糖、法國海鹽\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (12, 1, 6, '70% 台東洛神花風味巧克力', '70% Taitung Roselle Flavored Chocolate', '將台東洛神花低溫乾燥磨碎至微米級粉末，與單方精品可可豆融合。\r\n酸甜滋味令人驚喜，莓果香氣於鼻腔散發。', 350, 1, 'ORIGIN利用氣壓改變水的沸點，使水份在20～30℃時蒸發，因此與市面所見的乾燥洛神花味道完全不同，非烏梅般的發酵味而是明亮的莓果酸，保留了洛神花最新鮮完整的風味。\n洛神花，又被稱為「植物界的紅寶石」。\n許多人對於它名稱的由來，第一反應會想到《洛神賦》。事實上，洛神這個名字是由英文的Roselle音譯而來，與曹植的《洛神賦》或中國神話中的洛神並沒有關聯。\n洛神花原產於西非，經奴隸貿易及殖民主義在世界各地如印度都有引入，台灣東部則是於日治時期西元1910年引進。\n開花時間在每年的10～12月；花期只有一天，清晨開花、傍晚凋謝。花朵凋謝後花萼會轉為肥厚，就是我們食用的部位。洛神花並不適合使用機器採集，因此大多為人工手採，採收後可乾燥或新鮮直接加工製成花茶或食品。\n要特別注意的是，孕婦及哺乳中的婦女不可以食用洛神花喔！糖尿病、高血壓的患者如果食用，則需持續監測血糖與血壓，避免數值過低的狀況。', '', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (13, 1, 6, '70% 輕焙咖啡風味巧克力', '70%Light Roasted Coffee Flavored Chocolate', '將非洲冠軍日曬咖啡豆磨碎至微米級粉末，與單方精品可可豆融合。\n柑橘、甜桃般明亮酸質，清爽的口感。', 350, 1, '', '', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (14, 1, 6, '70% 深焙咖啡風味巧克力 70%', 'Deep Roasted Coffee Flavored Chocolate', '將印尼曼特寧咖啡豆磨碎至微米級粉末，與單方精品可可豆融合。\n可可脂充分包覆咖啡粉，帶出曼特寧本身的醇厚藥草味。', 350, 1, '曼特寧，原為印尼蘇門答臘島上一個當地部落的名字。傳說在二次大戰期間，日本佔領印尼時，一位日本軍人喝到一杯令他眼睛為之一亮的咖啡，便詢問咖啡的名字。店主因語言隔閡，誤以為軍人在詢問他是哪裡人，於是回答「曼特寧」。\n曼特寧咖啡採用「濕剝法」，使咖啡豆帶有草本、木質、藥材調性，非常厚實且濃郁的風味。\n中深烘焙度使咖啡豆苦中帶有焦糖、堅果風味，非常適合融入到巧克力當中。', '', '成分：可可膏、可可脂、砂糖、台灣茶葉\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\n內容量：42 公克\n葷素別：全素\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (15, 1, 7, '50% 祕魯Chuncho 牛奶巧克力', '50% Peru Chuncho Milk Chocolate', '奶香伴隨太妃糖甜感，葡萄果汁的酸甜滋味。', 380, 1, '採用安地斯高地 Chuncho 可可豆，\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n快速而甜美的開始，草莓牛奶且非常活潑。\n蜂蜜和莓果的味道如波浪般來回流動。\n餘韻烤榛果、巧克力味清淡細膩，但回味悠長。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖、奶粉、大豆卵磷脂、天然香草香料\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：奶素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (16, 1, 7, '50% 台灣龍眼蜜香烏龍牛奶巧克力', '50% Taiwan Longan Honey Flavored Oolong', '將宜蘭龍眼蜜香烏龍茶葉磨碎至微米級粉末，與單方精品可可豆融合。\r\n甜度較高的牛奶巧克力更加凸顯龍眼蜜香烏龍的蜜香與甜感。', 350, 1, '來自宜蘭的龍眼蜜香烏龍茶，受到小綠葉蟬的眷顧而自然產生花蜜般的甜感，並帶有梔子花、蜜桃、玉蘭花香氣。\n融入巧克力時，一入口便是龍眼蜜般的香甜充滿整個口腔，接著釋放茶香。巧克力完全融化後，口中留下的回甘餘韻綿長。\n蜜香茶最大的特色，就是有一股天然的柔和「蜜香」。只有經過小綠葉蟬吸食的茶菁，加工後才能產生一股天然的蜂蜜香。\r\n小綠葉蟬學名 Jacobiasca formosana ，其種小名 formosana 意即「台灣的」。因此全世界的產茶區，只有台灣能製作出種類豐富的蜜香茶，也是台灣新興熱門的特色茶類。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN 抱回銅牌佳績。', '成分：可可膏、可可脂、砂糖、奶粉、台灣茶葉、大豆卵磷脂、天然香草香料\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\n內容量：42 公克\n葷素別：奶素\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (17, 1, 7, '60% 厄瓜多牛奶巧克力', '60% Ecuador Milk Chocolate', '一入口便是濃濃奶味與可可調，伴隨麥芽香氣。\r\n彷彿在品嚐一塊牛奶糖，又或是一杯麥芽可可飲。', 350, 1, '入口立即帶有焦糖和蜂蜜的甜味，\r\n融化後榛果糖和麥芽奶味撲鼻而來，\r\n餘味榛果和可可的香氣。\n採用厄瓜多 Nacional 可可豆，是世界上為數不多的優質品種豆之一。\r\n厄瓜多產的可可豆僅佔全世界可可豆的4%，但是卻占精品巧克力產地的70%，是厄瓜多的代表性作物。\r\n因其卓越、濃郁、獨特的香氣而受到巧克力行家的青睞，並因其豐富而柔滑的味道而備受推崇。', '', '成分：可可膏、可可脂、砂糖、奶粉、大豆卵磷脂、天然香草香料\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：奶素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (18, 2, 8, '莓莓巧克力', NULL, '蔓越莓乾與灑滿覆盆莓粉的巧克力結合，莓好風味在口中綻放。', 350, 1, '味蕾綻放新風味，\r\n蔓越莓乾與覆盆莓粉，\r\n嚴選飽滿蔓越莓乾，外層包覆在細膩的覆盆莓粉巧克力。\r\n雙重美顏聖品的結合，創造絕妙口感體驗。\r\n為您帶來美味無窮的時刻。', '', '成分：蔓越莓、糖、可可脂、草莓粉、可可膏、葵花卵磷脂、大豆卵磷脂、葵花籽油、天然香草香料、覆盆莓粉、防潮糖粉 \n淨重：100公克\n產地：台灣 \n過敏原：本產線亦有生產大豆、芒果、花生、牛奶、堅果、芝麻、含麩質之穀物及其製品\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (19, 2, 8, '腰果巧克力豆', NULL, '頂級苦甜巧克力包裹著香脆的腰果，讓你心情愉悅的髒髒豆。', 320, 1, '從烘焙腰果到成品全手工製作，\n腰果裹上頂級苦甜巧克力和可可粉，\n巧克力融合香脆堅果，\n香甜口感酥脆扎實，越嚼越香，帶濃郁的可可味。\n讓你心情愉悅的髒髒豆，保證吃了會上癮的巧克力，一口接一口回味無窮。', '', '成分：腰果、可可膏、糖、可可脂、可可粉、大豆卵磷脂、天然香草香料\n淨重：100公克\n產地：台灣\n過敏原：本產品含有大豆、乳製品、堅果\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (20, 2, 8, '杏仁果巧克力豆', NULL, '頂級苦甜巧克力包裹著香脆的杏仁果，讓你心情愉悅的髒髒豆。', 320, 1, '從烘焙杏仁到成品全手工製作，杏仁裹上頂級苦甜巧克力和可可粉，\n巧克力融合香脆堅果，\n香甜口感酥脆扎實，越嚼越香，帶濃郁的可可味。\n讓你心情愉悅的髒髒豆，保證吃了會上癮的巧克力，一口接一口回味無窮。', '', '成分：杏仁果、黑巧克力、牛奶巧克力（可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料）、可可粉\n淨重：100公克\n產地：台灣\n過敏原：本產品含有大豆、乳製品、堅果\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (21, 2, 8, '夏威夷果巧克力豆', NULL, '頂級苦甜巧克力包裹著香脆的夏威夷果，讓你心情愉悅的髒髒豆。', 360, 1, '從烘焙夏威夷果到成品全手工製作，夏威夷果裹上頂級苦甜巧克力和可可粉，\n巧克力融合香脆堅果，\n香甜口感酥脆扎實，越嚼越香，帶濃郁的可可味。\n讓你心情愉悅的髒髒豆，保證吃了會上癮的巧克力，一口接一口回味無窮。', '', '成分：夏威夷果、黑巧克力、牛奶巧克力（可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料）、可可粉\n淨重：100公克\n產地：台灣\n過敏原：本產品含有大豆、乳製品、堅果\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (22, 2, 8, '烘焙可可豆', NULL, '每日堅果營養最佳攝取，適合對控制糖份攝取需求的族群，無加糖、無調味、零添加。', 350, 1, '富含膳食纖維，調節消化道機能，原豆研磨 全素可食。\n香濃的可可香氣，口感清脆，來自不同產區風味，一場味覺探險之旅。\n撥開即可食用，亦可搭配優格、穀片食用，或是壓碎撒至生菜沙拉、花生吐司或麵包上。', '', '成分：烘焙可可豆\n淨重：200公克\n產地：台灣\n過敏原資訊：堅果\n保存方法：請存放於28℃以下陰涼通風處', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (23, 2, 9, '85%經典含陷 生巧克力', NULL, '含酒提香展現可可原始純粹的味道。', 520, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n使用頂級黑巧克力，結合馬達加斯加天然香草莢，含酒提香展現可可原始純粹的味道。', '', '成分：85%黑巧克力(可可膏、可可脂、砂糖、大豆卵磷脂)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、葡萄糖漿、山梨糖醇(甜味劑)、蒸餾酒、可可粉、天然香草莢\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (24, 2, 9, '古坑咖啡 生巧克力', NULL, '添加L-阿拉伯糖，選用雲林古坑本產咖啡豆。', 550, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n選用雲林古坑本產咖啡豆，佐咖啡利口酒提香，添加L-阿拉伯糖，擁有咖啡、焦糖、炭焙、可可多層次的口感。', '', '成分：8黑巧克力(可可膏、可可脂、砂糖、大豆卵磷脂)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、咖啡利口酒、咖啡豆、葡萄糖漿、山梨糖醇(甜味劑)、L-阿拉伯糖\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (25, 2, 9, '小山園抹茶 生巧克力', NULL, '添加日本頂級小山園抹茶粉，濃郁茶味清香不苦澀。', 580, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n添加日本頂級小山園抹茶粉，顏色翠綠，濃郁茶味清香不苦澀，是抹茶控絕對不能錯過的味道。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、葡萄糖漿、山梨糖醇(甜味劑)、小山園抹茶粉\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (26, 2, 9, '炭焙烏龍 生巧克力', NULL, '添加L-阿拉伯糖，使用台灣有機認證茶葉。', 580, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n使用台灣有機認證茶葉，添加L-阿拉伯糖，經歷龍眼木炭焙口口甘醇，茶香味濃尾韻回甘持久。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、炭焙烏龍茶、葡萄糖漿、山梨糖醇(甜味劑)、L-阿拉伯糖\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (27, 2, 9, '百香果 生巧克力', NULL, '使用百香果果泥，熬煮的濃郁鮮果。', 550, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n使用百香果熬煮出來的果泥，加入台灣小農蜂蜜提出鮮果味，鮮果的濃郁完整鎖在裡面。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、百香果果泥、蜂蜜、防潮糖粉(糖、玉米澱粉、完全氫化棕櫚油、大豆卵磷脂、棕櫚油、大豆油、脂肪酸丙二醇酯、脂肪酸甘油酯、抗氧化劑(混合濃縮生育醇)、芥花油)、山梨糖醇(甜味劑)\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (28, 2, 9, '粉戀果香 生巧克力', NULL, '添加L-阿拉伯糖，結合天然水果，粉嫩少女般的初戀。', 550, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n結合天然水果－葡萄、紅龍果、檸檬，無添加人工色素，粉色為水果原色，就像粉嫩少女般的初戀。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、奶油、檸檬汁、火龍果汁、葡萄汁、水果果粉、葡萄糖漿、山梨糖醇(甜味劑)、L-阿拉伯糖\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (29, 2, 10, '可可碎粒 黑巧克力 75%', NULL, '吃的到可可碎粒。', 320, 1, '', '', '成分：可可膏、二砂糖、可可碎粒、可可脂\n淨重：45公克\n可可豆產地：委內瑞拉\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (30, 2, 10, 'L-阿拉伯糖 黑巧克力 74%', NULL, 'L-阿拉伯糖能抑制蔗糖在腸道分解與吸收，享受糖的甜蜜，免受糖的負擔。', 300, 1, '', '', '成分：可可膏、二砂糖、可可脂、L-阿拉伯糖\n淨重：45公克\n可可豆產地：厄瓜多\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (31, 2, 10, '台灣 黑巧克力70%', NULL, '台灣的巧克力帶有熱帶水果和葡萄果乾風味，微帶紅酒果酸感，是送禮最佳選擇。', 350, 1, '', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (32, 2, 10, '台灣 黑巧克力80%', NULL, '帶著紅酒味道，伴隨著煙燻香氣，口感醇厚溫順。', 360, 1, '', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (33, 2, 10, '台灣 黑巧克力90%', NULL, '新推出90%，風味、口感更升級', 380, 1, '新推出90%，風味、口感更升級。\r\n台灣的巧克力帶有熱帶水果和葡萄果乾風味，微帶紅酒果酸感，是送禮最佳選擇。', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (34, 2, 10, '哥倫比亞 黑巧克力 76%', NULL, '哥倫比亞產區特有風味，咖啡及可可香，尾韻帶葡萄果香及單寧酸感酸度。', 290, 1, '', '', '成分：可可膏、二砂糖\n淨重：45公克\n可可豆產地：哥倫比亞\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (35, 2, 10, '多明尼加 黑巧克力 66%', NULL, '帶著柑橘類香氣，伴隨著糖蜜味，清甜的味道是最佳入門款。', 280, 1, '', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：多明尼加\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (36, 2, 10, '秘魯白豆 黑巧克力 70%', NULL, '稀有白豆', 320, 1, '生長在3,500英尺以上的稀有的可可品種，柔和的莓果與花香相互交融，有紅酒單寧感，尾韻持久甘甜。', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：秘魯白豆\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (37, 2, 10, '秘魯白豆 黑巧克力 80%', NULL, '稀有白豆', 320, 1, '來自秘魯馬拉尼翁山谷的白可可豆，花香味道豐富飽滿，帶有香草莢、紅酒單寧，尾韻檸檬香氣。', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：秘魯白豆\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (38, 2, 10, '秘魯白豆 黑巧克力 99%', NULL, '高濃度可可，花香味道豐富飽滿。', 360, 1, '', '', '成分：可可膏、可可脂\n淨重：45公克\n可可豆產地：秘魯白豆\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (39, 2, 10, '馬達加斯加 黑巧克力 86%', NULL, '濃郁堅果香氣，滑順油脂感，尾韻帶些許苦酸。', 300, 1, '', '', '成分：可可膏、二砂糖\n淨重：45公克\n可可豆產地：馬達加斯加\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (40, 2, 10, '馬達加斯加 黑巧克力 92%', NULL, '濃郁堅果香氣，滑順油脂感，尾韻帶些許苦酸。', 330, 1, '', '', '成分：可可膏、二砂糖\n淨重：45公克\n可可豆產地：馬達加斯加\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (41, 2, 11, '伯爵紅茶 黑巧克力70%', NULL, '紅茶與佛手柑融合的獨特香氣與黑巧克力的美味融合。', 350, 1, '濃郁黑巧克力，融合伯爵紅茶的花與柑橘香氣，每一口都是獨特的味覺享受，適合喜歡獨特風味的巧克力愛好者品嚐。', '', '成分：可可膏、二砂糖、伯爵紅茶粉\n淨重：45公克\n可可豆產地：台灣\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (42, 2, 11, '東方美人 台灣黑巧克力70%', NULL, '台灣70%的純巧克力風味深邃而濃郁，與茶葉的清新香氣交織。', 360, 1, '台灣可可豆果酸風味，伴隨優雅的紅酒多酚，加上東方美人茶的清香，深厚滋味，香氣撲鼻，為味蕾帶來奇妙享受。', '', '成分：可可膏、二號砂糖(蔗糖)、東方美人茶粉\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (43, 2, 11, '茶語花香 黑巧克力70%', NULL, '鐵觀音茶特有花香及焙火香氣與黑巧克力的美味融合', 350, 1, '淡雅花香黑巧克力，融合體觀音特有濃醇甘潤，並由尾韻帶出溫和微弱果酸味。\r\n每一口都是獨特的味覺享受，適合喜歡獨特風味的巧克力愛好者品嚐', '', '成分：可可膏、二砂糖、鐵觀音茶粉\n淨重：45公克\n可可豆產地：聖多美\n過敏原：本產品生產製程廠房與其設備處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \r\n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (44, 2, 11, '鐵觀音 黑巧克力70%', NULL, '鐵觀音回甘茶香與黑巧克力的美味融合。', 350, 1, '秘魯可可豆花香和紅酒單寧味，融合體觀音特有濃醇甘潤，並由尾韻帶出溫和微弱果酸味。\n每一口都是獨特的味覺享受，適合喜歡獨特風味的巧克力愛好者品嚐。', '', '成分：可可膏、二砂糖、鐵觀音茶粉\n淨重：45公克\n可可豆產地：秘魯\n過敏原：本產品生產製程廠房與其設備處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (45, 2, 12, '赤藻糖 黑巧克力 66%', NULL, '吃不胖的巧克力。', 300, 1, '赤藻糖醇較不會造成血糖上升也幾乎沒有熱量。 \r\n吃起來有薄荷的微涼感，能抑制蛀牙菌生長，不易生成牙菌斑。', '', '成分：可可膏、赤藻糖醇、木糖醇、可可脂\n淨重：45公克\n可可豆產地：聖多美\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (46, 2, 12, '龍眼花 黑巧克力 70%', NULL, '台灣本產龍眼花。', 320, 1, '台灣可可豆融合本產龍眼花，其香氣隨著咀嚼散開，尾韻帶有龍眼蜜、龍眼乾，令人難以忘懷。', '', '成分：可可膏、二砂糖、乾燥龍眼花、可可脂\n淨重：45公克\n可可豆產地：厄瓜多\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (47, 2, 13, '烏龍牛奶巧克力58%', NULL, '芳香濃郁的茶香與馥郁的奶香結合，帶來獨特的口感饗宴。\r', 280, 1, '牛奶巧克力伴隨烏龍茶香，滑順入口。\r\n融合了烏龍茶和牛奶的絕妙配搭，茶香的清新和巧克力的濃郁在口中交織，帶來驚艷的味覺體驗。\r\n烏龍茶的香氣與牛奶的甘醇，讓您在品嘗時感受到獨特的層次與平衡，每一口都是一場香氣的旅程。', '', '成分：可可膏、脫脂奶粉、砂糖、烏龍茶粉\n淨重：45公克\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封1年，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (48, 2, 13, '牛奶巧克力 58%', NULL, '奶控必吃。', 280, 1, '有著起司味及堅果味香，奶控的人必吃。', '', '成分：可可膏、可可脂、脫脂奶粉、白砂糖\n淨重：45公克\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封1年，開封後請盡快食用完畢 \r\n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (49, 2, 13, '醇白巧克力', NULL, '媽媽與小朋友的最愛，不含可可鹼。', 280, 1, '小朋友也能吃的巧克力，不含可可鹼，品嚐奶香和天然可可脂在嘴巴融化的感受。', '', '成分：可可脂、脫脂奶粉、白砂糖\n淨重：45公克\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封1年，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (50, 3, 14, '文山包種茶巧克力', NULL, '清新淡雅，帶有梔子花香。\n甘醇清爽不苦澀，茶香在黑巧克力中隱隱綿長。', 450, 1, '黑巧克力與台灣茶的美好相遇，70%黑巧克力結合文山包種茶。\r\n巧克力入口即化、細膩滑順，清爽淡雅梔子花香氣，茶香綿長。', '', '成分：可可膏、砂糖、包種茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (51, 3, 14, '坪林鐵觀音巧克力', NULL, '風味醇厚，帶有炭焙香氣。\n入口微苦，後韻轉甘，與黑巧克力結合出美妙滋味。', 450, 1, '黑巧克力與台灣茶的美好相遇，70%黑巧克力結合坪林鐵觀音。\r\n巧克力入口即化、細膩滑順，熟果香氣和可可呈現美妙平衡。', '', '成分：可可膏、砂糖、鐵觀音茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (52, 3, 14, '花蓮蜜香紅茶巧克力', NULL, '溫和圓潤、後韻甘甜。\n獨特的蜜糖蔗香，在黑巧克力濃醇香氣中緩緩蔓延。', 450, 1, '黑巧克力與台灣茶的美好相遇，70%黑巧克力結合花蓮蜜香紅茶。\r\n巧克力入口即化、細膩滑順，帶有獨特蜜糖香氣，尾韻甘甜不澀。\r\n\r\n', '', '成分：可可膏、砂糖、蜜香紅茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (53, 3, 14, '東方美人巧克力', NULL, '台灣可可與茗茶交織的香韻風味。', 450, 1, '口感輕盈、溫和細膩，隱隱帶有蜂蜜香氣。\n烏梅香酸與熟果茶香結合，延展出迷人酸甜香韻。\n屏東可可獨特的烏梅酸香，結合東方美人特殊的茶韻風味，入口果酸突出而明亮，散發豐富的龍眼蜜香及荔枝熟果香。\r\n隨著巧克力在口中緩緩融化，果酸慢慢淡去後，可可細膩的甘醇接著隱隱透出，口感輕盈不厚重、層次豐富分明。', '2023 ICA 銀牌', '成分：可可膏、糖、茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (54, 3, 15, '100% 黑巧克力薄片', NULL, '想要最完整健康營養，不怕吃苦，適合嚴格控制糖份攝取族群。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，濃厚甘苦原味。', '', '成分：可可膏、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (55, 3, 15, '95% 黑巧克力薄片', NULL, '想要完整營養又怕太苦，較為順口，適合嚴格控制糖份攝取族群。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，營養無負擔\n甘苦順口。', '', '成分：可可膏、砂糖、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (56, 3, 15, '85% 黑巧克力薄片', NULL, '想要好吃又想健康無負擔，苦甜摻半，運動、能量一次補充。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，好吃又健康苦甜摻半。', '', '成分：可可膏、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (57, 3, 15, '75% 黑巧克力薄片', NULL, '吃零食沒有罪惡感，自在健康無負擔，運動、能量補充，舒緩放鬆心情。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，療癒好心情溫和滑順。', '', '成分：可可膏、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (58, 3, 15, '星鑽堅果巧克力', NULL, '可可、堅果雙重營養超健康，香濃涮嘴超好吃。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，無調味堅果富含優質營養。', '', '成分：可可膏、糖、腰果、杏仁、核桃、胡桃、可可脂\n淨重：230g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：3個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (59, 3, 16, '100% 經典迦納黑巧克力', NULL, '想要最完整健康營養，不怕吃苦，適合嚴格控制糖份攝取族群。', 100, 1, '嚴選迦納 / 比利時頂級黑巧克力，充滿熱帶可可的原始香氣，無添加糖，濃厚甘苦。', '', '成分：可可膏、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (60, 3, 16, '100% 國產屏東黑巧克力', NULL, '想要最完整健康營養，不怕吃苦，屏東可可帶酸苦口感。', 100, 1, 'ICA-世界巧克力大賞銅牌莊園，呈現屏東獨有的果酸風味，無添加糖，濃郁酸苦。', '', '成分：屏東可可膏、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (61, 3, 16, '85% 經典迦納黑巧克力', NULL, '想要好吃又想健康無負擔，苦甜摻半，運動、能量一次補充。', 100, 1, '嚴選迦納 / 比利時頂級黑巧克力，充滿熱帶可可的原始香氣，微加糖\n果酸苦甜。', '', '成分：可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (62, 3, 16, '85% 國產屏東黑巧克力', NULL, '想要好吃又想健康無負擔，苦甜摻半，屏東可可帶酸苦口感。', 100, 1, 'ICA-世界巧克力大賞銅牌莊園，呈現屏東獨有的果酸風味，微加糖\r\n果酸苦甜。', '', '成分：屏東可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (63, 3, 16, '75% 經典迦納黑巧克力', NULL, '吃零食不怕罪惡感、自在健康無負擔，運動登山、血糖能量一次補充。', 100, 1, '嚴選迦納 / 比利時頂級黑巧克力，充滿熱帶可可的原始香氣，低加糖濃厚輕甜。', '', '成分：可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (64, 3, 16, '75% 國產屏東黑巧克力', NULL, '吃零食不怕罪惡感、自在健康無負擔，屏東可可帶酸苦口感。', 100, 1, 'ICA-世界巧克力大賞銅牌莊園，呈現屏東獨有的果酸風味，低加糖\r\n果酸輕甜。', '', '成分：屏東可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (65, 3, 17, '嘉義海塩巧克力', NULL, '85%黑巧克力搭配嘉義季節海鹽，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配嘉義季節結晶海塩，鮮美富含礦物質，口感鮮美，苦甜回甘好滋味。', '', '成分：可可膏、砂糖、嘉義海塩、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (66, 3, 17, '土耳其無花果巧克力', NULL, '85%黑巧克力搭配無花果乾佐青提籽，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配土耳其天然無花果乾，富果籽口感，採天然烘乾，自然清新香甜。', '', '成分：可可膏、無花果、青提籽、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (67, 3, 17, '屏東鳳梨巧克力', NULL, '85%黑巧克力搭配屏東鳳梨乾佐番茄乾，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配屏東小農鳳梨果乾，充滿鳳梨香氣與酸甜尾韻。', '', '成分：可可膏、鳳梨乾、番茄乾、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (68, 3, 17, '彰化火龍果巧克力', NULL, '85%黑巧克力搭配彰化火龍果乾佐覆盆莓，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配台灣小農火龍果乾，天然清甜帶果籽口感。', '', '成分：可可膏、火龍果乾、覆盆莓乾、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (69, 3, 17, '屏東芒果巧克力', NULL, '85%黑巧克力搭配屏東芒果乾，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配搭配台灣小農芒果果乾，Q甜有嚼勁帶芒果香氣。', '', '成分：可可膏、芒果乾、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (70, 3, 17, '北美蔓越莓巧克力', NULL, '85%黑巧克力搭配蔓越莓果乾佐玫瑰花瓣，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配北美無毒蔓越莓果乾，充滿莓果迷人的酸甜香氣。', '', '成分：可可膏、蔓越莓、玫瑰花瓣、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (71, 4, 18, '36% 碧螺春生巧克力', NULL, '以三峽百年茶園「明前頂級碧螺春綠茶粉」製作而成的, 表現出碧螺春特有的清新雅致, 帶著一心二葉嫩芽的青草大地氣息，點綴屏東特有紅柴蜜的高雅人蔘牛蒡香氣，襯托出谷芳茶園碧螺春來自三峽山谷中春天的滋味。', 320, 1, '關於谷芳頂級明前碧螺春綠茶，手工嫩採三峽白雞谷特有「青心柑仔」品種一心二葉細芽嫩心的茶菁，以不發酵的專業加工製程，全程茶葉不落地加工，製成的茶香帶有海苔香、木質氣息、花果香與嫩草清爽氣息，茶湯清爽鮮甜、丹寧如絲、鮮甜健康、清新無負擔。', '', '成分：白巧克力(糖、可可脂、乳粉、葵花卵磷脂、香草萃取物)、動物性鮮奶油(乳脂、乳蛋白、鹿角菜膠)、發酵奶油(乳脂、乳酸菌種)、轉化糖(葡萄糖、果糖、蔗糖、水)、燕麥奶(水、燕麥、芥花油、磷酸氫二鉀、碳酸鈣、鹽)、全脂奶粉、碧螺春茶粉、可可脂、抹茶粉、蜂蜜\n淨重：56g\n原產地：台灣\n過敏原：本產品含牛奶、燕麥及其製品，本產線亦生產芒果、蛋、堅果、大豆、牛奶、及其製品，不適合其過敏體質者使用。\n保存方式：冷凍保存, 開封後請盡速食用完畢\n葷素標示：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (72, 4, 18, '70% 台灣一號屏東生巧克力', NULL, '帶有酒漬葡萄乾、榛果太妃糖等來自巧克力與蘭姆酒共譜的迷人韻味。', 350, 1, '選用70%台灣一號屏東巧克力、法國發酵奶油，以及特選於馬德拉桶與波本桶陳年12年的巴貝多蘭姆酒，經手工悉心乳化後靜置2日低溫熟成，在入口即化的瞬間感受帶有酒漬葡萄乾、榛果太妃糖等來自巧克力與蘭姆酒共譜的迷人韻味。', '', '成分：70%台灣一號巧克力(可可膏、細砂糖、可可脂)、葡萄糖漿、奶油(乳脂、乳酸菌)、鮮奶油(奶脂、奶蛋白、鹿角菜膠)、蘭姆酒、可可粉\n淨重：56g\n原產地：台灣\n過敏原：本產品含牛奶及其製品，本產線亦生產芒果、蛋、堅果、大豆、牛奶、及其製品，不適合其過敏體質者使用。\n保存方式：冷凍保存, 開封後請盡速食用完畢\n葷素標示：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (73, 4, 18, '85% 台灣一號屏東生巧克力', NULL, '巧克力與蘭姆酒交織綻放的莓果、榛果、太妃糖、奶油等細緻迷人韻味。', 350, 1, '選用台灣一號85%巧克力、法國發酵奶油，以及特選來自牙買加有300年歷史酒廠的蘭姆酒，經手工悉心乳化後靜置2日低溫熟成，在入口即化的瞬間感受巧克力與蘭姆酒交織綻放的莓果、榛果、太妃糖、奶油等細緻迷人韻味。', '', '成分：85%台灣一號巧克力(可可膏、細砂糖、可可脂)、鮮奶油(奶脂、奶蛋白、鹿角菜膠)、奶油(乳脂、乳酸菌)、葡萄糖漿、蘭姆酒、鹽之花、小蘇打、可可粉\n淨重：56g\n原產地：台灣\n過敏原：本產品含牛奶及其製品，本產線亦生產芒果、蛋、堅果、大豆、牛奶、及其製品，不適合其過敏體質者使用。\n保存方式：冷凍保存, 開封後請盡速食用完畢\n葷素標示：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (74, 4, 19, '若水 ‧ 100% 屏東巧克力方片', NULL, '帶有橙花、香蕉、青蘋果、蔓越莓、奶油起司的香氣。 ', 850, 1, '採用福灣巧克力FIDARGS法中的「Roasting標準烘烤工法」及「Griding明星研磨工法」，以低溫烘烤保留最多機能成分和細緻香氣，並縮短研磨時間減少氧化，完成既美味又健康的冠軍巧克力。 \n於2021-22年ICA世界巧克力大賽獲得世界最佳高濃度黑巧克力冠軍，為歷年來分數最高的金獎高濃度黑巧克力。 \n富含「總多酚」為蘋果的52倍、「兒茶素」為綠茶的5倍、「膳食纖維」為燕麥的5倍，以及調節生理機能的「鎂、鋅、銅、錳」等微量元素。', '2024 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2021-22 ICA 世界巧克力大賽 全球賽-金牌 ', '成分：屏東可可膏\n淨重：80g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (75, 4, 19, '100% 台灣一號巧克力-屏東可可', NULL, '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 1000, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銅牌', '成分：屏東可可膏\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (76, 4, 19, '85% 台灣一號巧克力-屏東可可', NULL, '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 850, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '', '成分：屏東可可膏、糖(特砂)、可可脂\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (77, 4, 19, '70% 台灣一號巧克力-屏東可可', NULL, '具太妃焦糖、堅果、 葡萄乾、香草、甘草、蘭姆酒、熱帶水果乾的風味。', 700, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌 \r\n2020 ICA 世界巧克力大賽 亞太區- 亞洲最佳黑巧克力等五金\r\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌', '成分：屏東可可膏、糖(特砂)、可可脂\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (78, 4, 19, '62% 台灣一號巧克力-屏東可可', NULL, '具葡萄乾、太妃焦糖、堅果、 熱帶水果乾、甘草、香草的風味。', 650, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」做法，亦即從屏東可可鮮果在園區內進行發酵、乾燥、烘焙、研磨、精煉、調溫、熟成等程序，所製成的產地原始風味巧克力，未經過抽脂程序，保留巧克力原始個性的最佳風味。\n品嘗起來帶有太妃糖、堅果、熱帶水果乾、咖啡之香氣，入口酸度適中平衡，口感滑順優雅。', '2023 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2019 ICA 世界巧克力大賽-總決賽 3面金牌 \r\n2018 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2017 ICA 世界巧克力大賽-亞太區 5面金牌 \r\n2017 ICA 世界巧克力大賽-亞太區 最佳黑巧克力', '成分：屏東可可膏、糖(特砂)、可可脂\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (79, 4, 20, '100% 台灣一號屏東巧克力', NULL, '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 350, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銅牌 ', '成分：屏東可可膏\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (80, 4, 20, '70% 台灣八號極致烘焙巧克力', NULL, '具蘋果、莓果、焦糖牛奶、堅果、咖啡的風味。', 330, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」做法，更透過福灣巧克力評鑑師獨家研發的“極致烘焙”手法，讓此款巧克力風味帶有個性鮮明的熱帶水果酸香與成熟穩重的巧克力風韻。', '', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (81, 4, 20, '70% 台灣九號雙重發酵粗磨巧克力', NULL, '具草莓、蘋果、紅酒醋、粉紅香檳、堅果的風味。', 330, 1, '全球首創雙重發酵法，來自香檳的瓶內二次發酵概念，突破台灣可可豆的風味極限，引領出強烈莓果紅酒醋等細緻醇類與酯類香氣，創造巧克力風味的無限可能。', '2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽-全球總決賽 銅牌\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銅牌- 原味黑巧克力類 \r\n2019 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2018 ICA 世界巧克力大賽-全球總決賽 金牌\r\n2018 ICA 世界巧克力大賽-亞太區 金牌\r\n2018 ICA 世界巧克力大賽-亞太區 最佳黑巧克力', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (82, 4, 20, '85% 台灣一號屏東巧克力', NULL, '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 330, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (83, 4, 20, '70% 台灣一號屏東巧克力', NULL, '具葡萄乾、焦糖牛奶、堅果、熱帶水果乾、甘草、香草的風味。', 300, 1, '70%屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等所有製程都在福灣園區內完成的TREE-TO-BAR巧克力。\r\n帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 亞洲最佳黑巧克力等五金\r\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (84, 4, 20, '62% 台灣一號屏東巧克力', NULL, '具有太妃焦糖、堅果、 葡萄乾、香草、甘草、蘭姆酒、熱帶水果乾的風味。', 280, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」做法，亦即從屏東可可鮮果在園區內進行發酵、乾燥、烘焙、研磨、精煉、調溫、熟成等程序，所製成的產地原始風味巧克力，未經過抽脂程序，保留巧克力原始個性的最佳風味。\n品嘗起來帶有太妃糖、堅果、熱帶水果乾、咖啡之香氣，入口酸度適中平衡，口感滑順優雅。', '2023 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2019 ICA 世界巧克力大賽-總決賽 3面金牌 \r\n2018 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2017 ICA 世界巧克力大賽-亞太區 5面金牌 \r\n2017 ICA 世界巧克力大賽-亞太區 最佳黑巧克力', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (85, 4, 20, '62% 台灣五號可可碎粒巧克力', NULL, '帶有可可碎粒的口感。', 280, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」作法，亦即從屏東可可鮮果在園區內進行發酵、乾燥、烘培、研磨、精煉、調溫、熟成等程序，所製成的產地原始風味巧克力，未經過抽脂程序，保留巧克力原始個性的最佳風味，最後在巧克力表面均勻撒上烘烤後的可可原豆碎粒，品嚐起來不僅口感十足，更帶有台灣個性鮮明的熱帶水果乾豐富香氣，接續下來的焦糖、堅果香氣更讓你回味無窮！', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2023 ICA 世界巧克力大賽 亞太區- 銅牌 \n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2019 AOC 英國皇家學院巧克力大賽- 銅牌\n2018 AOC 英國皇家學院巧克力大賽- 金牌\n2017 ICA 世界巧克力大賽 全球總決賽- 銅牌\n2017 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可碎粒、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (86, 4, 21, '68% 玉蝶巧克力', NULL, '玉蝶，是以68%黑巧克力為基礎、並帶有清新野薑花香氣的創作巧克力。', 650, 1, '生長於屏東牡丹哭泣湖畔的野薑花 ，以福灣巧克力獨創的Scenting窖藏窨製工法，將迷人香氣沁入巧克力中。\n凝聚時光，賦予新生，在山林裡，在河流邊，天地舞台，吟唱最清澈的詩歌。 \n風吹，蝶飛，那些冬日暖陽般的回憶，融化在唇齒間，幻化為翅膀，領著我們繼續探訪。', '', '成分：屏東可可膏、糖、可可脂\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (87, 4, 21, '70% 玉桂巧克力', NULL, '追憶古林秋日浪漫，台灣本土肉桂與台灣第一屏東巧克力的完美結合，細膩的貝殼薑味，獨特巧克力工藝的愛筆觸，華麗又狂野。', 650, 1, '回憶秋天山林炊煙繚繞的原始浪漫，將生於屏東長治的台灣土肉桂葉用以煙燻台灣一號70%黑巧克力，並綴以月桃籽粉與肉桂葉粉共同研磨，創造出獨樹一格的巧克力工藝，華麗奔放，溫潤心神，我們稱其為來自森林的療癒可樂。', '', '成分：屏東可可膏、糖、可可脂、台灣土肉桂葉粉、台灣月桃籽粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (88, 4, 21, '70% 高粱酒巧克力', NULL, '帶有高粱酒的香氣。', 580, 1, '以獨創減壓浸潤工法，將高粱酒細緻風韻融存到可可豆中，經過數週熟成後製作而成巧克力，展現出纖細秀逸的獨特高粱酒香氣。\r', '2020 ICA 世界巧克力大賽 亞太區- 銀牌/風味調味與熟成特別獎', '成分：屏東可可膏、糖、可可脂、高粱酒\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (89, 4, 21, '70% 玉蘭巧克力', NULL, '精緻美麗，芬芳迷人，台灣的秘密樂趣就隱藏在我們之中。\n融入我們的招牌台灣#1屏東巧克力，在你熱情的親吻下再次綻放。', 650, 1, '福灣巧克力2021四季巧克力計畫中的首發作品－玉蘭，以台灣一號70%黑巧克力為基礎、並帶有濃鬱的鬱玉蘭花的全新創作巧克力。 \n其製作依賴福萬「FIDARGS工藝」中獨特的方法——SCENTING技術。\n我們用多種不同的技巧來乾燥鮮花，以保持最終的花香，並將乾燥花和巧克力放在一起幾週，以盡可能吸收香氣。\n同時，巧克力也會經過適當的陳化，以形成更圓潤、更精緻的風味。 ', '2023 ICA 世界巧克力大賽太區- 銀牌 \n2021-22 ICA 世界巧克力大賽太區- 銅牌\n2022 AOC英國皇家學院巧克力大賽-銀牌', '成分：屏東可可膏、糖、可可脂\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (90, 4, 21, '70% 草莓啤酒酵母巧克力', NULL, '帶有洋甘菊花香、柑橘牛奶糖、草莓莓果的香氣，以及堅果與巧克力的苦韻。', 450, 1, '以福灣巧克力獨特的「酵母發酵工法」，將在地精釀啤酒的草莓啤酒酵母粕，加入新鮮的可可豆中共同低溫發酵，乾燥後再經過「低溫窖藏熟成工法」，轉化出耐人尋味的美好風味。\n不辜負巧克力NASA的稱號，福灣巧克力的原創工藝，再度驚艷世界。\n品嘗此款巧克力需讓味蕾保持乾淨敏銳，含入口中待其緩慢融化，將品嚐到輕盈的洋甘菊花香、細緻的柑橘牛奶糖、草莓莓果香，以及溫柔的堅果及巧克力苦韻。', '2020-21 ICA 世界巧克力大賽 全球總決賽\n-4面金牌: 原味黑巧克力/巧克力製作者/直接採購/栽種國家\n-2面特別獎: 限量/添加發酵\n2020 ICA 世界巧克力大賽 亞太區- 銀牌 ', '成分：屏東可可膏、糖、可可脂、草莓啤酒酵母\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素(製造流程含酒精) ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (91, 4, 21, '70% 啤酒酵母三號愛爾粗研磨巧克力', NULL, '具血橙、葡萄、鳳梨、梨子等鮮果的風味。', 450, 1, '70%啤酒酵母三號粗研磨巧克力Philotes（希臘神話中代表友誼的女神） 採用福灣巧克力原創「酵母發酵工法」。\n以特選的美式艾爾啤酒酵母，在溫濕度皆控制的發酵環境中投入可可豆與野生酵母共同發酵。\n乾燥後再以獨創「低溫窖藏熟成工法」等待時間的醞釀，才能完整表現出啤酒酵母與可可豆共譜的美妙風味。\n最後採用「明星研磨工法」以粗顆粒研磨模擬啤酒的氣泡感。\n咀嚼中帶著迷人奔放的血橙、葡萄、鳳梨、梨子等鮮果香氣，是全球巧克力光譜中極少見的風味。', '2020-21 ICA 世界巧克力大賽 全球總決賽- 原味黑巧克力銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可脂、酵母\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素(製造流程含酒精) ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (92, 4, 21, '70% 紅酒酵母一號巧克力', NULL, '帶有榛果、杏仁、奶油、烤麵包、苺果等的香氣。', 450, 1, '採用福灣巧克力原創「酵母發酵工法」，以特選的葡萄酒酵母，在溫濕度皆控制的發酵環境中投入可可豆與野生酵母共同發酵，乾燥後再以獨創「低溫窖藏熟成工法」等待時間的醞釀，才能完整呈現出葡萄酒酵母與可可豆共譜的美妙風味。帶有榛果、杏仁、奶油、烤麵包、苺果等令人意想不到的香氣表現。', '2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可脂、酵母\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素(製造流程含酒精) ', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (93, 4, 21, '56% 荔枝玫瑰東方美人奶茶巧克力', NULL, '帶有熟果花香、玫瑰花、玉荷包荔枝的香氣。', 450, 1, '以台灣屏東巧克力為基底，融合東方美人高雅細膩的熟果花香, 並以玫瑰花粉與玉荷包荔枝粉作為點綴提香, 淡淡的奶香平衡茶與巧克力的澀感，帶出馥郁優雅的迷人調性。\n由於多種食材結合的複雜性與成品的平衡感，在世界大賽中得到了一個很特別的「食譜配方特別獎」。', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 + 特殊食材獎\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌及食譜特別獎\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：黑巧克力(屏東可可膏、糖、可脂)、白巧克力(糖、可可脂、奶粉、葵花卵磷脂、香草萃取物)、東方美人茶粉、玫瑰花粉、荔枝果粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (94, 4, 21, '56% 台灣炭焙烏龍奶茶巧克力', NULL, '藉著烏龍奶茶風味的巧克力將台灣甚具代表性的奶茶文化傳遞到西方。', 400, 1, '以台灣巧克力作為基底，融合炭焙烏龍茶內斂雍容的梔子花與熟果茶韻, 帶出堅果、芝麻、薄荷等穩重韻味。\n淡雅的奶香平衡了茶與巧克力的澀感，展現出滑順別緻的巧克力烏龍奶茶風味。\n再度藉著巧克力將台灣甚具代表性的奶茶文化傳遞到西方世界。', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：黑巧克力(屏東可可膏、糖、可可脂)、白巧克力(糖、可可脂、奶粉、葵花卵磷脂、香草萃取物)、炭焙烏龍茶粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (95, 4, 21, '62% 台灣紅烏龍茶巧克力', NULL, '帶有馥郁茶香、堅果調性、牛奶糖尾韻。', 400, 1, '以台灣一號62%巧克力為基底,融合少見的高山紅烏龍茶雍容雅致的玫瑰、荳蔻風韻及馥郁茶香，轉化出開心果及杏仁的堅果調性，並以牛奶糖的尾韻作結。\n為福灣繼2018年鐵觀音、紅玉、炭焙烏龍之後，茶系列黑巧克力的最新力作。 ', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \n2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \n2021-22 ICA 世界巧克力大賽 亞太區- 金牌+當地食材特別獎\n2022 AOC 英國皇家巧克力大賽- 金牌\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌+當地食材特別獎\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可脂、紅烏龍茶粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (96, 4, 21, '53% 台灣十號深黑牛奶巧克力', NULL, '具香草、甘草、堅果、起司、麥芽、咖啡的風味。', 280, 1, '以略高的烘焙溫度帶出台灣可可強烈的堅果與甘草味，再加入低比例的奶粉使風味圓潤平衡，特別添加台灣本土香草，帶出乾淨的天然草本甜韻。', '2023 ICA 世界巧克力大賽 亞太區- 銅牌 \n2021-22 ICA 世界巧克力大賽 亞太區- 金牌\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2019 ICA 世界巧克力大賽 亞太區- 金牌', '成分：屏東可可膏、糖、奶粉、可可脂、屏東香草莢\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：奶素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (97, 4, 21, '62% 台灣馬告巧克力', NULL, '巧妙融合台灣獨有山胡椒-馬告。', 340, 1, '以台灣一號62%巧克力為基底，巧妙融合台灣獨有山胡椒-馬告，呈現出風姿綽約的曼妙層次，檸檬香茅、嫩薑、柑橘山椒等香氣與台灣巧克力本身的熱帶水果香氣輪番綻放，並以溫柔的太妃糖尾韻收斂。', '2022 AOC 英國皇家學院巧克力大賽- 銀牌\n2020-21 ICA 世界巧克力大賽- 全球總決賽- 調味黑巧克力銅牌\n2020 ICA 世界巧克力大賽- 亞太區- 調味黑巧克力金牌- 當地食材特別獎\n2019 ICA 世界巧克力大賽-全球總決賽- 金牌– 最佳調味黑巧克力\n2019 AOC 英國皇家學院巧克力大賽- 銀牌\n2018 ICA 世界巧克力大賽-全球總決賽- 銀牌\n2018 ICA 世界巧克力大賽-亞太區- 銀牌\n2018 AOC 英國皇家學院巧克力大賽- 銀牌', '成分：屏東可可膏、糖、可可脂、馬告粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (98, 4, 21, '62% 台灣黑胡椒巧克力', NULL, '採用屏東新鮮有機黑胡椒，結合台一金牌巧克力。', 380, 1, '採用屏東新鮮有機黑胡椒，結合台一62%金牌巧克力，傳遞來自迷人熱帶島嶼的熱情風韻。\n黑胡椒因為在屏東新鮮採摘並小批次手工處理與急速封存，風味細膩奔放。', '2021-22 ICA 世界巧克力大賽 亞太區- 銀牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2019 ICA 世界巧克力大賽 全球總決選- 銀牌 \r\n2019 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2018 ICA 世界巧克力大賽 全球總決選- 銀牌 \r\n2018 ICA 世界巧克力大賽 亞太區- 銀牌 ', '成分：屏東可可膏、糖、可可脂、台灣黑胡椒\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (99, 4, 21, '62% 台灣鹽花白胡椒巧克力', NULL, '採用屏東新鮮有機白胡椒以及嘉義洲南鹽場的鹽之花，結合台一金牌巧克力。', 380, 1, '採用屏東新鮮有機白胡椒以及嘉義洲南鹽場的鹽之花，結合台一62%金牌巧克力，傳遞來自迷人熱帶島嶼的熱情風韻。\n白胡椒因為在屏東新鮮採摘並小批次手工處理與急速封存，風味細膩奔放。', '2021-22 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2019 ICA 世界巧克力大賽-總決賽 銀牌 \r\n2018 ICA 世界巧克力大賽-總決賽 銀牌 \r\n2018 ICA 世界巧克力大賽-亞太區 銀牌', '成分：屏東可可膏、糖、可可脂、白胡椒、鹽之花\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (100, 4, 21, '70% 台灣二號 鹽之花巧克力', NULL, '採用嘉義洲南鹽場的鹽之花，結合台一金牌巧克力。', 300, 1, '在台灣一號金牌巧克力本身的臻果、太妃、熱帶果乾等香氣之上，再點綴台灣鹽之花(嘉義洲南鹽場)華麗優雅的海潮氣息，引領巧克力展現出更厚實的堅果底蘊。', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2019 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2019 AOC 英國皇家學院巧克力大賽- 銅牌\r\n2018 ICA 世界巧克力大賽 亞太區- 銅牌', '成分：屏東可可膏、糖、可可脂、嘉義海鹽\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (101, 4, 21, '70% 台灣三號 古法柴燒黑糖巧克力', NULL, '具葡萄乾、甘草、白蘭地、咖啡的風味。', 300, 1, '採用屏東契作之生態友善可可豆，在tree-to-bar工法研磨即添加手工黑糖，圓潤飽滿，香氣豐盈，黑糖些許的酸度與焦糖香氣和台灣可可豆的果香形成完美結合，將台灣巧克力的極限提升至全新層次。\r', '2024 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌', '成分：屏東可可膏、手工黑糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (102, 4, 21, '90% 台灣十一號赤藻醣醇巧克力', NULL, '糖友適用，具綠香蕉、菸草、堅果、青芒果的風味。', 350, 1, '特別開發以赤藻糖醇為糖基底的高濃度巧克力，讓健康考量的客人也能安心享受台灣風味黑巧克力。', '', '成分：屏東可可膏、赤藻醣醇\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (103, 4, 21, '62% 台灣陳年烏龍茶巧克力', NULL, '具杏仁、腰果、黑芝麻、茴香、甘草、薄荷的風味。', 380, 1, '使用烏龍茶，與福灣的金牌巧克力共同研磨而成，融入茶葉自然流露的花果香，創造出獨特尾韻。', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 總決賽- 銅牌', '成分：屏東可可膏、糖、可可脂、烏龍茶粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (104, 4, 21, '62% 台灣鐵觀音茶巧克力', NULL, '具月桂葉、小茴香、丁香、薄荷、芭樂、蘭花的風味。', 380, 1, '以台灣一號62%巧克力做為基底，融合名聞遐邇的鐵觀音茶。\n將鐵觀音茶的青果香與高雅馥郁的冷冽茶香與台灣一號的太妃糖熱帶果香完美結合。\n品味過程中茶種的甘醇在巧克力中巧妙湧現，喉韻芬芳不散。', '2024 ICA 世界巧克力大賽 亞太區- 金牌 \r\n2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銀牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銅牌\r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 金牌+當地食材特別獎\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌+當地食材特別獎 \r\n2019 ICA 世界巧克力大賽-全球總決賽- 金牌 \r\n2018 ICA M-M-M Gold prize\r\n2018 ICA 世界巧克力大賽-全球總決賽- 金牌\r\n2018 AOC 英國皇家學院巧克力大賽- 金牌\r\n2018  ICA 世界巧克力大賽 亞太區- 金牌', '成分：屏東可可膏、糖、可可脂、鐵觀音茶粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (105, 4, 21, '62% 台灣紅玉茶巧克力', NULL, '具月桂葉、佛手柑、肉桂、八角的風味。', 380, 1, '將帶有丁香、肉桂、薄荷等獨特香氣的台茶18號紅玉紅茶低溫研磨成粉，與福灣的金牌巧克力共同研磨而成，轉化出馥郁而溫暖的香料氣息。', '2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 全球總決選- 銀牌\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決選- 銀牌+當地食材特別獎\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌+當地食材特別獎 \r\n2019 ICA 世界巧克力大賽 總決選- 銀牌 \r\n2019 AOC 英國皇家學院巧克力大賽- 銀牌 \r\n2018 ICA 世界巧克力大賽 亞太區- 銀牌 ', '成分：屏東可可膏、糖、可可脂、紅玉茶粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-03 19:26:56');
-INSERT INTO `product` VALUES (106, 4, 21, '玫瑰荔枝可可碎巧克力', NULL, '採用屏東有機玫瑰，結合白巧克力、煙燻荔枝乾與台灣可可豆碎粒。', 420, 1, '採用屏東有機玫瑰，結合高濃度36%白巧克力、煙燻荔枝乾與台灣可可豆碎粒。\n在白巧克力溫柔口感下充分展現出玫瑰花高雅香氣、荔枝迷人風味、可可豆熱情果香的完美結合，香氣高雅雍容、綿延湧現，如此多層次的驚喜，令人愛不釋手。', '2017 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2018 AOC 英國皇家學院巧克力大賽- 銀牌', '成分：白巧克力(糖、可可脂、全脂奶粉、大豆卵磷脂、香草香料)、屏東有機玫瑰、煙燻荔枝乾、屏東可可碎粒 \n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：奶素', '2024-08-03 19:26:56');
+INSERT INTO `multiselect` (`ms_id`, `mslevel`, `msuplink`, `opcode`, `msname`, `msort`, `url1`, `url2`, `create_date`, `update_date`) VALUES
+(1, 1, 0, NULL, '付款方式', 0, NULL, NULL, '2023-08-11 09:46:53', '2023-08-17 03:42:28'),
+(2, 1, 0, NULL, '訂單處理狀態', 0, NULL, NULL, '2023-08-11 09:52:29', '2023-08-17 03:42:41'),
+(3, 2, 1, NULL, '貨到付款', 1, NULL, NULL, '2023-08-11 09:55:45', '2023-08-17 03:43:37'),
+(4, 2, 1, NULL, '信用卡付款', 2, NULL, NULL, '2023-08-11 09:55:45', '2023-08-17 03:43:54'),
+(5, 2, 1, NULL, '銀行轉帳', 3, NULL, NULL, '2023-08-11 09:55:45', '2023-08-17 03:44:37'),
+(6, 2, 1, NULL, '電子支付', 4, NULL, NULL, '2023-08-11 09:55:45', '2023-08-17 03:44:51'),
+(7, 2, 2, NULL, '處理中', 1, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 03:45:03'),
+(8, 2, 2, NULL, '待出貨', 2, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 03:45:32'),
+(9, 2, 2, NULL, '運送中', 3, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 03:45:45'),
+(10, 2, 2, NULL, '收貨完成', 4, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 03:46:10'),
+(11, 2, 2, NULL, '退貨中', 5, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 03:46:24'),
+(12, 2, 2, NULL, '已關閉訂單', 6, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 03:46:35'),
+(13, 2, 2, NULL, '無效訂單', 7, NULL, NULL, '2023-08-11 10:06:42', '2023-08-17 05:39:26'),
+(14, 2, 2, NULL, '訂單確認', 8, NULL, NULL, '2023-08-18 06:13:47', '2023-10-23 12:37:36'),
+(15, 2, 2, NULL, '平台出貨', 9, NULL, NULL, '2023-08-18 06:13:47', '2023-10-25 08:29:31'),
+(34, 1, 0, NULL, '付款處理狀態', 0, NULL, NULL, '2023-08-11 09:52:29', '2023-08-17 03:42:41'),
+(35, 2, 34, NULL, '侍貨到付款', 1, NULL, NULL, '2023-08-11 09:55:45', '2023-10-25 08:39:12'),
+(36, 2, 34, NULL, '完成付款', 2, NULL, NULL, '2023-08-11 09:55:45', '2023-10-25 08:39:12'),
+(37, 2, 34, NULL, '未完成付款', 3, NULL, NULL, '2023-08-11 09:55:45', '2023-10-25 08:39:12'),
+(38, 2, 34, NULL, '貨到付款已完成', 4, NULL, NULL, '2023-08-11 09:55:45', '2023-10-25 08:39:12');
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `product_img`
--- 
+--
+-- 資料表結構 `product`
+--
 
-CREATE TABLE `product_img` (
-  `img_id` int(11) NOT NULL auto_increment COMMENT '圖檔編號',
-  `p_id` int(11) NOT NULL COMMENT '產品編號',
-  `img_file` varchar(100) collate utf8_unicode_ci NOT NULL COMMENT '圖檔名稱',
-  `sort` int(11) NOT NULL COMMENT '圖片順序',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '建立日期',
-  PRIMARY KEY  (`img_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=300 ;
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
+  `p_id` int NOT NULL AUTO_INCREMENT COMMENT '產品編號',
+  `b_id` int NOT NULL COMMENT '品牌編號',
+  `class_id` int NOT NULL COMMENT '產品類別',
+  `p_name` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '產品名稱',
+  `p_ename` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '產品英名',
+  `p_intro` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '產品簡介',
+  `p_price` int DEFAULT NULL COMMENT '產品單價',
+  `p_open` tinyint(1) NOT NULL DEFAULT '1' COMMENT '上架',
+  `p_content` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci COMMENT '產品詳細規格',
+  `p_medal` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci COMMENT '產品獎牌',
+  `p_other` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci COMMENT '其他資訊',
+  `p_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '產品輸入日期',
+  PRIMARY KEY (`p_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- 
--- 列出以下資料庫的數據： `product_img`
--- 
+--
+-- 傾印資料表的資料 `product`
+--
 
-INSERT INTO `product_img` VALUES (1, 1, '85_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (2, 1, '85_Peru_Chuncho_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (3, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (4, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (5, 2, '70_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (6, 2, '70_Peru_Chuncho_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (7, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (8, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (9, 3, '75_Exclusive_ORIGIN_No.1_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (10, 3, '75_Exclusive_ORIGIN_No.1_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (11, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (12, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (13, 4, '100_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (14, 4, '100_Peru_Chuncho_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (15, 4, 'product_chocolate_peru_chuncho_dark_chocolate_100_01.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (16, 5, '85_Ecuador_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (17, 5, '85_Ecuador_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (18, 5, 'product_chocolate_ecuador_dark_chocolate_85_01.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (19, 6, '70_Ecuador_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (20, 6, '70_Ecuador_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (21, 6, 'product_chocolate_ecuador_dark_chocolate_70_02.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (22, 6, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (23, 7, '70_Dominican_Dark_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (24, 7, '70_Dominican_Dark_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (25, 7, 'product_chocolate_dominican_dark_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (26, 8, '70_Kampot_Red_Peppercorns_Flavored_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (27, 8, '70_Kampot_Red_Peppercorns_Flavored_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (28, 8, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (29, 8, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (30, 9, '70_Taiwan_Ruby_Tea_Flavored_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (31, 9, '70_Taiwan_Ruby_Tea_Flavored_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (32, 9, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (33, 9, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (34, 9, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_04.png', 5, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (35, 10, '70_Taiwan_Honey_Flavored_Red_Oolong01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (36, 10, '70_Taiwan_Honey_Flavored_Red_Oolong02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (37, 10, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (38, 10, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_04.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (39, 10, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_03.png', 5, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (40, 11, '70_Fleur_de_sel_Flavored_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (41, 11, '70_Fleur_de_sel_Flavored_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (42, 11, 'product_chocolate_fleur_de_sel_flavored_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (43, 11, 'product_chocolate_fleur_de_sel_flavored_chocolate_01.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (44, 12, '70_Taitung_Roselle_Flavored_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (45, 12, '70_Taitung_Roselle_Flavored_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (46, 12, 'product_chocolate_taitung_roselle_flavored_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (47, 12, 'product_chocolate_taitung_roselle_flavored_chocolate_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (48, 13, '70_Light_Roasted_Coffee_Lavored_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (49, 13, '70_Light_Roasted_Coffee_Lavored_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (50, 13, 'product_chocolate_light_roasted_coffee_flavored_chocolate_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (51, 14, '70_Deep_Roasted_Coffee_Flavored_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (52, 14, '70_Deep_Roasted_Coffee_Flavored_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (53, 14, 'product_chocolate_giftbox_deep_roasted_coffee.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (54, 14, 'product_chocolate_deep_roasted_coffee_flavored_chocolate_03.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (55, 15, '50_Peru_Chuncho_Milk_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (56, 15, '50_Peru_Chuncho_Milk_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (57, 15, 'product_chocolate_peru_chuncho_milk_chocolate_01.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (58, 15, 'product_chocolate_peru_chuncho_milk_chocolate_02.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (59, 16, '50_Taiwan_Longan_Honey_Flavored_Oolong01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (60, 16, '50_Taiwan_Longan_Honey_Flavored_Oolong02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (61, 16, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_50_02.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (62, 16, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_04.png', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (63, 16, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_06.png', 5, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (64, 17, '60_Ecuador_Milk_Chocolate01.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (65, 17, '60_Ecuador_Milk_Chocolate02.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (66, 17, 'product_chocolate_ecuador_dark_chocolate_85_01.png', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (67, 17, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (68, 18, '1698216040_da9a0f0c059b7651cf33.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (69, 18, '1698218611_4739c23a153fcb015f3f.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (70, 19, '1698139549_7ad796c132022d18ef4e.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (71, 19, '1672038476_91453e7098a5433cc48e.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (72, 19, '1672038476_18abfcdb2cf39ccfd499.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (73, 20, '1669617121_0960c0d157d675a79d2a.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (74, 20, '1698128312_d52150aebd1325d1f476.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (75, 20, '1675316090_8e27951942e5dfbadd06.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (76, 21, '1698139567_e9578ef06ba64870c4da.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (77, 21, '1669974459_d8690b0a1c99f9bbac42.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (78, 21, '1657779903_59bb0776d391fbd39cec.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (79, 22, '1657619596_908512177d45a7cfaba3.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (80, 22, '1657619596_305288aca900ad22d5e3.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (81, 23, '1657613585_673bdda59d11a7385de5.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (82, 23, '1657619466_534fd871c7e9498fb8b4.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (83, 23, 'content_1e27dc5c-410e-4523-a72f-634914850f79.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (84, 24, '1657613575_a1ae2c0b305d201573f1.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (85, 24, '1657619388_947e4d5095d191eb3bb8.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (86, 24, 'content_1e27dc5c-410e-4523-a72f-634914850f79.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (87, 25, '1657613261_27af5b8a43b683c7e4c2.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (88, 25, '1657619456_52a04b0187600f34b933.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (89, 25, '1657517278_729fae84bbce4995791e.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (90, 25, 'content_1e27dc5c-410e-4523-a72f-634914850f79.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (91, 26, '1657681751_7aefa9ffa3fe00e16d6a.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (92, 26, '1657619411_c490e9d54c4bbc8a851b.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (93, 26, '1657510503_6f8cd4c7d9e73e3bc7f8.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (94, 26, 'content_1e27dc5c-410e-4523-a72f-634914850f79.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (95, 27, '1699940734_3fc7b4fdcbe2d12f6668.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (96, 27, '1657613564_37f8fc5e1802b73d219a.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (97, 27, 'content_aabef4c4-1072-45aa-8744-9c04c7b83f18.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (98, 27, 'content_1e27dc5c-410e-4523-a72f-634914850f79.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (99, 28, '1699939726_2600f3a35adf66f3611b.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (100, 28, '1657613278_aeec5498231c5f0e96aa.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (101, 28, '1657619433_4e086e66c07118d367d0.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (102, 28, 'content_1475a3b2-b2f6-4155-a044-057dc1558fa7.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (103, 28, 'content_1e27dc5c-410e-4523-a72f-634914850f79.jpg', 5, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (104, 29, '1657684228_e1fa5b597421d2bbfedf.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (105, 29, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (106, 30, '1657684279_c7c939bfa084860e0f77.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (107, 30, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (108, 31, '1657094343_4bb9ce0c94f053ac2f39.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (109, 31, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (110, 32, '1657094357_0bb60f87df45f9238480.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (111, 32, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (112, 33, '1705978361_0be5279b60146cdd7852.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (113, 33, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (114, 34, '1711531886_27320679e2f19250f3bd.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (115, 34, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (116, 35, '1672125128_c2ae55776d4921aa7a79.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (117, 35, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (118, 36, '1657177389_0f200d945f3247dc9f03.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (119, 36, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (120, 37, '1657177407_f845aa2f272a16298201.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (121, 37, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (122, 38, '1658889594_a458d7b36afbf479dfd9.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (123, 38, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (124, 39, '1688621112_c4bcb57cbc1df52d126a.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (125, 39, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (126, 40, '1718334261_3a3a96ff38fec2b7e555.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (127, 40, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (128, 41, '1721792821_e9073439faef71d07f9a.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (129, 41, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (130, 42, '1711531846_5c0c5270b6d737048077.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (131, 42, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (132, 43, '1721792800_94efa7d64599fe211354.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (133, 43, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (134, 44, '1721792778_9700ea5b1623b4921a6c.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (135, 44, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (136, 45, '1675670300_8847cf1af7707425cc40.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (137, 45, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (138, 46, '1657094268_d292274a94fd82b5913f.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (139, 46, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (140, 47, '1674116283_50ccc0dfc512b4b34621.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (141, 47, 'content_9a489cf6-f453-406d-9be4-40064eb43f99.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (142, 48, '1657094256_3e6c7e19bc7f1cd872ec.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (143, 48, 'content_9a489cf6-f453-406d-9be4-40064eb43f99.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (144, 49, '1657093829_8436a67d18bd2793e47b.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (145, 49, 'content_9a489cf6-f453-406d-9be4-40064eb43f99.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (146, 50, '650e5b4758fde40017051631.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (147, 50, '650e76c81acf220014ffbe87.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (148, 50, '650e5b55bdbf510014cc06ef.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (149, 51, '650e76573b42650011bde6a7.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (150, 51, '650e7665da36b00017f9fce8.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (151, 51, '650e766126b745001d8dd983.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (152, 52, '650e7950409ac3000e876c71.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (153, 52, '650e795c79ddca0017b39a89.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (154, 52, '650e796010354a00149ac143.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (155, 53, '655f14dec4be51001dc59c45.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (156, 53, '655f14e61b37aa001100400d.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (157, 53, '655f14e25648c30017146ade.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (158, 54, '6278a8582b6197001b9431a5.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (159, 54, '6229c2c5f80fb5002f420c27.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (160, 54, '6229c2c528f5ea00323cb346.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (161, 54, '6229c2c559cebb00110cc684.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (162, 55, '6278a8464fe50c002db706b1.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (163, 55, '622a0ec11a97890032297f57.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (164, 55, '6229c2c528f5ea00323cb346.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (165, 55, '6229c2c559cebb00110cc684.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (166, 56, '6278a835d918380018cbab4f.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (167, 56, '622a0f3299ba500017b83517.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (168, 56, '6229c2c528f5ea00323cb346.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (169, 56, '6229c2c559cebb00110cc684.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (170, 57, '6278a824d53fa9001e812b9f.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (171, 57, '622a0f5173335582ca16488e.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (172, 57, '6229c2c528f5ea00323cb346.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (173, 57, '6229c2c559cebb00110cc684.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (174, 58, '62bbc2b4e1d716002aa56008.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (175, 58, '62bbc2b4c8f350002736a8da.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (176, 58, '62bbc2b4dc34430012ad0206.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (177, 58, '62bbc2b4e97784000f1f8936.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (178, 59, '619c8d3da2124d0023371a70.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (179, 59, '61ea67bc39e11300174c152b.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (180, 60, '619c8e39fdba773949364fbc.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (181, 60, '61ea6824a3916e002067c71a.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (182, 61, '619c8cd74c30cf00115de508.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (183, 61, '619c8cd12c8160003e364248.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (184, 62, '63104b3cb40dd40010d5e5e0.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (185, 62, '619c8d9e2c8160001736405a.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (186, 63, '619c87bd82d2f800263c2599.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (187, 63, '61ea6348fd1c9b0014e92e62.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (188, 64, '63104af3a862fa001003ce1f.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (189, 64, '61ea6a072af747002f29bfbb.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (190, 65, '619c8f305f439b0017e1bc07.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (191, 65, '619c8f3e6fe5e90021c209ee.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (192, 66, '619c8b5e1c62a9002f872df2.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (193, 66, '619c8b5312937900232ea550.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (194, 67, '619c89e98be1580014ca01b1.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (195, 67, '619c89f1129379001d2ea2c6.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (196, 68, '619c89858aded200236eac2a.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (197, 68, '619c897f229a172a8fbf3dcf.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (198, 69, '619c88553ba89b002fe48701.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (199, 69, '619c885e5ccb6600260b8940.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (200, 70, '619c863f5ccb6600170b86f1.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (201, 70, '619c8623fdba77003e366330.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (202, 71, '60226fc59ac7eb0011d79eb1.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (203, 71, '60226b3fa36da300119151af.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (204, 71, '5dac3603ff6f87002ca87e4d.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (205, 71, '64704e257ecea3001a03347c.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (206, 72, '60cc94484f385f0026a83a53.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (207, 73, '60cc947455f7c50023b996a5.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (208, 73, '5fe454829f4cc10032710003.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (209, 74, '64a46b8c43f97b0014561898.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (210, 74, '64a46bc743f97b0017562050.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (211, 75, '5d7f494b705c4b7dc11f8d36.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (212, 75, '5dac6f5b1de3b744bbce6b01.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (213, 75, '5dac6fbfac6b1a7320018cc6.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (214, 75, '5dac6fce1428350038f7907a.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (215, 76, '5d7f494b705c4b7dc11f8d36.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (216, 76, '5dac6f5b1de3b744bbce6b01.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (217, 76, '5dac6fbfac6b1a7320018cc6.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (218, 76, '5dac6fce1428350038f7907a.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (219, 77, '5d7f494b705c4b7dc11f8d36.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (220, 77, '5dac6f5b1de3b744bbce6b01.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (221, 77, '5dac6fbfac6b1a7320018cc6.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (222, 77, '5dac6fce1428350038f7907a.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (223, 78, '5d7f494b705c4b7dc11f8d36.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (224, 78, '5dac6f5b1de3b744bbce6b01.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (225, 78, '5dac6fbfac6b1a7320018cc6.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (226, 78, '5dac6fce1428350038f7907a.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (227, 79, '5efae7fee81f5c0033c83194.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (228, 79, '5da5ab804b5d9f0035caa71f.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (229, 79, '5c85ca23adfd90003bb49466.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (230, 80, '5e1442f3b0251500301b1c88.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (231, 80, '5c85ca23adfd90003bb49466.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (232, 81, '5da5b646303ca600297a35b1.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (233, 81, '5c85ca23adfd90003bb49466.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (234, 82, '5da5aec0abc98d001d0837f5.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (235, 82, '5efae90abee8350036d00bda.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (236, 82, '5efae91da8918c004b41b593.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (237, 83, '5ee0aae123ef736196f3c53d.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (238, 83, '5efae91da8918c004b41b593.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (239, 83, '5dac438d682e2c002c6cec49.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (240, 84, '5da5b734ca1b23003bacc4c8.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (241, 84, '5bb73c62d31748001844c11b.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (242, 85, '5efadfaaa522e4004b5922e6.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (243, 85, '5ee0a3be89d711004b6a6574.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (244, 85, '5da5b74fb641a40026b093ab.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (245, 86, '63805436e07ca4002297a813.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (246, 86, '638062f840203f002556ce20.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (247, 86, '638062f806d7a5002bf7915e.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (248, 86, '638062f8129646001ff83b19.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (249, 87, '61850d5b365caa00145b1222.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (250, 87, '6186804ea45b820017229d62.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (251, 87, '6186a26007be31002f689dfa.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (252, 87, '6186a26b06f87300178029e2.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (253, 88, '6113c40d98c790001d0984f0.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (254, 88, '6093af4e8e8251003bf9b25e.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (255, 89, '60a604554167cd00265d3187.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (256, 89, '60a6048e1df77900383e2e46.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (257, 89, '60a604b4f56634002c474f6f.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (258, 89, '6112240e0b27a3001a643140.jpg', 4, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (259, 89, '60a60566fc9c2c003bb2847e.jpg', 5, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (260, 89, '60a607adaf1d44001ac77925.jpg', 6, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (261, 90, '611a0eaef5ed4d002f09c772.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (262, 90, '609fd617bab42b0023595d5e.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (263, 90, '611224f6e1031d001dc0f210.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (264, 91, '60ba19deaf56ac00144bf881.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (265, 91, '60ba1930d9296e0011506c18.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (266, 92, '611a0f342452090020b4decc.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (267, 92, '6093af66c1db4d00146de450.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (268, 93, '60ba22cba63e040011a36c6b.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (269, 93, '60ba269ad6a49d003538f687.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (270, 94, '60ba1db0fbece3002f6f1ff5.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (271, 94, '60ba1d514d851b002626c492.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (272, 95, '60c1b9b6b19870002ce78ee9.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (273, 95, '60ba267e69e83c003ff7d1bb.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (274, 96, '5da5aeeb7cb140001ad19516.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (275, 97, '60ba23d4cab3b0002cc72ade.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (276, 97, '5da5b6d5bf6c39001db5ede9.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (277, 98, '5ee0ca42780857004e779344.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (278, 98, '5da5ad9e8606ad001a540134.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (279, 98, '5efae91da8918c004b41b593.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (280, 99, '5ee0c70521dec40046629302.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (281, 99, '5da5ab31fc308c003b5e233d.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (282, 99, '5efae91da8918c004b41b593.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (283, 100, '5eedd6f1fdd0870045242664.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (284, 100, '5da5b7d1ca1b23003bacc4e3.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (285, 100, '5da5ab31fc308c003b5e233d.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (286, 101, '5da58597bbb220001771d957.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (287, 101, '5dac6b59c6ddc800327d2acb.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (288, 102, '5da5aeabbc5a44001d1eb730.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (289, 102, '5c85ca23adfd90003bb49466.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (290, 103, '5ee0b82a21dec40040628fdb.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (291, 103, '5cbe936247fbd10038a26bbf.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (292, 103, '5efae91da8918c004b41b593.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (293, 104, '60ba23f9f7f14400267e46f8.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (294, 104, '5da5b194671ecf002c40f191.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (295, 104, '5dac4610c6ddc8003e7d2cda.jpg', 3, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (296, 105, '60ccabb8ff12090014738a21.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (297, 105, '5da5b69a0b6aa2002f05627f.jpg', 2, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (298, 106, '6167d40f6efc1829c26479b0.jpg', 1, '2024-08-03 19:38:03');
-INSERT INTO `product_img` VALUES (299, 106, '5dac3f4e9bdf925bd4c24f44.jpg', 2, '2024-08-03 19:38:03');
+INSERT INTO `product` (`p_id`, `b_id`, `class_id`, `p_name`, `p_ename`, `p_intro`, `p_price`, `p_open`, `p_content`, `p_medal`, `p_other`, `p_date`) VALUES
+(1, 1, 5, '85% 祕魯Chuncho 黑巧克力', '85% Peru Chuncho Dark Chocolate', '微微花香，帶有新鮮柑橘酸質。\n楓糖的甜香在鼻腔中散發。', 450, 1, '採用安地斯高地 Chuncho 可可豆，\r\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n融化時如糖蜜甜，風味新鮮且活潑、絲滑的口感。\n如紅色莓果、柑橘酸、新鮮的草莓、櫻桃般柔和。\n甜美蜂蜜和各種水果，在舌間來回擺動，還有瞬間消逝的花香。\n最後完全融化後，令人驚訝的柔軟餘味，如烤榛果、巧克力味、果香味清淡細膩，悠長愉悅。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回首面金牌。', '成分：可可膏、可可脂、砂糖\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\n內容量：42 公克\n葷素別：全素\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(2, 1, 5, '70% 祕魯Chuncho 黑巧克力', '70% Peru Chuncho Dark Chocolate', '新鮮莓果香，帶有微微橘子酸質。\r\n蜜糖的甜香在鼻腔中散發。', 380, 1, '採用安地斯高地 Chuncho 可可豆，\r\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n融化時如糖蜜甜，風味新鮮且活潑、絲滑的口感。\n如紅色莓果、柑橘酸、新鮮的草莓、櫻桃般柔和。\n甜美蜂蜜和各種水果，在舌間來回擺動，還有瞬間消逝的花香。\n最後完全融化後，令人驚訝的柔軟餘味，如烤榛果、巧克力味、果香味清淡細膩，悠長愉悅。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(3, 1, 5, '75% ORIGIN #1 黑巧克力', '75% Exclusive ORIGIN No.1 Dark Chocolate', '嚴選多支產區精品可可豆，以最佳比例調配完成。\r\n初嚐帶有微果酸，伴隨奶油堅果香氣、香蕉甜感。', 350, 1, 'ORIGIN #1 是目前全品牌唯一採用複數產區可可豆，以最佳比例調配而成的品項，\n可以說是ORIGIN的第一個孩子。\n奶油堅果香氣如絲般繞在味蕾間，香蕉般的溫和風味。', '於 ICA世界巧克力大賽（2021-22亞太區），首次代表品牌參加便獲得銅牌佳績。', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(4, 1, 5, '100% 祕魯Chuncho 黑巧克力', '100% Peru Chuncho Dark Chocolate', '木質調香氣，與櫻桃般突出的酸質。\r\n濃厚的口感與奶油般的滑順度。', 380, 1, '採用安地斯高地 Chuncho 可可豆，\r\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n風味新鮮且活潑、絲滑的口感，\n如紅色莓果、柑橘酸、新鮮的草莓、櫻桃般柔和。\n各種水果在舌間來回擺動，還有瞬間消逝的花香。\n最後完全融化後，令人驚訝的柔軟餘味，如烤榛果、巧克力味、果香味清淡細膩，悠長愉悅。', '', '成分：可可膏、可可脂\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(5, 1, 5, '85% 厄瓜多黑巧克力', '85% Ecuador Dark Chocolate', '以可可調為基礎，伴隨奶油堅果香。\r\n入口有淡淡花香與烤花生味。', 350, 1, '採用厄瓜多 Nacional 可可豆，是世界上為數不多的優質品種豆之一。\n厄瓜多產的可可豆僅佔全世界可可豆的 4%，但是卻占精品巧克力產地的 70%，是厄瓜多的代表性作物。\n因其卓越、濃郁、獨特的香氣而受到巧克力行家的青睞，並因其豐富而柔滑的味道而備受推崇。', '', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(6, 1, 5, '70% 厄瓜多黑巧克力', '70% Ecuador Dark Chocolate', '以可可調為基礎，伴隨奶油堅果香。\r\n入口有淡淡花香與烤花生味。', 350, 1, '採用厄瓜多 Nacional 可可豆，是世界上為數不多的優質品種豆之一。\n厄瓜多產的可可豆僅佔全世界可可豆的4%，但是卻占精品巧克力產地的70%，是厄瓜多的代表性作物。\n因其卓越、濃郁、獨特的香氣而受到巧克力行家的青睞，並因其豐富而柔滑的味道而備受推崇。', '', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(7, 1, 5, '70% 多明尼加黑巧克力', '70% Dominican Dark Chocolate', '帶有柑橘類香氣，伴隨黑糖甜感。\r\n熱帶水果的明亮酸質與木質調韻味。', 350, 1, '', '', '成分：可可膏、可可脂、砂糖\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(8, 1, 5, '70% 大馬士革玫瑰黑巧克力', '70% Damask Rose Dark Chocolate', '選用頂級可可豆，經過精心的烘焙與調製，散發出濃郁的莓果香氣。', 450, 1, '搭配我們的獨家微米粉碎技術,讓我們的茶葉、咖啡跟其他香料能夠細緻均匀的融合在巧克力中。\r\n我們特別加入了珍貴的大馬士革有機玫瑰，讓玫瑰的芬芳與巧克力的濃郁果香完美融合，創造出馥郁而迷人的風味。\r\n這是獻給雙魚座的巧克力，也是獻給所有心懷浪漫與夢想的愛好者。\r\n品嚐一口，感受玫瑰的芬芳在口中綻放，讓甜蜜與感動在心中蔓延', '', '成分：可可膏、可可脂、砂糖、玫瑰花\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(9, 1, 6, '70% 貢布粉紅胡椒風味巧克力', '70% Kampot Red Peppercorns Flavored Chocolate', '將貢布粉紅胡椒粒磨碎至微米級粉末，與單方精品可可豆融合。\r\n從溫和的甜味到辛辣，時而透露出花香與果味。', 380, 1, '入口先是微甜感，花香與柑橘接連冒出。\n含在口中利用舌頭的溫度將巧克力慢慢融化，在口中停留 30 秒後，胡椒的辣味逐漸增強，如同在口中放煙火般的味覺盛宴。\n粉紅胡椒是胡椒中的精品，外觀像葡萄乾，具有強烈的辛辣與花果香，熱辣的口感帶有淡淡的尤加利與薄荷味。\r\n種植的過程及其苛刻，使作物成熟的氣候條件必須非常完美，只有以胡椒聞名的柬埔寨貢布地區才能提供這種組合。\r\n粉紅胡椒獨特的風味和氣味，以及鮮紅多汁的果實，經常吸引小鳥與昆蟲前來偷吃，所以每一顆胡椒粒都非常珍貴。\r\n與黑胡椒不同，採收的方式並不是將完整的莖取下，而是透過人工將果實一粒一粒摘下，因此一個農場每天只能生產一杯粉紅胡椒粒。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為 ORIGIN 抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖、柬埔寨胡椒\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(10, 1, 6, '70% 台灣紅玉風味巧克力', '70% Taiwan Ruby Tea Flavored Chocolate', '將杉林溪紅玉紅茶葉磨碎至微米級粉末，與單方精品可可豆融合。\r\n微微的苦味襯托出紅玉本身帶有的香氣。', 380, 1, '杉林溪紅玉相對於日月潭紅玉，肉桂與薄荷味較淡雅，\n取而代之是鳳梨般的明亮酸感。\n品嚐時建議含於口中，用舌頭輕輕將巧克力化開，茶香在品嚐中段尤為突出。\n台茶十八號，又稱紅玉。\n目前全世界僅台灣獨有，堪稱世界頂級的紅茶種，有著「台灣香」的美名。\n日治時期，日本人發現在南投魚池區的氣候與阿薩姆紅茶原始的種植區域氣候非常相似，因此把阿薩姆紅茶引入該處開始大量種植，也因此使魚池鄉成為培育紅茶的重點區域。\n1999年，台灣農委會-茶業改良場-魚池分所 發表了由緬甸大葉種與臺灣原生山茶育種而成，帶有獨特薄荷肉桂香及甜甜焦糖味的全新茶種，並將之命名為台茶十八號。\n這個品種不僅是台灣創造育出的特殊種，還有著獨特奇香，會帶有涼氣、木質、蕈類、甜果香，是其他紅茶產區茶無法取代的氣息，可說是紅茶界的台灣之光。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(11, 1, 6, '70% 台灣蜜香紅烏龍風味巧克力', '70% Taiwan Honey Flavored Red Oolong', '將台東蜜香紅烏龍茶葉磨碎至微米級粉末，與單方精品可可豆融合。\r\n可可脂充分包覆茶粉，帶出紅烏龍無法以水沖泡出的厚度。', 350, 1, '一入口便是濃厚的熟果香，帶有烘焙的韻味。滋味醇厚圓滑，蜜香在舌尖纏繞。\n2008年，台灣農委會-茶葉改良場-台東分場 為了突破海拔較低的鹿野茶區困境，積極建立鹿野茶區特色，研發出本土特色烏龍茶。\r\n利用較不利製茶的夏、秋兩季，生產發酵程度較重的紅烏龍，也是所有烏龍茶中發酵程度最高的，非常接近紅茶但不是紅茶。\r\n具有紅茶般的茶湯色澤，卻是烏龍茶的滋味。茶質厚重充滿水果香，同時帶有甜感，滋味醇厚圓滑、耐泡、甘醇，冷泡、熱泡皆適宜，是近年來極具市場發展潛力的茶種。\r\n根據茶人洪飛騰先生所形容：「紅色茶湯鮮果香，甘醇回味撲鼻樑，一心二葉手工採，冷泡滋味透心涼」。', '紅烏龍獨特的多層次風味，獲得 ICA世界巧克力大賽（2021-22亞太區）評審的青睞，為首次參賽的ORIGIN抱回銅牌佳績。', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(12, 1, 6, '70% 鹽之花風味巧克力', '70% Fleur de sel Flavored Chocolate', '將法國葛宏德鹽之花磨碎至微米級粉末，與單方精品可可豆融合。\r\n溫和的鹹味提出甘甜，鹹甜交錯的驚喜口感。', 350, 1, '鹽之花富含礦物質，使其本身自帶多層次的風味與鮮味。\n融入巧克力時，鹹味圓潤輕柔、回甘悠長，散發著似有若無的紫羅蘭花氣息，鹹甜在舌尖交錯浮現。\n鹽之花，得名於其片狀如花瓣的結晶，重量極輕可漂浮在鹽水表面，並形成中空的倒金字塔形。\r\n傳統採集鹽之花的工人都是女性，因為鹽之花的晶體非常脆弱，人們認為必須由「柔軟的性別」來採集。採集方式是鹽沼中刮取，就像牛奶上漂浮著一層奶油，因此鹽之花被稱為「鹽田的奶油」。\r\n只有在陽光充足、乾燥且有緩慢穩定的風的情況下才能採集鹽之花。在法國葛宏德，每個鹽田每天僅能生產約一公斤。產量稀少且勞力密集，使得鹽之花成為最昂貴的鹽，珍貴性也使它獲得「海鹽中的魚子醬」的別名。	 ', '', '成分：可可膏、可可脂、砂糖、法國海鹽\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(13, 1, 6, '70% 台東洛神花風味巧克力', '70% Taitung Roselle Flavored Chocolate', '將台東洛神花低溫乾燥磨碎至微米級粉末，與單方精品可可豆融合。\r\n酸甜滋味令人驚喜，莓果香氣於鼻腔散發。', 350, 1, 'ORIGIN利用氣壓改變水的沸點，使水份在20～30℃時蒸發，因此與市面所見的乾燥洛神花味道完全不同，非烏梅般的發酵味而是明亮的莓果酸，保留了洛神花最新鮮完整的風味。\n洛神花，又被稱為「植物界的紅寶石」。\n許多人對於它名稱的由來，第一反應會想到《洛神賦》。事實上，洛神這個名字是由英文的Roselle音譯而來，與曹植的《洛神賦》或中國神話中的洛神並沒有關聯。\n洛神花原產於西非，經奴隸貿易及殖民主義在世界各地如印度都有引入，台灣東部則是於日治時期西元1910年引進。\n開花時間在每年的10～12月；花期只有一天，清晨開花、傍晚凋謝。花朵凋謝後花萼會轉為肥厚，就是我們食用的部位。洛神花並不適合使用機器採集，因此大多為人工手採，採收後可乾燥或新鮮直接加工製成花茶或食品。\n要特別注意的是，孕婦及哺乳中的婦女不可以食用洛神花喔！糖尿病、高血壓的患者如果食用，則需持續監測血糖與血壓，避免數值過低的狀況。', '', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(14, 1, 6, '70% 輕焙咖啡風味巧克力', '70%Light Roasted Coffee Flavored Chocolate', '將非洲冠軍日曬咖啡豆磨碎至微米級粉末，與單方精品可可豆融合。\n柑橘、甜桃般明亮酸質，清爽的口感。', 350, 1, '', '', '成分：可可膏、可可脂、砂糖、台灣茶葉\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：全素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(15, 1, 6, '70% 深焙咖啡風味巧克力 70%', 'Deep Roasted Coffee Flavored Chocolate', '將印尼曼特寧咖啡豆磨碎至微米級粉末，與單方精品可可豆融合。\n可可脂充分包覆咖啡粉，帶出曼特寧本身的醇厚藥草味。', 350, 1, '曼特寧，原為印尼蘇門答臘島上一個當地部落的名字。傳說在二次大戰期間，日本佔領印尼時，一位日本軍人喝到一杯令他眼睛為之一亮的咖啡，便詢問咖啡的名字。店主因語言隔閡，誤以為軍人在詢問他是哪裡人，於是回答「曼特寧」。\n曼特寧咖啡採用「濕剝法」，使咖啡豆帶有草本、木質、藥材調性，非常厚實且濃郁的風味。\n中深烘焙度使咖啡豆苦中帶有焦糖、堅果風味，非常適合融入到巧克力當中。', '', '成分：可可膏、可可脂、砂糖、台灣茶葉\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\n內容量：42 公克\n葷素別：全素\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(16, 1, 7, '50% 祕魯Chuncho 牛奶巧克力', '50% Peru Chuncho Milk Chocolate', '奶香伴隨太妃糖甜感，葡萄果汁的酸甜滋味。', 380, 1, '採用安地斯高地 Chuncho 可可豆，\n曾獲2017巧克力大獎決賽金牌&世界最佳獎的冠軍品種豆。\n快速而甜美的開始，草莓牛奶且非常活潑。\n蜂蜜和莓果的味道如波浪般來回流動。\n餘韻烤榛果、巧克力味清淡細膩，但回味悠長。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN抱回銀牌佳績。', '成分：可可膏、可可脂、砂糖、奶粉、大豆卵磷脂、天然香草香料\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：奶素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(17, 1, 7, '50% 台灣龍眼蜜香烏龍牛奶巧克力', '50% Taiwan Longan Honey Flavored Oolong', '將宜蘭龍眼蜜香烏龍茶葉磨碎至微米級粉末，與單方精品可可豆融合。\r\n甜度較高的牛奶巧克力更加凸顯龍眼蜜香烏龍的蜜香與甜感。', 350, 1, '來自宜蘭的龍眼蜜香烏龍茶，受到小綠葉蟬的眷顧而自然產生花蜜般的甜感，並帶有梔子花、蜜桃、玉蘭花香氣。\n融入巧克力時，一入口便是龍眼蜜般的香甜充滿整個口腔，接著釋放茶香。巧克力完全融化後，口中留下的回甘餘韻綿長。\n蜜香茶最大的特色，就是有一股天然的柔和「蜜香」。只有經過小綠葉蟬吸食的茶菁，加工後才能產生一股天然的蜂蜜香。\r\n小綠葉蟬學名 Jacobiasca formosana ，其種小名 formosana 意即「台灣的」。因此全世界的產茶區，只有台灣能製作出種類豐富的蜜香茶，也是台灣新興熱門的特色茶類。', '於 ICA世界巧克力大賽（2023亞太區）受到評審的青睞，為ORIGIN 抱回銅牌佳績。', '成分：可可膏、可可脂、砂糖、奶粉、台灣茶葉、大豆卵磷脂、天然香草香料\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\n內容量：42 公克\n葷素別：奶素\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(18, 1, 7, '60% 厄瓜多牛奶巧克力', '60% Ecuador Milk Chocolate', '一入口便是濃濃奶味與可可調，伴隨麥芽香氣。\r\n彷彿在品嚐一塊牛奶糖，又或是一杯麥芽可可飲。', 350, 1, '入口立即帶有焦糖和蜂蜜的甜味，\r\n融化後榛果糖和麥芽奶味撲鼻而來，\r\n餘味榛果和可可的香氣。\n採用厄瓜多 Nacional 可可豆，是世界上為數不多的優質品種豆之一。\r\n厄瓜多產的可可豆僅佔全世界可可豆的4%，但是卻占精品巧克力產地的70%，是厄瓜多的代表性作物。\r\n因其卓越、濃郁、獨特的香氣而受到巧克力行家的青睞，並因其豐富而柔滑的味道而備受推崇。', '', '成分：可可膏、可可脂、砂糖、奶粉、大豆卵磷脂、天然香草香料\r\n過敏原：本產品生產製程廠房其設備或生產管線有處理牛奶、堅果、大豆及其製品\r\n內容量：42 公克\r\n葷素別：奶素\r\n其他說明：巧克力需冷藏，若保存環境溫度反覆變化，可能會造成表面析出白色可可脂，為正常現象', '2024-08-14 13:23:33'),
+(19, 2, 8, '莓莓巧克力', '', '蔓越莓乾與灑滿覆盆莓粉的巧克力結合，莓好風味在口中綻放。', 350, 1, '味蕾綻放新風味，\r\n蔓越莓乾與覆盆莓粉，\r\n嚴選飽滿蔓越莓乾，外層包覆在細膩的覆盆莓粉巧克力。\r\n雙重美顏聖品的結合，創造絕妙口感體驗。\r\n為您帶來美味無窮的時刻。', '', '成分：蔓越莓、糖、可可脂、草莓粉、可可膏、葵花卵磷脂、大豆卵磷脂、葵花籽油、天然香草香料、覆盆莓粉、防潮糖粉 \n淨重：100公克\n產地：台灣 \n過敏原：本產線亦有生產大豆、芒果、花生、牛奶、堅果、芝麻、含麩質之穀物及其製品\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-14 13:23:33'),
+(20, 2, 8, '腰果巧克力豆', '', '頂級苦甜巧克力包裹著香脆的腰果，讓你心情愉悅的髒髒豆。', 320, 1, '從烘焙腰果到成品全手工製作，\n腰果裹上頂級苦甜巧克力和可可粉，\n巧克力融合香脆堅果，\n香甜口感酥脆扎實，越嚼越香，帶濃郁的可可味。\n讓你心情愉悅的髒髒豆，保證吃了會上癮的巧克力，一口接一口回味無窮。', '', '成分：腰果、可可膏、糖、可可脂、可可粉、大豆卵磷脂、天然香草香料\n淨重：100公克\n產地：台灣\n過敏原：本產品含有大豆、乳製品、堅果\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-14 13:23:33'),
+(21, 2, 8, '杏仁果巧克力豆', '', '頂級苦甜巧克力包裹著香脆的杏仁果，讓你心情愉悅的髒髒豆。', 320, 1, '從烘焙杏仁到成品全手工製作，杏仁裹上頂級苦甜巧克力和可可粉，\n巧克力融合香脆堅果，\n香甜口感酥脆扎實，越嚼越香，帶濃郁的可可味。\n讓你心情愉悅的髒髒豆，保證吃了會上癮的巧克力，一口接一口回味無窮。', '', '成分：杏仁果、黑巧克力、牛奶巧克力（可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料）、可可粉\n淨重：100公克\n產地：台灣\n過敏原：本產品含有大豆、乳製品、堅果\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-14 13:23:33'),
+(22, 2, 8, '夏威夷果巧克力豆', '', '頂級苦甜巧克力包裹著香脆的夏威夷果，讓你心情愉悅的髒髒豆。', 360, 1, '從烘焙夏威夷果到成品全手工製作，夏威夷果裹上頂級苦甜巧克力和可可粉，\n巧克力融合香脆堅果，\n香甜口感酥脆扎實，越嚼越香，帶濃郁的可可味。\n讓你心情愉悅的髒髒豆，保證吃了會上癮的巧克力，一口接一口回味無窮。', '', '成分：夏威夷果、黑巧克力、牛奶巧克力（可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料）、可可粉\n淨重：100公克\n產地：台灣\n過敏原：本產品含有大豆、乳製品、堅果\n保存方法：請存放於28℃以下陰涼通風處或冷藏保存\n保存期限：未開封180天，開封後請盡快食用完畢 ', '2024-08-14 13:23:33'),
+(23, 2, 8, '烘焙可可豆', '', '每日堅果營養最佳攝取，適合對控制糖份攝取需求的族群，無加糖、無調味、零添加。', 350, 1, '富含膳食纖維，調節消化道機能，原豆研磨 全素可食。\n香濃的可可香氣，口感清脆，來自不同產區風味，一場味覺探險之旅。\n撥開即可食用，亦可搭配優格、穀片食用，或是壓碎撒至生菜沙拉、花生吐司或麵包上。', '', '成分：烘焙可可豆\n淨重：200公克\n產地：台灣\n過敏原資訊：堅果\n保存方法：請存放於28℃以下陰涼通風處', '2024-08-14 13:23:33'),
+(24, 2, 9, '85%經典含陷 生巧克力', '', '含酒提香展現可可原始純粹的味道。', 520, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n使用頂級黑巧克力，結合馬達加斯加天然香草莢，含酒提香展現可可原始純粹的味道。', '', '成分：85%黑巧克力(可可膏、可可脂、砂糖、大豆卵磷脂)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、葡萄糖漿、山梨糖醇(甜味劑)、蒸餾酒、可可粉、天然香草莢\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(25, 2, 9, '古坑咖啡 生巧克力', '', '添加L-阿拉伯糖，選用雲林古坑本產咖啡豆。', 550, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n選用雲林古坑本產咖啡豆，佐咖啡利口酒提香，添加L-阿拉伯糖，擁有咖啡、焦糖、炭焙、可可多層次的口感。', '', '成分：8黑巧克力(可可膏、可可脂、砂糖、大豆卵磷脂)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、咖啡利口酒、咖啡豆、葡萄糖漿、山梨糖醇(甜味劑)、L-阿拉伯糖\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(26, 2, 9, '小山園抹茶 生巧克力', '', '添加日本頂級小山園抹茶粉，濃郁茶味清香不苦澀。', 580, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n添加日本頂級小山園抹茶粉，顏色翠綠，濃郁茶味清香不苦澀，是抹茶控絕對不能錯過的味道。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、葡萄糖漿、山梨糖醇(甜味劑)、小山園抹茶粉\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(27, 2, 9, '炭焙烏龍 生巧克力', '', '添加L-阿拉伯糖，使用台灣有機認證茶葉。', 580, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n使用台灣有機認證茶葉，添加L-阿拉伯糖，經歷龍眼木炭焙口口甘醇，茶香味濃尾韻回甘持久。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、動物性鮮奶油(鮮奶油、鹿角菜膠)、奶油、炭焙烏龍茶、葡萄糖漿、山梨糖醇(甜味劑)、L-阿拉伯糖\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(28, 2, 9, '百香果 生巧克力', '', '使用百香果果泥，熬煮的濃郁鮮果。', 550, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n使用百香果熬煮出來的果泥，加入台灣小農蜂蜜提出鮮果味，鮮果的濃郁完整鎖在裡面。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、百香果果泥、蜂蜜、防潮糖粉(糖、玉米澱粉、完全氫化棕櫚油、大豆卵磷脂、棕櫚油、大豆油、脂肪酸丙二醇酯、脂肪酸甘油酯、抗氧化劑(混合濃縮生育醇)、芥花油)、山梨糖醇(甜味劑)\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(29, 2, 9, '粉戀果香 生巧克力', '', '添加L-阿拉伯糖，結合天然水果，粉嫩少女般的初戀。', 550, 1, '生巧克力的「生」字源自日文「生チョコレート」，是新鮮的意思，加入鮮奶油混合，口感滑順並帶有Ｑ感，視覺、味覺上 絕對讓您驚艷。\n結合天然水果－葡萄、紅龍果、檸檬，無添加人工色素，粉色為水果原色，就像粉嫩少女般的初戀。', '', '成分：白巧克力(可可脂、糖、全脂奶粉、大豆卵磷脂、天然香草香料)、奶油、檸檬汁、火龍果汁、葡萄汁、水果果粉、葡萄糖漿、山梨糖醇(甜味劑)、L-阿拉伯糖\n淨重：140公克\n產地：台灣\n保存方法：冷凍保存\n保存期限：未開封30天，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(30, 2, 10, '可可碎粒 黑巧克力 75%', '', '吃的到可可碎粒。', 320, 1, '', '', '成分：可可膏、二砂糖、可可碎粒、可可脂\n淨重：45公克\n可可豆產地：委內瑞拉\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(31, 2, 10, 'L-阿拉伯糖 黑巧克力 74%', '', 'L-阿拉伯糖能抑制蔗糖在腸道分解與吸收，享受糖的甜蜜，免受糖的負擔。', 300, 1, '', '', '成分：可可膏、二砂糖、可可脂、L-阿拉伯糖\n淨重：45公克\n可可豆產地：厄瓜多\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(32, 2, 10, '台灣 黑巧克力70%', '', '台灣的巧克力帶有熱帶水果和葡萄果乾風味，微帶紅酒果酸感，是送禮最佳選擇。', 350, 1, '', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(33, 2, 10, '台灣 黑巧克力80%', '', '帶著紅酒味道，伴隨著煙燻香氣，口感醇厚溫順。', 360, 1, '', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(34, 2, 10, '台灣 黑巧克力90%', '', '新推出90%，風味、口感更升級', 380, 1, '新推出90%，風味、口感更升級。\r\n台灣的巧克力帶有熱帶水果和葡萄果乾風味，微帶紅酒果酸感，是送禮最佳選擇。', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(35, 2, 10, '哥倫比亞 黑巧克力 76%', '', '哥倫比亞產區特有風味，咖啡及可可香，尾韻帶葡萄果香及單寧酸感酸度。', 290, 1, '', '', '成分：可可膏、二砂糖\n淨重：45公克\n可可豆產地：哥倫比亞\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(36, 2, 10, '多明尼加 黑巧克力 66%', '', '帶著柑橘類香氣，伴隨著糖蜜味，清甜的味道是最佳入門款。', 280, 1, '', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：多明尼加\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(37, 2, 10, '秘魯白豆 黑巧克力 70%', '', '稀有白豆', 320, 1, '生長在3,500英尺以上的稀有的可可品種，柔和的莓果與花香相互交融，有紅酒單寧感，尾韻持久甘甜。', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：秘魯白豆\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(38, 2, 10, '秘魯白豆 黑巧克力 80%', '', '稀有白豆', 320, 1, '來自秘魯馬拉尼翁山谷的白可可豆，花香味道豐富飽滿，帶有香草莢、紅酒單寧，尾韻檸檬香氣。', '', '成分：可可膏、二砂糖、可可脂\n淨重：45公克\n可可豆產地：秘魯白豆\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(39, 2, 10, '秘魯白豆 黑巧克力 99%', '', '高濃度可可，花香味道豐富飽滿。', 360, 1, '', '', '成分：可可膏、可可脂\n淨重：45公克\n可可豆產地：秘魯白豆\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(40, 2, 10, '馬達加斯加 黑巧克力 86%', '', '濃郁堅果香氣，滑順油脂感，尾韻帶些許苦酸。', 300, 1, '', '', '成分：可可膏、二砂糖\n淨重：45公克\n可可豆產地：馬達加斯加\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(41, 2, 10, '馬達加斯加 黑巧克力 92%', '', '濃郁堅果香氣，滑順油脂感，尾韻帶些許苦酸。', 330, 1, '', '', '成分：可可膏、二砂糖\n淨重：45公克\n可可豆產地：馬達加斯加\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(42, 2, 11, '伯爵紅茶 黑巧克力70%', '', '紅茶與佛手柑融合的獨特香氣與黑巧克力的美味融合。', 350, 1, '濃郁黑巧克力，融合伯爵紅茶的花與柑橘香氣，每一口都是獨特的味覺享受，適合喜歡獨特風味的巧克力愛好者品嚐。', '', '成分：可可膏、二砂糖、伯爵紅茶粉\n淨重：45公克\n可可豆產地：台灣\n過敏原：本產品生產製程廠房與其設備有處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(43, 2, 11, '東方美人 台灣黑巧克力70%', '', '台灣70%的純巧克力風味深邃而濃郁，與茶葉的清新香氣交織。', 360, 1, '台灣可可豆果酸風味，伴隨優雅的紅酒多酚，加上東方美人茶的清香，深厚滋味，香氣撲鼻，為味蕾帶來奇妙享受。', '', '成分：可可膏、二號砂糖(蔗糖)、東方美人茶粉\n淨重：45公克\n可可豆產地：台灣\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(44, 2, 11, '茶語花香 黑巧克力70%', '', '鐵觀音茶特有花香及焙火香氣與黑巧克力的美味融合', 350, 1, '淡雅花香黑巧克力，融合體觀音特有濃醇甘潤，並由尾韻帶出溫和微弱果酸味。\r\n每一口都是獨特的味覺享受，適合喜歡獨特風味的巧克力愛好者品嚐', '', '成分：可可膏、二砂糖、鐵觀音茶粉\n淨重：45公克\n可可豆產地：聖多美\n過敏原：本產品生產製程廠房與其設備處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封2年，開封後請盡快食用完畢 \r\n葷素別：全素', '2024-08-14 13:23:33'),
+(45, 2, 11, '鐵觀音 黑巧克力70%', '', '鐵觀音回甘茶香與黑巧克力的美味融合。', 350, 1, '秘魯可可豆花香和紅酒單寧味，融合體觀音特有濃醇甘潤，並由尾韻帶出溫和微弱果酸味。\n每一口都是獨特的味覺享受，適合喜歡獨特風味的巧克力愛好者品嚐。', '', '成分：可可膏、二砂糖、鐵觀音茶粉\n淨重：45公克\n可可豆產地：秘魯\n過敏原：本產品生產製程廠房與其設備處理牛奶、花生、堅果及其製品\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(46, 2, 12, '赤藻糖 黑巧克力 66%', '', '吃不胖的巧克力。', 300, 1, '赤藻糖醇較不會造成血糖上升也幾乎沒有熱量。 \r\n吃起來有薄荷的微涼感，能抑制蛀牙菌生長，不易生成牙菌斑。', '', '成分：可可膏、赤藻糖醇、木糖醇、可可脂\n淨重：45公克\n可可豆產地：聖多美\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(47, 2, 12, '龍眼花 黑巧克力 70%', '', '台灣本產龍眼花。', 320, 1, '台灣可可豆融合本產龍眼花，其香氣隨著咀嚼散開，尾韻帶有龍眼蜜、龍眼乾，令人難以忘懷。', '', '成分：可可膏、二砂糖、乾燥龍眼花、可可脂\n淨重：45公克\n可可豆產地：厄瓜多\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封2年，開封後請盡快食用完畢 \n葷素別：全素', '2024-08-14 13:23:33'),
+(48, 2, 13, '烏龍牛奶巧克力58%', '', '芳香濃郁的茶香與馥郁的奶香結合，帶來獨特的口感饗宴。\r', 280, 1, '牛奶巧克力伴隨烏龍茶香，滑順入口。\r\n融合了烏龍茶和牛奶的絕妙配搭，茶香的清新和巧克力的濃郁在口中交織，帶來驚艷的味覺體驗。\r\n烏龍茶的香氣與牛奶的甘醇，讓您在品嘗時感受到獨特的層次與平衡，每一口都是一場香氣的旅程。', '', '成分：可可膏、脫脂奶粉、砂糖、烏龍茶粉\n淨重：45公克\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封1年，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(49, 2, 13, '牛奶巧克力 58%', '', '奶控必吃。', 280, 1, '有著起司味及堅果味香，奶控的人必吃。', '', '成分：可可膏、可可脂、脫脂奶粉、白砂糖\n淨重：45公克\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\r\n保存期限：未開封1年，開封後請盡快食用完畢 \r\n葷素別：奶素', '2024-08-14 13:23:33'),
+(50, 2, 13, '醇白巧克力', '', '媽媽與小朋友的最愛，不含可可鹼。', 280, 1, '小朋友也能吃的巧克力，不含可可鹼，品嚐奶香和天然可可脂在嘴巴融化的感受。', '', '成分：可可脂、脫脂奶粉、白砂糖\n淨重：45公克\n過敏原：堅果\n保存方法：保存溫度 12 ~ 22 °C\n保存期限：未開封1年，開封後請盡快食用完畢 \n葷素別：奶素', '2024-08-14 13:23:33'),
+(51, 3, 14, '文山包種茶巧克力', '', '清新淡雅，帶有梔子花香。\n甘醇清爽不苦澀，茶香在黑巧克力中隱隱綿長。', 450, 1, '黑巧克力與台灣茶的美好相遇，70%黑巧克力結合文山包種茶。\r\n巧克力入口即化、細膩滑順，清爽淡雅梔子花香氣，茶香綿長。', '', '成分：可可膏、砂糖、包種茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-14 13:23:33'),
+(52, 3, 14, '坪林鐵觀音巧克力', '', '風味醇厚，帶有炭焙香氣。\n入口微苦，後韻轉甘，與黑巧克力結合出美妙滋味。', 450, 1, '黑巧克力與台灣茶的美好相遇，70%黑巧克力結合坪林鐵觀音。\r\n巧克力入口即化、細膩滑順，熟果香氣和可可呈現美妙平衡。', '', '成分：可可膏、砂糖、鐵觀音茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-14 13:23:33'),
+(53, 3, 14, '花蓮蜜香紅茶巧克力', '', '溫和圓潤、後韻甘甜。\n獨特的蜜糖蔗香，在黑巧克力濃醇香氣中緩緩蔓延。', 450, 1, '黑巧克力與台灣茶的美好相遇，70%黑巧克力結合花蓮蜜香紅茶。\r\n巧克力入口即化、細膩滑順，帶有獨特蜜糖香氣，尾韻甘甜不澀。\r\n\r\n', '', '成分：可可膏、砂糖、蜜香紅茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-14 13:23:33'),
+(54, 3, 14, '東方美人巧克力', '', '台灣可可與茗茶交織的香韻風味。', 450, 1, '口感輕盈、溫和細膩，隱隱帶有蜂蜜香氣。\n烏梅香酸與熟果茶香結合，延展出迷人酸甜香韻。\n屏東可可獨特的烏梅酸香，結合東方美人特殊的茶韻風味，入口果酸突出而明亮，散發豐富的龍眼蜜香及荔枝熟果香。\r\n隨著巧克力在口中緩緩融化，果酸慢慢淡去後，可可細膩的甘醇接著隱隱透出，口感輕盈不厚重、層次豐富分明。', '2023 ICA 銀牌', '成分：可可膏、糖、茶粉、可可脂\n淨重：60g +- 5g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：24個月', '2024-08-14 13:23:33'),
+(55, 3, 15, '100% 黑巧克力薄片', '', '想要最完整健康營養，不怕吃苦，適合嚴格控制糖份攝取族群。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，濃厚甘苦原味。', '', '成分：可可膏、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(56, 3, 15, '95% 黑巧克力薄片', '', '想要完整營養又怕太苦，較為順口，適合嚴格控制糖份攝取族群。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，營養無負擔\n甘苦順口。', '', '成分：可可膏、砂糖、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(57, 3, 15, '85% 黑巧克力薄片', '', '想要好吃又想健康無負擔，苦甜摻半，運動、能量一次補充。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，好吃又健康苦甜摻半。', '', '成分：可可膏、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(58, 3, 15, '75% 黑巧克力薄片', '', '吃零食沒有罪惡感，自在健康無負擔，運動、能量補充，舒緩放鬆心情。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，療癒好心情溫和滑順。', '', '成分：可可膏、可可脂\n淨重：250g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(59, 3, 15, '星鑽堅果巧克力', '', '可可、堅果雙重營養超健康，香濃涮嘴超好吃。', 800, 1, '專為每日食用設計，給健康的你，完整可可營養。\n100%原豆研磨製成，完整可可無添加，無調味堅果富含優質營養。', '', '成分：可可膏、糖、腰果、杏仁、核桃、胡桃、可可脂\n淨重：230g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：3個月', '2024-08-14 13:23:33'),
+(60, 3, 16, '100% 經典迦納黑巧克力', '', '想要最完整健康營養，不怕吃苦，適合嚴格控制糖份攝取族群。', 100, 1, '嚴選迦納 / 比利時頂級黑巧克力，充滿熱帶可可的原始香氣，無添加糖，濃厚甘苦。', '', '成分：可可膏、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(61, 3, 16, '100% 國產屏東黑巧克力', '', '想要最完整健康營養，不怕吃苦，屏東可可帶酸苦口感。', 100, 1, 'ICA-世界巧克力大賞銅牌莊園，呈現屏東獨有的果酸風味，無添加糖，濃郁酸苦。', '', '成分：屏東可可膏、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(62, 3, 16, '85% 經典迦納黑巧克力', '', '想要好吃又想健康無負擔，苦甜摻半，運動、能量一次補充。', 100, 1, '嚴選迦納 / 比利時頂級黑巧克力，充滿熱帶可可的原始香氣，微加糖\n果酸苦甜。', '', '成分：可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(63, 3, 16, '85% 國產屏東黑巧克力', '', '想要好吃又想健康無負擔，苦甜摻半，屏東可可帶酸苦口感。', 100, 1, 'ICA-世界巧克力大賞銅牌莊園，呈現屏東獨有的果酸風味，微加糖\r\n果酸苦甜。', '', '成分：屏東可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(64, 3, 16, '75% 經典迦納黑巧克力', '', '吃零食不怕罪惡感、自在健康無負擔，運動登山、血糖能量一次補充。', 100, 1, '嚴選迦納 / 比利時頂級黑巧克力，充滿熱帶可可的原始香氣，低加糖濃厚輕甜。', '', '成分：可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(65, 3, 16, '75% 國產屏東黑巧克力', '', '吃零食不怕罪惡感、自在健康無負擔，屏東可可帶酸苦口感。', 100, 1, 'ICA-世界巧克力大賞銅牌莊園，呈現屏東獨有的果酸風味，低加糖\r\n果酸輕甜。', '', '成分：屏東可可膏、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：12個月', '2024-08-14 13:23:33'),
+(66, 3, 17, '嘉義海塩巧克力', '', '85%黑巧克力搭配嘉義季節海鹽，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配嘉義季節結晶海塩，鮮美富含礦物質，口感鮮美，苦甜回甘好滋味。', '', '成分：可可膏、砂糖、嘉義海塩、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-14 13:23:33'),
+(67, 3, 17, '土耳其無花果巧克力', '', '85%黑巧克力搭配無花果乾佐青提籽，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配土耳其天然無花果乾，富果籽口感，採天然烘乾，自然清新香甜。', '', '成分：可可膏、無花果、青提籽、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-14 13:23:33'),
+(68, 3, 17, '屏東鳳梨巧克力', '', '85%黑巧克力搭配屏東鳳梨乾佐番茄乾，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配屏東小農鳳梨果乾，充滿鳳梨香氣與酸甜尾韻。', '', '成分：可可膏、鳳梨乾、番茄乾、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-14 13:23:33'),
+(69, 3, 17, '彰化火龍果巧克力', '', '85%黑巧克力搭配彰化火龍果乾佐覆盆莓，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配台灣小農火龍果乾，天然清甜帶果籽口感。', '', '成分：可可膏、火龍果乾、覆盆莓乾、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-14 13:23:33'),
+(70, 3, 17, '屏東芒果巧克力', '', '85%黑巧克力搭配屏東芒果乾，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配搭配台灣小農芒果果乾，Q甜有嚼勁帶芒果香氣。', '', '成分：可可膏、芒果乾、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-14 13:23:33'),
+(71, 3, 17, '北美蔓越莓巧克力', '', '85%黑巧克力搭配蔓越莓果乾佐玫瑰花瓣，嘴饞零食不怕罪惡感、無負擔。', 125, 1, '嚴選迦納 / 比利時頂級黑巧克力，搭配北美無毒蔓越莓果乾，充滿莓果迷人的酸甜香氣。', '', '成分：可可膏、蔓越莓、玫瑰花瓣、砂糖、可可脂\n淨重：20g\n原產地：台灣\n過敏原：本產線另有堅果、芒果、奶製品等過敏原\n保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：6個月', '2024-08-14 13:23:33'),
+(72, 4, 18, '36% 碧螺春生巧克力', '', '以三峽百年茶園「明前頂級碧螺春綠茶粉」製作而成的, 表現出碧螺春特有的清新雅致, 帶著一心二葉嫩芽的青草大地氣息，點綴屏東特有紅柴蜜的高雅人蔘牛蒡香氣，襯托出谷芳茶園碧螺春來自三峽山谷中春天的滋味。', 320, 1, '關於谷芳頂級明前碧螺春綠茶，手工嫩採三峽白雞谷特有「青心柑仔」品種一心二葉細芽嫩心的茶菁，以不發酵的專業加工製程，全程茶葉不落地加工，製成的茶香帶有海苔香、木質氣息、花果香與嫩草清爽氣息，茶湯清爽鮮甜、丹寧如絲、鮮甜健康、清新無負擔。', '', '成分：白巧克力(糖、可可脂、乳粉、葵花卵磷脂、香草萃取物)、動物性鮮奶油(乳脂、乳蛋白、鹿角菜膠)、發酵奶油(乳脂、乳酸菌種)、轉化糖(葡萄糖、果糖、蔗糖、水)、燕麥奶(水、燕麥、芥花油、磷酸氫二鉀、碳酸鈣、鹽)、全脂奶粉、碧螺春茶粉、可可脂、抹茶粉、蜂蜜\n淨重：56g\n原產地：台灣\n過敏原：本產品含牛奶、燕麥及其製品，本產線亦生產芒果、蛋、堅果、大豆、牛奶、及其製品，不適合其過敏體質者使用。\n保存方式：冷凍保存, 開封後請盡速食用完畢\n葷素標示：奶素', '2024-08-14 13:23:33'),
+(73, 4, 18, '70% 台灣一號屏東生巧克力', '', '帶有酒漬葡萄乾、榛果太妃糖等來自巧克力與蘭姆酒共譜的迷人韻味。', 320, 1, '選用70%台灣一號屏東巧克力、法國發酵奶油，以及特選於馬德拉桶與波本桶陳年12年的巴貝多蘭姆酒，經手工悉心乳化後靜置2日低溫熟成，在入口即化的瞬間感受帶有酒漬葡萄乾、榛果太妃糖等來自巧克力與蘭姆酒共譜的迷人韻味。', '', '成分：70%台灣一號巧克力(可可膏、細砂糖、可可脂)、葡萄糖漿、奶油(乳脂、乳酸菌)、鮮奶油(奶脂、奶蛋白、鹿角菜膠)、蘭姆酒、可可粉\n淨重：56g\n原產地：台灣\n過敏原：本產品含牛奶及其製品，本產線亦生產芒果、蛋、堅果、大豆、牛奶、及其製品，不適合其過敏體質者使用。\n保存方式：冷凍保存, 開封後請盡速食用完畢\n葷素標示：奶素', '2024-08-14 13:23:33'),
+(74, 4, 18, '85% 台灣一號屏東生巧克力', '', '巧克力與蘭姆酒交織綻放的莓果、榛果、太妃糖、奶油等細緻迷人韻味。', 350, 1, '選用台灣一號85%巧克力、法國發酵奶油，以及特選來自牙買加有300年歷史酒廠的蘭姆酒，經手工悉心乳化後靜置2日低溫熟成，在入口即化的瞬間感受巧克力與蘭姆酒交織綻放的莓果、榛果、太妃糖、奶油等細緻迷人韻味。', '', '成分：85%台灣一號巧克力(可可膏、細砂糖、可可脂)、鮮奶油(奶脂、奶蛋白、鹿角菜膠)、奶油(乳脂、乳酸菌)、葡萄糖漿、蘭姆酒、鹽之花、小蘇打、可可粉\n淨重：56g\n原產地：台灣\n過敏原：本產品含牛奶及其製品，本產線亦生產芒果、蛋、堅果、大豆、牛奶、及其製品，不適合其過敏體質者使用。\n保存方式：冷凍保存, 開封後請盡速食用完畢\n葷素標示：奶素', '2024-08-14 13:23:33'),
+(75, 4, 19, '若水 ‧ 100% 屏東巧克力方片', '', '帶有橙花、香蕉、青蘋果、蔓越莓、奶油起司的香氣。 ', 850, 1, '採用福灣巧克力FIDARGS法中的「Roasting標準烘烤工法」及「Griding明星研磨工法」，以低溫烘烤保留最多機能成分和細緻香氣，並縮短研磨時間減少氧化，完成既美味又健康的冠軍巧克力。 \n於2021-22年ICA世界巧克力大賽獲得世界最佳高濃度黑巧克力冠軍，為歷年來分數最高的金獎高濃度黑巧克力。 \n富含「總多酚」為蘋果的52倍、「兒茶素」為綠茶的5倍、「膳食纖維」為燕麥的5倍，以及調節生理機能的「鎂、鋅、銅、錳」等微量元素。', '2024 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2021-22 ICA 世界巧克力大賽 全球賽-金牌 ', '成分：屏東可可膏\n淨重：80g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-14 13:23:33'),
+(76, 4, 19, '100% 台灣一號巧克力-屏東可可', '', '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 1000, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銅牌', '成分：屏東可可膏\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-14 13:23:33'),
+(77, 4, 19, '85% 台灣一號巧克力-屏東可可', '', '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 850, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '', '成分：屏東可可膏、糖(特砂)、可可脂\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-14 13:23:33'),
+(78, 4, 19, '70% 台灣一號巧克力-屏東可可', '', '具太妃焦糖、堅果、 葡萄乾、香草、甘草、蘭姆酒、熱帶水果乾的風味。', 700, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌 \r\n2020 ICA 世界巧克力大賽 亞太區- 亞洲最佳黑巧克力等五金\r\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌', '成分：屏東可可膏、糖(特砂)、可可脂\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-14 13:23:33'),
+(79, 4, 19, '62% 台灣一號巧克力-屏東可可', '', '具葡萄乾、太妃焦糖、堅果、 熱帶水果乾、甘草、香草的風味。', 650, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」做法，亦即從屏東可可鮮果在園區內進行發酵、乾燥、烘焙、研磨、精煉、調溫、熟成等程序，所製成的產地原始風味巧克力，未經過抽脂程序，保留巧克力原始個性的最佳風味。\n品嘗起來帶有太妃糖、堅果、熱帶水果乾、咖啡之香氣，入口酸度適中平衡，口感滑順優雅。', '2023 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2019 ICA 世界巧克力大賽-總決賽 3面金牌 \r\n2018 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2017 ICA 世界巧克力大賽-亞太區 5面金牌 \r\n2017 ICA 世界巧克力大賽-亞太區 最佳黑巧克力', '成分：屏東可可膏、糖(特砂)、可可脂\n淨重：90g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n葷素標示：全素', '2024-08-14 13:23:33'),
+(80, 4, 20, '100% 台灣一號屏東巧克力', '', '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 350, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銅牌 ', '成分：屏東可可膏\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(81, 4, 20, '70% 台灣八號極致烘焙巧克力', '', '具蘋果、莓果、焦糖牛奶、堅果、咖啡的風味。', 330, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」做法，更透過福灣巧克力評鑑師獨家研發的“極致烘焙”手法，讓此款巧克力風味帶有個性鮮明的熱帶水果酸香與成熟穩重的巧克力風韻。', '', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(82, 4, 20, '70% 台灣九號雙重發酵粗磨巧克力', '', '具草莓、蘋果、紅酒醋、粉紅香檳、堅果的風味。', 330, 1, '全球首創雙重發酵法，來自香檳的瓶內二次發酵概念，突破台灣可可豆的風味極限，引領出強烈莓果紅酒醋等細緻醇類與酯類香氣，創造巧克力風味的無限可能。', '2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽-全球總決賽 銅牌\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銅牌- 原味黑巧克力類 \r\n2019 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2018 ICA 世界巧克力大賽-全球總決賽 金牌\r\n2018 ICA 世界巧克力大賽-亞太區 金牌\r\n2018 ICA 世界巧克力大賽-亞太區 最佳黑巧克力', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(83, 4, 20, '85% 台灣一號屏東巧克力', '', '具熱帶水果乾、香料、堅果、焦糖、巧克力味的風味。', 330, 1, '屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等，所有製程都在福灣巧克力園區內完成的TREE-TO-BAR巧克力，帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(84, 4, 20, '70% 台灣一號屏東巧克力', '', '具葡萄乾、焦糖牛奶、堅果、熱帶水果乾、甘草、香草的風味。', 300, 1, '70%屏東風土黑巧克力，從可可鮮果開始發酵、烘焙、研磨等所有製程都在福灣園區內完成的TREE-TO-BAR巧克力。\r\n帶有堅果、焦糖、蘭姆酒、甘草等香氣，與些許熱帶水果酸度。', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 亞洲最佳黑巧克力等五金\r\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(85, 4, 20, '62% 台灣一號屏東巧克力', '', '具有太妃焦糖、堅果、 葡萄乾、香草、甘草、蘭姆酒、熱帶水果乾的風味。', 280, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」做法，亦即從屏東可可鮮果在園區內進行發酵、乾燥、烘焙、研磨、精煉、調溫、熟成等程序，所製成的產地原始風味巧克力，未經過抽脂程序，保留巧克力原始個性的最佳風味。\n品嘗起來帶有太妃糖、堅果、熱帶水果乾、咖啡之香氣，入口酸度適中平衡，口感滑順優雅。', '2023 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2019 ICA 世界巧克力大賽-總決賽 3面金牌 \r\n2018 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2017 ICA 世界巧克力大賽-亞太區 5面金牌 \r\n2017 ICA 世界巧克力大賽-亞太區 最佳黑巧克力', '成分：屏東可可膏、糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(86, 4, 20, '62% 台灣五號可可碎粒巧克力', '', '帶有可可碎粒的口感。', 280, 1, '完全採用屏東在地種植可可豆，採取領先全球精品巧克力的「From Tree to Bar」作法，亦即從屏東可可鮮果在園區內進行發酵、乾燥、烘培、研磨、精煉、調溫、熟成等程序，所製成的產地原始風味巧克力，未經過抽脂程序，保留巧克力原始個性的最佳風味，最後在巧克力表面均勻撒上烘烤後的可可原豆碎粒，品嚐起來不僅口感十足，更帶有台灣個性鮮明的熱帶水果乾豐富香氣，接續下來的焦糖、堅果香氣更讓你回味無窮！', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2023 ICA 世界巧克力大賽 亞太區- 銅牌 \n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2019 AOC 英國皇家學院巧克力大賽- 銅牌\n2018 AOC 英國皇家學院巧克力大賽- 金牌\n2017 ICA 世界巧克力大賽 全球總決賽- 銅牌\n2017 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可碎粒、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(87, 4, 21, '68% 玉蝶巧克力', '', '玉蝶，是以68%黑巧克力為基礎、並帶有清新野薑花香氣的創作巧克力。', 650, 1, '生長於屏東牡丹哭泣湖畔的野薑花 ，以福灣巧克力獨創的Scenting窖藏窨製工法，將迷人香氣沁入巧克力中。\n凝聚時光，賦予新生，在山林裡，在河流邊，天地舞台，吟唱最清澈的詩歌。 \n風吹，蝶飛，那些冬日暖陽般的回憶，融化在唇齒間，幻化為翅膀，領著我們繼續探訪。', '', '成分：屏東可可膏、糖、可可脂\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-14 13:23:33'),
+(88, 4, 21, '70% 玉桂巧克力', '', '追憶古林秋日浪漫，台灣本土肉桂與台灣第一屏東巧克力的完美結合，細膩的貝殼薑味，獨特巧克力工藝的愛筆觸，華麗又狂野。', 650, 1, '回憶秋天山林炊煙繚繞的原始浪漫，將生於屏東長治的台灣土肉桂葉用以煙燻台灣一號70%黑巧克力，並綴以月桃籽粉與肉桂葉粉共同研磨，創造出獨樹一格的巧克力工藝，華麗奔放，溫潤心神，我們稱其為來自森林的療癒可樂。', '', '成分：屏東可可膏、糖、可可脂、台灣土肉桂葉粉、台灣月桃籽粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-14 13:23:33'),
+(89, 4, 21, '70% 高粱酒巧克力', '', '帶有高粱酒的香氣。', 580, 1, '以獨創減壓浸潤工法，將高粱酒細緻風韻融存到可可豆中，經過數週熟成後製作而成巧克力，展現出纖細秀逸的獨特高粱酒香氣。\r', '2020 ICA 世界巧克力大賽 亞太區- 銀牌/風味調味與熟成特別獎', '成分：屏東可可膏、糖、可可脂、高粱酒\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(90, 4, 21, '70% 玉蘭巧克力', '', '精緻美麗，芬芳迷人，台灣的秘密樂趣就隱藏在我們之中。\n融入我們的招牌台灣#1屏東巧克力，在你熱情的親吻下再次綻放。', 650, 1, '福灣巧克力2021四季巧克力計畫中的首發作品－玉蘭，以台灣一號70%黑巧克力為基礎、並帶有濃鬱的鬱玉蘭花的全新創作巧克力。 \n其製作依賴福萬「FIDARGS工藝」中獨特的方法——SCENTING技術。\n我們用多種不同的技巧來乾燥鮮花，以保持最終的花香，並將乾燥花和巧克力放在一起幾週，以盡可能吸收香氣。\n同時，巧克力也會經過適當的陳化，以形成更圓潤、更精緻的風味。 ', '2023 ICA 世界巧克力大賽太區- 銀牌 \n2021-22 ICA 世界巧克力大賽太區- 銅牌\n2022 AOC英國皇家學院巧克力大賽-銀牌', '成分：屏東可可膏、糖、可可脂\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-14 13:23:33'),
+(91, 4, 21, '70% 草莓啤酒酵母巧克力', '', '帶有洋甘菊花香、柑橘牛奶糖、草莓莓果的香氣，以及堅果與巧克力的苦韻。', 450, 1, '以福灣巧克力獨特的「酵母發酵工法」，將在地精釀啤酒的草莓啤酒酵母粕，加入新鮮的可可豆中共同低溫發酵，乾燥後再經過「低溫窖藏熟成工法」，轉化出耐人尋味的美好風味。\n不辜負巧克力NASA的稱號，福灣巧克力的原創工藝，再度驚艷世界。\n品嘗此款巧克力需讓味蕾保持乾淨敏銳，含入口中待其緩慢融化，將品嚐到輕盈的洋甘菊花香、細緻的柑橘牛奶糖、草莓莓果香，以及溫柔的堅果及巧克力苦韻。', '2020-21 ICA 世界巧克力大賽 全球總決賽\n-4面金牌: 原味黑巧克力/巧克力製作者/直接採購/栽種國家\n-2面特別獎: 限量/添加發酵\n2020 ICA 世界巧克力大賽 亞太區- 銀牌 ', '成分：屏東可可膏、糖、可可脂、草莓啤酒酵母\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素(製造流程含酒精) ', '2024-08-14 13:23:33'),
+(92, 4, 21, '70% 啤酒酵母三號愛爾粗研磨巧克力', '', '具血橙、葡萄、鳳梨、梨子等鮮果的風味。', 450, 1, '70%啤酒酵母三號粗研磨巧克力Philotes（希臘神話中代表友誼的女神） 採用福灣巧克力原創「酵母發酵工法」。\n以特選的美式艾爾啤酒酵母，在溫濕度皆控制的發酵環境中投入可可豆與野生酵母共同發酵。\n乾燥後再以獨創「低溫窖藏熟成工法」等待時間的醞釀，才能完整表現出啤酒酵母與可可豆共譜的美妙風味。\n最後採用「明星研磨工法」以粗顆粒研磨模擬啤酒的氣泡感。\n咀嚼中帶著迷人奔放的血橙、葡萄、鳳梨、梨子等鮮果香氣，是全球巧克力光譜中極少見的風味。', '2020-21 ICA 世界巧克力大賽 全球總決賽- 原味黑巧克力銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可脂、酵母\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素(製造流程含酒精) ', '2024-08-14 13:23:33'),
+(93, 4, 21, '70% 紅酒酵母一號巧克力', '', '帶有榛果、杏仁、奶油、烤麵包、苺果等的香氣。', 450, 1, '採用福灣巧克力原創「酵母發酵工法」，以特選的葡萄酒酵母，在溫濕度皆控制的發酵環境中投入可可豆與野生酵母共同發酵，乾燥後再以獨創「低溫窖藏熟成工法」等待時間的醞釀，才能完整呈現出葡萄酒酵母與可可豆共譜的美妙風味。帶有榛果、杏仁、奶油、烤麵包、苺果等令人意想不到的香氣表現。', '2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可脂、酵母\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素(製造流程含酒精) ', '2024-08-14 13:23:33'),
+(94, 4, 21, '56% 荔枝玫瑰東方美人奶茶巧克力', '', '帶有熟果花香、玫瑰花、玉荷包荔枝的香氣。', 450, 1, '以台灣屏東巧克力為基底，融合東方美人高雅細膩的熟果花香, 並以玫瑰花粉與玉荷包荔枝粉作為點綴提香, 淡淡的奶香平衡茶與巧克力的澀感，帶出馥郁優雅的迷人調性。\n由於多種食材結合的複雜性與成品的平衡感，在世界大賽中得到了一個很特別的「食譜配方特別獎」。', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 + 特殊食材獎\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌及食譜特別獎\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：黑巧克力(屏東可可膏、糖、可脂)、白巧克力(糖、可可脂、奶粉、葵花卵磷脂、香草萃取物)、東方美人茶粉、玫瑰花粉、荔枝果粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：奶素', '2024-08-14 13:23:33'),
+(95, 4, 21, '56% 台灣炭焙烏龍奶茶巧克力', '', '藉著烏龍奶茶風味的巧克力將台灣甚具代表性的奶茶文化傳遞到西方。', 400, 1, '以台灣巧克力作為基底，融合炭焙烏龍茶內斂雍容的梔子花與熟果茶韻, 帶出堅果、芝麻、薄荷等穩重韻味。\n淡雅的奶香平衡了茶與巧克力的澀感，展現出滑順別緻的巧克力烏龍奶茶風味。\n再度藉著巧克力將台灣甚具代表性的奶茶文化傳遞到西方世界。', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：黑巧克力(屏東可可膏、糖、可可脂)、白巧克力(糖、可可脂、奶粉、葵花卵磷脂、香草萃取物)、炭焙烏龍茶粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：奶素', '2024-08-14 13:23:33'),
+(96, 4, 21, '62% 台灣紅烏龍茶巧克力', '', '帶有馥郁茶香、堅果調性、牛奶糖尾韻。', 400, 1, '以台灣一號62%巧克力為基底,融合少見的高山紅烏龍茶雍容雅致的玫瑰、荳蔻風韻及馥郁茶香，轉化出開心果及杏仁的堅果調性，並以牛奶糖的尾韻作結。\n為福灣繼2018年鐵觀音、紅玉、炭焙烏龍之後，茶系列黑巧克力的最新力作。 ', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \n2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \n2021-22 ICA 世界巧克力大賽 亞太區- 金牌+當地食材特別獎\n2022 AOC 英國皇家巧克力大賽- 金牌\n2020-21 ICA 世界巧克力大賽 全球總決賽- 銀牌+當地食材特別獎\n2020 ICA 世界巧克力大賽 亞太區- 銀牌', '成分：屏東可可膏、糖、可可脂、紅烏龍茶粉\n淨重：35g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：全素', '2024-08-14 13:23:33'),
+(97, 4, 21, '53% 台灣十號深黑牛奶巧克力', '', '具香草、甘草、堅果、起司、麥芽、咖啡的風味。', 280, 1, '以略高的烘焙溫度帶出台灣可可強烈的堅果與甘草味，再加入低比例的奶粉使風味圓潤平衡，特別添加台灣本土香草，帶出乾淨的天然草本甜韻。', '2023 ICA 世界巧克力大賽 亞太區- 銅牌 \n2021-22 ICA 世界巧克力大賽 亞太區- 金牌\n2022 AOC 英國皇家學院巧克力大賽- 銀牌\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌\n2019 ICA 世界巧克力大賽 亞太區- 金牌', '成分：屏東可可膏、糖、奶粉、可可脂、屏東香草莢\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：奶素', '2024-08-14 13:23:33'),
+(98, 4, 21, '62% 台灣馬告巧克力', '', '巧妙融合台灣獨有山胡椒-馬告。', 340, 1, '以台灣一號62%巧克力為基底，巧妙融合台灣獨有山胡椒-馬告，呈現出風姿綽約的曼妙層次，檸檬香茅、嫩薑、柑橘山椒等香氣與台灣巧克力本身的熱帶水果香氣輪番綻放，並以溫柔的太妃糖尾韻收斂。', '2022 AOC 英國皇家學院巧克力大賽- 銀牌\n2020-21 ICA 世界巧克力大賽- 全球總決賽- 調味黑巧克力銅牌\n2020 ICA 世界巧克力大賽- 亞太區- 調味黑巧克力金牌- 當地食材特別獎\n2019 ICA 世界巧克力大賽-全球總決賽- 金牌– 最佳調味黑巧克力\n2019 AOC 英國皇家學院巧克力大賽- 銀牌\n2018 ICA 世界巧克力大賽-全球總決賽- 銀牌\n2018 ICA 世界巧克力大賽-亞太區- 銀牌\n2018 AOC 英國皇家學院巧克力大賽- 銀牌', '成分：屏東可可膏、糖、可可脂、馬告粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(99, 4, 21, '62% 台灣黑胡椒巧克力', '', '採用屏東新鮮有機黑胡椒，結合台一金牌巧克力。', 380, 1, '採用屏東新鮮有機黑胡椒，結合台一62%金牌巧克力，傳遞來自迷人熱帶島嶼的熱情風韻。\n黑胡椒因為在屏東新鮮採摘並小批次手工處理與急速封存，風味細膩奔放。', '2021-22 ICA 世界巧克力大賽 亞太區- 銀牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銅牌 \r\n2019 ICA 世界巧克力大賽 全球總決選- 銀牌 \r\n2019 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2018 ICA 世界巧克力大賽 全球總決選- 銀牌 \r\n2018 ICA 世界巧克力大賽 亞太區- 銀牌 ', '成分：屏東可可膏、糖、可可脂、台灣黑胡椒\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(100, 4, 21, '62% 台灣鹽花白胡椒巧克力', '', '採用屏東新鮮有機白胡椒以及嘉義洲南鹽場的鹽之花，結合台一金牌巧克力。', 380, 1, '採用屏東新鮮有機白胡椒以及嘉義洲南鹽場的鹽之花，結合台一62%金牌巧克力，傳遞來自迷人熱帶島嶼的熱情風韻。\n白胡椒因為在屏東新鮮採摘並小批次手工處理與急速封存，風味細膩奔放。', '2021-22 ICA 世界巧克力大賽 亞太區- 銅牌 \r\n2019 ICA 世界巧克力大賽-總決賽 銀牌 \r\n2018 ICA 世界巧克力大賽-總決賽 銀牌 \r\n2018 ICA 世界巧克力大賽-亞太區 銀牌', '成分：屏東可可膏、糖、可可脂、白胡椒、鹽之花\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(101, 4, 21, '70% 台灣二號 鹽之花巧克力', '', '採用嘉義洲南鹽場的鹽之花，結合台一金牌巧克力。', 300, 1, '在台灣一號金牌巧克力本身的臻果、太妃、熱帶果乾等香氣之上，再點綴台灣鹽之花(嘉義洲南鹽場)華麗優雅的海潮氣息，引領巧克力展現出更厚實的堅果底蘊。', '2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2019 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2019 AOC 英國皇家學院巧克力大賽- 銅牌\r\n2018 ICA 世界巧克力大賽 亞太區- 銅牌', '成分：屏東可可膏、糖、可可脂、嘉義海鹽\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(102, 4, 21, '70% 台灣三號 古法柴燒黑糖巧克力', '', '具葡萄乾、甘草、白蘭地、咖啡的風味。', 300, 1, '採用屏東契作之生態友善可可豆，在tree-to-bar工法研磨即添加手工黑糖，圓潤飽滿，香氣豐盈，黑糖些許的酸度與焦糖香氣和台灣可可豆的果香形成完美結合，將台灣巧克力的極限提升至全新層次。\r', '2024 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2019 ICA 世界巧克力大賽 全球總決賽- 銀牌', '成分：屏東可可膏、手工黑糖、可可脂\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(103, 4, 21, '90% 台灣十一號赤藻醣醇巧克力', '', '糖友適用，具綠香蕉、菸草、堅果、青芒果的風味。', 350, 1, '特別開發以赤藻糖醇為糖基底的高濃度巧克力，讓健康考量的客人也能安心享受台灣風味黑巧克力。', '', '成分：屏東可可膏、赤藻醣醇\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(104, 4, 21, '62% 台灣陳年烏龍茶巧克力', '', '具杏仁、腰果、黑芝麻、茴香、甘草、薄荷的風味。', 380, 1, '使用烏龍茶，與福灣的金牌巧克力共同研磨而成，融入茶葉自然流露的花果香，創造出獨特尾韻。', '2024 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 總決賽- 銅牌', '成分：屏東可可膏、糖、可可脂、烏龍茶粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(105, 4, 21, '62% 台灣鐵觀音茶巧克力', '', '具月桂葉、小茴香、丁香、薄荷、芭樂、蘭花的風味。', 380, 1, '以台灣一號62%巧克力做為基底，融合名聞遐邇的鐵觀音茶。\n將鐵觀音茶的青果香與高雅馥郁的冷冽茶香與台灣一號的太妃糖熱帶果香完美結合。\n品味過程中茶種的甘醇在巧克力中巧妙湧現，喉韻芬芳不散。', '2024 ICA 世界巧克力大賽 亞太區- 金牌 \r\n2023 ICA 世界巧克力大賽 全球總決賽- 銀牌\r\n2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 亞太區- 銀牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銅牌\r\n2020-21 ICA 世界巧克力大賽 全球總決賽- 金牌+當地食材特別獎\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌+當地食材特別獎 \r\n2019 ICA 世界巧克力大賽-全球總決賽- 金牌 \r\n2018 ICA M-M-M Gold prize\r\n2018 ICA 世界巧克力大賽-全球總決賽- 金牌\r\n2018 AOC 英國皇家學院巧克力大賽- 金牌\r\n2018  ICA 世界巧克力大賽 亞太區- 金牌', '成分：屏東可可膏、糖、可可脂、鐵觀音茶粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(106, 4, 21, '62% 台灣紅玉茶巧克力', '', '具月桂葉、佛手柑、肉桂、八角的風味。', 380, 1, '將帶有丁香、肉桂、薄荷等獨特香氣的台茶18號紅玉紅茶低溫研磨成粉，與福灣的金牌巧克力共同研磨而成，轉化出馥郁而溫暖的香料氣息。', '2023 ICA 世界巧克力大賽 亞太區- 銀牌 \r\n2021-22 ICA 世界巧克力大賽 全球總決選- 銀牌\r\n2021-22 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2022 AOC 英國皇家學院巧克力大賽- 銀牌 \r\n2020-21 ICA 世界巧克力大賽 全球總決選- 銀牌+當地食材特別獎\r\n2020 ICA 世界巧克力大賽 亞太區- 銀牌+當地食材特別獎 \r\n2019 ICA 世界巧克力大賽 總決選- 銀牌 \r\n2019 AOC 英國皇家學院巧克力大賽- 銀牌 \r\n2018 ICA 世界巧克力大賽 亞太區- 銀牌 ', '成分：屏東可可膏、糖、可可脂、紅玉茶粉\n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：未開封兩年，開封後請於一年內盡速用完\n葷素標示：全素', '2024-08-14 13:23:33'),
+(107, 4, 21, '玫瑰荔枝可可碎巧克力', '', '採用屏東有機玫瑰，結合白巧克力、煙燻荔枝乾與台灣可可豆碎粒。', 420, 1, '採用屏東有機玫瑰，結合高濃度36%白巧克力、煙燻荔枝乾與台灣可可豆碎粒。\n在白巧克力溫柔口感下充分展現出玫瑰花高雅香氣、荔枝迷人風味、可可豆熱情果香的完美結合，香氣高雅雍容、綿延湧現，如此多層次的驚喜，令人愛不釋手。', '2017 ICA 世界巧克力大賽 亞太區- 銅牌\r\n2018 AOC 英國皇家學院巧克力大賽- 銀牌', '成分：白巧克力(糖、可可脂、全脂奶粉、大豆卵磷脂、香草香料)、屏東有機玫瑰、煙燻荔枝乾、屏東可可碎粒 \n淨重：45g\n原產地：台灣\n保存方式：保存方式：乾燥陰涼處 或 冷藏保存\n保存期限：請參閱包裝外盒\n葷素標示：奶素', '2024-08-14 13:23:33');
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `pyclass`
--- 
+--
+-- 資料表結構 `product_img`
+--
 
-CREATE TABLE `pyclass` (
-  `class_id` int(11) NOT NULL auto_increment COMMENT '產品類別',
-  `level` int(11) NOT NULL COMMENT '所在層級',
-  `fonticon` varchar(30) collate utf8_unicode_ci NOT NULL COMMENT '字型圖示',
-  `cname` varchar(30) collate utf8_unicode_ci NOT NULL COMMENT '類別名稱',
-  `sort` int(11) NOT NULL COMMENT '列表排序',
-  `uplink` int(11) NOT NULL COMMENT '上層連結',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP COMMENT '建立時間與更新時間',
-  PRIMARY KEY  (`class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT AUTO_INCREMENT=181 ;
+DROP TABLE IF EXISTS `product_img`;
+CREATE TABLE IF NOT EXISTS `product_img` (
+  `img_id` int NOT NULL AUTO_INCREMENT COMMENT '圖檔編號',
+  `p_id` int NOT NULL COMMENT '產品編號',
+  `img_file` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '圖檔名稱',
+  `sort` int NOT NULL COMMENT '圖片順序',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
+  PRIMARY KEY (`img_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=392 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- 
--- 列出以下資料庫的數據： `pyclass`
--- 
+--
+-- 傾印資料表的資料 `product_img`
+--
 
-INSERT INTO `pyclass` VALUES (1, 1, '', '起源風味研究室', 1, 0, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (2, 1, '', '土庫驛可可莊園', 2, 0, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (3, 1, '', '好田家', 3, 0, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (4, 1, '', '福灣巧克力', 4, 0, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (5, 2, '', '黑巧克力', 1, 1, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (6, 2, '', '風味巧克力', 2, 1, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (7, 2, '', '牛奶巧克力', 3, 1, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (8, 2, '', '巧克力豆', 1, 2, '2024-08-03 19:43:39');
-INSERT INTO `pyclass` VALUES (9, 2, '', '生巧克力', 2, 2, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (10, 2, '', '黑巧克力', 3, 2, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (11, 2, '', '茶巧克力', 4, 2, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (12, 2, '', '風味巧克力', 5, 2, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (13, 2, '', '牛奶巧克力', 6, 2, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (14, 2, '', '茶巧克力', 1, 3, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (15, 2, '', '薄片黑巧克力', 2, 3, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (16, 2, '', '單片黑巧克力', 3, 3, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (17, 2, '', '風味黑巧克力', 4, 3, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (18, 2, '', '生巧克力', 1, 4, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (19, 2, '', '薄片黑巧克力', 2, 4, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (20, 2, '', '單片黑巧克力', 3, 4, '2024-08-03 19:43:40');
-INSERT INTO `pyclass` VALUES (21, 2, '', '風味黑巧克力', 4, 4, '2024-08-03 19:43:40');
-
--- --------------------------------------------------------
-
--- 
--- 資料表格式： `town`
--- 
-
-CREATE TABLE `town` (
-  `town_no` bigint(20) NOT NULL auto_increment COMMENT '鄕鎮市編號',
-  `name` varchar(150) collate utf8_unicode_ci NOT NULL COMMENT '鄕鎮市名稱',
-  `post` varchar(10) collate utf8_unicode_ci NOT NULL COMMENT '郵遞區號',
-  `state` smallint(6) NOT NULL COMMENT '狀態',
-  `auto_no` int(11) NOT NULL COMMENT '上層城市編號連結',
-  PRIMARY KEY  (`town_no`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=374 ;
-
--- 
--- 列出以下資料庫的數據： `town`
--- 
-
-INSERT INTO `town` VALUES (1, '中正區', '100', 0, 1);
-INSERT INTO `town` VALUES (2, '大同區', '103', 0, 1);
-INSERT INTO `town` VALUES (3, '中山區', '104', 0, 1);
-INSERT INTO `town` VALUES (4, '松山區', '105', 0, 1);
-INSERT INTO `town` VALUES (5, '大安區', '106', 0, 1);
-INSERT INTO `town` VALUES (6, '萬華區', '108', 0, 1);
-INSERT INTO `town` VALUES (7, '信義區', '110', 0, 1);
-INSERT INTO `town` VALUES (8, '士林區', '111', 0, 1);
-INSERT INTO `town` VALUES (9, '北投區', '112', 0, 1);
-INSERT INTO `town` VALUES (10, '內湖區', '114', 0, 1);
-INSERT INTO `town` VALUES (11, '南港區', '115', 0, 1);
-INSERT INTO `town` VALUES (12, '文山區', '116', 0, 1);
-INSERT INTO `town` VALUES (13, '仁愛區', '200', 0, 2);
-INSERT INTO `town` VALUES (14, '信義區', '201', 0, 2);
-INSERT INTO `town` VALUES (15, '中正區', '202', 0, 2);
-INSERT INTO `town` VALUES (16, '中山區', '203', 0, 2);
-INSERT INTO `town` VALUES (17, '安樂區', '204', 0, 2);
-INSERT INTO `town` VALUES (18, '暖暖區', '205', 0, 2);
-INSERT INTO `town` VALUES (19, '七堵區', '206', 0, 2);
-INSERT INTO `town` VALUES (20, '萬里區', '207', 0, 3);
-INSERT INTO `town` VALUES (21, '金山區', '208', 0, 3);
-INSERT INTO `town` VALUES (22, '板橋區', '220', 0, 3);
-INSERT INTO `town` VALUES (23, '汐止區', '221', 0, 3);
-INSERT INTO `town` VALUES (24, '深坑區', '222', 0, 3);
-INSERT INTO `town` VALUES (25, '石碇區', '223', 0, 3);
-INSERT INTO `town` VALUES (26, '瑞芳區', '224', 0, 3);
-INSERT INTO `town` VALUES (27, '平溪區', '226', 0, 3);
-INSERT INTO `town` VALUES (28, '雙溪區', '227', 0, 3);
-INSERT INTO `town` VALUES (29, '貢寮區', '228', 0, 3);
-INSERT INTO `town` VALUES (30, '新店區', '231', 0, 3);
-INSERT INTO `town` VALUES (31, '坪林區', '232', 0, 3);
-INSERT INTO `town` VALUES (32, '烏來區', '233', 0, 3);
-INSERT INTO `town` VALUES (33, '永和區', '234', 0, 3);
-INSERT INTO `town` VALUES (34, '中和區', '235', 0, 3);
-INSERT INTO `town` VALUES (35, '土城區', '236', 0, 3);
-INSERT INTO `town` VALUES (36, '三峽區', '237', 0, 3);
-INSERT INTO `town` VALUES (37, '樹林區', '238', 0, 3);
-INSERT INTO `town` VALUES (38, '鶯歌區', '239', 0, 3);
-INSERT INTO `town` VALUES (39, '三重區', '241', 0, 3);
-INSERT INTO `town` VALUES (40, '新莊區', '242', 0, 3);
-INSERT INTO `town` VALUES (41, '泰山區', '243', 0, 3);
-INSERT INTO `town` VALUES (42, '林口區', '244', 0, 3);
-INSERT INTO `town` VALUES (43, '蘆洲區', '247', 0, 3);
-INSERT INTO `town` VALUES (44, '五股區', '248', 0, 3);
-INSERT INTO `town` VALUES (45, '八里區', '249', 0, 3);
-INSERT INTO `town` VALUES (46, '淡水區', '251', 0, 3);
-INSERT INTO `town` VALUES (47, '三芝區', '252', 0, 3);
-INSERT INTO `town` VALUES (48, '石門區', '253', 0, 3);
-INSERT INTO `town` VALUES (49, '宜蘭市', '260', 0, 4);
-INSERT INTO `town` VALUES (50, '頭城鎮', '261', 0, 4);
-INSERT INTO `town` VALUES (51, '礁溪鄉', '262', 0, 4);
-INSERT INTO `town` VALUES (52, '壯圍鄉', '263', 0, 4);
-INSERT INTO `town` VALUES (53, '員山鄉', '264', 0, 4);
-INSERT INTO `town` VALUES (54, '羅東鎮', '265', 0, 4);
-INSERT INTO `town` VALUES (55, '三星鄉', '266', 0, 4);
-INSERT INTO `town` VALUES (56, '大同鄉', '267', 0, 4);
-INSERT INTO `town` VALUES (57, '五結鄉', '268', 0, 4);
-INSERT INTO `town` VALUES (58, '冬山鄉', '269', 0, 4);
-INSERT INTO `town` VALUES (59, '蘇澳鎮', '270', 0, 4);
-INSERT INTO `town` VALUES (60, '南澳鄉', '272', 0, 4);
-INSERT INTO `town` VALUES (61, '釣魚台列嶼', '290', 0, 4);
-INSERT INTO `town` VALUES (62, '新竹市(東區)', '300', 0, 5);
-INSERT INTO `town` VALUES (63, '竹北市', '302', 0, 6);
-INSERT INTO `town` VALUES (64, '湖口鄉', '303', 0, 6);
-INSERT INTO `town` VALUES (65, '新豐鄉', '304', 0, 6);
-INSERT INTO `town` VALUES (66, '新埔鎮', '305', 0, 6);
-INSERT INTO `town` VALUES (67, '關西鎮', '306', 0, 6);
-INSERT INTO `town` VALUES (68, '芎林鄉', '307', 0, 6);
-INSERT INTO `town` VALUES (69, '寶山鄉', '308', 0, 6);
-INSERT INTO `town` VALUES (70, '竹東鎮', '310', 0, 6);
-INSERT INTO `town` VALUES (71, '五峰鄉', '311', 0, 6);
-INSERT INTO `town` VALUES (72, '橫山鄉', '312', 0, 6);
-INSERT INTO `town` VALUES (73, '尖石鄉', '313', 0, 6);
-INSERT INTO `town` VALUES (74, '北埔鄉', '314', 0, 6);
-INSERT INTO `town` VALUES (75, '峨眉鄉', '315', 0, 6);
-INSERT INTO `town` VALUES (76, '中壢區', '320', 0, 7);
-INSERT INTO `town` VALUES (77, '平鎮區', '324', 0, 7);
-INSERT INTO `town` VALUES (78, '龍潭區', '325', 0, 7);
-INSERT INTO `town` VALUES (79, '楊梅區', '326', 0, 7);
-INSERT INTO `town` VALUES (80, '新屋區', '327', 0, 7);
-INSERT INTO `town` VALUES (81, '觀音區', '328', 0, 7);
-INSERT INTO `town` VALUES (82, '桃園區', '330', 0, 7);
-INSERT INTO `town` VALUES (83, '龜山區', '333', 0, 7);
-INSERT INTO `town` VALUES (84, '八德區', '334', 0, 7);
-INSERT INTO `town` VALUES (85, '大溪區', '335', 0, 7);
-INSERT INTO `town` VALUES (86, '復興區', '336', 0, 7);
-INSERT INTO `town` VALUES (87, '大園區', '337', 0, 7);
-INSERT INTO `town` VALUES (88, '蘆竹區', '338', 0, 7);
-INSERT INTO `town` VALUES (89, '竹南鎮', '350', 0, 8);
-INSERT INTO `town` VALUES (90, '頭份市', '351', 0, 8);
-INSERT INTO `town` VALUES (91, '三灣鄉', '352', 0, 8);
-INSERT INTO `town` VALUES (92, '南庄鄉', '353', 0, 8);
-INSERT INTO `town` VALUES (93, '獅潭鄉', '354', 0, 8);
-INSERT INTO `town` VALUES (94, '後龍鎮', '356', 0, 8);
-INSERT INTO `town` VALUES (95, '通霄鎮', '357', 0, 8);
-INSERT INTO `town` VALUES (96, '苑裡鎮', '358', 0, 8);
-INSERT INTO `town` VALUES (97, '苗栗市', '360', 0, 8);
-INSERT INTO `town` VALUES (98, '造橋鄉', '361', 0, 8);
-INSERT INTO `town` VALUES (99, '頭屋鄉', '362', 0, 8);
-INSERT INTO `town` VALUES (100, '公館鄉', '363', 0, 8);
-INSERT INTO `town` VALUES (101, '大湖鄉', '364', 0, 8);
-INSERT INTO `town` VALUES (102, '泰安鄉', '365', 0, 8);
-INSERT INTO `town` VALUES (103, '銅鑼鄉', '366', 0, 8);
-INSERT INTO `town` VALUES (104, '三義鄉', '367', 0, 8);
-INSERT INTO `town` VALUES (105, '西湖鄉', '368', 0, 8);
-INSERT INTO `town` VALUES (106, '卓蘭鎮', '369', 0, 8);
-INSERT INTO `town` VALUES (107, '中區', '400', 0, 9);
-INSERT INTO `town` VALUES (108, '東區', '401', 0, 9);
-INSERT INTO `town` VALUES (109, '南區', '402', 0, 9);
-INSERT INTO `town` VALUES (110, '西區', '403', 0, 9);
-INSERT INTO `town` VALUES (111, '北區', '404', 0, 9);
-INSERT INTO `town` VALUES (112, '北屯區', '406', 0, 9);
-INSERT INTO `town` VALUES (113, '西屯區', '407', 0, 9);
-INSERT INTO `town` VALUES (114, '南屯區', '408', 0, 9);
-INSERT INTO `town` VALUES (115, '太平區', '411', 0, 9);
-INSERT INTO `town` VALUES (116, '大里區', '412', 0, 9);
-INSERT INTO `town` VALUES (117, '霧峰區', '413', 0, 9);
-INSERT INTO `town` VALUES (118, '烏日區', '414', 0, 9);
-INSERT INTO `town` VALUES (119, '豐原區', '420', 0, 9);
-INSERT INTO `town` VALUES (120, '后里區', '421', 0, 9);
-INSERT INTO `town` VALUES (121, '石岡區', '422', 0, 9);
-INSERT INTO `town` VALUES (122, '東勢區', '423', 0, 9);
-INSERT INTO `town` VALUES (123, '和平區', '424', 0, 9);
-INSERT INTO `town` VALUES (124, '新社區', '426', 0, 9);
-INSERT INTO `town` VALUES (125, '潭子區', '427', 0, 9);
-INSERT INTO `town` VALUES (126, '大雅區', '428', 0, 9);
-INSERT INTO `town` VALUES (127, '神岡區', '429', 0, 9);
-INSERT INTO `town` VALUES (128, '大肚區', '432', 0, 9);
-INSERT INTO `town` VALUES (129, '沙鹿區', '433', 0, 9);
-INSERT INTO `town` VALUES (130, '龍井區', '434', 0, 9);
-INSERT INTO `town` VALUES (131, '梧棲區', '435', 0, 9);
-INSERT INTO `town` VALUES (132, '清水區', '436', 0, 9);
-INSERT INTO `town` VALUES (133, '大甲區', '437', 0, 9);
-INSERT INTO `town` VALUES (134, '外埔區', '438', 0, 9);
-INSERT INTO `town` VALUES (135, '大安區', '439', 0, 9);
-INSERT INTO `town` VALUES (136, '彰化市', '500', 0, 10);
-INSERT INTO `town` VALUES (137, '芬園鄉', '502', 0, 10);
-INSERT INTO `town` VALUES (138, '花壇鄉', '503', 0, 10);
-INSERT INTO `town` VALUES (139, '秀水鄉', '504', 0, 10);
-INSERT INTO `town` VALUES (140, '鹿港鎮', '505', 0, 10);
-INSERT INTO `town` VALUES (141, '福興鄉', '506', 0, 10);
-INSERT INTO `town` VALUES (142, '線西鄉', '507', 0, 10);
-INSERT INTO `town` VALUES (143, '和美鎮', '508', 0, 10);
-INSERT INTO `town` VALUES (144, '伸港鄉', '509', 0, 10);
-INSERT INTO `town` VALUES (145, '員林市', '510', 0, 10);
-INSERT INTO `town` VALUES (146, '社頭鄉', '511', 0, 10);
-INSERT INTO `town` VALUES (147, '永靖鄉', '512', 0, 10);
-INSERT INTO `town` VALUES (148, '埔心鄉', '513', 0, 10);
-INSERT INTO `town` VALUES (149, '溪湖鎮', '514', 0, 10);
-INSERT INTO `town` VALUES (150, '大村鄉', '515', 0, 10);
-INSERT INTO `town` VALUES (151, '埔鹽鄉', '516', 0, 10);
-INSERT INTO `town` VALUES (152, '田中鎮', '520', 0, 10);
-INSERT INTO `town` VALUES (153, '北斗鎮', '521', 0, 10);
-INSERT INTO `town` VALUES (154, '田尾鄉', '522', 0, 10);
-INSERT INTO `town` VALUES (155, '埤頭鄉', '523', 0, 10);
-INSERT INTO `town` VALUES (156, '溪州鄉', '524', 0, 10);
-INSERT INTO `town` VALUES (157, '竹塘鄉', '525', 0, 10);
-INSERT INTO `town` VALUES (158, '二林鎮', '526', 0, 10);
-INSERT INTO `town` VALUES (159, '大城鄉', '527', 0, 10);
-INSERT INTO `town` VALUES (160, '芳苑鄉', '528', 0, 10);
-INSERT INTO `town` VALUES (161, '二水鄉', '530', 0, 10);
-INSERT INTO `town` VALUES (162, '南投市', '540', 0, 11);
-INSERT INTO `town` VALUES (163, '中寮鄉', '541', 0, 11);
-INSERT INTO `town` VALUES (164, '草屯鎮', '542', 0, 11);
-INSERT INTO `town` VALUES (165, '國姓鄉', '544', 0, 11);
-INSERT INTO `town` VALUES (166, '埔里鎮', '545', 0, 11);
-INSERT INTO `town` VALUES (167, '仁愛鄉', '546', 0, 11);
-INSERT INTO `town` VALUES (168, '名間鄉', '551', 0, 11);
-INSERT INTO `town` VALUES (169, '集集鎮', '552', 0, 11);
-INSERT INTO `town` VALUES (170, '水里鄉', '553', 0, 11);
-INSERT INTO `town` VALUES (171, '魚池鄉', '555', 0, 11);
-INSERT INTO `town` VALUES (172, '信義鄉', '556', 0, 11);
-INSERT INTO `town` VALUES (173, '竹山鎮', '557', 0, 11);
-INSERT INTO `town` VALUES (174, '鹿谷鄉', '558', 0, 11);
-INSERT INTO `town` VALUES (175, '斗南鎮', '630', 0, 12);
-INSERT INTO `town` VALUES (176, '大埤鄉', '631', 0, 12);
-INSERT INTO `town` VALUES (177, '虎尾鎮', '632', 0, 12);
-INSERT INTO `town` VALUES (178, '土庫鎮', '633', 0, 12);
-INSERT INTO `town` VALUES (179, '褒忠鄉', '634', 0, 12);
-INSERT INTO `town` VALUES (180, '東勢鄉', '635', 0, 12);
-INSERT INTO `town` VALUES (181, '臺西鄉', '636', 0, 12);
-INSERT INTO `town` VALUES (182, '崙背鄉', '637', 0, 12);
-INSERT INTO `town` VALUES (183, '麥寮鄉', '638', 0, 12);
-INSERT INTO `town` VALUES (184, '斗六市', '640', 0, 12);
-INSERT INTO `town` VALUES (185, '林內鄉', '643', 0, 12);
-INSERT INTO `town` VALUES (186, '古坑鄉', '646', 0, 12);
-INSERT INTO `town` VALUES (187, '莿桐鄉', '647', 0, 12);
-INSERT INTO `town` VALUES (188, '西螺鎮', '648', 0, 12);
-INSERT INTO `town` VALUES (189, '二崙鄉', '649', 0, 12);
-INSERT INTO `town` VALUES (190, '北港鎮', '651', 0, 12);
-INSERT INTO `town` VALUES (191, '水林鄉', '652', 0, 12);
-INSERT INTO `town` VALUES (192, '口湖鄉', '653', 0, 12);
-INSERT INTO `town` VALUES (193, '四湖鄉', '654', 0, 12);
-INSERT INTO `town` VALUES (194, '元長鄉', '655', 0, 12);
-INSERT INTO `town` VALUES (195, '嘉義市(東區)', '600', 0, 13);
-INSERT INTO `town` VALUES (196, '番路鄉', '602', 0, 14);
-INSERT INTO `town` VALUES (197, '梅山鄉', '603', 0, 14);
-INSERT INTO `town` VALUES (198, '竹崎鄉', '604', 0, 14);
-INSERT INTO `town` VALUES (199, '阿里山鄉', '605', 0, 14);
-INSERT INTO `town` VALUES (200, '中埔鄉', '606', 0, 14);
-INSERT INTO `town` VALUES (201, '大埔鄉', '607', 0, 14);
-INSERT INTO `town` VALUES (202, '水上鄉', '608', 0, 14);
-INSERT INTO `town` VALUES (203, '鹿草鄉', '611', 0, 14);
-INSERT INTO `town` VALUES (204, '太保市', '612', 0, 14);
-INSERT INTO `town` VALUES (205, '朴子市', '613', 0, 14);
-INSERT INTO `town` VALUES (206, '東石鄉', '614', 0, 14);
-INSERT INTO `town` VALUES (207, '六腳鄉', '615', 0, 14);
-INSERT INTO `town` VALUES (208, '新港鄉', '616', 0, 14);
-INSERT INTO `town` VALUES (209, '民雄鄉', '621', 0, 14);
-INSERT INTO `town` VALUES (210, '大林鎮', '622', 0, 14);
-INSERT INTO `town` VALUES (211, '溪口鄉', '623', 0, 14);
-INSERT INTO `town` VALUES (212, '義竹鄉', '624', 0, 14);
-INSERT INTO `town` VALUES (213, '布袋鎮', '625', 0, 14);
-INSERT INTO `town` VALUES (214, '中西區', '700', 0, 15);
-INSERT INTO `town` VALUES (215, '東區', '701', 0, 15);
-INSERT INTO `town` VALUES (216, '南區', '702', 0, 15);
-INSERT INTO `town` VALUES (217, '北區', '704', 0, 15);
-INSERT INTO `town` VALUES (218, '安平區', '708', 0, 15);
-INSERT INTO `town` VALUES (219, '安南區', '709', 0, 15);
-INSERT INTO `town` VALUES (220, '永康區', '710', 0, 15);
-INSERT INTO `town` VALUES (221, '歸仁區', '711', 0, 15);
-INSERT INTO `town` VALUES (222, '新化區', '712', 0, 15);
-INSERT INTO `town` VALUES (223, '左鎮區', '713', 0, 15);
-INSERT INTO `town` VALUES (224, '玉井區', '714', 0, 15);
-INSERT INTO `town` VALUES (225, '楠西區', '715', 0, 15);
-INSERT INTO `town` VALUES (226, '南化區', '716', 0, 15);
-INSERT INTO `town` VALUES (227, '仁德區', '717', 0, 15);
-INSERT INTO `town` VALUES (228, '關廟區', '718', 0, 15);
-INSERT INTO `town` VALUES (229, '龍崎區', '719', 0, 15);
-INSERT INTO `town` VALUES (230, '官田區', '720', 0, 15);
-INSERT INTO `town` VALUES (231, '麻豆區', '721', 0, 15);
-INSERT INTO `town` VALUES (232, '佳里區', '722', 0, 15);
-INSERT INTO `town` VALUES (233, '西港區', '723', 0, 15);
-INSERT INTO `town` VALUES (234, '七股區', '724', 0, 15);
-INSERT INTO `town` VALUES (235, '將軍區', '725', 0, 15);
-INSERT INTO `town` VALUES (236, '學甲區', '726', 0, 15);
-INSERT INTO `town` VALUES (237, '北門區', '727', 0, 15);
-INSERT INTO `town` VALUES (238, '新營區', '730', 0, 15);
-INSERT INTO `town` VALUES (239, '後壁區', '731', 0, 15);
-INSERT INTO `town` VALUES (240, '白河區', '732', 0, 15);
-INSERT INTO `town` VALUES (241, '東山區', '733', 0, 15);
-INSERT INTO `town` VALUES (242, '六甲區', '734', 0, 15);
-INSERT INTO `town` VALUES (243, '下營區', '735', 0, 15);
-INSERT INTO `town` VALUES (244, '柳營區', '736', 0, 15);
-INSERT INTO `town` VALUES (245, '鹽水區', '737', 0, 15);
-INSERT INTO `town` VALUES (246, '善化區', '741', 0, 15);
-INSERT INTO `town` VALUES (247, '大內區', '742', 0, 15);
-INSERT INTO `town` VALUES (248, '山上區', '743', 0, 15);
-INSERT INTO `town` VALUES (249, '新市區', '744', 0, 15);
-INSERT INTO `town` VALUES (250, '安定區', '745', 0, 15);
-INSERT INTO `town` VALUES (251, '新興區', '800', 0, 16);
-INSERT INTO `town` VALUES (252, '前金區', '801', 0, 16);
-INSERT INTO `town` VALUES (253, '苓雅區', '802', 0, 16);
-INSERT INTO `town` VALUES (254, '鹽埕區', '803', 0, 16);
-INSERT INTO `town` VALUES (255, '鼓山區', '804', 0, 16);
-INSERT INTO `town` VALUES (256, '旗津區', '805', 0, 16);
-INSERT INTO `town` VALUES (257, '前鎮區', '806', 0, 16);
-INSERT INTO `town` VALUES (258, '三民區', '807', 0, 16);
-INSERT INTO `town` VALUES (259, '楠梓區', '811', 0, 16);
-INSERT INTO `town` VALUES (260, '小港區', '812', 0, 16);
-INSERT INTO `town` VALUES (261, '左營區', '813', 0, 16);
-INSERT INTO `town` VALUES (262, '仁武區', '814', 0, 16);
-INSERT INTO `town` VALUES (263, '大社區', '815', 0, 16);
-INSERT INTO `town` VALUES (264, '岡山區', '820', 0, 16);
-INSERT INTO `town` VALUES (265, '路竹區', '821', 0, 16);
-INSERT INTO `town` VALUES (266, '阿蓮區', '822', 0, 16);
-INSERT INTO `town` VALUES (267, '田寮區', '823', 0, 16);
-INSERT INTO `town` VALUES (268, '燕巢區', '824', 0, 16);
-INSERT INTO `town` VALUES (269, '橋頭區', '825', 0, 16);
-INSERT INTO `town` VALUES (270, '梓官區', '826', 0, 16);
-INSERT INTO `town` VALUES (271, '彌陀區', '827', 0, 16);
-INSERT INTO `town` VALUES (272, '永安區', '828', 0, 16);
-INSERT INTO `town` VALUES (273, '湖內區', '829', 0, 16);
-INSERT INTO `town` VALUES (274, '鳳山區', '830', 0, 16);
-INSERT INTO `town` VALUES (275, '大寮區', '831', 0, 16);
-INSERT INTO `town` VALUES (276, '林園區', '832', 0, 16);
-INSERT INTO `town` VALUES (277, '鳥松區', '833', 0, 16);
-INSERT INTO `town` VALUES (278, '大樹區', '840', 0, 16);
-INSERT INTO `town` VALUES (279, '旗山區', '842', 0, 16);
-INSERT INTO `town` VALUES (280, '美濃區', '843', 0, 16);
-INSERT INTO `town` VALUES (281, '六龜區', '844', 0, 16);
-INSERT INTO `town` VALUES (282, '內門區', '845', 0, 16);
-INSERT INTO `town` VALUES (283, '杉林區', '846', 0, 16);
-INSERT INTO `town` VALUES (284, '甲仙區', '847', 0, 16);
-INSERT INTO `town` VALUES (285, '桃源區', '848', 0, 16);
-INSERT INTO `town` VALUES (286, '那瑪夏區', '849', 0, 16);
-INSERT INTO `town` VALUES (287, '茂林區', '851', 0, 16);
-INSERT INTO `town` VALUES (288, '茄萣區', '852', 0, 16);
-INSERT INTO `town` VALUES (289, '東沙', '817', 0, 17);
-INSERT INTO `town` VALUES (290, '南沙', '819', 0, 17);
-INSERT INTO `town` VALUES (291, '馬公市', '880', 0, 18);
-INSERT INTO `town` VALUES (292, '西嶼鄉', '881', 0, 18);
-INSERT INTO `town` VALUES (293, '望安鄉', '882', 0, 18);
-INSERT INTO `town` VALUES (294, '七美鄉', '883', 0, 18);
-INSERT INTO `town` VALUES (295, '白沙鄉', '884', 0, 18);
-INSERT INTO `town` VALUES (296, '湖西鄉', '885', 0, 18);
-INSERT INTO `town` VALUES (297, '屏東市', '900', 0, 19);
-INSERT INTO `town` VALUES (298, '三地門鄉', '901', 0, 19);
-INSERT INTO `town` VALUES (299, '霧臺鄉', '902', 0, 19);
-INSERT INTO `town` VALUES (300, '瑪家鄉', '903', 0, 19);
-INSERT INTO `town` VALUES (301, '九如鄉', '904', 0, 19);
-INSERT INTO `town` VALUES (302, '里港鄉', '905', 0, 19);
-INSERT INTO `town` VALUES (303, '高樹鄉', '906', 0, 19);
-INSERT INTO `town` VALUES (304, '鹽埔鄉', '907', 0, 19);
-INSERT INTO `town` VALUES (305, '長治鄉', '908', 0, 19);
-INSERT INTO `town` VALUES (306, '麟洛鄉', '909', 0, 19);
-INSERT INTO `town` VALUES (307, '竹田鄉', '911', 0, 19);
-INSERT INTO `town` VALUES (308, '內埔鄉', '912', 0, 19);
-INSERT INTO `town` VALUES (309, '萬丹鄉', '913', 0, 19);
-INSERT INTO `town` VALUES (310, '潮州鎮', '920', 0, 19);
-INSERT INTO `town` VALUES (311, '泰武鄉', '921', 0, 19);
-INSERT INTO `town` VALUES (312, '來義鄉', '922', 0, 19);
-INSERT INTO `town` VALUES (313, '萬巒鄉', '923', 0, 19);
-INSERT INTO `town` VALUES (314, '崁頂鄉', '924', 0, 19);
-INSERT INTO `town` VALUES (315, '新埤鄉', '925', 0, 19);
-INSERT INTO `town` VALUES (316, '南州鄉', '926', 0, 19);
-INSERT INTO `town` VALUES (317, '林邊鄉', '927', 0, 19);
-INSERT INTO `town` VALUES (318, '東港鄉', '928', 0, 19);
-INSERT INTO `town` VALUES (319, '琉球鄉', '929', 0, 19);
-INSERT INTO `town` VALUES (320, '佳冬鄉', '931', 0, 19);
-INSERT INTO `town` VALUES (321, '新園鄉', '932', 0, 19);
-INSERT INTO `town` VALUES (322, '枋寮鄉', '940', 0, 19);
-INSERT INTO `town` VALUES (323, '枋山鄉', '941', 0, 19);
-INSERT INTO `town` VALUES (324, '春日鄉', '942', 0, 19);
-INSERT INTO `town` VALUES (325, '獅子鄉', '943', 0, 19);
-INSERT INTO `town` VALUES (326, '車城鄉', '944', 0, 19);
-INSERT INTO `town` VALUES (327, '牡丹鄉', '945', 0, 19);
-INSERT INTO `town` VALUES (328, '恆春鎮', '946', 0, 19);
-INSERT INTO `town` VALUES (329, '滿州鄉', '947', 0, 19);
-INSERT INTO `town` VALUES (330, '臺東市', '950', 0, 20);
-INSERT INTO `town` VALUES (331, '綠島鄉', '951', 0, 20);
-INSERT INTO `town` VALUES (332, '蘭嶼鄉', '952', 0, 20);
-INSERT INTO `town` VALUES (333, '延平鄉', '953', 0, 20);
-INSERT INTO `town` VALUES (334, '卑南鄉', '954', 0, 20);
-INSERT INTO `town` VALUES (335, '鹿野鄉', '955', 0, 20);
-INSERT INTO `town` VALUES (336, '關山鎮', '956', 0, 20);
-INSERT INTO `town` VALUES (337, '海端鄉', '957', 0, 20);
-INSERT INTO `town` VALUES (338, '池上鄉', '958', 0, 20);
-INSERT INTO `town` VALUES (339, '東河鄉', '959', 0, 20);
-INSERT INTO `town` VALUES (340, '成功鎮', '961', 0, 20);
-INSERT INTO `town` VALUES (341, '長濱鄉', '962', 0, 20);
-INSERT INTO `town` VALUES (342, '太麻里鄉', '963', 0, 20);
-INSERT INTO `town` VALUES (343, '金峰鄉', '964', 0, 20);
-INSERT INTO `town` VALUES (344, '大武鄉', '965', 0, 20);
-INSERT INTO `town` VALUES (345, '達仁鄉', '966', 0, 20);
-INSERT INTO `town` VALUES (346, '花蓮市', '970', 0, 21);
-INSERT INTO `town` VALUES (347, '新城鄉', '971', 0, 21);
-INSERT INTO `town` VALUES (348, '秀林鄉', '972', 0, 21);
-INSERT INTO `town` VALUES (349, '吉安鄉', '973', 0, 21);
-INSERT INTO `town` VALUES (350, '壽豐鄉', '974', 0, 21);
-INSERT INTO `town` VALUES (351, '鳳林鎮', '975', 0, 21);
-INSERT INTO `town` VALUES (352, '光復鄉', '976', 0, 21);
-INSERT INTO `town` VALUES (353, '豐濱鄉', '977', 0, 21);
-INSERT INTO `town` VALUES (354, '瑞穗鄉', '978', 0, 21);
-INSERT INTO `town` VALUES (355, '萬榮鄉', '979', 0, 21);
-INSERT INTO `town` VALUES (356, '玉里鎮', '981', 0, 21);
-INSERT INTO `town` VALUES (357, '卓溪鄉', '982', 0, 21);
-INSERT INTO `town` VALUES (358, '富里鄉', '983', 0, 21);
-INSERT INTO `town` VALUES (359, '金沙鎮', '890', 0, 22);
-INSERT INTO `town` VALUES (360, '金湖鎮', '891', 0, 22);
-INSERT INTO `town` VALUES (361, '金寧鄉', '892', 0, 22);
-INSERT INTO `town` VALUES (362, '金城鎮', '893', 0, 22);
-INSERT INTO `town` VALUES (363, '烈嶼鄉', '894', 0, 22);
-INSERT INTO `town` VALUES (364, '烏坵鄉', '896', 0, 22);
-INSERT INTO `town` VALUES (365, '南竿鄉', '209', 0, 23);
-INSERT INTO `town` VALUES (366, '北竿鄉', '210', 0, 23);
-INSERT INTO `town` VALUES (367, '莒光鄉', '211', 0, 23);
-INSERT INTO `town` VALUES (368, '東引鄉', '212', 0, 23);
-INSERT INTO `town` VALUES (371, '新竹市(北區)', '300', 0, 5);
-INSERT INTO `town` VALUES (372, '新竹市(香山區)', '300', 0, 5);
-INSERT INTO `town` VALUES (373, '嘉義市(西區)', '600', 0, 13);
+INSERT INTO `product_img` (`img_id`, `p_id`, `img_file`, `sort`, `create_date`) VALUES
+(1, 1, '85_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:35'),
+(2, 1, '17115185991.jfif', 2, '2024-08-14 13:46:35'),
+(3, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_02.png', 6, '2024-08-14 13:46:35'),
+(4, 1, 'product_chocolate_peru_chuncho_dark_chocolate_05.png', 7, '2024-08-14 13:46:35'),
+(5, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_03.png', 9, '2024-08-14 13:46:35'),
+(6, 1, 'product_chocolate_peru_chuncho_dark_chocolate_85_01.png', 10, '2024-08-14 13:46:35'),
+(7, 2, '70_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:35'),
+(8, 2, '17115963351.jfif', 2, '2024-08-14 13:46:35'),
+(9, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_02.png', 6, '2024-08-14 13:46:35'),
+(10, 2, 'product_chocolate_peru_chuncho_dark_chocolate_05.png', 7, '2024-08-14 13:46:35'),
+(11, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_03.png', 9, '2024-08-14 13:46:35'),
+(12, 2, 'product_chocolate_peru_chuncho_dark_chocolate_70_01.png', 10, '2024-08-14 13:46:35'),
+(13, 3, '75_Exclusive_ORIGIN_No.1_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:35'),
+(14, 3, '16678002221.png', 2, '2024-08-14 13:46:35'),
+(15, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_02.png', 6, '2024-08-14 13:46:35'),
+(16, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_03.png', 9, '2024-08-14 13:46:35'),
+(17, 3, 'product_chocolate_exclusive_origin_no1_dark_chocolate_04.png', 10, '2024-08-14 13:46:35'),
+(18, 4, '100_Peru_Chuncho_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:35'),
+(19, 4, '16865548171.png', 2, '2024-08-14 13:46:35'),
+(20, 4, 'product_chocolate_peru_chuncho_dark_chocolate_100_01.png', 6, '2024-08-14 13:46:35'),
+(21, 4, 'product_chocolate_peru_chuncho_dark_chocolate_05.png', 7, '2024-08-14 13:46:35'),
+(22, 4, 'product_chocolate_peru_chuncho_dark_chocolate_100_02.png', 10, '2024-08-14 13:46:35'),
+(23, 5, '85_Ecuador_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:35'),
+(24, 5, '16865544791.png', 2, '2024-08-14 13:46:35'),
+(25, 5, 'product_chocolate_ecuador_dark_chocolate_85_01.png', 6, '2024-08-14 13:46:35'),
+(26, 5, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 7, '2024-08-14 13:46:35'),
+(27, 5, 'product_chocolate_ecuador_dark_chocolate_85_02.png', 10, '2024-08-14 13:46:35'),
+(28, 6, '70_Ecuador_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:35'),
+(29, 6, '16865543261.png', 2, '2024-08-14 13:46:35'),
+(30, 6, 'product_chocolate_ecuador_dark_chocolate_70_02.jpg', 6, '2024-08-14 13:46:35'),
+(31, 6, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 7, '2024-08-14 13:46:35'),
+(32, 6, 'product_chocolate_ecuador_dark_chocolate_70_01.png', 10, '2024-08-14 13:46:35'),
+(33, 7, '70_Dominican_Dark_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(34, 7, '16678050541.png', 2, '2024-08-14 13:46:36'),
+(35, 7, 'product_chocolate_dominican_dark_chocolate_02.png', 6, '2024-08-14 13:46:36'),
+(36, 7, 'product_chocolate_dominican_dark_chocolate_03.png', 10, '2024-08-14 13:46:36'),
+(37, 8, '70_Damask_Rose_Dark_Chocolate.jpg', 1, '2024-08-14 13:46:36'),
+(38, 8, '17231036671.png', 2, '2024-08-14 13:46:36'),
+(39, 8, '20240808_111836.png', 6, '2024-08-14 13:46:36'),
+(40, 9, '70_Kampot_Red_Peppercorns_Flavored_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(41, 9, '17116926751.jfif', 2, '2024-08-14 13:46:36'),
+(42, 9, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_02.png', 6, '2024-08-14 13:46:36'),
+(43, 9, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_01.png', 7, '2024-08-14 13:46:36'),
+(44, 9, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_03.png', 9, '2024-08-14 13:46:36'),
+(45, 9, 'product_chocolate_kampot_red_peppercorns_flavored_chocolate_04.png', 10, '2024-08-14 13:46:36'),
+(46, 10, '70_Taiwan_Ruby_Tea_Flavored_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(47, 10, '16678962791.png', 2, '2024-08-14 13:46:36'),
+(48, 10, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_02.png', 6, '2024-08-14 13:46:36'),
+(49, 10, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_03.png', 7, '2024-08-14 13:46:36'),
+(50, 10, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_04.png', 9, '2024-08-14 13:46:36'),
+(51, 10, 'product_chocolate_taiwan_ruby_tea_flavored_chocolate_05.png', 10, '2024-08-14 13:46:36'),
+(52, 11, '70_Taiwan_Honey_Flavored_Red_Oolong01.jpg', 1, '2024-08-14 13:46:36'),
+(53, 11, '16678961871.png', 2, '2024-08-14 13:46:36'),
+(54, 11, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_02.png', 3, '2024-08-14 13:46:36'),
+(55, 11, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_04.png', 4, '2024-08-14 13:46:36'),
+(56, 11, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_03.png', 9, '2024-08-14 13:46:36'),
+(57, 11, 'product_chocolate_taiwan_honey_flavored_red_oolong_flavored_chocolate_05.png', 10, '2024-08-14 13:46:36'),
+(58, 12, '70_Fleur_de_sel_Flavored_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(59, 12, '17126320451.jfif', 2, '2024-08-14 13:46:36'),
+(60, 12, 'product_chocolate_fleur_de_sel_flavored_chocolate_02.png', 6, '2024-08-14 13:46:36'),
+(61, 12, 'product_chocolate_fleur_de_sel_flavored_chocolate_01.png', 7, '2024-08-14 13:46:36'),
+(62, 12, 'product_chocolate_fleur_de_sel_flavored_chocolate_03.png', 10, '2024-08-14 13:46:36'),
+(63, 13, '70_Taitung_Roselle_Flavored_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(64, 13, '16678962041.png', 2, '2024-08-14 13:46:36'),
+(65, 13, 'product_chocolate_taitung_roselle_flavored_chocolate_02.png', 6, '2024-08-14 13:46:36'),
+(66, 13, 'product_chocolate_taitung_roselle_flavored_chocolate_03.png', 7, '2024-08-14 13:46:36'),
+(67, 13, 'product_chocolate_taitung_roselle_flavored_chocolate_04.png', 10, '2024-08-14 13:46:36'),
+(68, 14, '70_Light_Roasted_Coffee_Lavored_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(69, 14, '16678972291.png', 2, '2024-08-14 13:46:36'),
+(70, 14, 'product_chocolate_light_roasted_coffee_flavored_chocolate_02.png', 6, '2024-08-14 13:46:36'),
+(71, 14, 'product_chocolate_light_roasted_coffee_flavored_chocolate_03.png', 10, '2024-08-14 13:46:36'),
+(72, 15, '70_Deep_Roasted_Coffee_Flavored_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(73, 15, '16678972111.png', 2, '2024-08-14 13:46:36'),
+(74, 15, 'product_chocolate_giftbox_deep_roasted_coffee.png', 6, '2024-08-14 13:46:36'),
+(75, 15, 'product_chocolate_deep_roasted_coffee_flavored_chocolate_03.png', 7, '2024-08-14 13:46:36'),
+(76, 15, 'product_chocolate_deep_roasted_coffee_flavored_chocolate_02.png', 10, '2024-08-14 13:46:36'),
+(77, 16, '50_Peru_Chuncho_Milk_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(78, 16, '17115979601.jfif', 2, '2024-08-14 13:46:36'),
+(79, 16, 'product_chocolate_peru_chuncho_milk_chocolate_01.png', 6, '2024-08-14 13:46:36'),
+(80, 16, 'product_chocolate_peru_chuncho_dark_chocolate_05.png', 7, '2024-08-14 13:46:36'),
+(81, 16, 'product_chocolate_peru_chuncho_milk_chocolate_02.png', 9, '2024-08-14 13:46:36'),
+(82, 16, 'product_chocolate_peru_chuncho_milk_chocolate_03.png', 10, '2024-08-14 13:46:36'),
+(83, 17, '50_Taiwan_Longan_Honey_Flavored_Oolong01.jpg', 1, '2024-08-14 13:46:36'),
+(84, 17, '17125676121.jpg', 2, '2024-08-14 13:46:36'),
+(85, 17, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_50_02.png', 6, '2024-08-14 13:46:36'),
+(86, 17, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_04.png', 7, '2024-08-14 13:46:36'),
+(87, 17, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_06.png', 9, '2024-08-14 13:46:36'),
+(88, 17, 'product_chocolate_taiwan_longan_honey_flavored_oolong_milk_chocolate_50_03.png', 10, '2024-08-14 13:46:36'),
+(89, 18, '60_Ecuador_Milk_Chocolate01.jpg', 1, '2024-08-14 13:46:36'),
+(90, 18, '16865540541.png', 2, '2024-08-14 13:46:36'),
+(91, 18, 'product_chocolate_ecuador_dark_chocolate_85_01.png', 6, '2024-08-14 13:46:36'),
+(92, 18, 'product_chocolate_ecuador_dark_chocolate_03.jpg', 7, '2024-08-14 13:46:36'),
+(93, 18, 'product_chocolate_ecuador_milk_chocolate_01.png', 9, '2024-08-14 13:46:36'),
+(94, 19, '1698216040_da9a0f0c059b7651cf33.avif', 1, '2024-08-14 13:46:36'),
+(95, 19, '1698218611_4739c23a153fcb015f3f.avif', 2, '2024-08-14 13:46:36'),
+(96, 19, 'content_a8ac7c50-f62e-44a3-90ad-7bc4bd1cfdc9.avif', 10, '2024-08-14 13:46:36'),
+(97, 20, '1698139549_7ad796c132022d18ef4e.avif', 1, '2024-08-14 13:46:36'),
+(98, 20, '1672038476_91453e7098a5433cc48e.avif', 2, '2024-08-14 13:46:36'),
+(99, 20, '1672038476_18abfcdb2cf39ccfd499.avif', 3, '2024-08-14 13:46:36'),
+(100, 20, 'content_a8ac7c50-f62e-44a3-90ad-7bc4bd1cfdc9.avif', 10, '2024-08-14 13:46:36'),
+(101, 21, '1698128312_d52150aebd1325d1f476.avif', 1, '2024-08-14 13:46:36'),
+(102, 21, '1675316090_8e27951942e5dfbadd06.avif', 2, '2024-08-14 13:46:36'),
+(103, 21, '1669617121_0960c0d157d675a79d2a.avif', 3, '2024-08-14 13:46:36'),
+(104, 21, 'content_a8ac7c50-f62e-44a3-90ad-7bc4bd1cfdc9.avif', 10, '2024-08-14 13:46:36'),
+(105, 22, '1698139567_e9578ef06ba64870c4da.avif', 1, '2024-08-14 13:46:36'),
+(106, 22, '1669974459_d8690b0a1c99f9bbac42.avif', 2, '2024-08-14 13:46:36'),
+(107, 22, '1657779903_59bb0776d391fbd39cec.avif', 3, '2024-08-14 13:46:36'),
+(108, 22, 'content_a8ac7c50-f62e-44a3-90ad-7bc4bd1cfdc9.avif', 10, '2024-08-14 13:46:36'),
+(109, 23, '1657619596_908512177d45a7cfaba3.avif', 1, '2024-08-14 13:46:36'),
+(110, 23, '1657619596_305288aca900ad22d5e3.avif', 2, '2024-08-14 13:46:36'),
+(111, 23, 'content_8cefe033-e23a-4ea4-9ef7-4bfd6c1ad02c.avif', 10, '2024-08-14 13:46:36'),
+(112, 24, '1657613585_673bdda59d11a7385de5.avif', 1, '2024-08-14 13:46:36'),
+(113, 24, '1657619466_534fd871c7e9498fb8b4.avif', 2, '2024-08-14 13:46:36'),
+(114, 24, 'content_a55cb465-aa22-491b-a756-97d41ddabfe0.avif', 9, '2024-08-14 13:46:36'),
+(115, 24, 'content_a2892fdc-a09f-4c1e-b409-139928ac208c.avif', 10, '2024-08-14 13:46:36'),
+(116, 25, '1657613575_a1ae2c0b305d201573f1.avif', 1, '2024-08-14 13:46:36'),
+(117, 25, '1657619388_947e4d5095d191eb3bb8.avif', 2, '2024-08-14 13:46:36'),
+(118, 25, 'content_0d928b71-5b2a-485e-92f2-16d9ac36af33.avif', 9, '2024-08-14 13:46:36'),
+(119, 25, 'content_3af9e6ff-28a0-4c09-b342-2047ddb99697.avif', 10, '2024-08-14 13:46:36'),
+(120, 26, '1657613261_27af5b8a43b683c7e4c2.avif', 1, '2024-08-14 13:46:36'),
+(121, 26, '1657619456_52a04b0187600f34b933.avif', 2, '2024-08-14 13:46:36'),
+(122, 26, '1657517278_729fae84bbce4995791e.avif', 3, '2024-08-14 13:46:36'),
+(123, 26, 'content_c358eeeb-4f81-4b14-a832-69b11a721395.avif', 9, '2024-08-14 13:46:36'),
+(124, 26, 'content_6bba28b6-ed89-44ec-987c-2ddf9613e780.avif', 10, '2024-08-14 13:46:36'),
+(125, 27, '1657681751_7aefa9ffa3fe00e16d6a.avif', 1, '2024-08-14 13:46:36'),
+(126, 27, '1657619411_c490e9d54c4bbc8a851b.avif', 2, '2024-08-14 13:46:36'),
+(127, 27, '1657510503_6f8cd4c7d9e73e3bc7f8.avif', 3, '2024-08-14 13:46:36'),
+(128, 27, 'content_b7a24b3a-4657-4ba9-9829-e902a6cf9d6b.avif', 9, '2024-08-14 13:46:36'),
+(129, 27, 'content_1e27dc5c-410e-4523-a72f-634914850f79.avif', 10, '2024-08-14 13:46:36'),
+(130, 28, '1699940734_3fc7b4fdcbe2d12f6668.avif', 1, '2024-08-14 13:46:36'),
+(131, 28, '1657613564_37f8fc5e1802b73d219a.avif', 2, '2024-08-14 13:46:36'),
+(132, 28, 'content_aabef4c4-1072-45aa-8744-9c04c7b83f18.avif', 6, '2024-08-14 13:46:36'),
+(133, 28, 'content_c06b95f4-1333-4bd0-9895-b960ef18479d.avif', 9, '2024-08-14 13:46:36'),
+(134, 28, 'content_182ae7f6-3388-4c98-b1d3-548beef701c3.avif', 10, '2024-08-14 13:46:36'),
+(135, 29, '1699939726_2600f3a35adf66f3611b.avif', 1, '2024-08-14 13:46:36'),
+(136, 29, '1657613278_aeec5498231c5f0e96aa.avif', 2, '2024-08-14 13:46:36'),
+(137, 29, '1657619433_4e086e66c07118d367d0.avif', 3, '2024-08-14 13:46:36'),
+(138, 29, 'content_1475a3b2-b2f6-4155-a044-057dc1558fa7.avif', 6, '2024-08-14 13:46:36'),
+(139, 29, 'content_009bb779-87a7-41e1-ac03-5d8cb92779e9.avif', 9, '2024-08-14 13:46:36'),
+(140, 29, 'content_a34617b3-b436-486d-8849-7681f75a332f.avif', 10, '2024-08-14 13:46:36'),
+(141, 30, '1657684228_e1fa5b597421d2bbfedf.avif', 1, '2024-08-14 13:46:36'),
+(142, 30, 'content_5289c1de-acc8-4ddf-b9fc-fbaa25632e36.avif', 10, '2024-08-14 13:46:36'),
+(143, 31, '1657684279_c7c939bfa084860e0f77.avif', 1, '2024-08-14 13:46:36'),
+(144, 31, 'content_5b84a516-2ede-4630-9c02-0d0e6704d6ad.avif', 10, '2024-08-14 13:46:36'),
+(145, 32, '1657094343_4bb9ce0c94f053ac2f39.avif', 1, '2024-08-14 13:46:36'),
+(146, 32, 'content_b73254c5-156e-4d93-8ea3-fd172a325000.avif', 10, '2024-08-14 13:46:36'),
+(147, 33, '1657094357_0bb60f87df45f9238480.avif', 1, '2024-08-14 13:46:36'),
+(148, 33, 'content_a5ec807c-bc6d-4a2b-af86-9324f8d93444.avif', 10, '2024-08-14 13:46:36'),
+(149, 34, '1705978361_0be5279b60146cdd7852.avif', 1, '2024-08-14 13:46:36'),
+(150, 34, 'content_b73254c5-156e-4d93-8ea3-fd172a325000.avif', 10, '2024-08-14 13:46:36'),
+(151, 35, '1711531886_27320679e2f19250f3bd.avif', 1, '2024-08-14 13:46:36'),
+(152, 35, 'content_c407f7c8-8f43-4c21-8232-23e7fb13a7e2.avif', 10, '2024-08-14 13:46:36'),
+(153, 36, '1672125128_c2ae55776d4921aa7a79.avif', 1, '2024-08-14 13:46:36'),
+(154, 36, 'content_dde62f68-0edc-4c80-b694-aec4f9d43c3d.avif', 10, '2024-08-14 13:46:36'),
+(155, 37, '1657177389_0f200d945f3247dc9f03.avif', 1, '2024-08-14 13:46:36'),
+(156, 37, 'content_098ae208-3f91-4b28-8b79-b54479a9746e.avif', 10, '2024-08-14 13:46:36'),
+(157, 38, '1657177407_f845aa2f272a16298201.avif', 1, '2024-08-14 13:46:36'),
+(158, 38, 'content_699c8d73-c48c-46d0-85d7-0210197633ed.avif', 10, '2024-08-14 13:46:36'),
+(159, 39, '1658889594_a458d7b36afbf479dfd9.avif', 1, '2024-08-14 13:46:36'),
+(160, 39, 'content_f6e1b677-b268-4b98-8df7-5b05b643fe6d.avif', 10, '2024-08-14 13:46:36'),
+(161, 40, '1688621112_c4bcb57cbc1df52d126a.avif', 1, '2024-08-14 13:46:36'),
+(162, 40, 'content_26caec3d-8eb5-4423-b1e7-ea9d8b791d2f.avif', 10, '2024-08-14 13:46:36'),
+(163, 41, '1718334261_3a3a96ff38fec2b7e555.avif', 1, '2024-08-14 13:46:36'),
+(164, 41, 'content_26caec3d-8eb5-4423-b1e7-ea9d8b791d2f.avif', 10, '2024-08-14 13:46:36'),
+(165, 42, '1721792821_e9073439faef71d07f9a.avif', 1, '2024-08-14 13:46:36'),
+(166, 42, 'content_b73254c5-156e-4d93-8ea3-fd172a325000.avif', 10, '2024-08-14 13:46:36'),
+(167, 43, '1711531846_5c0c5270b6d737048077.avif', 1, '2024-08-14 13:46:36'),
+(168, 43, 'content_b73254c5-156e-4d93-8ea3-fd172a325000.avif', 10, '2024-08-14 13:46:36'),
+(169, 44, '1721792800_94efa7d64599fe211354.avif', 1, '2024-08-14 13:46:36'),
+(170, 44, 'content_b73254c5-156e-4d93-8ea3-fd172a325000.avif', 10, '2024-08-14 13:46:36'),
+(171, 45, '1721792778_9700ea5b1623b4921a6c.avif', 1, '2024-08-14 13:46:36'),
+(172, 45, 'content_b73254c5-156e-4d93-8ea3-fd172a325000.avif', 10, '2024-08-14 13:46:36'),
+(173, 46, '1675670300_8847cf1af7707425cc40.avif', 1, '2024-08-14 13:46:36'),
+(174, 46, 'content_c23c08d2-9195-4a72-8f1b-040f97ce701d.avif', 10, '2024-08-14 13:46:36'),
+(175, 47, '1657094268_d292274a94fd82b5913f.avif', 1, '2024-08-14 13:46:36'),
+(176, 47, 'content_713f76d8-5333-4751-81f2-fabcb238a1f4.avif', 10, '2024-08-14 13:46:36'),
+(177, 48, '1674116283_50ccc0dfc512b4b34621.avif', 1, '2024-08-14 13:46:36'),
+(178, 48, 'content_542f853f-84af-45ac-ad10-158ca7d5fb24.avif', 10, '2024-08-14 13:46:36'),
+(179, 49, '1657094256_3e6c7e19bc7f1cd872ec.avif', 1, '2024-08-14 13:46:36'),
+(180, 49, 'content_36f40f10-93d6-48ad-bf21-a695dc1c6ef7.avif', 10, '2024-08-14 13:46:36'),
+(181, 50, '1657093829_8436a67d18bd2793e47b.avif', 1, '2024-08-14 13:46:36'),
+(182, 50, 'content_9a489cf6-f453-406d-9be4-40064eb43f99.avif', 10, '2024-08-14 13:46:36'),
+(183, 51, '650e5b4758fde40017051631.webp', 1, '2024-08-14 13:46:36'),
+(184, 51, '650e76c81acf220014ffbe87.webp', 2, '2024-08-14 13:46:36'),
+(185, 51, '650e5b55bdbf510014cc06ef.webp', 3, '2024-08-14 13:46:36'),
+(186, 52, '650e76573b42650011bde6a7.webp', 1, '2024-08-14 13:46:36'),
+(187, 52, '650e7665da36b00017f9fce8.webp', 2, '2024-08-14 13:46:36'),
+(188, 52, '650e766126b745001d8dd983.webp', 3, '2024-08-14 13:46:36'),
+(189, 53, '650e7950409ac3000e876c71.webp', 1, '2024-08-14 13:46:36'),
+(190, 53, '650e795c79ddca0017b39a89.webp', 2, '2024-08-14 13:46:36'),
+(191, 53, '650e796010354a00149ac143.webp', 3, '2024-08-14 13:46:36'),
+(192, 54, '655f14dec4be51001dc59c45.webp', 1, '2024-08-14 13:46:36'),
+(193, 54, '655f14e61b37aa001100400d.webp', 2, '2024-08-14 13:46:36'),
+(194, 54, '655f14e25648c30017146ade.webp', 3, '2024-08-14 13:46:36'),
+(195, 54, 'oriental-beauty-chocolate.jpg', 10, '2024-08-14 13:46:36'),
+(196, 55, '6278a8582b6197001b9431a5.webp', 1, '2024-08-14 13:46:36'),
+(197, 55, '6229c2c5f80fb5002f420c27.webp', 2, '2024-08-14 13:46:36'),
+(198, 55, '6229c2c528f5ea00323cb346.webp', 3, '2024-08-14 13:46:36'),
+(199, 55, '6229c2c559cebb00110cc684.webp', 4, '2024-08-14 13:46:36'),
+(200, 55, 'original1_0.png', 6, '2024-08-14 13:46:36'),
+(201, 55, 'original2_1.png', 7, '2024-08-14 13:46:36'),
+(202, 55, 'original3.png', 8, '2024-08-14 13:46:36'),
+(203, 56, '6278a8464fe50c002db706b1.webp', 1, '2024-08-14 13:46:36'),
+(204, 56, '622a0ec11a97890032297f57.webp', 2, '2024-08-14 13:46:36'),
+(205, 56, '6229c2c528f5ea00323cb346.webp', 3, '2024-08-14 13:46:36'),
+(206, 56, '6229c2c559cebb00110cc684.webp', 4, '2024-08-14 13:46:36'),
+(207, 56, 'original1_0.png', 6, '2024-08-14 13:46:36'),
+(208, 56, 'original2_2.png', 7, '2024-08-14 13:46:36'),
+(209, 56, 'original3.png', 8, '2024-08-14 13:46:36'),
+(210, 57, '6278a835d918380018cbab4f.webp', 1, '2024-08-14 13:46:36'),
+(211, 57, '622a0f3299ba500017b83517.webp', 2, '2024-08-14 13:46:36'),
+(212, 57, '6229c2c528f5ea00323cb346.webp', 3, '2024-08-14 13:46:36'),
+(213, 57, '6229c2c559cebb00110cc684.webp', 4, '2024-08-14 13:46:36'),
+(214, 57, 'original1_0.png', 6, '2024-08-14 13:46:36'),
+(215, 57, 'original2_3.png', 7, '2024-08-14 13:46:36'),
+(216, 57, 'original3.png', 8, '2024-08-14 13:46:36'),
+(217, 58, '6278a824d53fa9001e812b9f.webp', 1, '2024-08-14 13:46:36'),
+(218, 58, '622a0f5173335582ca16488e.webp', 2, '2024-08-14 13:46:36'),
+(219, 58, '6229c2c528f5ea00323cb346.webp', 3, '2024-08-14 13:46:36'),
+(220, 58, '6229c2c559cebb00110cc684.webp', 4, '2024-08-14 13:46:36'),
+(221, 58, 'original1_0.png', 6, '2024-08-14 13:46:36'),
+(222, 58, 'original2_4.png', 7, '2024-08-14 13:46:36'),
+(223, 58, 'original3.png', 8, '2024-08-14 13:46:36'),
+(224, 59, '62bbc2b4e1d716002aa56008.webp', 1, '2024-08-14 13:46:36'),
+(225, 59, '62bbc2b4c8f350002736a8da.webp', 2, '2024-08-14 13:46:36'),
+(226, 59, '62bbc2b4dc34430012ad0206.webp', 3, '2024-08-14 13:46:36'),
+(227, 59, '62bbc2b4e97784000f1f8936.webp', 4, '2024-08-14 13:46:36'),
+(228, 59, 'original1_0.png', 6, '2024-08-14 13:46:36'),
+(229, 59, 'original2_0.png', 7, '2024-08-14 13:46:36'),
+(230, 59, 'original3.png', 8, '2024-08-14 13:46:36'),
+(231, 60, '619c8d3da2124d0023371a70.webp', 1, '2024-08-14 13:46:36'),
+(232, 60, '61ea67bc39e11300174c152b.webp', 2, '2024-08-14 13:46:36'),
+(233, 60, 'original1_1.png', 6, '2024-08-14 13:46:36'),
+(234, 60, 'original2_1.png', 7, '2024-08-14 13:46:36'),
+(235, 60, 'original3.png', 8, '2024-08-14 13:46:36'),
+(236, 61, '619c8e39fdba773949364fbc.webp', 1, '2024-08-14 13:46:36'),
+(237, 61, '61ea6824a3916e002067c71a.webp', 2, '2024-08-14 13:46:36'),
+(238, 61, 'original1_2.png', 6, '2024-08-14 13:46:36'),
+(239, 61, 'original2_1.png', 7, '2024-08-14 13:46:36'),
+(240, 61, 'original3.png', 8, '2024-08-14 13:46:36'),
+(241, 62, '619c8cd74c30cf00115de508.webp', 1, '2024-08-14 13:46:36'),
+(242, 62, '619c8cd12c8160003e364248.webp', 2, '2024-08-14 13:46:36'),
+(243, 62, 'original1_3.png', 6, '2024-08-14 13:46:36'),
+(244, 62, 'original2_5.png', 7, '2024-08-14 13:46:36'),
+(245, 62, 'original3.png', 8, '2024-08-14 13:46:36'),
+(246, 63, '63104b3cb40dd40010d5e5e0.webp', 1, '2024-08-14 13:46:36'),
+(247, 63, '619c8d9e2c8160001736405a.webp', 2, '2024-08-14 13:46:36'),
+(248, 63, 'original1_2.png', 6, '2024-08-14 13:46:36'),
+(249, 63, 'original2_5.png', 7, '2024-08-14 13:46:36'),
+(250, 63, 'original3.png', 8, '2024-08-14 13:46:36'),
+(251, 64, '619c87bd82d2f800263c2599.webp', 1, '2024-08-14 13:46:36'),
+(252, 64, '61ea6348fd1c9b0014e92e62.webp', 2, '2024-08-14 13:46:36'),
+(253, 64, 'original1_1.png', 6, '2024-08-14 13:46:36'),
+(254, 64, 'original2_6.png', 7, '2024-08-14 13:46:36'),
+(255, 64, 'original3.png', 8, '2024-08-14 13:46:36'),
+(256, 65, '63104af3a862fa001003ce1f.webp', 1, '2024-08-14 13:46:36'),
+(257, 65, '61ea6a072af747002f29bfbb.webp', 2, '2024-08-14 13:46:36'),
+(258, 65, 'original1_2.png', 6, '2024-08-14 13:46:36'),
+(259, 65, 'original2_6.png', 7, '2024-08-14 13:46:36'),
+(260, 65, 'original3.png', 8, '2024-08-14 13:46:36'),
+(261, 66, '619c8f305f439b0017e1bc07.webp', 1, '2024-08-14 13:46:36'),
+(262, 66, '619c8f3e6fe5e90021c209ee.webp', 2, '2024-08-14 13:46:36'),
+(263, 66, 'original1_1.png', 6, '2024-08-14 13:46:36'),
+(264, 66, 'original2_7.png', 7, '2024-08-14 13:46:36'),
+(265, 66, 'original3.png', 8, '2024-08-14 13:46:36'),
+(266, 67, '619c8b5e1c62a9002f872df2.webp', 1, '2024-08-14 13:46:36'),
+(267, 67, '619c8b5312937900232ea550.webp', 2, '2024-08-14 13:46:36'),
+(268, 67, 'original1_1.png', 6, '2024-08-14 13:46:36'),
+(269, 67, 'original2_8.png', 7, '2024-08-14 13:46:36'),
+(270, 67, 'original3.png', 8, '2024-08-14 13:46:36'),
+(271, 68, '619c89e98be1580014ca01b1.webp', 1, '2024-08-14 13:46:36'),
+(272, 68, '619c89f1129379001d2ea2c6.webp', 2, '2024-08-14 13:46:36'),
+(273, 68, 'original1_2.png', 6, '2024-08-14 13:46:36'),
+(274, 68, 'original2_9.png', 7, '2024-08-14 13:46:36'),
+(275, 68, 'original3.png', 8, '2024-08-14 13:46:36'),
+(276, 69, '619c89858aded200236eac2a.webp', 1, '2024-08-14 13:46:36'),
+(277, 69, '619c897f229a172a8fbf3dcf.webp', 2, '2024-08-14 13:46:36'),
+(278, 69, 'original1_2.png', 6, '2024-08-14 13:46:36'),
+(279, 69, 'original2_10.png', 7, '2024-08-14 13:46:36'),
+(280, 69, 'original3.png', 8, '2024-08-14 13:46:36'),
+(281, 70, '619c88553ba89b002fe48701.webp', 1, '2024-08-14 13:46:36'),
+(282, 70, '619c885e5ccb6600260b8940.webp', 2, '2024-08-14 13:46:36'),
+(283, 70, 'original1_1.png', 6, '2024-08-14 13:46:36'),
+(284, 70, 'original2_11.png', 7, '2024-08-14 13:46:36'),
+(285, 70, 'original3.png', 8, '2024-08-14 13:46:36'),
+(286, 71, '619c863f5ccb6600170b86f1.webp', 1, '2024-08-14 13:46:36'),
+(287, 71, '619c8623fdba77003e366330.webp', 2, '2024-08-14 13:46:36'),
+(288, 71, 'original1_2.png', 6, '2024-08-14 13:46:36'),
+(289, 71, 'original2_12.png', 7, '2024-08-14 13:46:36'),
+(290, 71, 'original3.png', 8, '2024-08-14 13:46:36'),
+(291, 72, '60226fc59ac7eb0011d79eb1.webp', 1, '2024-08-14 13:46:36'),
+(292, 72, '60226b3fa36da300119151af.webp', 2, '2024-08-14 13:46:36'),
+(293, 72, '5dac3603ff6f87002ca87e4d.webp', 3, '2024-08-14 13:46:36'),
+(294, 72, '64704e257ecea3001a03347c.webp', 4, '2024-08-14 13:46:36'),
+(295, 72, 'original1.jpg', 6, '2024-08-14 13:46:36'),
+(296, 72, 'original2.jpg', 7, '2024-08-14 13:46:36'),
+(297, 73, '60cc94484f385f0026a83a53.webp', 1, '2024-08-14 13:46:36'),
+(298, 73, '60cc947455f7c50023b996a5.webp', 1, '2024-08-14 13:46:36'),
+(299, 74, '5fe454829f4cc10032710003.webp', 2, '2024-08-14 13:46:36'),
+(300, 75, '64a46b8c43f97b0014561898.webp', 1, '2024-08-14 13:46:36'),
+(301, 75, '64a46bc743f97b0017562050.webp', 6, '2024-08-14 13:46:36'),
+(302, 76, '5d7f494b705c4b7dc11f8d36.webp', 1, '2024-08-14 13:46:36'),
+(303, 76, '5dac6f5b1de3b744bbce6b01.webp', 2, '2024-08-14 13:46:36'),
+(304, 76, '5dac6fbfac6b1a7320018cc6.webp', 6, '2024-08-14 13:46:36'),
+(305, 76, '5dac6fce1428350038f7907a.webp', 7, '2024-08-14 13:46:36'),
+(306, 77, '5d7f494b705c4b7dc11f8d36.webp', 1, '2024-08-14 13:46:36'),
+(307, 77, '5dac6f5b1de3b744bbce6b01.webp', 2, '2024-08-14 13:46:36'),
+(308, 77, '5dac6fbfac6b1a7320018cc6.webp', 3, '2024-08-14 13:46:36'),
+(309, 77, '5dac6fce1428350038f7907a.webp', 4, '2024-08-14 13:46:36'),
+(310, 78, '5d7f494b705c4b7dc11f8d36.webp', 1, '2024-08-14 13:46:36'),
+(311, 78, '5dac6f5b1de3b744bbce6b01.webp', 2, '2024-08-14 13:46:36'),
+(312, 78, '5dac6fbfac6b1a7320018cc6.webp', 3, '2024-08-14 13:46:36'),
+(313, 78, '5dac6fce1428350038f7907a.webp', 4, '2024-08-14 13:46:36'),
+(314, 79, '5d7f494b705c4b7dc11f8d36.webp', 1, '2024-08-14 13:46:36'),
+(315, 79, '5dac6f5b1de3b744bbce6b01.webp', 2, '2024-08-14 13:46:36'),
+(316, 79, '5dac6fbfac6b1a7320018cc6.webp', 3, '2024-08-14 13:46:36'),
+(317, 79, '5dac6fce1428350038f7907a.webp', 4, '2024-08-14 13:46:36'),
+(318, 80, '5efae7fee81f5c0033c83194.webp', 1, '2024-08-14 13:46:36'),
+(319, 80, '5da5ab804b5d9f0035caa71f.webp', 2, '2024-08-14 13:46:36'),
+(320, 80, '5c85ca23adfd90003bb49466.webp', 3, '2024-08-14 13:46:36'),
+(321, 80, '1080x.webp', 6, '2024-08-14 13:46:36'),
+(322, 81, '5e1442f3b0251500301b1c88.webp', 1, '2024-08-14 13:46:36'),
+(323, 81, '5c85ca23adfd90003bb49466.webp', 2, '2024-08-14 13:46:36'),
+(324, 82, '5da5b646303ca600297a35b1.webp', 1, '2024-08-14 13:46:36'),
+(325, 82, '5c85ca23adfd90003bb49466.webp', 2, '2024-08-14 13:46:36'),
+(326, 83, '5da5aec0abc98d001d0837f5.webp', 1, '2024-08-14 13:46:36'),
+(327, 83, '5efae90abee8350036d00bda.webp', 2, '2024-08-14 13:46:36'),
+(328, 83, '5efae91da8918c004b41b593.webp', 3, '2024-08-14 13:46:36'),
+(329, 84, '5ee0aae123ef736196f3c53d.webp', 1, '2024-08-14 13:46:36'),
+(330, 84, '5efae91da8918c004b41b593.webp', 2, '2024-08-14 13:46:36'),
+(331, 84, '5dac438d682e2c002c6cec49.webp', 3, '2024-08-14 13:46:36'),
+(332, 85, '5da5b734ca1b23003bacc4c8.webp', 1, '2024-08-14 13:46:36'),
+(333, 85, '5bb73c62d31748001844c11b.webp', 2, '2024-08-14 13:46:36'),
+(334, 86, '5efadfaaa522e4004b5922e6.webp', 1, '2024-08-14 13:46:36'),
+(335, 86, '5ee0a3be89d711004b6a6574.webp', 2, '2024-08-14 13:46:36'),
+(336, 86, '5da5b74fb641a40026b093ab.webp', 3, '2024-08-14 13:46:36'),
+(337, 87, '63805436e07ca4002297a813.webp', 1, '2024-08-14 13:46:36'),
+(338, 87, '638062f840203f002556ce20.webp', 2, '2024-08-14 13:46:36'),
+(339, 87, '638062f806d7a5002bf7915e.webp', 3, '2024-08-14 13:46:36'),
+(340, 87, '638062f8129646001ff83b19.webp', 6, '2024-08-14 13:46:36'),
+(341, 88, '61850d5b365caa00145b1222.webp', 1, '2024-08-14 13:46:36'),
+(342, 88, '6186804ea45b820017229d62.webp', 2, '2024-08-14 13:46:36'),
+(343, 88, '6186a26b06f87300178029e2.webp', 3, '2024-08-14 13:46:36'),
+(344, 88, 'original2.png', 6, '2024-08-14 13:46:36'),
+(345, 89, '6113c40d98c790001d0984f0.webp', 1, '2024-08-14 13:46:36'),
+(346, 89, '6093af4e8e8251003bf9b25e.webp', 2, '2024-08-14 13:46:36'),
+(347, 90, '60a604554167cd00265d3187.webp', 1, '2024-08-14 13:46:36'),
+(348, 90, '60a6048e1df77900383e2e46.webp', 2, '2024-08-14 13:46:36'),
+(349, 90, '60a604b4f56634002c474f6f.webp', 3, '2024-08-14 13:46:36'),
+(350, 90, '6112240e0b27a3001a643140.webp', 6, '2024-08-14 13:46:36'),
+(351, 90, '60a607adaf1d44001ac77925.webp', 7, '2024-08-14 13:46:36'),
+(352, 90, '60a60566fc9c2c003bb2847e.webp', 8, '2024-08-14 13:46:36'),
+(353, 91, '611a0eaef5ed4d002f09c772.webp', 1, '2024-08-14 13:46:36'),
+(354, 91, '609fd617bab42b0023595d5e.webp', 2, '2024-08-14 13:46:36'),
+(355, 91, '611224f6e1031d001dc0f210.webp', 6, '2024-08-14 13:46:36'),
+(356, 92, '60ba19deaf56ac00144bf881.webp', 1, '2024-08-14 13:46:36'),
+(357, 92, '60ba1930d9296e0011506c18.webp', 2, '2024-08-14 13:46:36'),
+(358, 93, '611a0f342452090020b4decc.webp', 1, '2024-08-14 13:46:36'),
+(359, 93, '6093af66c1db4d00146de450.webp', 2, '2024-08-14 13:46:36'),
+(360, 94, '60ba22cba63e040011a36c6b.webp', 1, '2024-08-14 13:46:36'),
+(361, 94, '60ba269ad6a49d003538f687.webp', 2, '2024-08-14 13:46:36'),
+(362, 95, '60ba1db0fbece3002f6f1ff5.webp', 1, '2024-08-14 13:46:36'),
+(363, 95, '60ba1d514d851b002626c492.webp', 2, '2024-08-14 13:46:36'),
+(364, 96, '60c1b9b6b19870002ce78ee9.webp', 1, '2024-08-14 13:46:36'),
+(365, 96, '60ba267e69e83c003ff7d1bb.webp', 2, '2024-08-14 13:46:36'),
+(366, 97, '5da5aeeb7cb140001ad19516.webp', 1, '2024-08-14 13:46:36'),
+(367, 98, '60ba23d4cab3b0002cc72ade.webp', 1, '2024-08-14 13:46:36'),
+(368, 98, '5da5b6d5bf6c39001db5ede9.webp', 2, '2024-08-14 13:46:36'),
+(369, 99, '5ee0ca42780857004e779344.webp', 1, '2024-08-14 13:46:36'),
+(370, 99, '5da5ad9e8606ad001a540134.webp', 2, '2024-08-14 13:46:36'),
+(371, 99, '5efae91da8918c004b41b593.webp', 3, '2024-08-14 13:46:36'),
+(372, 100, '5ee0c70521dec40046629302.webp', 1, '2024-08-14 13:46:36'),
+(373, 100, '5da5ab31fc308c003b5e233d.webp', 2, '2024-08-14 13:46:36'),
+(374, 100, '5efae91da8918c004b41b593.webp', 3, '2024-08-14 13:46:36'),
+(375, 101, '5eedd6f1fdd0870045242664.webp', 1, '2024-08-14 13:46:36'),
+(376, 101, '5da5b7d1ca1b23003bacc4e3.webp', 2, '2024-08-14 13:46:36'),
+(377, 101, '5da5ab31fc308c003b5e233d.webp', 3, '2024-08-14 13:46:36'),
+(378, 102, '5da58597bbb220001771d957.webp', 1, '2024-08-14 13:46:36'),
+(379, 102, '5dac6b59c6ddc800327d2acb.webp', 2, '2024-08-14 13:46:36'),
+(380, 103, '5da5aeabbc5a44001d1eb730.webp', 1, '2024-08-14 13:46:36'),
+(381, 103, '5c85ca23adfd90003bb49466.webp', 2, '2024-08-14 13:46:36'),
+(382, 104, '5ee0b82a21dec40040628fdb.webp', 1, '2024-08-14 13:46:36'),
+(383, 104, '5cbe936247fbd10038a26bbf.webp', 2, '2024-08-14 13:46:36'),
+(384, 104, '5efae91da8918c004b41b593.webp', 3, '2024-08-14 13:46:36'),
+(385, 105, '60ba23f9f7f14400267e46f8.webp', 1, '2024-08-14 13:46:36'),
+(386, 105, '5da5b194671ecf002c40f191.webp', 2, '2024-08-14 13:46:36'),
+(387, 105, '5dac4610c6ddc8003e7d2cda.webp', 6, '2024-08-14 13:46:36'),
+(388, 106, '60ccabb8ff12090014738a21.webp', 1, '2024-08-14 13:46:36'),
+(389, 106, '5da5b69a0b6aa2002f05627f.webp', 2, '2024-08-14 13:46:36'),
+(390, 107, '6167d40f6efc1829c26479b0.webp', 1, '2024-08-14 13:46:36'),
+(391, 107, '5dac3f4e9bdf925bd4c24f44.webp', 2, '2024-08-14 13:46:36');
 
 -- --------------------------------------------------------
 
--- 
--- 資料表格式： `uorder`
--- 
+--
+-- 資料表結構 `pyclass`
+--
 
-CREATE TABLE `uorder` (
-  `order_id` varchar(30) collate utf8_unicode_ci NOT NULL COMMENT '訂單編號',
-  `email_id` int(11) NOT NULL COMMENT '會員編號',
-  `address_id` int(11) NOT NULL COMMENT '收件人編號',
-  `howpay` tinyint(4) NOT NULL default '1' COMMENT '如何付款',
-  `paystatus` int(11) default NULL COMMENT '付款狀態',
-  `status` tinyint(1) NOT NULL default '1' COMMENT '訂單處理狀態',
-  `remark` varchar(200) collate utf8_unicode_ci default NULL COMMENT '備註',
-  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT '訂單時間',
-  PRIMARY KEY  (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+DROP TABLE IF EXISTS `pyclass`;
+CREATE TABLE IF NOT EXISTS `pyclass` (
+  `class_id` int NOT NULL AUTO_INCREMENT COMMENT '產品類別',
+  `level` int NOT NULL COMMENT '所在層級',
+  `fonticon` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '字型圖示',
+  `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '類別名稱',
+  `sort` int NOT NULL COMMENT '列表排序',
+  `uplink` int NOT NULL COMMENT '上層連結',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '建立時間與更新時間',
+  PRIMARY KEY (`class_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=181 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci ROW_FORMAT=COMPACT;
 
--- 
--- 列出以下資料庫的數據： `uorder`
--- 
+--
+-- 傾印資料表的資料 `pyclass`
+--
 
+INSERT INTO `pyclass` (`class_id`, `level`, `fonticon`, `cname`, `sort`, `uplink`, `create_date`) VALUES
+(1, 1, '', '起源風味研究室', 1, 0, '2024-08-03 11:43:39'),
+(2, 1, '', '土庫驛可可莊園', 2, 0, '2024-08-03 11:43:39'),
+(3, 1, '', '好田家', 3, 0, '2024-08-03 11:43:39'),
+(4, 1, '', '福灣巧克力', 4, 0, '2024-08-03 11:43:39'),
+(5, 2, '', '黑巧克力', 1, 1, '2024-08-03 11:43:39'),
+(6, 2, '', '風味巧克力', 2, 1, '2024-08-03 11:43:39'),
+(7, 2, '', '牛奶巧克力', 3, 1, '2024-08-03 11:43:39'),
+(8, 2, '', '巧克力豆', 1, 2, '2024-08-03 11:43:39'),
+(9, 2, '', '生巧克力', 2, 2, '2024-08-03 11:43:40'),
+(10, 2, '', '黑巧克力', 3, 2, '2024-08-03 11:43:40'),
+(11, 2, '', '茶巧克力', 4, 2, '2024-08-03 11:43:40'),
+(12, 2, '', '風味巧克力', 5, 2, '2024-08-03 11:43:40'),
+(13, 2, '', '牛奶巧克力', 6, 2, '2024-08-03 11:43:40'),
+(14, 2, '', '茶巧克力', 1, 3, '2024-08-03 11:43:40'),
+(15, 2, '', '薄片黑巧克力', 2, 3, '2024-08-03 11:43:40'),
+(16, 2, '', '單片黑巧克力', 3, 3, '2024-08-03 11:43:40'),
+(17, 2, '', '風味黑巧克力', 4, 3, '2024-08-03 11:43:40'),
+(18, 2, '', '生巧克力', 1, 4, '2024-08-03 11:43:40'),
+(19, 2, '', '薄片黑巧克力', 2, 4, '2024-08-03 11:43:40'),
+(20, 2, '', '單片黑巧克力', 3, 4, '2024-08-03 11:43:40'),
+(21, 2, '', '風味黑巧克力', 4, 4, '2024-08-03 11:43:40');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `town`
+--
+
+DROP TABLE IF EXISTS `town`;
+CREATE TABLE IF NOT EXISTS `town` (
+  `town_no` bigint NOT NULL AUTO_INCREMENT COMMENT '鄕鎮市編號',
+  `name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '鄕鎮市名稱',
+  `post` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '郵遞區號',
+  `state` smallint NOT NULL COMMENT '狀態',
+  `auto_no` int NOT NULL COMMENT '上層城市編號連結',
+  PRIMARY KEY (`town_no`)
+) ENGINE=MyISAM AUTO_INCREMENT=374 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- 傾印資料表的資料 `town`
+--
+
+INSERT INTO `town` (`town_no`, `name`, `post`, `state`, `auto_no`) VALUES
+(1, '中正區', '100', 0, 1),
+(2, '大同區', '103', 0, 1),
+(3, '中山區', '104', 0, 1),
+(4, '松山區', '105', 0, 1),
+(5, '大安區', '106', 0, 1),
+(6, '萬華區', '108', 0, 1),
+(7, '信義區', '110', 0, 1),
+(8, '士林區', '111', 0, 1),
+(9, '北投區', '112', 0, 1),
+(10, '內湖區', '114', 0, 1),
+(11, '南港區', '115', 0, 1),
+(12, '文山區', '116', 0, 1),
+(13, '仁愛區', '200', 0, 2),
+(14, '信義區', '201', 0, 2),
+(15, '中正區', '202', 0, 2),
+(16, '中山區', '203', 0, 2),
+(17, '安樂區', '204', 0, 2),
+(18, '暖暖區', '205', 0, 2),
+(19, '七堵區', '206', 0, 2),
+(20, '萬里區', '207', 0, 3),
+(21, '金山區', '208', 0, 3),
+(22, '板橋區', '220', 0, 3),
+(23, '汐止區', '221', 0, 3),
+(24, '深坑區', '222', 0, 3),
+(25, '石碇區', '223', 0, 3),
+(26, '瑞芳區', '224', 0, 3),
+(27, '平溪區', '226', 0, 3),
+(28, '雙溪區', '227', 0, 3),
+(29, '貢寮區', '228', 0, 3),
+(30, '新店區', '231', 0, 3),
+(31, '坪林區', '232', 0, 3),
+(32, '烏來區', '233', 0, 3),
+(33, '永和區', '234', 0, 3),
+(34, '中和區', '235', 0, 3),
+(35, '土城區', '236', 0, 3),
+(36, '三峽區', '237', 0, 3),
+(37, '樹林區', '238', 0, 3),
+(38, '鶯歌區', '239', 0, 3),
+(39, '三重區', '241', 0, 3),
+(40, '新莊區', '242', 0, 3),
+(41, '泰山區', '243', 0, 3),
+(42, '林口區', '244', 0, 3),
+(43, '蘆洲區', '247', 0, 3),
+(44, '五股區', '248', 0, 3),
+(45, '八里區', '249', 0, 3),
+(46, '淡水區', '251', 0, 3),
+(47, '三芝區', '252', 0, 3),
+(48, '石門區', '253', 0, 3),
+(49, '宜蘭市', '260', 0, 4),
+(50, '頭城鎮', '261', 0, 4),
+(51, '礁溪鄉', '262', 0, 4),
+(52, '壯圍鄉', '263', 0, 4),
+(53, '員山鄉', '264', 0, 4),
+(54, '羅東鎮', '265', 0, 4),
+(55, '三星鄉', '266', 0, 4),
+(56, '大同鄉', '267', 0, 4),
+(57, '五結鄉', '268', 0, 4),
+(58, '冬山鄉', '269', 0, 4),
+(59, '蘇澳鎮', '270', 0, 4),
+(60, '南澳鄉', '272', 0, 4),
+(61, '釣魚台列嶼', '290', 0, 4),
+(62, '新竹市(東區)', '300', 0, 5),
+(63, '竹北市', '302', 0, 6),
+(64, '湖口鄉', '303', 0, 6),
+(65, '新豐鄉', '304', 0, 6),
+(66, '新埔鎮', '305', 0, 6),
+(67, '關西鎮', '306', 0, 6),
+(68, '芎林鄉', '307', 0, 6),
+(69, '寶山鄉', '308', 0, 6),
+(70, '竹東鎮', '310', 0, 6),
+(71, '五峰鄉', '311', 0, 6),
+(72, '橫山鄉', '312', 0, 6),
+(73, '尖石鄉', '313', 0, 6),
+(74, '北埔鄉', '314', 0, 6),
+(75, '峨眉鄉', '315', 0, 6),
+(76, '中壢區', '320', 0, 7),
+(77, '平鎮區', '324', 0, 7),
+(78, '龍潭區', '325', 0, 7),
+(79, '楊梅區', '326', 0, 7),
+(80, '新屋區', '327', 0, 7),
+(81, '觀音區', '328', 0, 7),
+(82, '桃園區', '330', 0, 7),
+(83, '龜山區', '333', 0, 7),
+(84, '八德區', '334', 0, 7),
+(85, '大溪區', '335', 0, 7),
+(86, '復興區', '336', 0, 7),
+(87, '大園區', '337', 0, 7),
+(88, '蘆竹區', '338', 0, 7),
+(89, '竹南鎮', '350', 0, 8),
+(90, '頭份市', '351', 0, 8),
+(91, '三灣鄉', '352', 0, 8),
+(92, '南庄鄉', '353', 0, 8),
+(93, '獅潭鄉', '354', 0, 8),
+(94, '後龍鎮', '356', 0, 8),
+(95, '通霄鎮', '357', 0, 8),
+(96, '苑裡鎮', '358', 0, 8),
+(97, '苗栗市', '360', 0, 8),
+(98, '造橋鄉', '361', 0, 8),
+(99, '頭屋鄉', '362', 0, 8),
+(100, '公館鄉', '363', 0, 8),
+(101, '大湖鄉', '364', 0, 8),
+(102, '泰安鄉', '365', 0, 8),
+(103, '銅鑼鄉', '366', 0, 8),
+(104, '三義鄉', '367', 0, 8),
+(105, '西湖鄉', '368', 0, 8),
+(106, '卓蘭鎮', '369', 0, 8),
+(107, '中區', '400', 0, 9),
+(108, '東區', '401', 0, 9),
+(109, '南區', '402', 0, 9),
+(110, '西區', '403', 0, 9),
+(111, '北區', '404', 0, 9),
+(112, '北屯區', '406', 0, 9),
+(113, '西屯區', '407', 0, 9),
+(114, '南屯區', '408', 0, 9),
+(115, '太平區', '411', 0, 9),
+(116, '大里區', '412', 0, 9),
+(117, '霧峰區', '413', 0, 9),
+(118, '烏日區', '414', 0, 9),
+(119, '豐原區', '420', 0, 9),
+(120, '后里區', '421', 0, 9),
+(121, '石岡區', '422', 0, 9),
+(122, '東勢區', '423', 0, 9),
+(123, '和平區', '424', 0, 9),
+(124, '新社區', '426', 0, 9),
+(125, '潭子區', '427', 0, 9),
+(126, '大雅區', '428', 0, 9),
+(127, '神岡區', '429', 0, 9),
+(128, '大肚區', '432', 0, 9),
+(129, '沙鹿區', '433', 0, 9),
+(130, '龍井區', '434', 0, 9),
+(131, '梧棲區', '435', 0, 9),
+(132, '清水區', '436', 0, 9),
+(133, '大甲區', '437', 0, 9),
+(134, '外埔區', '438', 0, 9),
+(135, '大安區', '439', 0, 9),
+(136, '彰化市', '500', 0, 10),
+(137, '芬園鄉', '502', 0, 10),
+(138, '花壇鄉', '503', 0, 10),
+(139, '秀水鄉', '504', 0, 10),
+(140, '鹿港鎮', '505', 0, 10),
+(141, '福興鄉', '506', 0, 10),
+(142, '線西鄉', '507', 0, 10),
+(143, '和美鎮', '508', 0, 10),
+(144, '伸港鄉', '509', 0, 10),
+(145, '員林市', '510', 0, 10),
+(146, '社頭鄉', '511', 0, 10),
+(147, '永靖鄉', '512', 0, 10),
+(148, '埔心鄉', '513', 0, 10),
+(149, '溪湖鎮', '514', 0, 10),
+(150, '大村鄉', '515', 0, 10),
+(151, '埔鹽鄉', '516', 0, 10),
+(152, '田中鎮', '520', 0, 10),
+(153, '北斗鎮', '521', 0, 10),
+(154, '田尾鄉', '522', 0, 10),
+(155, '埤頭鄉', '523', 0, 10),
+(156, '溪州鄉', '524', 0, 10),
+(157, '竹塘鄉', '525', 0, 10),
+(158, '二林鎮', '526', 0, 10),
+(159, '大城鄉', '527', 0, 10),
+(160, '芳苑鄉', '528', 0, 10),
+(161, '二水鄉', '530', 0, 10),
+(162, '南投市', '540', 0, 11),
+(163, '中寮鄉', '541', 0, 11),
+(164, '草屯鎮', '542', 0, 11),
+(165, '國姓鄉', '544', 0, 11),
+(166, '埔里鎮', '545', 0, 11),
+(167, '仁愛鄉', '546', 0, 11),
+(168, '名間鄉', '551', 0, 11),
+(169, '集集鎮', '552', 0, 11),
+(170, '水里鄉', '553', 0, 11),
+(171, '魚池鄉', '555', 0, 11),
+(172, '信義鄉', '556', 0, 11),
+(173, '竹山鎮', '557', 0, 11),
+(174, '鹿谷鄉', '558', 0, 11),
+(175, '斗南鎮', '630', 0, 12),
+(176, '大埤鄉', '631', 0, 12),
+(177, '虎尾鎮', '632', 0, 12),
+(178, '土庫鎮', '633', 0, 12),
+(179, '褒忠鄉', '634', 0, 12),
+(180, '東勢鄉', '635', 0, 12),
+(181, '臺西鄉', '636', 0, 12),
+(182, '崙背鄉', '637', 0, 12),
+(183, '麥寮鄉', '638', 0, 12),
+(184, '斗六市', '640', 0, 12),
+(185, '林內鄉', '643', 0, 12),
+(186, '古坑鄉', '646', 0, 12),
+(187, '莿桐鄉', '647', 0, 12),
+(188, '西螺鎮', '648', 0, 12),
+(189, '二崙鄉', '649', 0, 12),
+(190, '北港鎮', '651', 0, 12),
+(191, '水林鄉', '652', 0, 12),
+(192, '口湖鄉', '653', 0, 12),
+(193, '四湖鄉', '654', 0, 12),
+(194, '元長鄉', '655', 0, 12),
+(195, '嘉義市(東區)', '600', 0, 13),
+(196, '番路鄉', '602', 0, 14),
+(197, '梅山鄉', '603', 0, 14),
+(198, '竹崎鄉', '604', 0, 14),
+(199, '阿里山鄉', '605', 0, 14),
+(200, '中埔鄉', '606', 0, 14),
+(201, '大埔鄉', '607', 0, 14),
+(202, '水上鄉', '608', 0, 14),
+(203, '鹿草鄉', '611', 0, 14),
+(204, '太保市', '612', 0, 14),
+(205, '朴子市', '613', 0, 14),
+(206, '東石鄉', '614', 0, 14),
+(207, '六腳鄉', '615', 0, 14),
+(208, '新港鄉', '616', 0, 14),
+(209, '民雄鄉', '621', 0, 14),
+(210, '大林鎮', '622', 0, 14),
+(211, '溪口鄉', '623', 0, 14),
+(212, '義竹鄉', '624', 0, 14),
+(213, '布袋鎮', '625', 0, 14),
+(214, '中西區', '700', 0, 15),
+(215, '東區', '701', 0, 15),
+(216, '南區', '702', 0, 15),
+(217, '北區', '704', 0, 15),
+(218, '安平區', '708', 0, 15),
+(219, '安南區', '709', 0, 15),
+(220, '永康區', '710', 0, 15),
+(221, '歸仁區', '711', 0, 15),
+(222, '新化區', '712', 0, 15),
+(223, '左鎮區', '713', 0, 15),
+(224, '玉井區', '714', 0, 15),
+(225, '楠西區', '715', 0, 15),
+(226, '南化區', '716', 0, 15),
+(227, '仁德區', '717', 0, 15),
+(228, '關廟區', '718', 0, 15),
+(229, '龍崎區', '719', 0, 15),
+(230, '官田區', '720', 0, 15),
+(231, '麻豆區', '721', 0, 15),
+(232, '佳里區', '722', 0, 15),
+(233, '西港區', '723', 0, 15),
+(234, '七股區', '724', 0, 15),
+(235, '將軍區', '725', 0, 15),
+(236, '學甲區', '726', 0, 15),
+(237, '北門區', '727', 0, 15),
+(238, '新營區', '730', 0, 15),
+(239, '後壁區', '731', 0, 15),
+(240, '白河區', '732', 0, 15),
+(241, '東山區', '733', 0, 15),
+(242, '六甲區', '734', 0, 15),
+(243, '下營區', '735', 0, 15),
+(244, '柳營區', '736', 0, 15),
+(245, '鹽水區', '737', 0, 15),
+(246, '善化區', '741', 0, 15),
+(247, '大內區', '742', 0, 15),
+(248, '山上區', '743', 0, 15),
+(249, '新市區', '744', 0, 15),
+(250, '安定區', '745', 0, 15),
+(251, '新興區', '800', 0, 16),
+(252, '前金區', '801', 0, 16),
+(253, '苓雅區', '802', 0, 16),
+(254, '鹽埕區', '803', 0, 16),
+(255, '鼓山區', '804', 0, 16),
+(256, '旗津區', '805', 0, 16),
+(257, '前鎮區', '806', 0, 16),
+(258, '三民區', '807', 0, 16),
+(259, '楠梓區', '811', 0, 16),
+(260, '小港區', '812', 0, 16),
+(261, '左營區', '813', 0, 16),
+(262, '仁武區', '814', 0, 16),
+(263, '大社區', '815', 0, 16),
+(264, '岡山區', '820', 0, 16),
+(265, '路竹區', '821', 0, 16),
+(266, '阿蓮區', '822', 0, 16),
+(267, '田寮區', '823', 0, 16),
+(268, '燕巢區', '824', 0, 16),
+(269, '橋頭區', '825', 0, 16),
+(270, '梓官區', '826', 0, 16),
+(271, '彌陀區', '827', 0, 16),
+(272, '永安區', '828', 0, 16),
+(273, '湖內區', '829', 0, 16),
+(274, '鳳山區', '830', 0, 16),
+(275, '大寮區', '831', 0, 16),
+(276, '林園區', '832', 0, 16),
+(277, '鳥松區', '833', 0, 16),
+(278, '大樹區', '840', 0, 16),
+(279, '旗山區', '842', 0, 16),
+(280, '美濃區', '843', 0, 16),
+(281, '六龜區', '844', 0, 16),
+(282, '內門區', '845', 0, 16),
+(283, '杉林區', '846', 0, 16),
+(284, '甲仙區', '847', 0, 16),
+(285, '桃源區', '848', 0, 16),
+(286, '那瑪夏區', '849', 0, 16),
+(287, '茂林區', '851', 0, 16),
+(288, '茄萣區', '852', 0, 16),
+(289, '東沙', '817', 0, 17),
+(290, '南沙', '819', 0, 17),
+(291, '馬公市', '880', 0, 18),
+(292, '西嶼鄉', '881', 0, 18),
+(293, '望安鄉', '882', 0, 18),
+(294, '七美鄉', '883', 0, 18),
+(295, '白沙鄉', '884', 0, 18),
+(296, '湖西鄉', '885', 0, 18),
+(297, '屏東市', '900', 0, 19),
+(298, '三地門鄉', '901', 0, 19),
+(299, '霧臺鄉', '902', 0, 19),
+(300, '瑪家鄉', '903', 0, 19),
+(301, '九如鄉', '904', 0, 19),
+(302, '里港鄉', '905', 0, 19),
+(303, '高樹鄉', '906', 0, 19),
+(304, '鹽埔鄉', '907', 0, 19),
+(305, '長治鄉', '908', 0, 19),
+(306, '麟洛鄉', '909', 0, 19),
+(307, '竹田鄉', '911', 0, 19),
+(308, '內埔鄉', '912', 0, 19),
+(309, '萬丹鄉', '913', 0, 19),
+(310, '潮州鎮', '920', 0, 19),
+(311, '泰武鄉', '921', 0, 19),
+(312, '來義鄉', '922', 0, 19),
+(313, '萬巒鄉', '923', 0, 19),
+(314, '崁頂鄉', '924', 0, 19),
+(315, '新埤鄉', '925', 0, 19),
+(316, '南州鄉', '926', 0, 19),
+(317, '林邊鄉', '927', 0, 19),
+(318, '東港鄉', '928', 0, 19),
+(319, '琉球鄉', '929', 0, 19),
+(320, '佳冬鄉', '931', 0, 19),
+(321, '新園鄉', '932', 0, 19),
+(322, '枋寮鄉', '940', 0, 19),
+(323, '枋山鄉', '941', 0, 19),
+(324, '春日鄉', '942', 0, 19),
+(325, '獅子鄉', '943', 0, 19),
+(326, '車城鄉', '944', 0, 19),
+(327, '牡丹鄉', '945', 0, 19),
+(328, '恆春鎮', '946', 0, 19),
+(329, '滿州鄉', '947', 0, 19),
+(330, '臺東市', '950', 0, 20),
+(331, '綠島鄉', '951', 0, 20),
+(332, '蘭嶼鄉', '952', 0, 20),
+(333, '延平鄉', '953', 0, 20),
+(334, '卑南鄉', '954', 0, 20),
+(335, '鹿野鄉', '955', 0, 20),
+(336, '關山鎮', '956', 0, 20),
+(337, '海端鄉', '957', 0, 20),
+(338, '池上鄉', '958', 0, 20),
+(339, '東河鄉', '959', 0, 20),
+(340, '成功鎮', '961', 0, 20),
+(341, '長濱鄉', '962', 0, 20),
+(342, '太麻里鄉', '963', 0, 20),
+(343, '金峰鄉', '964', 0, 20),
+(344, '大武鄉', '965', 0, 20),
+(345, '達仁鄉', '966', 0, 20),
+(346, '花蓮市', '970', 0, 21),
+(347, '新城鄉', '971', 0, 21),
+(348, '秀林鄉', '972', 0, 21),
+(349, '吉安鄉', '973', 0, 21),
+(350, '壽豐鄉', '974', 0, 21),
+(351, '鳳林鎮', '975', 0, 21),
+(352, '光復鄉', '976', 0, 21),
+(353, '豐濱鄉', '977', 0, 21),
+(354, '瑞穗鄉', '978', 0, 21),
+(355, '萬榮鄉', '979', 0, 21),
+(356, '玉里鎮', '981', 0, 21),
+(357, '卓溪鄉', '982', 0, 21),
+(358, '富里鄉', '983', 0, 21),
+(359, '金沙鎮', '890', 0, 22),
+(360, '金湖鎮', '891', 0, 22),
+(361, '金寧鄉', '892', 0, 22),
+(362, '金城鎮', '893', 0, 22),
+(363, '烈嶼鄉', '894', 0, 22),
+(364, '烏坵鄉', '896', 0, 22),
+(365, '南竿鄉', '209', 0, 23),
+(366, '北竿鄉', '210', 0, 23),
+(367, '莒光鄉', '211', 0, 23),
+(368, '東引鄉', '212', 0, 23),
+(371, '新竹市(北區)', '300', 0, 5),
+(372, '新竹市(香山區)', '300', 0, 5),
+(373, '嘉義市(西區)', '600', 0, 13);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `uorder`
+--
+
+DROP TABLE IF EXISTS `uorder`;
+CREATE TABLE IF NOT EXISTS `uorder` (
+  `order_id` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '訂單編號',
+  `email_id` int NOT NULL COMMENT '會員編號',
+  `address_id` int NOT NULL COMMENT '收件人編號',
+  `howpay` tinyint NOT NULL DEFAULT '1' COMMENT '如何付款',
+  `paystatus` int DEFAULT NULL COMMENT '付款狀態',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '訂單處理狀態',
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '備註',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單時間',
+  PRIMARY KEY (`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci ROW_FORMAT=COMPACT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

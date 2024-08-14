@@ -8,15 +8,15 @@
     <br>
     <div class="row text-center align-items-end">
         <div class="col-md-2 col-sm-4 col-4 offset-md-3">
-            <img src="./images/SGS.png" style="width:5vw">
+            <img src="./images/brand/SGS.png" style="width:5vw">
             <div>從產地嚴選原料經 SGS 檢驗合格</div>
         </div>
         <div class="col-md-2 col-sm-4 col-4">
-            <img src="./images/NATURAL100.png" style="width:5vw">
+            <img src="./images/brand/NATURAL100.png" style="width:5vw">
             <div>留住天然健康 | 低加工 | 零添加</div>
         </div>
         <div class="col-md-2 col-sm-4 col-4">
-            <img src="./images/EU_standards.png" style="width:5vw">
+            <img src="./images/brand/EU_standards.png" style="width:5vw">
             <div>所有巧克力產品符合歐盟標準</div>
         </div>
     </div>
