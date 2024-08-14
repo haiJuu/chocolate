@@ -30,8 +30,8 @@ if (isset($_GET['p_id']) && isset($_GET['qty'])) {
     } else {
         $retcode = array("c" => "0", "m" => '系統發生錯誤');
     }
-    echo json_encode($retcode, JSON_UNESCAPED_UNICODE);
-    // echo json_encode($retcode);
+    // echo json_encode($retcode, JSON_UNESCAPED_UNICODE);
+    echo json_encode($retcode);
 }
 
 return;

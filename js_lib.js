@@ -29,7 +29,7 @@ function addCart(p_id) {
 
     // $.ajax 函式呼叫後台的 add_cart.php
     $.ajax({
-        url: './add_cart.php',
+        url: './addcart.php',
         type: 'get',
         dataType: 'json',
         data: {

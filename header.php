@@ -8,10 +8,11 @@
         <?php
         $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
         $cart = $link->query($select_cart);
+        $count_cart = $cart->rowCount();
         ?>
 
         <a href="#">
-            <i class="fas fa-shopping-bag"></i><span class="badge">+<?php echo ($cart) ? $cart->rowCount() : ''; ?></span>　
+            <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart != 0 ? "+" . $count_cart : ''; ?></span>　
         </a>
         <a href="#">
             <i class="fas fa-portrait"></i>
