@@ -20,9 +20,9 @@ function boxShadow($now_brand, $check_brand)
 	return (($now_brand == $check_brand) ? "box-shadow" : "");
 }
 
-function locationDot($now_class, $check_class)
+function locationCircle($now_class, $check_class)
 {
-	return (($now_class == $check_class) ? "<i class='fa-solid fa-location-dot'> </i>" : "");
+	return (($now_class == $check_class) ? "<span style='color:lightgray;font-size:60%'> ● </span>" : "");
 }
 
 
@@ -50,9 +50,7 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 			$egp = $totalPages_Recordset1 >= $max_links ? $max_links : $totalPages_Recordset1 + 1;
 		}
 		if ($totalPages_Recordset1 >= 1) {
-			#	------------------------
-			#	Searching for $_GET vars
-			#	------------------------
+
 			$_get_vars = '';
 			if (!empty($_GET) || !empty($HTTP_GET_VARS)) {
 				$_GET = empty($_GET) ? $HTTP_GET_VARS : $_GET;
@@ -76,9 +74,7 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 					$firstArray = ($pageNum_Recordset1 > 0) ? "<li class='page-item'><a class='page-link' href=\"$_SERVER[PHP_SELF]?page_num_" . $sname . "=$precedente$_get_vars\" aria-label='Previous'><span aria-hidden='true'>$prev_Recordset1</span></a></li>" : "<li class='page-item disabled'><span class='page-link' aria-label='Previous' aria-hidden='true'>$prev_Recordset1</span></li>";
 					break;
 			}
-			# ----------------------
-			# page numbers
-			# ----------------------
+
 			for ($a = $fgp + 1; $a <= $egp; $a++) {
 				$theNext = $a - 1;
 				if ($show_page) {

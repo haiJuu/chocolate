@@ -265,6 +265,7 @@ section#content .imgbar img {
 }
 
 section#content .imgbar ul li {
+    /* align-items: center; */
     /* border: 1px solid black; */
     margin: 1rem 2rem 0 2rem;
 }

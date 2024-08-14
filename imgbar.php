@@ -65,7 +65,7 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="drugstore.php?<?php echo $drugstore_href; ?>">
-                                    <?php echo locationDot($now_class, $check_class); ?> 全部
+                                    <?php echo locationCircle($now_class, $check_class); ?> 全部
                                 </a>
                             </li>
 
@@ -73,12 +73,7 @@
                             ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="drugstore.php?class_id=<?php echo $fetch_pyclass['class_id']; ?>">
-                                        <?php echo locationDot($_GET['class_id'], $fetch_pyclass['class_id']); ?>
-                                        <?php
-                                        // if ($fetch_pyclass['class_id'] == $_GET['class_id']) {
-                                        //     echo "<i class='fa-solid fa-location-dot'> </i>";
-                                        // } 
-                                        ?>
+                                        <?php echo locationCircle($_GET['class_id'], $fetch_pyclass['class_id']); ?>
                                         <?php echo $fetch_pyclass['cname']; ?>
                                     </a>
                                 </li>
