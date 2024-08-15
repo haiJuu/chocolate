@@ -61,8 +61,8 @@
         <div class="row text-center">
             <nav class="navbar navbar-expand-lg justify-content-center">
                 <div>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
+                    <div class="navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav col-md-12 col-sm-12">
                             <li class="nav-item">
                                 <a class="nav-link" href="drugstore.php?<?php echo $drugstore_href; ?>">
                                     <?php echo locationCircle($now_class, $check_class); ?> 全部
