@@ -44,8 +44,9 @@
                 </a> -->
             </div>
 
-            <div class="hot-start">
-                <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i>
+            <div class="hot-start text-start">
+                <!-- <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> -->
+                品 × 牌 × 暢 × 銷
             </div>
 
             <div class="hot">

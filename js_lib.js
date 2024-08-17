@@ -1,14 +1,14 @@
 // 
-// $(function () {
-//     $(".card .row.mt-2 .col-md-4 a").mouseover(function () {
-//         var imgsrc = $(this).children("img").attr("src");
-//         $("#showGoods").attr({
-//             "src": imgsrc
-//         });
-//     });
+$(function () {
+    $(".goods a").mouseover(function () {
+        var imgsrc = $(this).children("img").attr("src");
+        $("#showGoods").attr({
+            "src": imgsrc
+        });
+    });
 
-//     $(".fancybox").fancybox();
-// })
+    $(".fancybox").fancybox();
+})
 
 
 // product_list

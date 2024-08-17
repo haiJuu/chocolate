@@ -25,7 +25,7 @@ require_once("php_lib.php");
 
     <section id="content" class="container-fluid">
 
-        <?php require_once("./goods_content.php"); ?>
+        <?php require_once("./goods_content.php") ?>
 
     </section>
 
