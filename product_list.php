@@ -31,7 +31,7 @@ while ($fetch_product2 = $product2->fetch()) { ?>
         <div class="product row text-center justify-content-center">
         <?php } ?>
 
-        <div class="card col-md-2 col-sm-6 col-6">
+        <div class="card col-md-2 col-sm-3 col-6">
             <a href="goods.php?p_id=<?php echo $fetch_product2['p_id']; ?>">
                 <div class="img-container">
                     <img src="./images/product/<?php echo $fetch_product2['img_file']; ?>" class="card-img-top" alt="<?php echo $fetch_product2['p_name']; ?>" title="<?php echo $fetch_product2['p_intro']; ?>">
@@ -47,7 +47,7 @@ while ($fetch_product2 = $product2->fetch()) { ?>
         <?php if ($row_num == $product2->rowCount()) {
             if ($row_num % 4 != 0) {
                 for ($empty_card = 0; $empty_card < abs($row_num % 4 - 4); $empty_card++) { ?>
-                    <div class="card col-md-2 col-sm-6 col-6">
+                    <div class="card col-md-2 col-sm-3 col-6">
                         <div class="card-body">
                         </div>
                     </div>
