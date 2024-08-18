@@ -27,7 +27,7 @@
             ?>
                 <a href="drugstore.php?class_id=<?php echo $fetch_brand['class_id']; ?>&level=<?php echo $fetch_brand['level']; ?>">
                     <div class="img-container">
-                        <img src="./images/brand/<?php echo $fetch_brand['b_logo'] ?>" alt="<?php echo $fetch_brand['cname'] ?>" title="<?php echo $fetch_brand['cname'] ?>" class="<?php echo boxShadow($now_brand, $fetch_brand['class_id']); ?>">
+                        <img src="./images/brand/<?php echo $fetch_brand['b_logo']; ?>" alt="<?php echo $fetch_brand['cname']; ?>" title="<?php echo $fetch_brand['cname'] ?>" class="<?php echo boxShadow($now_brand, $fetch_brand['class_id']); ?>">
                     </div>
                 </a>
             <?php } ?>
@@ -59,21 +59,21 @@
 
 
         <div class="row text-center">
-            <nav class="navbar navbar-expand-lg justify-content-center">
+            <nav>
                 <div>
-                    <div class="navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav col-md-12 col-sm-12">
-                            <li class="nav-item">
-                                <a class="nav-link" href="drugstore.php?<?php echo $drugstore_href; ?>">
-                                    <?php echo locationCircle($now_class, $check_class); ?> 全部
+                    <div>
+                        <ul class="col-md-12 col-sm-12 col-12">
+                            <li>
+                                <a href="drugstore.php?<?php echo $drugstore_href; ?>">
+                                    <?php echo locationCircle($now_brand, $now_class, $check_class); ?> 全部
                                 </a>
                             </li>
 
                             <?php while ($fetch_pyclass = $pyclass->fetch()) {
                             ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="drugstore.php?class_id=<?php echo $fetch_pyclass['class_id']; ?>">
-                                        <?php echo locationCircle($_GET['class_id'], $fetch_pyclass['class_id']); ?>
+                                <li>
+                                    <a href="drugstore.php?class_id=<?php echo $fetch_pyclass['class_id']; ?>">
+                                        <?php echo locationCircle($now_brand, $_GET['class_id'], $fetch_pyclass['class_id']); ?>
                                         <?php echo $fetch_pyclass['cname']; ?>
                                     </a>
                                 </li>

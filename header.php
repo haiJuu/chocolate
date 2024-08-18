@@ -1,10 +1,11 @@
 <div class="row">
-    <div class="logo col-md-4 col-sm-2 col-4 offset-md-4 align-content-center text-center"><a href="./index.php">
+    <div class="logo col-md-4 offset-md-4 col-sm-2 col-4 align-content-center text-center">
+        <a href="./index.php">
             CHO
         </a>
     </div>
 
-    <div class="font col-md-2 col-sm-2 offset-md-2 offset-sm-6 col-2 align-content-center text-center">
+    <div class="font col-md-4 offset-md-0 col-sm-3 offset-sm-7 col-8 align-content-center text-end pe-4">
         <?php
         $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
         $cart = $link->query($select_cart);
@@ -12,16 +13,16 @@
         ?>
 
         <a href="#">
-            <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart != 0 ? "+" . $count_cart : ''; ?></span>　
+            <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart; ?></span>
         </a>
         <a href="#">
             <i class="fas fa-portrait"></i>
         </a>
     </div>
-    <div class="nav col-md-10 col-sm-2 text-center">
+    <div class="nav col-md-7 col-sm-2 col-2">
         <nav class="navbar navbar-expand-lg">
             <div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -140,8 +141,7 @@
             </div>
         </nav>
     </div>
-
-    <div class="search col-md-2">
+    <div class="search col-md-3 col-sm-8 col-8 offset-2 pe-4 pt-2">
         <form action="./drugstore.php" method="get" name="search" id="search" class="d-flex" role="search">
             <input name="search_name" id="search_name" class="form-control me-2" type="search" placeholder="找商品" aria-label="Search" value="<?php echo (isset($_GET['search_name']) ? $_GET['search_name'] : '') ?>" required>
             <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>

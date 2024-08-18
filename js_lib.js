@@ -1,9 +1,9 @@
 // 
 $(function () {
     $(".goods a").mouseover(function () {
-        var imgsrc = $(this).children("img").attr("src");
+        var img_src = $(this).children("img").attr("src");
         $("#showGoods").attr({
-            "src": imgsrc
+            "src": img_src
         });
     });
 

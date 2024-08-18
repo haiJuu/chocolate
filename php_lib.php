@@ -20,11 +20,25 @@ function boxShadow($now_brand, $check_brand)
 	return (($now_brand == $check_brand) ? "box-shadow" : "");
 }
 
-function locationCircle($now_class, $check_class)
+function locationCircle($now_brand, $now_class, $check_class)
 {
-	return (($now_class == $check_class) ? "<span style='color:lightgray;font-size:60%'> ● </span>" : "");
-}
+	switch ($now_brand) {
+		case 1:
+			$circle_color = "#153d35";
+			break;
+		case 2:
+			$circle_color = "#33618a";
+			break;
+		case 3:
+			$circle_color = "#b7d200";
+			break;
+		case 4:
+			$circle_color = "#ffb504";
+			break;
+	}
 
+	return (($now_class == $check_class) ? "<span style='color:" . $circle_color . ";font-size:60%'> ● </span>" : "");
+}
 
 // product_list
 function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Recordset1, $next_Recordset1, $separator = " | ", $sname, $max_links = 10, $show_page = true, $selmode = 1)
@@ -130,4 +144,27 @@ function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Reco
 		}
 	}
 	return array($firstArray, $pagesArray, $lastArray);
+}
+
+
+// product_list
+// goods_content
+function btnColor($now_brand)
+{
+	switch ($now_brand) {
+		case 1:
+			$circle_color = "#153d35";
+			break;
+		case 2:
+			$circle_color = "#33618a";
+			break;
+		case 3:
+			$circle_color = "#b7d200";
+			break;
+		case 4:
+			$circle_color = "#ffb504";
+			break;
+	}
+
+	return $circle_color;
 }
