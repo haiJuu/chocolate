@@ -1,8 +1,8 @@
 <?php
 // PDO sql連線指令
 $dsn = "mysql:host=localhost;dbname=expstore;charset=utf8";
-$user = "root";
-$password = "";
+$user = "haijuu";
+$password = "820918";
 $link = new PDO($dsn, $user, $password);
 
 // 設置字符集
