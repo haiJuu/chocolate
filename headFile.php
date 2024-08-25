@@ -15,4 +15,4 @@
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./style_rwd.css">
+<link rel="stylesheet" href="./styleRwd.css">

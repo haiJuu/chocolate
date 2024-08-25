@@ -3,7 +3,7 @@ require_once("./connections/conn_db.php");
 
 (!isset($_SESSION)) ? session_start() : "";
 
-require_once("php_lib.php");
+require_once("phpLib.php");
 ?>
 
 
@@ -12,7 +12,7 @@ require_once("php_lib.php");
 
 <head>
 
-    <?php require_once("./head_file.php") ?>
+    <?php require_once("./headFile.php") ?>
 
 </head>
 
@@ -27,7 +27,7 @@ require_once("php_lib.php");
     <section id="content" class="container-fluid">
 
         <?php require_once("./carousel.php") ?>
-        <?php require_once("./brand_hot.php") ?>
+        <?php require_once("./brandAndHot.php") ?>
 
     </section>
 
@@ -37,7 +37,7 @@ require_once("php_lib.php");
 
     </footer>
 
-    <?php require_once("./js_file.php") ?>
+    <?php require_once("./jsFile.php") ?>
 
 </body>
 

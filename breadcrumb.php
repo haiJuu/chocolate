@@ -59,7 +59,7 @@ if (isset($_GET['p_id']) && $_GET['p_id'] != '') {
 
 ?>
 
-<div class="row" style="padding-right:0">
+<div class="row">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="./index.php"><i class="fa-solid fa-house"></i></a></li>

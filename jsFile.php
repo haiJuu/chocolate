@@ -9,4 +9,4 @@
 
 
 <!-- js_lib -->
-<script src="./js_lib.js"></script>
+<script src="./jsLib.js"></script>

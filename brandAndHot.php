@@ -44,12 +44,12 @@
                 </a> -->
             </div>
 
-            <div class="hot-start text-start">
+            <div class="row hot-start text-start">
                 <!-- <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> <i class="fas fa-crown"></i> -->
                 品 × 牌 × 暢 × 銷
             </div>
 
-            <div class="hot">
+            <div class="row hot">
                 <?php
                 $select_hot = sprintf("SELECT * FROM hot,product,product_img WHERE hot.b_id=%d AND hot.p_id=product.p_id AND hot.p_id=product_img.p_id AND product_img.sort=1 ORDER BY h_sort", $fetch_brand['b_id']);
                 $hot = $link->query($select_hot);
@@ -57,7 +57,7 @@
                 <?php
                 while ($fetch_hot = $hot->fetch()) {
                 ?>
-                    <div class="card">
+                    <div class="card col-md-3 col-sm-3 col-3">
                         <a href="goods.php?p_id=<?php echo $fetch_hot['p_id'] ?>"><img src="./images/product/<?php echo $fetch_hot['img_file']; ?>" class="card-img-top" alt="BRAND HOT PRODUCT <?php echo $fetch_hot['h_sort']; ?>" title="<?php echo $fetch_hot['p_name']; ?>"></a>
                     </div>
                 <?php } ?>

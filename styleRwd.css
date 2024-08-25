@@ -1,0 +1,55 @@
+@media screen and (max-width:767px) {
+
+    section#content .brand>.card img {
+        width: 40vw;
+    }
+
+    section#content .brand .card .card-img-overlay {
+        font-size: 14px;
+        line-height: 1.5rem;
+    }
+
+    section#content .imgbar ul li {
+        margin: 1rem 0.5rem 0 0.5rem;
+        font-size: 0.8rem;
+    }
+
+}
+
+
+@media screen and (max-width:420px) {
+
+
+    header .logo {
+        font-size: 3rem;
+    }
+
+    header .nav {
+        font-size: 0.8rem;
+    }
+
+    section#content .brand-start {
+        font-size: 0.8rem;
+    }
+
+    section#content .brand .card .card-img-overlay {
+        font-size: 10px;
+        line-height: 1.25rem;
+    }
+
+    section#content .brand .card .hot-start {
+        font-size: 0.8rem;
+    }
+
+    section#content .imgbar {
+        padding: 3rem 0 1rem 0;
+    }
+
+    section#content .goods .goodsmark div {
+        font-size: 0.8rem;
+    }
+
+    section#content .goods>div:nth-child(3) {
+        font-size: 0.8rem;
+    }
+}

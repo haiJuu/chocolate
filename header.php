@@ -4,7 +4,6 @@
             CHO
         </a>
     </div>
-
     <div class="font col-md-4 offset-md-0 col-sm-3 offset-sm-7 col-8 align-content-center text-end pe-4">
         <?php
         $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
@@ -12,11 +11,11 @@
         $count_cart = $cart->rowCount();
         ?>
 
-        <a href="#">
+        <a href="./cart.php">
             <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart; ?></span>
         </a>
         <a href="#">
-            <i class="fas fa-portrait"></i>
+            <i class="fas fa-portrait ms-3"></i>
         </a>
     </div>
     <div class="nav col-md-7 col-sm-2 col-2">

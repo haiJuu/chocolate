@@ -11,7 +11,9 @@ require_once("phpLib.php");
 <html lang="zh-TW">
 
 <head>
+
     <?php require_once("./headFile.php") ?>
+
 </head>
 
 <body>
@@ -19,13 +21,14 @@ require_once("phpLib.php");
     <header class="container-fluid fixed-top">
 
         <?php require_once("./header.php") ?>
-        <?php require_once("./breadcrumb.php") ?>
 
     </header>
 
     <section id="content" class="container-fluid">
 
-        <?php require_once("./goodsContent.php") ?>
+        <div class="register">
+
+        </div>
 
     </section>
 

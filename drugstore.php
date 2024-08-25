@@ -3,7 +3,7 @@ require_once("./connections/conn_db.php");
 
 (!isset($_SESSION)) ? session_start() : "";
 
-require_once("php_lib.php");
+require_once("phpLib.php");
 ?>
 
 
@@ -11,7 +11,7 @@ require_once("php_lib.php");
 <html lang="zh-TW">
 
 <head>
-    <?php require_once("./head_file.php") ?>
+    <?php require_once("./headFile.php") ?>
 </head>
 
 <body>
@@ -26,7 +26,7 @@ require_once("php_lib.php");
     <section id="content" class="container-fluid">
 
         <?php require_once("./imgbar.php") ?>
-        <?php require_once("./product_list.php") ?>
+        <?php require_once("./productList.php") ?>
 
     </section>
 
@@ -36,7 +36,7 @@ require_once("php_lib.php");
 
     </footer>
 
-    <?php require_once("./js_file.php") ?>
+    <?php require_once("./jsFile.php") ?>
 
 </body>
 

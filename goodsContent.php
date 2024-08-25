@@ -1,22 +1,22 @@
 <div class="goods">
-    <div class="card mb-3">
+    <div class="card">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-sm-8 col-12 productImg mb-5 pe-3">
-                <div class="me-3">
+            <div class="productImg col-md-6 col-sm-10 col-12 mb-3 pe-3">
+                <div class="col-md-1 col-sm-2 col-2 me-3">
                     <?php
                     $select_product_img = sprintf("SELECT * FROM product_img WHERE product_img.p_id=%d AND product_img.sort < 6 ORDER BY sort DESC", $_GET['p_id']);
                     $product_img = $link->query($select_product_img);
                     $fetch_product_img = $product_img->fetch()
                     ?>
                     <?php do { ?>
-                        <div>
+                        <div class="row">
                             <a href="./images/product/<?php echo $fetch_product_img['img_file'] ?>" rel="group" class="fancybox" title="<?php echo $fetch_product['p_name']; ?>">
                                 <img src="./images/product/<?php echo $fetch_product_img['img_file']; ?>" alt="<?php echo $fetch_product['p_name']; ?>" title="<?php echo $fetch_product['p_name']; ?>" class="img-fluid">
                             </a>
                         </div>
                     <?php } while ($fetch_product_img = $product_img->fetch()) ?>
                 </div>
-                <div>
+                <div class="col-md-6 col-sm-8 col-9">
                     <?php
                     $select_product_img = sprintf("SELECT * FROM product_img WHERE product_img.p_id=%d AND product_img.sort < 6 ORDER BY sort DESC", $_GET['p_id']);
                     $product_img = $link->query($select_product_img);
@@ -26,26 +26,37 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-8 col-12">
-                <?php
-                $select_brand = sprintf("SELECT * FROM brand,product WHERE brand.b_id=product.b_id AND product.p_id ='%d'", $_GET['p_id']);
-                $brand = $link->query($select_brand);
-                $fetch_brand = $brand->fetch()
-                ?>
+            <div class="productInfo col-md-6 col-sm-10 col-12 ps-3">
+                <div class="col-md-6 col-sm-12 col-12">
+                    <div class="row justify-content-end">
+                        <div class="col-md-3 col-sm-2 col-2">
+                            <?php
+                            $select_brand = sprintf("SELECT * FROM brand,product WHERE brand.b_id=product.b_id AND product.p_id ='%d'", $_GET['p_id']);
+                            $brand = $link->query($select_brand);
+                            $fetch_brand = $brand->fetch()
+                            ?>
 
-                <div class="productInfo">
-                    <div class="img-container">
-                        <img src="./images/brand/<?php echo $fetch_brand['b_logo']; ?>" alt="<?php echo $fetch_brand['cname']; ?>" title="<?php echo $fetch_brand['cname']; ?>" style="border: 1px solid <?php echo btnColor($fetch_brand['b_id']); ?>;">
+                            <img src="./images/brand/<?php echo $fetch_brand['b_logo']; ?>" alt="<?php echo $fetch_brand['cname']; ?>" title="<?php echo $fetch_brand['cname']; ?>" style="border: 1px solid <?php echo btnColor($fetch_brand['b_id']); ?>;">
+                        </div>
                     </div>
-                    <h4 class="card-title"><?php echo $fetch_product['p_name']; ?></h4>
-                    <p class="card-text"><?php echo $fetch_product['p_intro']; ?></p>
-                    <br>
-                    <h5 class="color_e600a0">NT$ <?php echo $fetch_product['p_price']; ?></h5>
-                    <div class="text-end mb-1"><label for="qty">數量</label></div>
-                    <div>
-                        <input type="number" id="qty" name="qty" value="1" class="w-100" min="0">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <h4 class="card-title"><?php echo $fetch_product['p_name']; ?></h4>
+                            <p class="card-text"><?php echo $fetch_product['p_intro']; ?></p>
+                            <h5 class="color_e600a0">
+                                NT$ <?php echo $fetch_product['p_price']; ?>
+                            </h5>
+                            <div class="text-end mb-1">
+                                <label for="qty">
+                                    數量
+                                </label>
+                            </div>
+                            <div>
+                                <input type="number" id="qty" name="qty" value="1" class="w-100" min="0">
+                            </div>
+                            <button name="cartAdd" id="cartAdd" type="button" class="btn w-100 mt-3" onclick="addCart(<?php echo $fetch_product['p_id']; ?>)" style="background-color:<?php echo btnColor($fetch_brand['b_id']); ?>">加入購物車</button>
+                        </div>
                     </div>
-                    <button name="add_cart" id="add_cart" type="button" class="btn w-100 mt-3" onclick="addCart(<?php echo $fetch_product['p_id']; ?>)" style="background-color:<?php echo btnColor($fetch_brand['b_id']); ?>">加入購物車</button>
                 </div>
             </div>
         </div>
