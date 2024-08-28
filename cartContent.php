@@ -9,14 +9,14 @@
         ?>
 
         <?php if ($cart->rowCount() != 0) { ?>
-            <div class="col-md-8 col-sm-10 col-12">
+            <div class="col-md-8 col-sm-10 col-10">
                 <div class="table-responsive-md">
                     <table class="table table-hover mt-3">
                         <thead>
                             <tr>
                                 <td colspan="3">購物車 ( <?php echo $cart->rowCount() ?> 件)</td>
                                 <td class="text-end" colspan="3">
-                                    <button type="button id=" name="btn01" class="btn btn-success" onclick="btn_confirmLink('確定清空購物車?','./cartDelete.php?mode=2')">清空全部</button>
+                                    <button type="button id=" name="btn01" class="btn btn-success" onclick="btnConfirmLink('確定清空購物車?','./cartDelete.php?mode=2')">清空全部</button>
                                 </td>
                             </tr>
                             <tr class="table-warning">
@@ -49,7 +49,7 @@
                                         <h4 class="color_e600a0 pt-1"><?php echo $fetch_cart['p_price'] * $fetch_cart['qty']; ?></h4>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-danger" onclick="btn_confirmLink('確定刪除此商品?','./cartDelete.php?mode=1&cart_id=<?php echo $fetch_cart['cart_id']; ?>')"><i class="fas fa-times"></i></button>
+                                        <button type="button" class="btn btn-danger" onclick="btnConfirmLink('確定刪除此商品?','./cartDelete.php?mode=1&cart_id=<?php echo $fetch_cart['cart_id']; ?>')"><i class="fas fa-times"></i></button>
                                     </td>
                                 </tr>
                             <?php
@@ -114,8 +114,14 @@
             </div>
         <?php } else { ?>
 
-            <div class="alert alert-warning col-md-8 col-sm-10 col-12" role="alert">
-                抱歉，目前購物車沒有相關產品。
+            <div class="emptyCart col-md-4 col-sm-6 col-8 text-center">
+                <i class="fa-solid fa-circle-exclamation mb-5"></i>
+                <h5>購物車是空的</h5>
+                <a href="./drugstore.php">
+                    <button class="btn w-75 mt-5">
+                        返回購物
+                    </button>
+                </a>
             </div>
 
         <?php } ?>

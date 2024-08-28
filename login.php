@@ -5,14 +5,14 @@ require_once("./connections/conn_db.php");
 
 require_once("phpLib.php");
 
-if (isset($_GET['sPath'])) {
-    $sPath = $_GET['sPath'] . ".php";
+if (isset($_GET['goToPath'])) {
+    $goToPath = $_GET['goToPath'] . ".php";
 } else {
-    $sPath = "index.php";
+    $goToPath = "index.php";
 }
 
 if (isset($_SESSION['login'])) {
-    header(sprintf("Location:%s", $sPath));
+    header(sprintf("Location:%s", $goToPath));
 }
 ?>
 
@@ -36,21 +36,44 @@ if (isset($_SESSION['login'])) {
 
     <section id="content" class="container-fluid">
 
-        <div class="login">
+        <?php if (!isset($_SESSION['login'])) { ?>
+            <div class="login">
+                <div class="row justify-content-center">
+                    <div class="loginCol col-md-4 col-sm-6 col-10">
+                        <h3 id="profile-name" class="profile-name-card mb-5">已經是會員</h3>
+                        <form action="" method="POST" id="loginForm">
+                            <input type="email" id="inputAccount" name="inputAccount" class="mb-3 w-100" placeholder="請輸入電郵" required autofocus>
+                            <input type="password" id="inputPassword" name="inputPassword" class="mb-3 w-100" placeholder="請輸入密碼" required>
+                            <div class="forgetPassword">
+                                <a href="#" style="color:darkblue">忘記密碼 ?</a>
+                            </div>
+                            <button type="submit" class="btn w-100 mt-3">
+                                會員登入
+                            </button>
+                        </form>
 
-            <img src="" alt="logo" id="profile-img" class="profile-img-card">
-            <p id="profile-name" class="profile-name-card">會員登入</p>
-            <form action="" method="POST" class="form-signin" id="form1">
-                <input type="email" id="inputAccount" name="inputAccount" class="form-control" placeholder="Account" required autofocus>
-                <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
-                <button type="submit" class="btn btn-signin mt-4">sign in</button>
-            </form>
-            <div class="other mt-5 text-center">
-                <a href="register.php">New user</a>
-                <a href="#">Forget the password?</a>
+                        <h3 id="profile-name" class="profile-name-card mt-5 mb-5">還不是會員</h3>
+                        <div class="other mt-5 text-center">
+                            <a href="./register.php">
+                                <button class="btn w-100">
+                                    註冊會員
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } else { ?>
+
+            <div class="member">
+                <div class="row justify-content-center">
+                    <div class="loginCol col-md-4 col-sm-6 col-10">
+                        會員資料
+                    </div>
+                </div>
             </div>
 
-        </div>
+        <?php } ?>
 
     </section>
 
@@ -61,6 +84,39 @@ if (isset($_SESSION['login'])) {
     </footer>
 
     <?php require_once("./jsFile.php") ?>
+
+    <script>
+        $(function() {
+            $("#loginForm").submit(function() {
+                const inputAccount = $("#inputAccount").val();
+                const inputPassword = $("#inputPassword").val();
+
+                // $("#loading").show();
+
+                $.ajax({
+                    url: 'loginAuthAjax.php',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        inputAccount: inputAccount,
+                        inputPassword: inputPassword,
+                    },
+                    success: function(data) {
+                        if (data.c == true) {
+                            alert(data.m);
+                            window.location.href = "<?php echo $goToPath; ?>";
+                        } else {
+                            alert(data.m);
+                        }
+                    },
+                    error: function(data) {
+                        alert("目前無法連接到系統");
+                    }
+
+                });
+            });
+        });
+    </script>
 
 </body>
 

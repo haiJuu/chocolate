@@ -14,9 +14,15 @@
         <a href="./cart.php">
             <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart; ?></span>
         </a>
-        <a href="#">
+        <a href="./login.php">
             <i class="fas fa-portrait ms-3"></i>
         </a>
+        <?php if (isset($_SESSION['login'])) { ?>
+            <a href="javascript:void(0);" onclick="btnConfirmLink('確定登出 ?','./logout.php')" title="登出">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+
+        <?php } ?>
     </div>
     <div class="nav col-md-7 col-sm-2 col-2">
         <nav class="navbar navbar-expand-lg">

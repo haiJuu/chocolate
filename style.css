@@ -454,6 +454,96 @@ section#content .cart .table tbody tr td {
     font-size: 1rem;
 }
 
+section#content .cart .emptyCart i {
+    font-size: 8rem;
+}
+
+section#content .cart .emptyCart button {
+    background-color: #212529;
+    color: white;
+}
+
+section#content .checkout {
+    /* border: 1px solid black; */
+    margin-top: 6rem;
+    padding-bottom: 2rem;
+}
+
+section#content .login {
+    /* border: 1px solid black; */
+    margin-top: 5rem;
+    padding-bottom: 3rem;
+}
+
+section#content .loginCol {
+    box-shadow: 1px 1px 5px lightgray;
+    /* border: 1px solid blcak; */
+    padding: 5%;
+    box-sizing: border-box;
+}
+
+section#content .login input {
+    border: none;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+}
+
+section#content .login input:focus {
+    border-bottom: 1px solid gray;
+    border-color: none;
+    outline: 0;
+    color: #212529;
+}
+
+section#content .login .forgetPassword {
+    font-size: 14px;
+}
+
+section#content .login button {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: gray;
+    font-size: 1rem;
+}
+
+section#content .login a {
+    /* border: 1px solid black; */
+    color: gray;
+    text-decoration: none;
+}
+
+section#content .login button:hover,
+section#content .login a button:hover {
+    background-color: lightgray;
+    color: white;
+}
+
+section#content .register {
+    /* border: 1px solid black; */
+    margin-top: 5rem;
+    padding-bottom: 3rem;
+}
+
+section#content .register .input-group>.form-control {
+    width: 100%;
+}
+
+section#content .register span.error-tips,
+section#content .register span.error-tips::before {
+    font-family: "Font Awesome 5 Free";
+    color: red;
+    font-weight: 900;
+    content: "\f0c4";
+}
+
+section#content .register span.valid-tips,
+section#content .register span.valid-tips::before {
+    font-family: "Font Awesome 5 Free";
+    color: greenyellow;
+    font-weight: 900;
+    content: "\f00c";
+}
+
 footer {
     /* border: 1px solid black; */
     padding-top: 2rem;
