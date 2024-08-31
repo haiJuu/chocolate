@@ -25,31 +25,31 @@ require_once("phpLib.php");
     </header>
 
     <?php
-    // if ((isset($_POST['formctl'])) && ($_POST['formctl'] == 'reg')) {
-    //     $email = $_POST['email'];
-    //     $pw1 = md5($_POST['pw1']);
-    //     $cname = $_POST['cname'];
-    //     $tssn = $_POST['tssn'];
-    //     $birthday = $_POST['birthday'];
-    //     $mobile = $_POST['mobile'];
-    //     $myzip = $_POST['myZip'] == "" ? NULL : $_POST['myZip'];
-    //     $address = $_POST['address'] == "" ? NULL : $_POST['address'];
-    //     $imgname = $_POST['uploadname'] == "" ? NULL : $_POST['uploadname'];
-    //     $insertsql = "INSERT INTO member(email,pw1,cname,tssn,birthday,imgname) VALUES ('" . $email . "','" . $pw1 . "','" . $cname . "','" . $tssn . "','" . $birthday . "','" . $imgname . "')";
-    //     $Result = $link->query($insertsql);
-    //     $emailid = $link->lastInsertId();
+    if ((isset($_POST['formctl'])) && ($_POST['formctl'] == 'reg')) {
+        $email = $_POST['email'];
+        $pw1 = md5($_POST['pw1']);
+        $cname = $_POST['cname'];
+        $tssn = $_POST['tssn'];
+        $birthday = $_POST['birthday'];
+        $mobile = $_POST['mobile'];
+        $zip = $_POST['zip'] == "" ? NULL : $_POST['zip'];
+        $address = $_POST['address'] == "" ? NULL : $_POST['address'];
+        $memberImg = $_POST['memberImg'] == "" ? NULL : $_POST['memberImg'];
+        $insert_member = "INSERT INTO member(email,pw1,cname,tssn,birthday,member_img) VALUES ('" . $email . "','" . $pw1 . "','" . $cname . "','" . $tssn . "','" . $birthday . "','" . $memberImg . "')";
+        $member = $link->query($insert_member);
+        $email_id = $link->lastInsertId();
 
-    //     if ($Result) {
-    //         $insertsql = "INSERT INTO addbook(emailid,setdefault,cname,mobile,myzip,address) VALUES ('" . $emailid . "','1','" . $cname . "','" . $mobile . "','" . $myzip . "','" . $address . "')";
-    //         $Result = $link->query($insertsql);
+        if ($member) {
+            $insertsql = "INSERT INTO addbook(email_id,setdefault,cname,mobile,zip,address) VALUES ('" . $email_id . "','1','" . $cname . "','" . $mobile . "','" . $zip . "','" . $address . "')";
+            $addbook = $link->query($insertsql);
 
-    //         $_SESSION['login'] = true;
-    //         $_SESSION['emailid'] = $emailid;
-    //         $_SESSION['email'] = $email;
-    //         $_SESSION['cname'] = $cname;
-    //         echo "<script language='javascript'>alert('謝謝您，會員資料已完成註冊');location.href='./index.php'</script>";
-    //     }
-    // }
+            $_SESSION['login'] = true;
+            $_SESSION['email_id'] = $email_id;
+            $_SESSION['email'] = $email;
+            $_SESSION['cname'] = $cname;
+            echo "<script language='javascript'>alert('謝謝您，會員資料已完成註冊');location.href='./index.php'</script>";
+        }
+    }
     ?>
 
 
@@ -57,15 +57,15 @@ require_once("phpLib.php");
 
         <div class="register">
 
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1>會員註冊頁面</h1>
-                    <p>請輸入相關資料，*為必須輸入欄位</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-8 col-10 text-start">
+                    <h1>填寫註冊資料</h1>
+                    <p>*為必須輸入欄位</p>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-8 offset-2 text-left">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-8 col-10 text-left">
                     <form action="./register.php" method="POST" id="reg" name="reg">
                         <div class="input-group mb-3">
                             <input type="email" id="email" name="email" class="form-control" placeholder="*請輸入email帳號">
@@ -88,47 +88,38 @@ require_once("phpLib.php");
                         <div class="input-group mb-3">
                             <input type="text" id="mobile" name="mobile" class="form-control" placeholder="請輸入手機號碼">
                         </div>
-
-                        <div class="input-group mb-3">
-                            <select id="myCity" name="myCity" class="form-control">
-                                <option value="">請選擇市區</option>
+                        <div class="input-group mb-2">
+                            <select id="city" name="city" class="form-control w-50">
+                                <option value="">選擇縣市</option>
                                 <?php
-                                $city = "SELECT * FROM city WHERE State=0";
-                                $city_rs = $link->query($city);
-                                while ($city_rows = $city_rs->fetch()) {
+                                $select_city = "SELECT * FROM city WHERE state=0";
+                                $city = $link->query($select_city);
+                                while ($fetch_city = $city->fetch()) {
                                 ?>
-                                    <option value="<?php echo $city_rows['AutoNo']; ?>"><?php echo $city_rows['Name']; ?></option>
-
+                                    <option value="<?php echo $fetch_city['auto_no']; ?>"><?php echo $fetch_city['cname']; ?></option>
                                 <?php } ?>
                             </select>
-                            <br>
-                            <select id="myTown" name="myTown" class="form-control">
-                                <option value="">請選擇地區</option>
+                            <select id="town" name="town" class="form-control w-50">
+                                <option value="">選擇鄉鎮市區</option>
                             </select>
                         </div>
-                        <label for="address" class="form-label" id="zipcode" name="zipcode">郵遞區號：地址</label>
+                        <label for="address" class="form-label" id="zipcode" name="zipcode">郵遞區號：</label>
                         <div class="input-group mb-3">
-                            <input type="hidden" id="myZip" name="myZip" value="">
+                            <input type="hidden" id="zip" name="zip" value="">
                             <input type="text" id="address" name="address" class="form-control" placeholder="請輸入後續地址">
                         </div>
-
-                        <label for="fileToUpload" class="form-label">上傳相片：</label>
+                        <label for="memberImg" class="form-label">上傳相片：</label>
                         <div class="input-group mb-3">
-                            <input type="file" id="fileToUpload" name="fileToUpload" class="form-control" title="請上傳相片圖示" accept="image/x-png,image/jpeg,image/gif,image/jpg">
-
+                            <input type="file" id="memberImg" name="memberImg" class="form-control mb-1" title="請上傳相片圖示" accept="image/x-png,image/jpeg,image/gif,image/jpg">
                             <p>
-                                <button type="button" class="btn btn-danger" id="uploadForm" name="uploadForm">開始上傳</button>
+                                <button type="button" class="btn btn-danger" id="uploadImg" name="uploadImg">開始上傳</button>
                             </p>
-
                             <div class="progress" id="progress-div01" style="width:100%;display:none;">
                                 <div id="progress-bar01" class="progress-bar progress-bar-striped" role="progressbar" style="width:0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">0%</div>
                             </div>
-
                             <input type="hidden" id="uploadname" name="uploadname" value="">
-
-                            <img src="" alt="photo" id="showimg" name="showimg" class="img-fluid" style="display:none;">
+                            <img src="" alt="photo" id="showImg" name="showImg" class="img-fluid" style="display:none;">
                         </div>
-
                         <div class="input-group mb-3">
                             <input type="hidden" id="captcha" name="captcha" value=" ">
                             <a href="javascript:void(0);" title="按我更新認證" onclick="getCaptcha();">
@@ -142,21 +133,10 @@ require_once("phpLib.php");
                         <div class="input-group mb-3">
                             <button type="submit" class="btn btn-success btn-lg">送出</button>
                         </div>
-
-                        <!-- <div class="input-group mb-3">
-                                    <input type="" id="" name="" class="form-control" placeholder="">
-                                </div> -->
-
                     </form>
                 </div>
             </div>
-
         </div>
-        </div>
-        </div>
-
-        </div>
-
     </section>
 
     <footer class="container-fluid">

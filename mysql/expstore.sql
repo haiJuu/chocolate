@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024-08-18 09:36:02
+-- 產生時間： 2024-08-30 22:49:32
 -- 伺服器版本： 8.3.0
 -- PHP 版本： 8.2.18
 
@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- 資料庫： `expstore`
@@ -30,15 +30,22 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `addbook`;
 CREATE TABLE IF NOT EXISTS `addbook` (
   `address_id` int NOT NULL AUTO_INCREMENT COMMENT '地址ID',
-  `setdefault` tinyint(1) NOT NULL DEFAULT '0' COMMENT '預設收件人',
   `email_id` int NOT NULL COMMENT '會員編號',
-  `cname` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '收件者姓名',
-  `mobile` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '收件者電話',
-  `myzip` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '郵遞區號',
-  `address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '收件地址',
+  `setdefault` tinyint(1) NOT NULL DEFAULT '0' COMMENT '預設收件人',
+  `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件者姓名',
+  `mobile` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件者電話',
+  `zip` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '郵遞區號',
+  `address` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件地址',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`address_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- 傾印資料表的資料 `addbook`
+--
+
+INSERT INTO `addbook` (`address_id`, `email_id`, `setdefault`, `cname`, `mobile`, `zip`, `address`, `create_date`) VALUES
+(1, 3, 1, '喬', '0900999000', '542', '碧山路999號', '2024-08-30 22:38:15');
 
 -- --------------------------------------------------------
 
@@ -50,13 +57,13 @@ DROP TABLE IF EXISTS `brand`;
 CREATE TABLE IF NOT EXISTS `brand` (
   `b_id` int NOT NULL AUTO_INCREMENT COMMENT '品牌編號',
   `class_id` int NOT NULL COMMENT '類別編號',
-  `cname` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '品牌中稱',
-  `ename` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '品牌英稱',
-  `b_logo` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '品牌商標',
-  `b_content` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '品牌簡介',
+  `cname` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌中稱',
+  `ename` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌英稱',
+  `b_logo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌商標',
+  `b_content` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '品牌簡介',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建日期',
   PRIMARY KEY (`b_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `brand`
@@ -79,14 +86,14 @@ CREATE TABLE IF NOT EXISTS `carousel` (
   `caro_id` int NOT NULL AUTO_INCREMENT COMMENT '輪播編號',
   `b_id` int NOT NULL COMMENT '品牌編號',
   `p_id` int DEFAULT NULL COMMENT '產品編號',
-  `caro_title` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '輪播標題',
-  `caro_content` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '輪播內容介紹',
+  `caro_title` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '輪播標題',
+  `caro_content` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '輪播內容介紹',
   `caro_online` tinyint(1) NOT NULL DEFAULT '1' COMMENT '上下架',
   `caro_sort` int NOT NULL COMMENT '輪播排序',
-  `caro_pic` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '輪播圖檔名稱',
+  `caro_pic` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '輪播圖檔名稱',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`caro_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `carousel`
@@ -110,30 +117,26 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `email_id` int DEFAULT NULL COMMENT '會員編號',
   `p_id` int NOT NULL COMMENT '產品編號',
   `qty` int NOT NULL COMMENT '產品數量',
-  `order_id` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '訂單編號',
+  `order_id` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '訂單編號',
   `status` tinyint NOT NULL DEFAULT '1' COMMENT '訂單處理狀態',
-  `ip` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '訂購者的IP',
+  `ip` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '訂購者的IP',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入購物車時間',
   PRIMARY KEY (`cart_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `email_id`, `p_id`, `qty`, `order_id`, `status`, `ip`, `create_date`) VALUES
-(22, NULL, 24, 1, NULL, 1, '::1', '2024-08-18 06:31:00'),
-(21, NULL, 25, 2, NULL, 1, '::1', '2024-08-18 06:30:57'),
-(20, NULL, 46, 1, NULL, 1, '::1', '2024-08-18 06:30:55'),
-(19, NULL, 45, 1, NULL, 1, '::1', '2024-08-18 06:30:54'),
-(18, NULL, 44, 1, NULL, 1, '::1', '2024-08-18 06:30:52'),
-(17, NULL, 43, 1, NULL, 1, '::1', '2024-08-18 06:30:52'),
-(16, NULL, 47, 1, NULL, 1, '::1', '2024-08-18 06:30:50'),
-(15, NULL, 48, 1, NULL, 1, '::1', '2024-08-18 06:30:49'),
-(14, NULL, 49, 1, NULL, 1, '::1', '2024-08-18 06:30:47'),
-(13, NULL, 6, 1, NULL, 1, '::1', '2024-08-18 06:29:36'),
-(12, NULL, 17, 1, NULL, 1, '::1', '2024-08-18 06:28:22'),
-(23, NULL, 20, 2, NULL, 1, '::1', '2024-08-18 06:31:03');
+(108, NULL, 68, 1, NULL, 1, '::1', '2024-08-30 11:28:43'),
+(107, NULL, 69, 1, NULL, 1, '::1', '2024-08-30 11:28:42'),
+(106, NULL, 70, 1, NULL, 1, '::1', '2024-08-30 11:28:41'),
+(105, NULL, 71, 1, NULL, 1, '::1', '2024-08-30 11:28:40'),
+(104, NULL, 4, 1, NULL, 1, '::1', '2024-08-30 11:28:38'),
+(103, NULL, 3, 1, NULL, 1, '::1', '2024-08-30 11:28:38'),
+(102, NULL, 2, 1, NULL, 1, '::1', '2024-08-30 11:28:37'),
+(101, NULL, 1, 1, NULL, 1, '::1', '2024-08-30 11:28:36');
 
 -- --------------------------------------------------------
 
@@ -144,17 +147,17 @@ INSERT INTO `cart` (`cart_id`, `email_id`, `p_id`, `qty`, `order_id`, `status`, 
 DROP TABLE IF EXISTS `city`;
 CREATE TABLE IF NOT EXISTS `city` (
   `auto_no` int NOT NULL AUTO_INCREMENT COMMENT '城市編號',
-  `name` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '城市名稱',
+  `cname` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '城市名稱',
   `city_order` tinyint NOT NULL COMMENT '標記',
   `state` smallint NOT NULL COMMENT '狀態',
   PRIMARY KEY (`auto_no`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `city`
 --
 
-INSERT INTO `city` (`auto_no`, `name`, `city_order`, `state`) VALUES
+INSERT INTO `city` (`auto_no`, `cname`, `city_order`, `state`) VALUES
 (1, '臺北市', 0, 0),
 (2, '基隆市', 0, 0),
 (3, '新北市', 0, 0),
@@ -192,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `hot` (
   `p_id` int NOT NULL COMMENT '產品編號',
   `h_sort` int DEFAULT NULL COMMENT '熱銷商品排名',
   PRIMARY KEY (`h_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `hot`
@@ -225,17 +228,24 @@ INSERT INTO `hot` (`h_id`, `b_id`, `p_id`, `h_sort`) VALUES
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE IF NOT EXISTS `member` (
   `email_id` int NOT NULL AUTO_INCREMENT COMMENT 'email流水號',
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'email帳號',
-  `pw1` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '密碼',
+  `email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT 'email帳號',
+  `pw1` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '密碼',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否啟動',
-  `cname` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '中文姓名',
-  `tssn` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '身份證字號',
+  `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '中文姓名',
+  `tssn` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '身份證字號',
   `birthday` date NOT NULL COMMENT '生日',
-  `imgname` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '相片檔名',
+  `member_img` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '會員相片',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`email_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- 傾印資料表的資料 `member`
+--
+
+INSERT INTO `member` (`email_id`, `email`, `pw1`, `active`, `cname`, `tssn`, `birthday`, `member_img`, `create_date`) VALUES
+(3, 'cho@gmail.com', '55291adf660a480208c49c7b5094c17c', 1, '喬', 'H200009999', '2024-08-31', 'pathOfExile4.jpg', '2024-08-30 22:38:15');
 
 -- --------------------------------------------------------
 
@@ -248,15 +258,15 @@ CREATE TABLE IF NOT EXISTS `multiselect` (
   `ms_id` int NOT NULL AUTO_INCREMENT COMMENT '多功能選擇ID',
   `mslevel` int NOT NULL COMMENT '多功能選擇層級',
   `msuplink` int NOT NULL COMMENT '上層連結',
-  `opcode` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '外掛參數',
-  `msname` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '多功能選擇名稱',
+  `opcode` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛參數',
+  `msname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '多功能選擇名稱',
   `msort` int DEFAULT NULL COMMENT '各功能列表排序',
-  `url1` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '外掛網址1',
-  `url2` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '外掛網址2',
+  `url1` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛網址1',
+  `url2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛網址2',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
-  `update_date` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '修改日期',
+  `update_date` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`ms_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `multiselect`
@@ -295,18 +305,18 @@ CREATE TABLE IF NOT EXISTS `product` (
   `p_id` int NOT NULL AUTO_INCREMENT COMMENT '產品編號',
   `b_id` int NOT NULL COMMENT '品牌編號',
   `class_id` int NOT NULL COMMENT '產品類別',
-  `p_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '產品名稱',
-  `p_ename` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '產品英名',
-  `p_intro` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '產品簡介',
+  `p_name` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '產品名稱',
+  `p_ename` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '產品英名',
+  `p_intro` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '產品簡介',
   `p_price` int DEFAULT NULL COMMENT '產品單價',
   `p_open` tinyint(1) NOT NULL DEFAULT '1' COMMENT '上架',
-  `p_description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '產品描述',
-  `p_award` text CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '產品獎牌',
-  `p_spec` text CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '其他資訊',
-  `p_shipping` text CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '運送方式',
+  `p_description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci COMMENT '產品描述',
+  `p_award` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci COMMENT '產品獎牌',
+  `p_spec` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci COMMENT '其他資訊',
+  `p_shipping` text CHARACTER SET utf8mb4 COLLATE utf8mb4_zh_0900_as_cs COMMENT '運送方式',
   `p_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '產品輸入日期',
   PRIMARY KEY (`p_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `product`
@@ -432,11 +442,11 @@ DROP TABLE IF EXISTS `product_img`;
 CREATE TABLE IF NOT EXISTS `product_img` (
   `img_id` int NOT NULL AUTO_INCREMENT COMMENT '圖檔編號',
   `p_id` int NOT NULL COMMENT '產品編號',
-  `img_file` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '圖檔名稱',
+  `img_file` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '圖檔名稱',
   `sort` int NOT NULL COMMENT '圖片順序',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`img_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=442 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=442 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `product_img`
@@ -895,13 +905,13 @@ DROP TABLE IF EXISTS `pyclass`;
 CREATE TABLE IF NOT EXISTS `pyclass` (
   `class_id` int NOT NULL AUTO_INCREMENT COMMENT '產品類別',
   `level` int NOT NULL COMMENT '所在層級',
-  `fonticon` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '字型圖示',
-  `cname` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '類別名稱',
+  `fonticon` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '字型圖示',
+  `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '類別名稱',
   `sort` int NOT NULL COMMENT '列表排序',
   `uplink` int NOT NULL COMMENT '上層連結',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '建立時間與更新時間',
   PRIMARY KEY (`class_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=181 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=MyISAM AUTO_INCREMENT=181 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci ROW_FORMAT=COMPACT;
 
 --
 -- 傾印資料表的資料 `pyclass`
@@ -939,18 +949,18 @@ INSERT INTO `pyclass` (`class_id`, `level`, `fonticon`, `cname`, `sort`, `uplink
 DROP TABLE IF EXISTS `town`;
 CREATE TABLE IF NOT EXISTS `town` (
   `town_no` bigint NOT NULL AUTO_INCREMENT COMMENT '鄕鎮市編號',
-  `name` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '鄕鎮市名稱',
-  `post` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '郵遞區號',
+  `tname` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '鄕鎮市名稱',
+  `post` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '郵遞區號',
   `state` smallint NOT NULL COMMENT '狀態',
   `auto_no` int NOT NULL COMMENT '上層城市編號連結',
   PRIMARY KEY (`town_no`)
-) ENGINE=MyISAM AUTO_INCREMENT=374 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=374 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `town`
 --
 
-INSERT INTO `town` (`town_no`, `name`, `post`, `state`, `auto_no`) VALUES
+INSERT INTO `town` (`town_no`, `tname`, `post`, `state`, `auto_no`) VALUES
 (1, '中正區', '100', 0, 1),
 (2, '大同區', '103', 0, 1),
 (3, '中山區', '104', 0, 1),
@@ -1331,16 +1341,16 @@ INSERT INTO `town` (`town_no`, `name`, `post`, `state`, `auto_no`) VALUES
 
 DROP TABLE IF EXISTS `uorder`;
 CREATE TABLE IF NOT EXISTS `uorder` (
-  `order_id` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '訂單編號',
+  `order_id` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '訂單編號',
   `email_id` int NOT NULL COMMENT '會員編號',
   `address_id` int NOT NULL COMMENT '收件人編號',
   `howpay` tinyint NOT NULL DEFAULT '1' COMMENT '如何付款',
   `paystatus` int DEFAULT NULL COMMENT '付款狀態',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '訂單處理狀態',
-  `remark` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '備註',
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '備註',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單時間',
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci ROW_FORMAT=COMPACT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

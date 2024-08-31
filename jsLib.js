@@ -14,7 +14,7 @@ function addCart(p_id) {
         return (false);
     }
 
-    // $.ajax 函式呼叫後台的 add_cart.php
+    // $.Ajax 函式呼叫後台的 add_cart.php
     $.ajax({
         url: './cartAddAjax.php',
         type: 'get',
@@ -93,7 +93,7 @@ $(".cart input").change(function () {
 
 // header
 // cartContent
-function btnConfirmLink(message, url) {
+function confirmLink(message, url) {
     if (message == "" || url == "") {
         return false;
     }
@@ -113,89 +113,84 @@ function getCaptcha() {
 $(function () {
     getCaptcha();
 
-    $("#myCity").change(function () {
+    $("#city").change(function () {
 
-        var CNo = $("#myCity").val();
-        if (CNo == "") {
+        var auto_no = $("#city").val();
+        if (auto_no == "") {
             return false;
         }
 
         $.ajax({
-            url: "Town_ajax.php",
+            url: "./registerTownAjax.php",
             type: "post",
             dataType: "json",
             data: {
-                CNo: CNo,
+                auto_no: auto_no,
             },
             success: function (data) {
                 if (data.c == true) {
-                    $("#myTown").html(data.m);
-                    $("#myZip").val("");
+                    $("#town").html(data.m);
+                    $("#zip").val("");
                 } else {
                     alert(data.m)
                 }
             },
             error: function (data) {
-                alert("系統目前無法連接到後台資料庫");
+                alert("目前無法連接到系統");
             }
         });
 
     });
 
-    $("#myTown").change(function () {
+    $("#town").change(function () {
 
-        var AutoNo = $("#myTown").val();
-        if (AutoNo == "") {
+        var auto_no = $("#town").val();
+        if (auto_no == "") {
             return false;
         }
 
         $.ajax({
-            url: "Zip_ajax.php",
+            url: "registerZipAjax.php",
             type: "get",
             dataType: "json",
             data: {
-                AutoNo: AutoNo,
+                auto_no: auto_no,
             },
             success: function (data) {
                 if (data.c == true) {
-                    $("#myZip").val(data.Post);
-                    $("#zipcode").html(data.Post + data.Cityname + data.Name);
+                    $("#zip").val(data.post);
+                    $("#zipcode").html(data.post + " " + data.cname + data.tname);
                 } else {
                     alert(data.m)
                 }
             },
             error: function (data) {
-                alert("系統目前無法連接到後台資料庫");
+                alert("目前無法連接到系統");
             }
         });
 
     });
 });
 
-
-function getId(el) {
-    return document.getElementById(el);
-}
-
-$("#uploadForm").click(function (e) {
-    var fileName = $("#fileToUpload").val();
-    var idxDot = fileName.lastIndexOf(".") + 1;
-    let extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png" || extFile == "gif") {
+$("#uploadImg").click(function (e) {
+    var memberImgName = $("#memberImg").val();
+    var dotIndex = memberImgName.lastIndexOf(".") + 1;
+    let imgFormat = memberImgName.substr(dotIndex, memberImgName.length).toLowerCase();
+    if (imgFormat == "jpg" || imgFormat == "jpeg" || imgFormat == "png" || imgFormat == "gif") {
         $("#progress-div01").css("display", "flex");
-        let file1 = getId("fileToUpload").files[0];
-        let formdata = new FormData();
-        formdata.append("file1", file1);
-        let ajax = new XMLHttpRequest();
-        ajax.upload.addEventListener("progress", progressHandler, false);
-        ajax.addEventListener("load", completeHandler, false);
-        ajax.addEventListener("error", errorHandler, false);
-        ajax.addEventListener("abort", abortHandler, false);
-        ajax.open("POST", "file_upload_parser.php");
-        ajax.send(formdata);
+        let memberImg = document.getElementById("memberImg").files[0];
+        let formMemberImg = new FormData();
+        formMemberImg.append("memberImg", memberImg);
+        let requestUploadImg = new XMLHttpRequest();
+        requestUploadImg.upload.addEventListener("progress", progressHandler, false);
+        requestUploadImg.addEventListener("load", completeHandler, false);
+        requestUploadImg.addEventListener("error", errorHandler, false);
+        requestUploadImg.addEventListener("abort", abortHandler, false);
+        requestUploadImg.open("POST", "./registerUploadImg.php");
+        requestUploadImg.send(formMemberImg);
         return false;
     } else {
-        alert("目前只支援jpg,jpeg,png,gif 檔案格式上傳!");
+        alert("上傳僅支援jpg,jpeg,png,gif 檔案格式");
     }
 });
 
@@ -208,9 +203,9 @@ function progressHandler(event) {
 function completeHandler(event) {
     let data = JSON.parse(event.target.responseText);
     if (data.success == "true") {
-        $("#uploadname").val(data.fileName);
-        $("#showimg").attr({
-            "src": "uploads/" + data.fileName,
+        $("#uploadname").val(data.memberImgName);
+        $("#showImg").attr({
+            "src": "./images/member/" + data.memberImgName,
             "style": "display:block;"
         });
         $("button.btn.btn-danger").attr({
@@ -229,17 +224,18 @@ function abortHandler(event) {
     alert("Upload Aborted: 上傳作業取消");
 };
 
-jQuery.validator.addMethod("tssn", function (value, element, param) {
+
+jQuery.validator.addMethod("tssnFormat", function (value, element, param) {
     var tssn = /^[a-zA-Z]{1}[1-2]{1}[0-9]{8}$/;
     return this.optional(element) || (tssn.test(value));
 });
 
-jQuery.validator.addMethod("checkphone", function (value, element, param) {
+jQuery.validator.addMethod("phoneFormat", function (value, element, param) {
     var checkphone = /^[0]{1}[9]{1}[0-9]{8}$/;
     return this.optional(element) || (checkphone.test(value));
 });
 
-jQuery.validator.addMethod("checkMyTown", function (value, element, param) {
+jQuery.validator.addMethod("townRequired", function (value, element, param) {
     return (value !== "");
 });
 
@@ -248,7 +244,7 @@ $("#reg").validate({
         email: {
             required: true,
             email: true,
-            remote: "checkemail.php"
+            remote: "./registerCheckEmail.php"
         },
         pw1: {
             required: true,
@@ -264,20 +260,20 @@ $("#reg").validate({
         },
         tssn: {
             required: true,
-            tssn: true
+            tssnFormat: true
         },
         birthday: {
             required: true
         },
         mobile: {
             required: true,
-            checkphone: true
+            phoneFormat: true
         },
         address: {
             required: true
         },
-        myTown: {
-            checkMyTown: true
+        town: {
+            townRequired: true
         },
         recaptcha: {
             required: true,
@@ -305,20 +301,20 @@ $("#reg").validate({
         },
         tssn: {
             required: "身份證ID不得為空白",
-            tssn: "身份證ID格式有誤"
+            tssnFormat: "身份證ID格式有誤"
         },
         birthday: {
             required: "生日不得為空白"
         },
         mobile: {
             required: "手機號碼不得為空白",
-            checkphone: "手機號碼格式有誤"
+            phoneFormat: "手機號碼格式有誤"
         },
         address: {
             required: "地址不得為空白"
         },
-        myTown: {
-            checkMyTown: "需選擇郵遞區號"
+        town: {
+            townRequired: "需選擇郵遞區號"
         },
         recaptcha: {
             required: "驗證碼不得為空白！",

@@ -89,7 +89,7 @@ if (isset($_SESSION['login'])) {
         $(function() {
             $("#loginForm").submit(function() {
                 const inputAccount = $("#inputAccount").val();
-                const inputPassword = $("#inputPassword").val();
+                const inputPassword = MD5($("#inputPassword").val());
 
                 // $("#loading").show();
 

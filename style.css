@@ -120,6 +120,12 @@ header .search {
     /* border: 1px solid black; */
 }
 
+header .search input {
+    max-width: 150px;
+    /* border: 1px solid black; */
+}
+
+
 header .search .form-control:focus {
     border-color: gray;
     box-shadow: none;
@@ -355,8 +361,8 @@ section#content .page-link:hover {
 
 section#content .goods {
     /* border: 1px solid black; */
-    margin-top: 6rem;
-    padding-bottom: 2rem;
+    margin-top: 5rem;
+    padding-bottom: 3rem;
     line-height: 1.5rem;
 }
 
@@ -444,29 +450,98 @@ section#content .goods .goodsmark a {
     text-decoration: none;
 }
 
-section#content .cart {
-    /* border: 1px solid black; */
-    margin-top: 6rem;
-    padding-bottom: 2rem;
+section#content .cartProgressBar {
+    margin-top: 5rem;
+    font-size: 0.8rem;
+    text-align: center;
 }
 
-section#content .cart .table tbody tr td {
-    font-size: 1rem;
+section#content .cartProgressBar>div {
+    display: flex;
+}
+
+section#content .cartProgressBar>div>div>div:nth-child(1) {
+    width: 40px;
+    aspect-ratio: 1/1;
+    background-color: lightgray;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    color: #fff;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+}
+
+section#content .cartProgressBar>div>div>div:nth-child(1) a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+section#content .cartProgressBar>div hr {
+    width: 100%;
+    height: 3px;
+    background-color: lightgray;
+    margin-top: 20px;
+    color: lightgray;
+}
+
+section#content .cart {
+    /* border: 1px solid black; */
+    padding-bottom: 3rem;
+}
+
+
+section#content .cart table,
+section#content .checkout table {
+    border: 1px solid lightgray;
+}
+
+section#content .cart table tr td,
+section#content .checkout table tr td {
+    align-content: center;
+    padding: 0.5rem 1rem;
+}
+
+section#content .cart table tbody tr td img,
+section#content .checkout table tbody tr td img {
+    width: 5vw;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center center;
+}
+
+section#content .cart table tbody tr td input {
+    width: 50px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+section#content .cart table tbody tr td i,
+section#content .cart table tfoot tr td a {
+    cursor: pointer;
 }
 
 section#content .cart .emptyCart i {
     font-size: 8rem;
 }
 
-section#content .cart .emptyCart button {
+section#content .cart .emptyCart a button {
+    width: 75%;
     background-color: #212529;
     color: white;
 }
 
 section#content .checkout {
     /* border: 1px solid black; */
-    margin-top: 6rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+}
+
+section#content .checkout .accordion .table {
+    border-right: none;
+    border-left: none;
 }
 
 section#content .login {

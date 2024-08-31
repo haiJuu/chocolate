@@ -4,15 +4,14 @@ header('Content-Type:application/json;charset=utf-8');
 
 require_once('./connections/conn_db.php');
 
-$Zip = sprintf("SELECT town.Name,town.Post,city.Name AS Cityname FROM town,city WHERE town.AutoNo=city.AutoNo AND town.townNo='%d'", $_GET['AutoNo']);
+$select_cityAndTown = sprintf("SELECT town.tname,town.post,city.cname FROM town,city WHERE town.auto_no=city.auto_no AND town.town_no='%d'", $_GET['auto_no']);
 
-$Zip_rs = $link->query($Zip);
-$Zip_num = $Zip_rs->rowCount();
-if ($Zip_num > 0) {
-    $Zip_rows = $Zip_rs->fetch();
-    $retcode = array("c" => "1", "Post" => $Zip_rows['Post'], "Name" => $Zip_rows['Name'], "Cityname" => $Zip_rows['Cityname']);
+$cityAndTown = $link->query($select_cityAndTown);
+if ($cityAndTown->rowCount() > 0) {
+    $fetch_cityAndTown = $cityAndTown->fetch();
+    $retcode = array("c" => "1", "post" => $fetch_cityAndTown['post'], "cname" => $fetch_cityAndTown['cname'], "tname" => $fetch_cityAndTown['tname']);
 } else {
-    $retcode = array("c" => "0", "m" => "找不到相關資料");
+    $retcode = array("c" => "0", "m" => "沒有資料");
 }
 
 echo json_encode($retcode);

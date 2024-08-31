@@ -4,13 +4,12 @@ header('Content-Type:application/json;charset=utf-8');
 
 require_once('./connections/conn_db.php');
 
-$Town = sprintf("SELECT * FROM town WHERE AutoNo='%d'", $_POST['CNo']);
-$Town_rs = $link->query($Town);
-$Town_num = $Town_rs->rowCount();
-$htmlstring = "<option value=''>選擇鄉鎮市</option>";
-if ($Town_num > 0) {
-    while ($Town_rows = $Town_rs->fetch()) {
-        $htmlstring = $htmlstring . "<option value='" . $Town_rows['townNo'] . "'>" . $Town_rows['Name'] . "</option>";
+$select_town = sprintf("SELECT * FROM town WHERE auto_no='%d'", $_POST['auto_no']);
+$town = $link->query($select_town);
+$htmlstring = "<option value=''>選擇鄉鎮市區</option>";
+if ($town->rowCount() > 0) {
+    while ($fetch_town = $town->fetch()) {
+        $htmlstring = $htmlstring . "<option value='" . $fetch_town['town_no'] . "'>" . $fetch_town['tname'] . "</option>";
     }
     $retcode = array("c" => "1", "m" => $htmlstring);
 } else {

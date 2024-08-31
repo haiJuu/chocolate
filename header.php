@@ -4,13 +4,12 @@
             CHO
         </a>
     </div>
-    <div class="font col-md-4 offset-md-0 col-sm-3 offset-sm-7 col-8 align-content-center text-end pe-4">
+    <div class="font col-md-4 col-sm-10 col-8 align-content-center text-end pe-4">
         <?php
         $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
         $cart = $link->query($select_cart);
         $count_cart = $cart->rowCount();
         ?>
-
         <a href="./cart.php">
             <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart; ?></span>
         </a>
@@ -18,13 +17,13 @@
             <i class="fas fa-portrait ms-3"></i>
         </a>
         <?php if (isset($_SESSION['login'])) { ?>
-            <a href="javascript:void(0);" onclick="btnConfirmLink('確定登出 ?','./logout.php')" title="登出">
+            <a href="javascript:void(0);" class="ms-3" onclick="confirmLink('確定登出 ?','./logout.php')" title="登出">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
 
         <?php } ?>
     </div>
-    <div class="nav col-md-7 col-sm-2 col-2">
+    <div class="nav col-md-9 col-sm-6 col-6">
         <nav class="navbar navbar-expand-lg">
             <div>
                 <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,8 +145,8 @@
             </div>
         </nav>
     </div>
-    <div class="search col-md-3 col-sm-8 col-8 offset-2 pe-4 pt-2">
-        <form action="./drugstore.php" method="get" name="search" id="search" class="d-flex" role="search">
+    <div class="search col-md-3 col-sm-6 col-6 pe-4 pt-2">
+        <form action="./drugstore.php" method="get" name="search" id="search" class="d-flex justify-content-end" role="search">
             <input name="search_name" id="search_name" class="form-control me-2" type="search" placeholder="找商品" aria-label="Search" value="<?php echo (isset($_GET['search_name']) ? $_GET['search_name'] : '') ?>" required>
             <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
