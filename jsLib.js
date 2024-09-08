@@ -1,5 +1,18 @@
-// productList
-// goodsContent
+// header
+// cartContent
+function confirmLink(message, url) {
+    if (message == "" || url == "") {
+        return false;
+    }
+    if (confirm(message)) {
+        window.location = url;
+    }
+    return false;
+}
+
+
+// classContent
+// productContent
 function addCart(p_id) {
     var qty = $("#qty").val();
     if (qty <= 0) {
@@ -14,9 +27,8 @@ function addCart(p_id) {
         return (false);
     }
 
-    // $.Ajax 函式呼叫後台的 add_cart.php
     $.ajax({
-        url: './cartAddAjax.php',
+        url: './ajaxCartQtyAdd.php',
         type: 'get',
         dataType: 'json',
         data: {
@@ -46,11 +58,11 @@ function addCart(p_id) {
 }
 
 
-// goodsContent
+// productContent
 $(function () {
-    $(".goods a").mouseover(function () {
+    $(".product a").mouseover(function () {
         var img_src = $(this).children("img").attr("src");
-        $("#showGoods").attr({
+        $("#showProduct").attr({
             "src": img_src
         });
     });
@@ -69,7 +81,7 @@ $(".cart input").change(function () {
     }
 
     $.ajax({
-        url: 'cartChangeAjax.php',
+        url: './ajaxCartQtyChange.php',
         type: 'post',
         dataType: 'json',
         data: {
@@ -91,86 +103,11 @@ $(".cart input").change(function () {
 });
 
 
-// header
-// cartContent
-function confirmLink(message, url) {
-    if (message == "" || url == "") {
-        return false;
-    }
-    if (confirm(message)) {
-        window.location = url;
-    }
-    return false;
-}
-
-
-// register
+// registerContent
 function getCaptcha() {
     var inputTxt = document.getElementById("captcha");
     inputTxt.value = captchaCode("can", 150, 50, "blue", "white", "28px", 5);
 }
-
-$(function () {
-    getCaptcha();
-
-    $("#city").change(function () {
-
-        var auto_no = $("#city").val();
-        if (auto_no == "") {
-            return false;
-        }
-
-        $.ajax({
-            url: "./registerTownAjax.php",
-            type: "post",
-            dataType: "json",
-            data: {
-                auto_no: auto_no,
-            },
-            success: function (data) {
-                if (data.c == true) {
-                    $("#town").html(data.m);
-                    $("#zip").val("");
-                } else {
-                    alert(data.m)
-                }
-            },
-            error: function (data) {
-                alert("目前無法連接到系統");
-            }
-        });
-
-    });
-
-    $("#town").change(function () {
-
-        var auto_no = $("#town").val();
-        if (auto_no == "") {
-            return false;
-        }
-
-        $.ajax({
-            url: "registerZipAjax.php",
-            type: "get",
-            dataType: "json",
-            data: {
-                auto_no: auto_no,
-            },
-            success: function (data) {
-                if (data.c == true) {
-                    $("#zip").val(data.post);
-                    $("#zipcode").html(data.post + " " + data.cname + data.tname);
-                } else {
-                    alert(data.m)
-                }
-            },
-            error: function (data) {
-                alert("目前無法連接到系統");
-            }
-        });
-
-    });
-});
 
 $("#uploadImg").click(function (e) {
     var memberImgName = $("#memberImg").val();
@@ -259,7 +196,7 @@ $("#reg").validate({
             required: true
         },
         tssn: {
-            required: true,
+            required: false,
             tssnFormat: true
         },
         birthday: {
@@ -300,7 +237,7 @@ $("#reg").validate({
             required: "使用者名稱不得為空白"
         },
         tssn: {
-            required: "身份證ID不得為空白",
+            required: "",
             tssnFormat: "身份證ID格式有誤"
         },
         birthday: {
@@ -323,3 +260,190 @@ $("#reg").validate({
     },
 
 })
+
+
+// registerContent
+// checkoutContent
+$(function () {
+
+    $("#city").change(function () {
+
+        var auto_no = $("#city").val();
+        if (auto_no == "") {
+            $("#town").html("<option value=''>選擇鄉鎮市區</option>");
+            $("#zip").val("");
+            $('#zipcode').html("");
+            return false;
+        }
+
+        $.ajax({
+            url: "./ajaxCityTown.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                auto_no: auto_no,
+            },
+            success: function (data) {
+                if (data.c == true) {
+                    $("#town").html(data.m);
+                    $("#zip").val("");
+                } else {
+                    alert(data.m)
+                }
+            },
+            error: function (data) {
+                alert("目前無法連接到系統");
+            }
+        });
+
+    });
+
+    $("#town").change(function () {
+
+        var auto_no = $("#town").val();
+        if (auto_no == "") {
+            $('#zip').val("");
+            $('#zipcode').html("");
+            return false;
+        }
+
+        $.ajax({
+            url: "./ajaxTownZip.php",
+            type: "get",
+            dataType: "json",
+            data: {
+                auto_no: auto_no,
+            },
+            success: function (data) {
+                if (data.c == true) {
+                    $("#zip").val(data.post);
+                    $("#zipcode").html(data.post + " " + data.city_name + data.town_name);
+                } else {
+                    alert(data.m)
+                }
+            },
+            error: function (data) {
+                alert("目前無法連接到系統");
+            }
+        });
+
+    });
+});
+
+
+// checkout_content
+$(function () {
+    $('#addbook').click(function () {
+        var validate = 0, msg = "";
+        var cname = $("#cname").val();
+        var mobile = $("#mobile").val();
+        var zip = $("#zip").val();
+        var address = $("#address").val();
+
+        if (cname == "") {
+            msg = msg + "收件姓名不得為空白!;\n";
+            validate = 1;
+        }
+        if (mobile == "") {
+            msg = msg + "電話號碼不得為空白!;\n";
+            validate = 1;
+        }
+        if (zip == "") {
+            msg = msg + "縣市鄉鎮市區不得為空白;\n";
+            validate = 1;
+        }
+        if (address == "") {
+            msg = msg + "地址不得為空白;\n";
+            validate = 1;
+        }
+        if (validate) {
+            alert(msg);
+            return false
+        }
+
+        $.ajax({
+            url: './ajaxAddbook.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                cname: cname,
+                mobile: mobile,
+                zip: zip,
+                address: address,
+            },
+            success: function (data) {
+                if (data.c == true) {
+                    alert(data.m)
+                    window.location.reload();
+                } else {
+                    alert(data.m);
+                }
+            },
+            error: function (data) {
+                alert("目前無法連接到系統");
+            }
+        })
+    });
+
+    $('input[name=setdefault]').change(function () {
+        var address_id = $(this).val();
+
+        $.ajax({
+            url: './ajaxAddbookSetdefault.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                address_id: address_id,
+            },
+            success: function (data) {
+                if (data.c == true) {
+                    alert(data.m)
+                    window.location.reload();
+                } else {
+                    alert(data.m)
+                }
+            },
+            error: function (data) {
+                alert("目前無法連接到系統");
+            },
+        })
+    })
+
+
+    $('#uorder').click(function () {
+        let msg = "系統將進行結帳處理，請確認產品金額與收件人是否正確!";
+        if (!confirm(msg)) return false;
+        // $('#loading').show();
+
+        var address_id = $('input[name=setdefault]:checked').val();
+        var e_invoice = $("#e_invoice").val();
+        var company_name = $("#company_name").val();
+        var tax_ID_number = $("#tax_ID_number").val();
+        var remark = $("#remark").val();
+
+        $.ajax({
+            url: './ajaxUorderAdd.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                address_id: address_id,
+                e_invoice: e_invoice,
+                company_name: company_name,
+                tax_ID_number: tax_ID_number,
+                remark: remark,
+            },
+            success: function (data) {
+                if (data.c == true) {
+                    alert(data.m)
+                    window.location.href = "./order.php";
+                } else {
+                    alert(data.m)
+                }
+            },
+            error: function (data) {
+                alert("目前無法連接到系統");
+            },
+        })
+    })
+
+});

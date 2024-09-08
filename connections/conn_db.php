@@ -8,4 +8,4 @@ $link = new PDO($dsn, $user, $password);
 // 設置字符集
 $link->exec("SET NAMES utf8");
 
-// date_default_timezone_set('Asia/Taipel');
+date_default_timezone_set('Asia/Taipei');

@@ -9,7 +9,7 @@
         line-height: 1.5rem;
     }
 
-    section#content .imgbar ul li {
+    section#content .classBar ul li {
         margin: 1rem 0.5rem 0 0.5rem;
         font-size: 0.8rem;
     }
@@ -45,15 +45,15 @@
         font-size: 0.8rem;
     }
 
-    section#content .imgbar {
+    section#content .classBar {
         padding: 3rem 0 1rem 0;
     }
 
-    section#content .goods .goodsmark div {
+    section#content .product .productMark div {
         font-size: 0.8rem;
     }
 
-    section#content .goods>div:nth-child(3) {
+    section#content .product>div:nth-child(3) {
         font-size: 0.8rem;
     }
 }

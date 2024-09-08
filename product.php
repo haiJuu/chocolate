@@ -25,8 +25,7 @@ require_once("phpLib.php");
 
     <section id="content" class="container-fluid">
 
-        <?php require_once("./imgbar.php") ?>
-        <?php require_once("./productList.php") ?>
+        <?php require_once("./productContent.php") ?>
 
     </section>
 

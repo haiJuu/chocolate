@@ -20,6 +20,9 @@ if (isset($_POST['inputAccount']) && isset($_POST['inputPassword'])) {
                 $_SESSION['email_id'] = $fetch_member['email_id'];
                 $_SESSION['email'] = $fetch_member['email'];
                 $_SESSION['cname'] = $fetch_member['cname'];
+                $_SESSION['mobile'] = $fetch_member['mobile'];
+                $_SESSION['member_img'] = $fetch_member['member_img'];
+
                 $retcode = array("c" => "1", "m" => "登入成功");
             } else {
                 $retcode = array("c" => "2", "m" => "會員尚未啟動或已被鎖定");

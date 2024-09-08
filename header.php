@@ -1,9 +1,11 @@
 <div class="row">
+
     <div class="logo col-md-4 offset-md-4 col-sm-2 col-4 align-content-center text-center">
         <a href="./index.php">
             CHO
         </a>
     </div>
+
     <div class="font col-md-4 col-sm-10 col-8 align-content-center text-end pe-4">
         <?php
         $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
@@ -13,16 +15,30 @@
         <a href="./cart.php">
             <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart; ?></span>
         </a>
-        <a href="./login.php">
-            <i class="fas fa-portrait ms-3"></i>
-        </a>
-        <?php if (isset($_SESSION['login'])) { ?>
-            <a href="javascript:void(0);" class="ms-3" onclick="confirmLink('確定登出 ?','./logout.php')" title="登出">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </a>
 
+        <?php if (isset($_SESSION['login'])) { ?>
+
+            <ul class="navbar-nav" style="display:inline-block;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="./images/member/<?php echo ($_SESSION['member_img'] != '') ? $_SESSION['member_img'] : '' ?>" width="40" height="40" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="./member.php">個人資料</a></li>
+                        <li><a class="dropdown-item" href="./order.php">查詢訂單</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="confirmLink('確定登出 ?','./logout.php')">登　　出</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        <?php } else { ?>
+            <a href="./login.php">
+                <i class="fas fa-portrait ms-3"></i>
+            </a>
         <?php } ?>
+
     </div>
+
     <div class="nav col-md-9 col-sm-6 col-6">
         <nav class="navbar navbar-expand-lg">
             <div>
@@ -66,13 +82,13 @@
                             <ul class="dropdown-menu">
 
                                 <li class="nav-item">
-                                    <a class="dropdown-item" href="./drugstore.php" role="button" aria-expanded="false">
+                                    <a class="dropdown-item" href="./class.php" role="button" aria-expanded="false">
                                         所有商品
                                     </a>
                                 </li>
                                 <?php while ($fetch_pyclass1 = $pyclass1->fetch()) { ?>
                                     <li class="nav-item dropend">
-                                        <a href="drugstore.php?class_id=<?php echo $fetch_pyclass1['class_id']; ?>&level=<?php echo $fetch_pyclass1['level']; ?>" class="dropdown-item dropdown-toggle">
+                                        <a href="./class.php?class_id=<?php echo $fetch_pyclass1['class_id']; ?>&level=<?php echo $fetch_pyclass1['level']; ?>" class="dropdown-item dropdown-toggle">
                                             <?php echo $fetch_pyclass1['cname']; ?>
                                         </a>
                                         <ul class="dropdown-menu">
@@ -87,7 +103,7 @@
                                             ?>
 
                                             <?php while ($fetch_pyclass2 = $pyclass2->fetch()) { ?>
-                                                <li><a class="dropdown-item" href="drugstore.php?class_id=<?php echo $fetch_pyclass2['class_id']; ?>"><?php echo $fetch_pyclass2['cname']; ?></a></li>
+                                                <li><a class="dropdown-item" href="./class.php?class_id=<?php echo $fetch_pyclass2['class_id']; ?>"><?php echo $fetch_pyclass2['cname']; ?></a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>
@@ -145,10 +161,12 @@
             </div>
         </nav>
     </div>
+
     <div class="search col-md-3 col-sm-6 col-6 pe-4 pt-2">
-        <form action="./drugstore.php" method="get" name="search" id="search" class="d-flex justify-content-end" role="search">
+        <form action="./product.php" method="get" name="search" id="search" class="d-flex justify-content-end" role="search">
             <input name="search_name" id="search_name" class="form-control me-2" type="search" placeholder="找商品" aria-label="Search" value="<?php echo (isset($_GET['search_name']) ? $_GET['search_name'] : '') ?>" required>
             <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
+
 </div>

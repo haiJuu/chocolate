@@ -235,19 +235,20 @@ section#content .brand .card .hot .card img {
     border-radius: 10%;
 }
 
-section#content .imgbar {
+section#content .classBar {
     /* border: 1px solid black; */
-    padding: 4rem 0 2rem 0;
+    margin-top: 5rem;
+    padding-bottom: 3rem;
 }
 
-section#content .imgbar .img-flex {
+section#content .classBar .img-flex {
     display: flex;
     justify-content: center;
     align-items: center;
     /* border: 1px solid black; */
 }
 
-section#content .imgbar .img-container {
+section#content .classBar .img-container {
     width: 12vw;
     aspect-ratio: 1/3;
     box-shadow: 1px 1px 3px lightgray;
@@ -256,37 +257,37 @@ section#content .imgbar .img-container {
     /* overflow: hidden; */
 }
 
-section#content .imgbar img.box-shadow {
+section#content .classBar img.box-shadow {
     box-shadow: 4px 4px 4px black;
 }
 
-section#content .imgbar img {
+section#content .classBar img {
     width: 100%;
     aspect-ratio: 1/3;
     object-fit: cover;
     object-position: center center;
 }
 
-section#content .imgbar ul li {
+section#content .classBar ul li {
     display: inline-block;
     /* align-items: center; */
     /* border: 1px solid black; */
     margin: 1rem 2rem 0 2rem;
 }
 
-section#content .imgbar ul li a {
+section#content .classBar ul li a {
     color: black;
     text-decoration: none;
 }
 
-section#content .product .card {
+section#content .class .card {
     overflow: hidden;
     border: none;
     /* border: 1px solid black; */
     padding: 1rem 0;
 }
 
-section#content .product .card .img-container {
+section#content .class .card .img-container {
     width: 100%;
     aspect-ratio: 1/1;
     overflow: hidden;
@@ -295,27 +296,27 @@ section#content .product .card .img-container {
     margin: auto;
 }
 
-section#content .product .card img {
+section#content .class .card img {
     width: inherit;
     aspect-ratio: 1/1;
     object-position: center center;
     border-radius: 5%;
 }
 
-section#content .product .card img:hover {
+section#content .class .card img:hover {
     transform: scale(1.5);
     transition: all 1s;
 }
 
-section#content .product .card .card-title {
+section#content .class .card .card-title {
     font-size: 16px;
 }
 
-section#content .product .card .card-text {
+section#content .class .card .card-text {
     font-size: 14px;
 }
 
-section#content .product .card .btn {
+section#content .class .card .btn {
     border: none;
     color: white;
     font-size: 12px;
@@ -359,26 +360,26 @@ section#content .page-link:hover {
     border-color: var(--bs-pagination-hover-border-color);
 }
 
-section#content .goods {
+section#content .product {
     /* border: 1px solid black; */
     margin-top: 5rem;
     padding-bottom: 3rem;
     line-height: 1.5rem;
 }
 
-section#content .goods .card {
+section#content .product .card {
     border: none;
     /* border: 1px solid black; */
     text-align: left;
 }
 
-section#content .goods .card .productImg {
+section#content .product .card .productImg {
     display: flex;
     justify-content: flex-end;
     text-align: right;
 }
 
-section#content .goods .card .productImg img#showGoods {
+section#content .product .card .productImg img#showProduct {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -388,7 +389,7 @@ section#content .goods .card .productImg img#showGoods {
     border-radius: none;
 }
 
-section#content .goods .card .productImg a img {
+section#content .product .card .productImg a img {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -398,12 +399,12 @@ section#content .goods .card .productImg a img {
     margin-bottom: 1rem;
 }
 
-section#content .goods .card .productInfo {
+section#content .product .card .productInfo {
     font-size: 14px;
     /* border: 1px solid black; */
 }
 
-section#content .goods .card .productInfo img {
+section#content .product .card .productInfo img {
     width: 100%;
     aspect-ratio: 1/1;
     border-left: 1px solid black;
@@ -413,13 +414,13 @@ section#content .goods .card .productInfo img {
     margin-bottom: 1rem;
 }
 
-section#content .goods .card .productInfo input {
+section#content .product .card .productInfo input {
     padding: 0.25rem;
     font-size: 14px;
     text-align: center;
 }
 
-section#content .goods .card .productInfo button {
+section#content .product .card .productInfo button {
     padding: 0.5rem;
     color: white;
     font-size: 14px;
@@ -438,13 +439,13 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-section#content .goods .goodsmark div {
+section#content .product .productMark div {
     border: 1px solid lightgray;
     padding: 0.5rem;
     font-size: 1rem;
 }
 
-section#content .goods .goodsmark a {
+section#content .product .productMark a {
     display: block;
     color: black;
     text-decoration: none;
@@ -490,7 +491,6 @@ section#content .cart {
     /* border: 1px solid black; */
     padding-bottom: 3rem;
 }
-
 
 section#content .cart table,
 section#content .checkout table {
@@ -617,6 +617,18 @@ section#content .register span.valid-tips::before {
     color: greenyellow;
     font-weight: 900;
     content: "\f00c";
+}
+
+section#content .order {
+    /* border: 1px solid black; */
+    margin-top: 5rem;
+    padding-bottom: 3rem;
+}
+
+section#content .member {
+    /* border: 1px solid black; */
+    margin-top: 5rem;
+    padding-bottom: 3rem;
 }
 
 footer {

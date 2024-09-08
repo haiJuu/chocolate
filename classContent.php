@@ -28,11 +28,11 @@ $row_num = 1;
 <?php
 while ($fetch_product2 = $product2->fetch()) { ?>
     <?php if ($row_num % 4 == 1) { ?>
-        <div class="product row text-center justify-content-center">
+        <div class="class row text-center justify-content-center">
         <?php } ?>
 
         <div class="card col-md-2 col-sm-3 col-6">
-            <a href="goods.php?p_id=<?php echo $fetch_product2['p_id']; ?>">
+            <a href="./product.php?p_id=<?php echo $fetch_product2['p_id']; ?>">
                 <div class="img-container">
                     <img src="./images/product/<?php echo $fetch_product2['img_file']; ?>" class="card-img-top" alt="<?php echo $fetch_product2['p_name']; ?>" title="<?php echo $fetch_product2['p_intro']; ?>">
                 </div>

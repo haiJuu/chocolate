@@ -1,4 +1,4 @@
-<div class="imgbar">
+<div class="classBar">
     <div class="row text-center">
         <div class="col-md-12 col-sm-12 col-12 img-flex">
             <?php
@@ -25,7 +25,7 @@
             <?php
             while ($fetch_brand = $brand->fetch()) {
             ?>
-                <a href="drugstore.php?class_id=<?php echo $fetch_brand['class_id']; ?>&level=<?php echo $fetch_brand['level']; ?>">
+                <a href="./class.php?class_id=<?php echo $fetch_brand['class_id']; ?>&level=<?php echo $fetch_brand['level']; ?>">
                     <div class="img-container">
                         <img src="./images/brand/<?php echo $fetch_brand['b_logo']; ?>" alt="<?php echo $fetch_brand['cname']; ?>" title="<?php echo $fetch_brand['cname'] ?>" class="<?php echo boxShadow($now_brand, $fetch_brand['class_id']); ?>">
                     </div>
@@ -40,7 +40,7 @@
         if (isset($_GET['level']) && $_GET['level'] == 1) {
             $select_pyclass = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $_GET['class_id']);
 
-            $drugstore_href = "class_id=" . $_GET['class_id'];
+            $class_href = "./class_id=" . $_GET['class_id'];
             $check_class = $_GET['class_id'];
         } else {
             $select_pyclass = sprintf("SELECT * FROM pyclass WHERE level=2 AND class_id=%d ORDER BY sort", $_GET['class_id']);
@@ -49,7 +49,7 @@
 
             $select_pyclass = sprintf("SELECT * FROM pyclass WHERE level=2 AND uplink=%d ORDER BY sort", $fetch_pyclass['uplink']);
 
-            $drugstore_href = "class_id=" . $fetch_pyclass['uplink'] . "&level=1";
+            $class_href = "./class_id=" . $fetch_pyclass['uplink'] . "&level=1";
             $check_class = 0;
         }
 
@@ -64,7 +64,7 @@
                     <div>
                         <ul class="col-md-12 col-sm-12 col-12">
                             <li>
-                                <a href="drugstore.php?<?php echo $drugstore_href; ?>">
+                                <a href="./class.php?<?php echo $class_href; ?>">
                                     <?php echo locationCircle($now_brand, $now_class, $check_class); ?> 全部
                                 </a>
                             </li>
@@ -72,7 +72,7 @@
                             <?php while ($fetch_pyclass = $pyclass->fetch()) {
                             ?>
                                 <li>
-                                    <a href="drugstore.php?class_id=<?php echo $fetch_pyclass['class_id']; ?>">
+                                    <a href="./class.php?class_id=<?php echo $fetch_pyclass['class_id']; ?>">
                                         <?php echo locationCircle($now_brand, $_GET['class_id'], $fetch_pyclass['class_id']); ?>
                                         <?php echo $fetch_pyclass['cname']; ?>
                                     </a>

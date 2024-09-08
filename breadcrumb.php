@@ -14,7 +14,7 @@ if (isset($_GET['p_id']) && $_GET['p_id'] != '') {
     $breadcrumb2_name = $fetch_product['cname'];
     $breadcrumb2_class_id = $fetch_product['uplink'];
 
-    $breadcrumb2 = "<li class='breadcrumb-item'><a href='drugstore.php?class_id=" . $fetch_product['class_id'] . "'>" . $breadcrumb2_name . "</a></li>";
+    $breadcrumb2 = "<li class='breadcrumb-item'><a href='./class.php?class_id=" . $fetch_product['class_id'] . "'>" . $breadcrumb2_name . "</a></li>";
 
     $select_pyclass = sprintf("SELECT * FROM pyclass WHERE level=1 AND class_id=%d", $breadcrumb2_class_id);
     $pyclass = $link->query($select_pyclass);
@@ -23,7 +23,7 @@ if (isset($_GET['p_id']) && $_GET['p_id'] != '') {
     $breadcrumb1_class_id = $fetch_pyclass['class_id'];
     $breadcrumb1_name = $fetch_pyclass['cname'];
     // $pyclass_level = $fetch_pyclass['level'];
-    $breadcrumb1 = "<li class='breadcrumb-item'><a href='drugstore.php?class_id=" . $breadcrumb1_class_id . "&level=1'>" . $breadcrumb1_name . "</a></li>";
+    $breadcrumb1 = "<li class='breadcrumb-item'><a href='./class.php?class_id=" . $breadcrumb1_class_id . "&level=1'>" . $breadcrumb1_name . "</a></li>";
 } elseif (isset($_GET['search_name'])) {
     $breadcrumb0 = "<li class='breadcrumb-item'>找 " . $_GET['search_name'] . " 的商品</li>";
 } elseif (isset($_GET['level']) && isset($_GET['class_id'])) {
@@ -52,7 +52,7 @@ if (isset($_GET['p_id']) && $_GET['p_id'] != '') {
     $breadcrumb1_class_id = $fetch_pyclass1['class_id'];
     $breadcrumb1_name = $fetch_pyclass1['cname'];
     // $breadcrumb1_level = $fetch_pyclass1['level'];
-    $breadcrumb1 = "<li class='breadcrumb-item'><a href='drugstore.php?class_id=" . $breadcrumb1_class_id . "&level=1'>" . $breadcrumb1_name . "</a></li>";
+    $breadcrumb1 = "<li class='breadcrumb-item'><a href='./class.php?class_id=" . $breadcrumb1_class_id . "&level=1'>" . $breadcrumb1_name . "</a></li>";
 } else {
     $breadcrumb0 = "<li class='breadcrumb-item'>所有商品</li>";
 }

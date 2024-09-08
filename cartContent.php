@@ -12,7 +12,7 @@
         <hr>
         <div>
             <div>3</div>
-            再確認
+            已完成
         </div>
     </div>
 </div>
@@ -48,8 +48,10 @@
                             ?>
                                 <tr class="text-center">
                                     <td colspan="2" class="text-start">
-                                        <img src="./images/product/<?php echo $fetch_cart['img_file']; ?>" alt="<?php echo $fetch_cart['p_name']; ?>" class="img-fluid">
-                                        <?php echo $fetch_cart['p_name']; ?>
+                                        <a href="./product.php?p_id=<?php echo $fetch_cart['p_id']; ?>" style="    text-decoration: none;color: black;">
+                                            <img src="./images/product/<?php echo $fetch_cart['img_file']; ?>" alt="<?php echo $fetch_cart['p_name']; ?>" class="img-fluid">
+                                            <?php echo $fetch_cart['p_name']; ?>
+                                        </a>
                                     </td>
                                     <td>
                                         NT$<?php echo $fetch_cart['p_price']; ?>
@@ -123,7 +125,7 @@
                         <tfoot>
                             <tr class="text-end">
                                 <td colspan="2">
-                                    <a href="./drugstore.php" style="text-decoration:none">
+                                    <a href="./class.php" style="text-decoration:none">
                                         < 繼續購物</a>　
                                             <a href="./checkout.php" style="text-decoration:none">前往結帳 ></a>
                                 </td>
@@ -137,7 +139,7 @@
             <div class="emptyCart col-md-4 col-sm-6 col-8 text-center">
                 <i class="fa-solid fa-circle-exclamation mb-5"></i>
                 <h5>購物車是空的</h5>
-                <a href="./drugstore.php">
+                <a href="./class.php">
                     <button class="btn w-75 mt-5">
                         返回購物
                     </button>

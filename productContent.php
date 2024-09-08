@@ -1,4 +1,4 @@
-<div class="goods">
+<div class="product">
     <div class="card">
         <div class="row justify-content-center">
             <div class="productImg col-md-6 col-sm-10 col-12 mb-3 pe-3">
@@ -22,7 +22,7 @@
                     $product_img = $link->query($select_product_img);
                     $fetch_product_img = $product_img->fetch()
                     ?>
-                    <img id="showGoods" name="showGoods" src="./images/product/<?php echo $fetch_product_img['img_file']; ?>" class="img-fluid" alt="<?php echo $fetch_product['p_name']; ?>" title="<?php echo $fetch_product['p_name']; ?>">
+                    <img id="showProduct" name="showProduct" src="./images/product/<?php echo $fetch_product_img['img_file']; ?>" class="img-fluid" alt="<?php echo $fetch_product['p_name']; ?>" title="<?php echo $fetch_product['p_name']; ?>">
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
     </div>
 
 
-    <div class="row goodsmark justify-content-center text-center mt-5">
+    <div class="row productMark justify-content-center text-center mt-5">
         <div class="col-md-3 col-sm-3 col-3"><a href="#mark_description">商品描述</a></div>
         <div class="col-md-3 col-sm-3 col-3"><a href="#mark_award">獲獎紀錄</a></div>
         <div class="col-md-3 col-sm-3 col-3"><a href="#mark_spec">商品規格</a></div>

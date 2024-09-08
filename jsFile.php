@@ -10,6 +10,10 @@
 <script src="./commlib.js"></script>
 <script src="./jquery.validate.js"></script>
 
+<!-- vue -->
+<!-- <script src="https://unpkg.com/vue@next"></script> -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!-- js_lib -->
 <script src="./jsLib.js"></script>

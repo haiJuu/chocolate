@@ -94,7 +94,7 @@ if (isset($_SESSION['login'])) {
                 // $("#loading").show();
 
                 $.ajax({
-                    url: 'loginAuthAjax.php',
+                    url: './ajaxMemberLogin.php',
                     type: 'post',
                     dataType: 'json',
                     data: {
