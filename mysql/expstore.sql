@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024-08-30 22:49:32
+-- 產生時間： 2024-09-08 15:21:57
 -- 伺服器版本： 8.3.0
 -- PHP 版本： 8.2.18
 
@@ -38,14 +38,18 @@ CREATE TABLE IF NOT EXISTS `addbook` (
   `address` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '收件地址',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `addbook`
 --
 
 INSERT INTO `addbook` (`address_id`, `email_id`, `setdefault`, `cname`, `mobile`, `zip`, `address`, `create_date`) VALUES
-(1, 3, 1, '喬', '0900999000', '542', '碧山路999號', '2024-08-30 22:38:15');
+(1, 3, 0, '喬', '0900999000', '542', '碧山路999號', '2024-08-30 22:38:15'),
+(2, 4, 1, '1', '0908888888', '266', '123123', '2024-08-31 02:43:58'),
+(3, 5, 1, '李貝貝', '0900000000', '335', '文化路123號', '2024-09-02 11:34:10'),
+(4, 6, 1, '測試一', '0907000777', '542', '中正路777號', '2024-09-07 02:52:39'),
+(5, 3, 1, '喬一', '0900888777', '335', '文化路999號', '2024-09-07 05:35:07');
 
 -- --------------------------------------------------------
 
@@ -122,21 +126,30 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `ip` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '訂購者的IP',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入購物車時間',
   PRIMARY KEY (`cart_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `email_id`, `p_id`, `qty`, `order_id`, `status`, `ip`, `create_date`) VALUES
-(108, NULL, 68, 1, NULL, 1, '::1', '2024-08-30 11:28:43'),
-(107, NULL, 69, 1, NULL, 1, '::1', '2024-08-30 11:28:42'),
-(106, NULL, 70, 1, NULL, 1, '::1', '2024-08-30 11:28:41'),
-(105, NULL, 71, 1, NULL, 1, '::1', '2024-08-30 11:28:40'),
-(104, NULL, 4, 1, NULL, 1, '::1', '2024-08-30 11:28:38'),
-(103, NULL, 3, 1, NULL, 1, '::1', '2024-08-30 11:28:38'),
-(102, NULL, 2, 1, NULL, 1, '::1', '2024-08-30 11:28:37'),
-(101, NULL, 1, 1, NULL, 1, '::1', '2024-08-30 11:28:36');
+(145, 3, 4, 1, '2024090702074982487', 8, '::1', '2024-09-07 05:52:52'),
+(144, 3, 2, 2, '2024090702074982487', 8, '::1', '2024-09-07 05:52:49'),
+(143, 3, 1, 1, '2024090702074982487', 8, '::1', '2024-09-07 05:52:48'),
+(142, 3, 70, 1, '2024090701510417612', 8, '::1', '2024-09-07 05:10:19'),
+(141, 3, 69, 1, '2024090701510417612', 8, '::1', '2024-09-07 05:10:18'),
+(140, 3, 7, 1, '2024090701510417612', 8, '::1', '2024-09-07 05:10:15'),
+(139, 3, 3, 1, '2024090701510417612', 8, '::1', '2024-09-07 05:10:14'),
+(146, 3, 1, 1, '2024090808060254377', 8, '::1', '2024-09-08 00:57:20'),
+(147, 3, 2, 1, '2024090808060254377', 8, '::1', '2024-09-08 00:57:21'),
+(148, 3, 3, 1, '2024090808060254377', 8, '::1', '2024-09-08 00:57:22'),
+(149, 3, 4, 1, '2024090808060254377', 8, '::1', '2024-09-08 00:57:22'),
+(150, 3, 72, 1, '2024090808061594661', 8, '::1', '2024-09-08 12:06:09'),
+(151, 3, 70, 1, '2024090808062848575', 8, '::1', '2024-09-08 12:06:22'),
+(152, 3, 69, 1, '2024090808062848575', 8, '::1', '2024-09-08 12:06:23'),
+(153, 3, 16, 1, '2024090808181444483', 8, '::1', '2024-09-08 12:18:09'),
+(154, NULL, 105, 1, NULL, 1, '::1', '2024-09-08 15:21:22'),
+(155, NULL, 48, 1, NULL, 1, '::1', '2024-09-08 15:21:29');
 
 -- --------------------------------------------------------
 
@@ -147,7 +160,7 @@ INSERT INTO `cart` (`cart_id`, `email_id`, `p_id`, `qty`, `order_id`, `status`, 
 DROP TABLE IF EXISTS `city`;
 CREATE TABLE IF NOT EXISTS `city` (
   `auto_no` int NOT NULL AUTO_INCREMENT COMMENT '城市編號',
-  `cname` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '城市名稱',
+  `city_name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '城市名稱',
   `city_order` tinyint NOT NULL COMMENT '標記',
   `state` smallint NOT NULL COMMENT '狀態',
   PRIMARY KEY (`auto_no`)
@@ -157,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `city` (
 -- 傾印資料表的資料 `city`
 --
 
-INSERT INTO `city` (`auto_no`, `cname`, `city_order`, `state`) VALUES
+INSERT INTO `city` (`auto_no`, `city_name`, `city_order`, `state`) VALUES
 (1, '臺北市', 0, 0),
 (2, '基隆市', 0, 0),
 (3, '新北市', 0, 0),
@@ -232,20 +245,24 @@ CREATE TABLE IF NOT EXISTS `member` (
   `pw1` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '密碼',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否啟動',
   `cname` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '中文姓名',
+  `mobile` varchar(20) COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '會員電話',
   `tssn` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '身份證字號',
   `birthday` date NOT NULL COMMENT '生日',
   `member_img` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '會員相片',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立日期',
   PRIMARY KEY (`email_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- 傾印資料表的資料 `member`
 --
 
-INSERT INTO `member` (`email_id`, `email`, `pw1`, `active`, `cname`, `tssn`, `birthday`, `member_img`, `create_date`) VALUES
-(3, 'cho@gmail.com', '55291adf660a480208c49c7b5094c17c', 1, '喬', 'H200009999', '2024-08-31', 'pathOfExile4.jpg', '2024-08-30 22:38:15');
+INSERT INTO `member` (`email_id`, `email`, `pw1`, `active`, `cname`, `mobile`, `tssn`, `birthday`, `member_img`, `create_date`) VALUES
+(3, 'cho@gmail.com', '55291adf660a480208c49c7b5094c17c', 1, '喬', '0900999000', 'H200009999', '2024-08-31', 'pathOfExile4.jpg', '2024-08-30 22:38:15'),
+(4, '1@com.co', '81dc9bdb52d04dc20036dbd8313ed055', 1, '1', '0908888888', 'M122438989', '1992-02-07', 'pathOfExile7.jpg', '2024-08-31 02:43:58'),
+(5, 'haijuu@gmail.com', '219f952a4ddde6fd4c2e8a337935544f', 1, '李貝貝', '0900000000', 'H223335555', '2024-09-02', '', '2024-09-02 11:34:10'),
+(6, 'test0907@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1, '測試一', '0907000777', 'H112345678', '2024-09-07', '', '2024-09-07 02:52:39');
 
 -- --------------------------------------------------------
 
@@ -259,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `multiselect` (
   `mslevel` int NOT NULL COMMENT '多功能選擇層級',
   `msuplink` int NOT NULL COMMENT '上層連結',
   `opcode` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛參數',
-  `msname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '多功能選擇名稱',
+  `ms_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '多功能選擇名稱',
   `msort` int DEFAULT NULL COMMENT '各功能列表排序',
   `url1` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛網址1',
   `url2` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '外掛網址2',
@@ -272,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `multiselect` (
 -- 傾印資料表的資料 `multiselect`
 --
 
-INSERT INTO `multiselect` (`ms_id`, `mslevel`, `msuplink`, `opcode`, `msname`, `msort`, `url1`, `url2`, `create_date`, `update_date`) VALUES
+INSERT INTO `multiselect` (`ms_id`, `mslevel`, `msuplink`, `opcode`, `ms_name`, `msort`, `url1`, `url2`, `create_date`, `update_date`) VALUES
 (1, 1, 0, NULL, '付款方式', 0, NULL, NULL, '2023-08-11 09:46:53', '2023-08-17 03:42:28'),
 (2, 1, 0, NULL, '訂單處理狀態', 0, NULL, NULL, '2023-08-11 09:52:29', '2023-08-17 03:42:41'),
 (3, 2, 1, NULL, '貨到付款', 1, NULL, NULL, '2023-08-11 09:55:45', '2023-08-17 03:43:37'),
@@ -949,7 +966,7 @@ INSERT INTO `pyclass` (`class_id`, `level`, `fonticon`, `cname`, `sort`, `uplink
 DROP TABLE IF EXISTS `town`;
 CREATE TABLE IF NOT EXISTS `town` (
   `town_no` bigint NOT NULL AUTO_INCREMENT COMMENT '鄕鎮市編號',
-  `tname` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '鄕鎮市名稱',
+  `town_name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '鄕鎮市名稱',
   `post` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '郵遞區號',
   `state` smallint NOT NULL COMMENT '狀態',
   `auto_no` int NOT NULL COMMENT '上層城市編號連結',
@@ -960,7 +977,7 @@ CREATE TABLE IF NOT EXISTS `town` (
 -- 傾印資料表的資料 `town`
 --
 
-INSERT INTO `town` (`town_no`, `tname`, `post`, `state`, `auto_no`) VALUES
+INSERT INTO `town` (`town_no`, `town_name`, `post`, `state`, `auto_no`) VALUES
 (1, '中正區', '100', 0, 1),
 (2, '大同區', '103', 0, 1),
 (3, '中山區', '104', 0, 1),
@@ -1346,11 +1363,27 @@ CREATE TABLE IF NOT EXISTS `uorder` (
   `address_id` int NOT NULL COMMENT '收件人編號',
   `howpay` tinyint NOT NULL DEFAULT '1' COMMENT '如何付款',
   `paystatus` int DEFAULT NULL COMMENT '付款狀態',
+  `e_invoice` varchar(10) COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '雲端發票',
+  `company_name` varchar(20) COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '公司抬頭',
+  `tax_ID_number` varchar(10) COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '統一編號',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '訂單處理狀態',
   `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '備註',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單時間',
   PRIMARY KEY (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci ROW_FORMAT=COMPACT;
+
+--
+-- 傾印資料表的資料 `uorder`
+--
+
+INSERT INTO `uorder` (`order_id`, `email_id`, `address_id`, `howpay`, `paystatus`, `e_invoice`, `company_name`, `tax_ID_number`, `status`, `remark`, `create_date`) VALUES
+('2024090701490218904', 3, 5, 3, 35, NULL, NULL, NULL, 7, NULL, '2024-09-07 05:49:02'),
+('2024090701510417612', 3, 5, 3, 35, NULL, NULL, NULL, 7, NULL, '2024-09-07 05:51:04'),
+('2024090702074982487', 3, 5, 3, 35, '/VHHWPRC', '', '', 7, '', '2024-09-07 06:07:49'),
+('2024090808060254377', 3, 5, 3, 35, '', '', '', 7, '', '2024-09-08 12:06:02'),
+('2024090808061594661', 3, 5, 3, 35, '', '', '', 7, '', '2024-09-08 12:06:15'),
+('2024090808062848575', 3, 5, 3, 35, '', '', '', 7, '', '2024-09-08 12:06:28'),
+('2024090808181444483', 3, 5, 3, 35, '', '', '', 7, '', '2024-09-08 12:18:14');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
