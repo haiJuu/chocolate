@@ -75,118 +75,7 @@ require_once("phpLib.php");
 
     <?php require_once("./jsFile.php") ?>
 
-    <script>
-        const Vue3 = Vue.createApp({
-            data() {
-                return {
-                    email_id: <?php echo $_SESSION['email_id']; ?>,
-                    member: [],
-                    captcha: '',
-                    readonly: true,
-                    PWOld: '',
-                    PWNEW1: '',
-                    PWNew2: '',
-                }
-            },
-            methods: {
-                getMemberInfo() {
-                    axios.get('./ajaxMember.php', {
-                            params: {
-                                email_id: this.email_id
-                            }
-                        })
-                        .then((res) => {
-                            let data = res.data;
-                            if (data.c == true) {
-                                this.member = data.d[0];
-                            } else {
-                                alert(data.m)
-                            }
-                        })
-                        .catch(function(error) {
-                            alert("系統目前無法連接到後台資料庫")
-                        })
-                },
-                getCaptcha() {
-                    this.captcha = captchaCode("can", 150, 50, "blue", "white", "28px", 5);
-                },
-                editMember() {
-                    this.readonly = false;
-                },
-                async saveMember() {
-                    let valid = $('#reg').valid();
-                    console.log("Valid:", valid); // 確認 valid 的值
-                    if (valid) {
-                        console.log("進入了 valid 區塊");
-                        let imgfile = $('#uploadname').val();
-                        console.log("imgfile:", imgfile); // 檢查 imgfile 值
-                        if (imgfile != '') {
-                            this.member.member_img = imgfile;
-                        }
 
-                        console.log("this.member:", this.member); // 確認 this.member 是否正確
-
-                        try {
-                            console.log("開始 axios 請求");
-                            const res = await axios.get('reqMember.php', {
-                                params: {
-                                    birthday: this.member.birthday,
-                                    cname: this.member.cname,
-                                    emailid: this.member.email_id,
-                                    imgname: this.member.member_img,
-                                    tssn: this.member.tssn,
-                                }
-                            });
-
-                            let data = res.data;
-                            if (data.c == true) {
-                                alert(data.m);
-                                location.reload();
-                                console.log("2");
-                            }
-                        } catch (error) {
-                            console.log("請求失敗，進入 catch 區塊", error);
-                            alert(error + " 系統目前無法連接到後台資料庫");
-                            console.log("3");
-                        }
-                    }
-
-                    console.log("4"); // 程式最後執行
-                },
-                async savePW() {
-                    let valid = $("#changePW").valid();
-                    if (valid) {
-                        await axios.get("reqchangePW.php", {
-                                params: {
-                                    emailid: this.member.emailid,
-                                    PWNew1: MD5(this.PWNew1),
-                                }
-                            })
-                            .then((res) => {
-                                let data = res.data;
-                                if (data.c == true) {
-                                    $("#changePW").validate().resetForm();
-                                    this.PWOld = "";
-                                    this.PWNew1 = "";
-                                    this.PWNew2 = "";
-                                    $("#mClose").click();
-                                    alert(data.m);
-                                }
-                            })
-                            .catch(function(error) {
-                                alert(error);
-                            });
-                    }
-                },
-            },
-            mounted() {
-                this.getCaptcha();
-                this.getMemberInfo();
-            }
-        });
-
-        Vue3.mount('#modify');
-    </script>
 
     <script type="text/javascript">
         $(function() {
@@ -195,7 +84,7 @@ require_once("phpLib.php");
                 return this.optional(element) || (tssn.test(value));
             });
 
-            $("#reg").validate({
+            $("#member").validate({
                 onfocusout: false,
                 rules: {
                     cname: {
@@ -237,7 +126,7 @@ require_once("phpLib.php");
                 rules: {
                     PWOld: {
                         required: true,
-                        remote: "checkPW.php?emailid=<?php echo $_SESSION['emailid'] ?>",
+                        remote: "checkPW.php?email_id=<?php echo $_SESSION['email_id'] ?>",
                     },
                     PWNew1: {
                         required: true,

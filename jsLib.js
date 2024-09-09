@@ -104,6 +104,7 @@ $(".cart input").change(function () {
 
 
 // registerContent
+// memberContent
 function getCaptcha() {
     var inputTxt = document.getElementById("captcha");
     inputTxt.value = captchaCode("can", 150, 50, "blue", "white", "28px", 5);
@@ -409,6 +410,51 @@ $(function () {
         })
     })
 
+    $('#howpay').change(function () {
+        const howpay = document.getElementById('howpay').value;
+        const howpayDiv = document.getElementById('howpayContent');
+
+        let howpayContent = '';
+
+        switch (howpay) {
+            case 'cod':
+                howpayContent = '';
+                break;
+            case 'credit':
+                howpayContent = `<div class="creditInfoGroup">
+    <input type="text" id="creditId" name="creditId" class="creditInfoControl" placeholder="信用卡號碼" required>
+    <label for="creditId">信用卡號碼</label>
+</div>
+
+<div class="creditInfoGroup">
+    <input type="text" id="creditName" name="creditName" class="creditInfoControl" placeholder="持卡人姓名" required>
+    <label for="creditName">持卡人姓名</label>
+</div>
+
+<div class="creditInfoGroup">
+    <input type="text" id="creditDate" name="creditDate" class="creditInfoControl" placeholder="MM/YY" required>
+    <label for="creditDate">有效期</label>
+</div>
+
+<div class="creditInfoGroup">
+    <input type="text" id="creditCVV" name="creditCVV" class="creditInfoControl" placeholder="CVV" required>
+    <label for="creditCVV">安全碼</label>
+</div>
+`;
+                break;
+            case 'bank':
+                howpayContent = "<p>收款銀行帳戶：</p><p>銀行名稱：XX銀行</p><p>帳戶號碼：1234-5678-9012</p>";
+                break;
+            case 'epay':
+                howpayContent = "<input type='radio' name='epay' id='epay[]' checked><div style='width:150px'><img src='./images/Apple_Pay_logo.svg' alt='applepay' class='img-fluid'></div><input type='radio' name='epay' id='epay[]'><div><img src='./images/Line_pay_logo.svg' alt='linepay' class='img-fluid'></div><input type='radio' name='epay' id='epay[]'><div><img src='./images/JKOPAY_logo.svg' alt='jkopay' class='img-fluid'></div>";
+
+                break;
+            default:
+                howpayContent = '';
+        }
+
+        howpayDiv.innerHTML = howpayContent;
+    })
 
     $('#uorder').click(function () {
         let msg = "系統將進行結帳處理，請確認產品金額與收件人是否正確!";

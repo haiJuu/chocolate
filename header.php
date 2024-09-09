@@ -21,7 +21,7 @@
             <ul class="navbar-nav" style="display:inline-block;">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="./images/member/<?php echo ($_SESSION['member_img'] != '') ? $_SESSION['member_img'] : '' ?>" width="40" height="40" class="rounded-circle">
+                        <img src="./images/member/<?php echo ($_SESSION['member_img'] != '') ? $_SESSION['member_img'] : ''; ?>" width="40" height="40" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="./member.php">個人資料</a></li>

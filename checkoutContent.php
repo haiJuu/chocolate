@@ -29,18 +29,16 @@
         <div class="col-md-8 col-sm-10 col-12">
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
-                    <h2 class="accordion-header text-center" id="heading">
+                    <div class="accordion-header" id="heading">
+                        <a class="accordion-button collapsed w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapse">
 
-                        <a class="accordion-button w-100 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapse" style="text-decoration:none;color:black;text-align:center;">
-
-                            <div class="text-center fs-5" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapse" style="border:1px solid black;padding:1rem">
+                            <h2 class="text-center fs-5" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
                                 <div class="mt-3 mb-3"><strong>合計:NT$<?php echo $total ?></strong></div>
                                 <div class="mb-3">購物車 (<?php echo $cart->rowCount() ?>件)</div>
-                            </div>
+                            </h2>
 
                         </a>
-
-                    </h2>
+                    </div>
 
                     <div id="collapse" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordionExample">
                         <div class="accordion-body" style="padding:0;">
@@ -106,7 +104,7 @@
                                 </table>
                             </div>
 
-                            <a class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapse" style="border-top:1px solid lightgray;">
+                            <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse" style="border-top:1px solid lightgray;">
                             </a>
 
                         </div>
@@ -167,15 +165,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
-                            <p>載具編號 (選填)</p>
-                            <p>
-                                <input type="text" id="e_invoice" name="e_invoice" class="w-100">
+                        <td class="e_invoice">
+                            <p>載具編號 (選填)
+                                <input type="text" id="e_invoice" name="e_invoice">
                             </p>
-                            <p>公司抬頭 (選填)</p>
-                            <p><input type="text" id="company_name" name="company_name" class="w-100"></p>
-                            <p>統一編號 (選填)</p>
-                            <p><input type="text" id="tax_ID_number" name="tax_ID_number" class="w-100"></p>
+                            <p>公司抬頭 (選填)<input type="text" id="company_name" name="company_name"></p>
+                            <p>統一編號 (選填)<input type="text" id="tax_ID_number" name="tax_ID_number"></p>
                         </td>
                     </tr>
                 </tbody>
@@ -214,13 +209,16 @@
                 <tbody>
                     <tr>
                         <td>
-                            <select name="" id="" style="padding:5px">
-                                <option value="">請選擇付款方式</option>
-                                <option value="">貨到付款</option>
-                                <option value="">信用卡</option>
-                                <option value="">銀行轉帳</option>
-                                <option value="">電子支付</option>
-                            </select>
+                            <p>
+                                <select name="howpay" id="howpay" class="howpay" style="padding:5px">
+                                    <option value="">請選擇付款方式</option>
+                                    <option value="cod">貨到付款</option>
+                                    <option value="credit">信用卡</option>
+                                    <option value="bank">銀行轉帳</option>
+                                    <option value="epay">電子支付</option>
+                                </select>
+                            </p>
+                            <div id="howpayContent" class="howpayContent"></div>
                         </td>
                     </tr>
             </table>
@@ -250,7 +248,7 @@
                             < 返回購物車</a>
                     </td>
                     <td class="text-end">
-                        <button type="button" id="uorder" name="uorder" class="btn btn-danger w-100">提交訂單</button>
+                        <button type="button" id="uorder" name="uorder" class="btn w-100">提交訂單</button>
                     </td>
                 </tr>
             </table>

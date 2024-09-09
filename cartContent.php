@@ -82,7 +82,6 @@
                         </tfoot>
                     </table>
                 </div>
-                <br>
                 <div class="table-responsive-md">
                     <table class="table mt-3">
                         <thead class="text-start fs-5">

@@ -539,9 +539,116 @@ section#content .checkout {
     padding-bottom: 3rem;
 }
 
+section#content .checkout .accordion .accordion-button {
+    flex-direction: column;
+    /* color: var(--bs-accordion-btn-color); */
+    color: black;
+    text-decoration: none;
+}
+
+section#content .checkout .accordion .accordion-button:not(.collapsed) {
+    /* color: var(--bs-accordion-active-color); */
+    color: black;
+    /* background-color: var(--bs-accordion-active-bg); */
+    background-color: white;
+    /* box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color); */
+    box-shadow: none;
+}
+
+section#content .checkout .accordion .accordion-button::after {
+    background-image: var(--bs-accordion-btn-icon);
+    /* background-size: var(--bs-accordion-btn-icon-width); */
+    background-size: 0.75rem;
+    color: black;
+    margin: auto;
+}
+
+section#content .checkout .accordion h2 {
+    margin: auto;
+}
+
 section#content .checkout .accordion .table {
     border-right: none;
     border-left: none;
+}
+
+section#content .checkout .e_invoice input {
+    width: 100%;
+    padding: 2.5px;
+    margin-top: 5px;
+    outline: none;
+}
+
+section#content .checkout .howpay {
+    padding: 5px;
+    outline: none;
+}
+
+
+section#content .checkout .creditInfoGroup {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+section#content .checkout .creditInfoGroup label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    font-size: 14px;
+    color: gray;
+    transition: 0.3s;
+    /* pointer-events: none; */
+}
+
+section#content .checkout .creditInfoControl {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid gray;
+    outline: none;
+}
+
+section#content .checkout .creditInfoControl::placeholder {
+    color: transparent;
+}
+
+section#content .checkout .creditInfoControl:focus+label,
+section#content .checkout .creditInfoControl:not(:placeholder-shown)+label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+}
+
+section#content .checkout button {
+    background-color: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+}
+
+section#content .order .accordion .accordion-button {
+    flex-direction: column;
+    /* color: var(--bs-accordion-btn-color); */
+    color: black;
+    text-decoration: none;
+}
+
+section#content .order .accordion .accordion-button:not(.collapsed) {
+    /* color: var(--bs-accordion-active-color); */
+    color: black;
+    /* background-color: var(--bs-accordion-active-bg); */
+    background-color: white;
+    /* box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color); */
+    box-shadow: none;
+}
+
+section#content .order .accordion .accordion-button::after {
+    background-image: var(--bs-accordion-btn-icon);
+    /* background-size: var(--bs-accordion-btn-icon-width); */
+    background-size: 0.75rem;
+    color: black;
+    margin: auto;
 }
 
 section#content .login {

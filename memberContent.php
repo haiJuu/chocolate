@@ -9,7 +9,7 @@
         </div>
         <div class="row" id="modify" name="modify">
             <div class="col-lg-8 offset-2 text-left">
-                <form action="" method="GET" id="reg" name="reg">
+                <form action="" method="GET" id="member" name="member">
                     <div class="input-group mb-3">
                         <input type="email" id="email" name="email" class="form-control" placeholder="*請輸入email帳號" readonly v-model="member.email">
                     </div>
@@ -24,12 +24,11 @@
                         <input type="text" id="birthday" name="birthday" class="form-control" placeholder="*請選擇生日" onfocus="(this.type='date')" :readonly="readonly" v-model="member.birthday">
                     </div>
 
-                    <label for="fileToUpload" class="form-label">上傳相片：</label>
+                    <label for="memberImg" class="form-label">上傳相片：</label>
                     <div class="input-group mb-3" v-show="!readonly">
-                        <input type="file" id="fileToUpload" name="fileToUpload" class="form-control" title="請上傳相片圖示" accept="image/x-png,image/jpeg,image/gif,image/jpg">
-
+                        <input type="file" id="memberImg" name="memberImg" class="form-control" title="請上傳相片圖示" accept="image/x-png,image/jpeg,image/gif,image/jpg">
                         <p>
-                            <button type="button" class="btn btn-danger" id="uploadForm" name="uploadForm">開始上傳</button>
+                            <button type="button" class="btn btn-danger" id="uploadImg" name="uploadImg">開始上傳</button>
                         </p>
 
                         <div class="progress" id="progress-div01" style="width:100%;display:none;">
@@ -38,7 +37,7 @@
 
                         <input type="hidden" id="uploadname" name="uploadname" value="">
 
-                        <img src="" alt="photo" id="showimg" name="showimg" class="img-fluid" style="display:none;">
+                        <img src="" alt="photo" id="showImg" name="showImg" class="img-fluid" style="display:none;">
                     </div>
 
                     <div class="input-group mb-3" v-if="readonly">
