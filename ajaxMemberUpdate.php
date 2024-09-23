@@ -15,7 +15,7 @@ if (isset($_GET['email_id']) && $_GET['email_id'] != '') {
     $result = $link->query($query);
 
     if ($result) {
-        // (!isset($_SESSION)) ? session_start() : "";
+        (!isset($_SESSION)) ? session_start() : "";
         $_SESSION['cname'] = $cname;
         $_SESSION['member_img'] = $member_img;
         $retcode = array("c" => "1", "m" => "謝謝您!會員資料已經更新");
