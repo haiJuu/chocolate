@@ -32,10 +32,10 @@
                     <table class="table mt-3">
                         <thead>
                             <tr class="table-light">
-                                <td colspan="6" class="text-start fs-5">購物車 (<?php echo $cart->rowCount() ?>件)</td>
+                                <td colspan="5" class="text-start fs-5">購物車 (<?php echo $cart->rowCount() ?>件)</td>
                             </tr>
                             <tr class="text-center">
-                                <td width="30%" colspan="2" class="text-start">商品資訊</td>
+                                <td width="30%" class="text-start">商品資訊</td>
                                 <td width="20%">單價</td>
                                 <td width="15%">數量</td>
                                 <td width="20%">小計</td>
@@ -47,10 +47,10 @@
                             while ($fetch_cart = $cart->fetch()) {
                             ?>
                                 <tr class="text-center">
-                                    <td colspan="2" class="text-start">
-                                        <a href="./product.php?p_id=<?php echo $fetch_cart['p_id']; ?>" style="    text-decoration: none;color: black;">
+                                    <td class="text-start">
+                                        <a href="./product.php?p_id=<?php echo $fetch_cart['p_id']; ?>" style="text-decoration: none;color: black;display:flex">
                                             <img src="./images/product/<?php echo $fetch_cart['img_file']; ?>" alt="<?php echo $fetch_cart['p_name']; ?>" class="img-fluid">
-                                            <?php echo $fetch_cart['p_name']; ?>
+                                            <div><?php echo $fetch_cart['p_name']; ?></div>
                                         </a>
                                     </td>
                                     <td>
@@ -74,7 +74,7 @@
                         </tbody>
                         <tfoot class="text-center">
                             <tr>
-                                <td colspan="5"></td>
+                                <td colspan="4"></td>
                                 <td>
                                     <a onclick="confirmLink('確定刪除全商品?','./cartDelete.php?mode=2')">刪除<br>全部</a>
                                 </td>
@@ -95,16 +95,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>運費：
-                                    <?php
-                                    if ($cartTotal >= 3000) {
-                                        $shippingFee = 0;
-                                        echo $shippingFee;
-                                    } else {
-                                        $shippingFee = 100;
-                                        echo $shippingFee;
-                                    }
-                                    ?>
+                                <td>運費：<?php
+                                        if ($cartTotal >= 3000) {
+                                            $shippingFee = 0;
+                                            echo $shippingFee;
+                                        } else {
+                                            $shippingFee = 100;
+                                            echo $shippingFee;
+                                        }
+                                        ?>
                                 </td>
                                 <td class="text-end" colspan="2">
                                     <?php

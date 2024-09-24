@@ -212,7 +212,7 @@
                             <p>
                                 <select name="howpay" id="howpay" class="howpay" style="padding:5px">
                                     <option value="">請選擇付款方式</option>
-                                    <option value="cod">貨到付款</option>
+                                    <option value="cod" selected>貨到付款</option>
                                     <option value="credit">信用卡</option>
                                     <option value="bank">銀行轉帳</option>
                                     <option value="epay">電子支付</option>
@@ -231,7 +231,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><textarea class="w-100" name="remark" id="remark" rows="3" placeholder="有什麼想告訴賣家嗎?" style="padding:5px;"></textarea></td>
+                        <td><textarea class="remark w-100" name="remark" id="remark" rows="3" placeholder="有什麼想告訴賣家嗎?"></textarea></td>
                     </tr>
                 </tbody>
             </table>
@@ -263,7 +263,7 @@ $select_addbook = sprintf("SELECT *,city.city_name,town.town_name FROM addbook,c
 $addbook = $link->query($select_addbook);
 ?>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade checkoutModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -326,14 +326,14 @@ $addbook = $link->query($select_addbook);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($fetcf_addbook = $addbook->fetch()) { ?>
+                        <?php while ($fetch_addbook = $addbook->fetch()) { ?>
                             <tr>
                                 <th scope="row">
-                                    <input type="radio" name="setdefault" id="setdefault[]" value="<?php echo $fetcf_addbook['address_id'] ?>" <?php echo ($fetcf_addbook['setdefault']) ? 'checked' : ''; ?>>
+                                    <input type="radio" name="setdefault" id="setdefault[]" value="<?php echo $fetch_addbook['address_id'] ?>" <?php echo ($fetch_addbook['setdefault']) ? 'checked' : ''; ?>>
                                 </th>
-                                <td><?php echo $fetcf_addbook['cname']; ?></td>
-                                <td><?php echo $fetcf_addbook['mobile']; ?></td>
-                                <td><?php echo $fetcf_addbook['zip'] . $fetcf_addbook['city_name'] . $fetcf_addbook['town_name'] . $fetcf_addbook['address']; ?></td>
+                                <td><?php echo $fetch_addbook['cname']; ?></td>
+                                <td><?php echo $fetch_addbook['mobile']; ?></td>
+                                <td><?php echo $fetch_addbook['zip'] . $fetch_addbook['city_name'] . $fetch_addbook['town_name'] . $fetch_addbook['address']; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

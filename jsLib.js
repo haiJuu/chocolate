@@ -332,7 +332,7 @@ $(function () {
 });
 
 
-// checkout_content
+// checkoutContent
 $(function () {
     $('#addbook').click(function () {
         var validate = 0, msg = "";
@@ -443,11 +443,10 @@ $(function () {
 `;
                 break;
             case 'bank':
-                howpayContent = "<p>收款銀行帳戶：</p><p>銀行名稱：XX銀行</p><p>帳戶號碼：1234-5678-9012</p>";
+                howpayContent = "<p>收款帳戶：</p><p>銀行名稱：中華郵政 (700)</p><p>帳戶號碼：0001-2345-6789</p>";
                 break;
             case 'epay':
-                howpayContent = "<input type='radio' name='epay' id='epay[]' checked><div style='width:150px'><img src='./images/Apple_Pay_logo.svg' alt='applepay' class='img-fluid'></div><input type='radio' name='epay' id='epay[]'><div><img src='./images/Line_pay_logo.svg' alt='linepay' class='img-fluid'></div><input type='radio' name='epay' id='epay[]'><div><img src='./images/JKOPAY_logo.svg' alt='jkopay' class='img-fluid'></div>";
-
+                howpayContent = "<div><input type='radio' name='epay' id='epay[]' checked><img src='./images/Apple_Pay_logo.svg' alt='applepay'></div><div><input type='radio' name='epay' id='epay[]'><img src='./images/Line_pay_logo.svg' alt='linepay'></div><div><input type='radio' name='epay' id='epay[]'><img src='./images/JKOPAY_logo.svg' alt='jkopay'></div>";
                 break;
             default:
                 howpayContent = '';
@@ -491,5 +490,12 @@ $(function () {
             },
         })
     })
-
 });
+
+
+// orderContent
+$(function () {
+    $('#goToUpper').click(function () {
+        window.history.back();
+    })
+})

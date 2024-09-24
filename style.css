@@ -572,7 +572,8 @@ section#content .checkout .accordion .table {
     border-left: none;
 }
 
-section#content .checkout .e_invoice input {
+section#content .checkout .e_invoice input,
+section#content .checkout .remark {
     width: 100%;
     padding: 2.5px;
     margin-top: 5px;
@@ -619,12 +620,29 @@ section#content .checkout .creditInfoControl:not(:placeholder-shown)+label {
     font-size: 12px;
 }
 
+section#content .checkout .howpayContent {
+    width: 100%;
+    /* border: 1px solid black; */
+}
+
+section#content .checkout .howpayContent img {
+    width: 127px;
+    height: 52px;
+    margin-left: 1rem;
+}
+
 section#content .checkout button {
     background-color: lightgray;
     border: 1px solid lightgray;
     border-radius: 10px;
     color: white;
     font-size: 1rem;
+}
+
+section#content .checkoutModal .form-control {
+    border-color: gray;
+    box-shadow: none;
+    outline: none;
 }
 
 section#content .order .accordion .accordion-button {
@@ -649,6 +667,28 @@ section#content .order .accordion .accordion-button::after {
     background-size: 0.75rem;
     color: black;
     margin: auto;
+}
+
+section#content .order .accordion table tbody tr td img {
+    width: 30%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center center;
+}
+
+section#content .order .accordion table tr td {
+    align-content: center;
+    /* padding: 0.5rem 1rem; */
+}
+
+section#content .order .emptyOrder i {
+    font-size: 8rem;
+}
+
+section#content .order .emptyOrder button {
+    width: 75%;
+    background-color: #212529;
+    color: white;
 }
 
 section#content .login {
