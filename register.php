@@ -25,7 +25,7 @@ require_once("phpLib.php");
     </header>
 
     <?php
-    if ((isset($_POST['formctl'])) && ($_POST['formctl'] == 'reg')) {
+    if ((isset($_POST['register'])) && ($_POST['register'] == 'register')) {
         $email = $_POST['email'];
         $pw1 = md5($_POST['pw1']);
         $cname = $_POST['cname'];
@@ -40,13 +40,14 @@ require_once("phpLib.php");
         $email_id = $link->lastInsertId();
 
         if ($member) {
-            $insertsql = "INSERT INTO addbook(email_id,setdefault,cname,mobile,zip,address) VALUES ('" . $email_id . "','1','" . $cname . "','" . $mobile . "','" . $zip . "','" . $address . "')";
-            $addbook = $link->query($insertsql);
+            $insert_addbook = "INSERT INTO addbook(email_id,setdefault,cname,mobile,zip,address) VALUES ('" . $email_id . "','1','" . $cname . "','" . $mobile . "','" . $zip . "','" . $address . "')";
+            $addbook = $link->query($insert_addbook);
 
             $_SESSION['login'] = true;
             $_SESSION['email_id'] = $email_id;
             $_SESSION['email'] = $email;
             $_SESSION['cname'] = $cname;
+            $_SESSION['member_img'] = $memberImg;
             echo "<script language='javascript'>alert('謝謝您，會員資料已完成註冊');location.href='./index.php'</script>";
         }
     }

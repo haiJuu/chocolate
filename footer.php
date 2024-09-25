@@ -5,20 +5,20 @@
         </div>
     </div>
     <br>
-    <div class="row text-center">
-        <div class="col-md-2 col-sm-6 col-6 offset-md-2">
+    <div class="row justify-content-center text-center">
+        <div class="col-md-3 col-sm-6 col-6">
             <i class="fas fa-regular fa-phone"></i>
             <div>0900999000</div>
         </div>
-        <div class="col-md-2 col-sm-6 col-6">
+        <div class="col-md-3 col-sm-6 col-6">
             <i class="fas fa-regular fa-clock"></i>
             <div>星期一至日 10:00～18:00</div>
         </div>
-        <div class="col-md-2 col-sm-6 col-6">
+        <div class="col-md-3 col-sm-6 col-6">
             <i class="fa-solid fa-envelope"></i>
             <div>choosechocolate@gmail.com.tw</div>
         </div>
-        <div class="col-md-2 col-sm-6 col-6">
+        <div class="col-md-3 col-sm-6 col-6">
             <i class="fa-solid fa-location-arrow"></i>
             <div>南投縣草屯鎮</div>
         </div>

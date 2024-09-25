@@ -267,81 +267,89 @@ $addbook = $link->query($select_addbook);
 
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
+
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">收件人資訊</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">選擇／新增收件人</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" name="cname" id="cname" class="form-control" placeholder="收件姓名">
-                        </div>
-                        <div class="col">
-                            <input type="number" name="mobile" id="mobile" class="form-control" placeholder="電話號碼">
-                        </div>
-                        <div class="col">
-                            <select name="city" id="city" class="form-control">
-                                <option value="">選擇縣市</option>
-
-                                <?php
-                                $select_city = "SELECT * FROM city WHERE State=0";
-                                $city = $link->query($select_city);
-                                while ($fetch_city = $city->fetch()) { ?>
-
-                                    <option value="<?php echo $fetch_city['auto_no'] ?>"><?php echo $fetch_city['city_name'] ?></option>
-
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select name="town" id="town" class="form-control">
-                                <option value="">選擇鄉鎮市區</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col">
-                            <input type="hidden" name="zip" id="zip" value="">
-                            <label for="address" id="zipcode" name="zipcode"></label>
-                            <input type="text" name="address" id="address" class="form-control" placeholder="地址">
-                        </div>
-                    </div>
-
-                    <div class="row mt-4 justify-content-center">
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-success" id="addbook" name="addbook">新增資料</button>
-                        </div>
-                    </div>
-                </form>
-                <hr>
                 <table class="table">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">選取</th>
-                            <th scope="col">收件姓名</th>
-                            <th scope="col">電話號碼</th>
-                            <th scope="col">收件地址</th>
+                    <thead class="table-light">
+                        <tr class="text-center">
+                            <th scope="col" width="10%">選擇</th>
+                            <th scope="col" width="15%">收件姓名</th>
+                            <th scope="col" width="20%">電話號碼</th>
+                            <th scope="col" class="text-start">收件地址</th>
+                            <th scope="col">刪除</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php while ($fetch_addbook = $addbook->fetch()) { ?>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="row">
                                     <input type="radio" name="setdefault" id="setdefault[]" value="<?php echo $fetch_addbook['address_id'] ?>" <?php echo ($fetch_addbook['setdefault']) ? 'checked' : ''; ?>>
                                 </th>
                                 <td><?php echo $fetch_addbook['cname']; ?></td>
                                 <td><?php echo $fetch_addbook['mobile']; ?></td>
-                                <td><?php echo $fetch_addbook['zip'] . $fetch_addbook['city_name'] . $fetch_addbook['town_name'] . $fetch_addbook['address']; ?></td>
+                                <td class="text-start"><?php echo $fetch_addbook['zip'] . $fetch_addbook['city_name'] . $fetch_addbook['town_name'] . $fetch_addbook['address']; ?></td>
+                                <td> <i class="fas fa-times" onclick="confirmLink('確定刪除此資料?','./ckeckoutDeleteAddbook.php?address_id=<?php echo $fetch_addbook['address_id']; ?>')"></i></td>
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
+
+                <form>
+
+                    <table class="table">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th scope="row" width="10%">新增</th>
+                                <th scope="col" width="15%"></th>
+                                <th scope="col" width="20%"></th>
+                                <th scope="col" colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="text-center"><button type="button" class="btn btn-dark" id="addbook" name="addbook"><i class="fa-solid fa-plus"></i></button></th>
+                                <td><input type="text" name="cname" id="cname" class="form-control" placeholder="收件姓名"></td>
+                                <td><input type="number" name="mobile" id="mobile" class="form-control" placeholder="電話號碼"></td>
+                                <td><select name="city" id="city" class="form-control">
+                                        <option value="">選擇縣市</option>
+
+                                        <?php
+                                        $select_city = "SELECT * FROM city WHERE State=0";
+                                        $city = $link->query($select_city);
+                                        while ($fetch_city = $city->fetch()) { ?>
+
+                                            <option value="<?php echo $fetch_city['auto_no'] ?>"><?php echo $fetch_city['city_name'] ?></option>
+
+                                        <?php } ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="town" id="town" class="form-control">
+                                        <option value="">選擇鄉鎮市區</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td colspan="4"><input type="hidden" name="zip" id="zip" value="">
+                                    <label for="address" id="zipcode" name="zipcode">郵遞區號</label>
+                                    <input type="text" name="address" id="address" class="form-control" placeholder="地址">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </form>
             </div>
-            <div class="modal-footer justify-content-center">
+            <!-- <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

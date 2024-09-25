@@ -79,8 +79,8 @@ $i = 1;
                                         while ($fetch_cart = $cart->fetch()) {
                                         ?>
                                             <tr class="text-center">
-                                                <td class="text-start"><img src="./images/product/<?php echo $fetch_cart['img_file']; ?>" alt="<?php echo $fetch_cart['p_name']; ?>" class="img-fluid">
-                                                    <?php echo $fetch_cart['p_name']; ?>
+                                                <td class="text-start" style="display:flex"><img src="./images/product/<?php echo $fetch_cart['img_file']; ?>" alt="<?php echo $fetch_cart['p_name']; ?>" class="img-fluid">
+                                                    <div><?php echo $fetch_cart['p_name']; ?></div>
                                                 </td>
                                                 <td>
                                                     NT$ <?php echo $fetch_cart['p_price']; ?>

@@ -40,6 +40,26 @@ header .font .badge {
     color: black;
 }
 
+header .font .dropdown-toggle::after {
+    display: inline-block;
+    /* margin-left: 0.255em; */
+    margin-left: 0;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+header .font .dropdown-menu {
+    /* --bs-dropdown-min-width: 10rem; */
+    --bs-dropdown-min-width: 0;
+    /* --bs-dropdown-padding-x: 0; */
+    --bs-dropdown-padding-x: 0.5rem;
+    /* display: none; */
+}
+
 header .nav {
     align-items: flex-start;
     /* border: 1px solid black; */
@@ -639,6 +659,10 @@ section#content .checkout button {
     font-size: 1rem;
 }
 
+section#content .checkoutModal .table {
+    border: 0px solid white;
+}
+
 section#content .checkoutModal .form-control {
     border-color: gray;
     box-shadow: none;
@@ -746,24 +770,67 @@ section#content .register {
     padding-bottom: 3rem;
 }
 
-section#content .register .input-group>.form-control {
-    width: 100%;
+section#content .register input {
+    align-content: center;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    box-shadow: none;
+    outline: none;
+}
+
+section#content .register select {
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    box-shadow: none;
+    outline: none;
+}
+
+section#content .register input[type="file"] {
+    border: none;
+    border: 1px solid gray;
+    padding: 5px;
+    box-shadow: none;
+    outline: none;
+}
+
+section#content .register button[type="submit"] {
+    background-color: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+}
+
+section#content .register button.btn-light {
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: gray;
+    font-size: 1rem;
+}
+
+section#content .register button.btn-light:hover {
+    background-color: lightgray;
+    color: white;
 }
 
 section#content .register span.error-tips,
 section#content .register span.error-tips::before {
-    font-family: "Font Awesome 5 Free";
+    /* font-family: "Font Awesome 5 Free"; */
+    font-size: 14px;
     color: red;
-    font-weight: 900;
-    content: "\f0c4";
+    content: "\a　　　　　　";
+    white-space: pre-wrap;
 }
 
 section#content .register span.valid-tips,
 section#content .register span.valid-tips::before {
-    font-family: "Font Awesome 5 Free";
-    color: greenyellow;
-    font-weight: 900;
-    content: "\f00c";
+    /* font-family: "Font Awesome 5 Free"; */
+    color: red;
+    content: "\a　　　　　　";
+    white-space: pre-wrap;
 }
 
 section#content .order {

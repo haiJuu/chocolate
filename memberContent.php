@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="input-group mb-3" v-if="readonly">
-                        <img :src="`./images/member/${(member.member_img)?member.member_img:''}`" alt="photo" style="width:20%;" :title="`檔名：${(member.member_img)?member.member_img:''}`">
+                        <img :src="`./images/member/${(member.member_img)?member.member_img:'bear.jpg'}`" alt="photo" style="width:20%;" :title="`${(member.member_img)?member.member_img:'此為預設頭貼'}`">
                     </div>
 
                     <div class="input-group mb-3" v-show="!readonly">

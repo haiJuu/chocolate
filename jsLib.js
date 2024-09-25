@@ -115,7 +115,7 @@ $("#uploadImg").click(function (e) {
     var dotIndex = memberImgName.lastIndexOf(".") + 1;
     let imgFormat = memberImgName.substr(dotIndex, memberImgName.length).toLowerCase();
     if (imgFormat == "jpg" || imgFormat == "jpeg" || imgFormat == "png" || imgFormat == "gif") {
-        $("#progress-div01").css("display", "flex");
+        $("#progress").css("display", "flex");
         let memberImg = document.getElementById("memberImg").files[0];
         let formMemberImg = new FormData();
         formMemberImg.append("memberImg", memberImg);
@@ -134,8 +134,8 @@ $("#uploadImg").click(function (e) {
 
 function progressHandler(event) {
     let percent = Math.round((event.loaded / event.total) * 100);
-    $("#progress-bar01").css("width", percent + "%");
-    $("#progress-bar01").html(percent + "%");
+    $("#progress-bar").css("width", percent + "%");
+    $("#progress-bar").html(percent + "%");
 };
 
 function completeHandler(event) {
@@ -146,7 +146,7 @@ function completeHandler(event) {
             "src": "./images/member/" + data.memberImgName,
             "style": "display:block;"
         });
-        $("button.btn.btn-danger").attr({
+        $("button.btn.btn-light").attr({
             "style": "display:none;",
         });
     } else {
@@ -177,7 +177,7 @@ jQuery.validator.addMethod("townRequired", function (value, element, param) {
     return (value !== "");
 });
 
-$("#reg").validate({
+$("#register").validate({
     rules: {
         email: {
             required: true,
@@ -221,42 +221,42 @@ $("#reg").validate({
 
     messages: {
         email: {
-            required: "email信箱不得為空白",
+            required: "必填",
             email: "email信箱格式錯誤",
             remote: "email信箱已經註冊"
         },
         pw1: {
-            required: "密碼不得為空白",
+            required: "必填",
             maxlength: "密碼最大長度為20位(4-20位英文字母與數字的組合)",
             minlength: "密碼最小長度為4位(4-20位英文字母與數字的組合)"
         },
         pw2: {
-            required: "確認密碼不得為空白",
-            equalTo: "兩次輸入的密碼必須一致！"
+            required: "必填",
+            equalTo: "兩次輸入的密碼必須一致"
         },
         cname: {
-            required: "使用者名稱不得為空白"
+            required: "必填"
         },
         tssn: {
             required: "",
-            tssnFormat: "身份證ID格式有誤"
+            tssnFormat: "身份證格式有誤"
         },
         birthday: {
-            required: "生日不得為空白"
+            required: "必填"
         },
         mobile: {
-            required: "手機號碼不得為空白",
+            required: "必填",
             phoneFormat: "手機號碼格式有誤"
         },
         address: {
-            required: "地址不得為空白"
+            required: "必填"
         },
         town: {
-            townRequired: "需選擇郵遞區號"
+            townRequired: "必填"
         },
         recaptcha: {
-            required: "驗證碼不得為空白！",
-            equalTo: "驗證碼需相同！"
+            required: "必填",
+            equalTo: "驗證碼需相同"
         },
     },
 
@@ -342,19 +342,19 @@ $(function () {
         var address = $("#address").val();
 
         if (cname == "") {
-            msg = msg + "收件姓名不得為空白!;\n";
+            msg = msg + "收件姓名不得為空白\n";
             validate = 1;
         }
         if (mobile == "") {
-            msg = msg + "電話號碼不得為空白!;\n";
+            msg = msg + "電話號碼不得為空白\n";
             validate = 1;
         }
         if (zip == "") {
-            msg = msg + "縣市鄉鎮市區不得為空白;\n";
+            msg = msg + "縣市鄉鎮市區不得為空白\n";
             validate = 1;
         }
         if (address == "") {
-            msg = msg + "地址不得為空白;\n";
+            msg = msg + "地址不得為空白\n";
             validate = 1;
         }
         if (validate) {
