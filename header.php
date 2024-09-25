@@ -8,12 +8,14 @@
 
     <div class="font col-md-4 col-sm-10 col-8 align-content-center text-end pe-4">
         <?php
-        $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "'";
-        $cart = $link->query($select_cart);
-        $count_cart = $cart->rowCount();
+        if (isset($_SESSION['login'])) {
+            $select_cart = "SELECT * FROM cart WHERE order_id is NULL AND ip='" . $_SERVER['REMOTE_ADDR'] . "' AND email_id ='" . $_SESSION['email_id'] . "'";
+            $cart = $link->query($select_cart);
+            $count_cart = $cart->rowCount();
+        }
         ?>
         <a href="./cart.php">
-            <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo $count_cart; ?></span>
+            <i class="fas fa-shopping-bag"></i><span class="badge"><?php echo isset($_SESSION['login']) ? $count_cart : "0"; ?></span>
         </a>
 
         <?php if (isset($_SESSION['login'])) { ?>

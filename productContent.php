@@ -59,7 +59,8 @@
 
                             <button name="cartAdd" id="cartAdd" type="button" class="btn w-100 mt-3"
                                 onclick="<?php if (!isset($_SESSION['login'])) {
-                                                echo "window.location.href = './login.php?goToPath=class'";
+                                                $goToPath = "./product.php?p_id=" . $fetch_product['p_id'];
+                                                echo "window.location.href = './login.php?goToPath=$goToPath'";
                                             } else {
                                                 $p_id = $fetch_product['p_id'];
                                                 echo "addCart($p_id);";
