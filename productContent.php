@@ -54,7 +54,17 @@
                             <div>
                                 <input type="number" id="qty" name="qty" value="1" class="w-100" min="0">
                             </div>
-                            <button name="cartAdd" id="cartAdd" type="button" class="btn w-100 mt-3" onclick="addCart(<?php echo $fetch_product['p_id']; ?>)" style="background-color:<?php echo btnColor($fetch_brand['b_id']); ?>">加入購物車</button>
+
+                            <!-- <button name="cartAdd" id="cartAdd" type="button" class="btn w-100 mt-3" onclick="addCart(<?php echo $fetch_product['p_id']; ?>)" style="background-color:<?php echo btnColor($fetch_brand['b_id']); ?>">加入購物車</button> -->
+
+                            <button name="cartAdd" id="cartAdd" type="button" class="btn w-100 mt-3"
+                                onclick="<?php if (!isset($_SESSION['login'])) {
+                                                echo "window.location.href = './login.php?goToPath=class'";
+                                            } else {
+                                                $p_id = $fetch_product['p_id'];
+                                                echo "addCart($p_id);";
+                                            } ?>"
+                                style="background-color:<?php echo btnColor($fetch_brand['b_id']); ?>">加入購物車</button>
                         </div>
                     </div>
                 </div>

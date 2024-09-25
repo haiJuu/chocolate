@@ -281,7 +281,7 @@ $addbook = $link->query($select_addbook);
                             <th scope="col" width="15%">收件姓名</th>
                             <th scope="col" width="20%">電話號碼</th>
                             <th scope="col" class="text-start">收件地址</th>
-                            <th scope="col">刪除</th>
+                            <!-- <th scope="col">刪除</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -293,7 +293,7 @@ $addbook = $link->query($select_addbook);
                                 <td><?php echo $fetch_addbook['cname']; ?></td>
                                 <td><?php echo $fetch_addbook['mobile']; ?></td>
                                 <td class="text-start"><?php echo $fetch_addbook['zip'] . $fetch_addbook['city_name'] . $fetch_addbook['town_name'] . $fetch_addbook['address']; ?></td>
-                                <td> <i class="fas fa-times" onclick="confirmLink('確定刪除此資料?','./ckeckoutDeleteAddbook.php?address_id=<?php echo $fetch_addbook['address_id']; ?>')"></i></td>
+                                <!-- <td> <i class="fas fa-times" onclick="confirmLink('確定刪除此資料?','./ckeckoutDeleteAddbook.php?address_id=<?php echo $fetch_addbook['address_id']; ?>')"></i></td> -->
                             </tr>
                         <?php } ?>
                     </tbody>

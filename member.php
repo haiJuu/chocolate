@@ -21,18 +21,16 @@ require_once("phpLib.php");
 
         span.error-tips,
         span.error-tips::before {
-            font-family: "Font Awesome 5 Free";
+            /* font-family: "Font Awesome 5 Free"; */
             color: red;
-            font-weight: 900;
-            content: "\f0c4";
+            font-size: 14px;
+            content: "";
         }
 
         span.valid-tips,
         span.valid-tips::before {
-            font-family: "Font Awesome 5 Free";
-            color: greenyellow;
-            font-weight: 900;
-            content: "\f00c";
+            /* font-family: "Font Awesome 5 Free"; */
+            content: "";
         }
 
         .text-white {
@@ -105,18 +103,18 @@ require_once("phpLib.php");
 
                 messages: {
                     cname: {
-                        required: "使用者名稱不得為空白"
+                        required: "必填"
                     },
                     tssn: {
-                        required: "身份證ID不得為空白",
+                        required: "",
                         tssn: "身份證ID格式有誤"
                     },
                     birthday: {
-                        required: "生日不得為空白"
+                        required: "必填"
                     },
                     recaptcha: {
-                        required: "驗證碼不得為空白！",
-                        equalTo: "驗證碼需相同！"
+                        required: "必填",
+                        equalTo: "驗證碼需相同"
                     },
                 },
 

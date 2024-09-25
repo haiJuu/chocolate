@@ -24,15 +24,15 @@
                         <input type="text" id="birthday" name="birthday" class="form-control" placeholder="*請選擇生日" onfocus="(this.type='date')" :readonly="readonly" v-model="member.birthday">
                     </div>
 
-                    <label for="memberImg" class="form-label">上傳相片：</label>
+                    <label for="memberImg" class="form-label">頭貼設定：</label>
                     <div class="input-group mb-3" v-show="!readonly">
                         <input type="file" id="memberImg" name="memberImg" class="form-control" title="請上傳相片圖示" accept="image/x-png,image/jpeg,image/gif,image/jpg">
                         <p>
-                            <button type="button" class="btn btn-danger" id="uploadImg" name="uploadImg">開始上傳</button>
+                            <button type="button" class="btn btn-light" id="uploadImg" name="uploadImg">上傳</button>
                         </p>
 
-                        <div class="progress" id="progress-div01" style="width:100%;display:none;">
-                            <div id="progress-bar01" class="progress-bar progress-bar-striped" role="progressbar" style="width:0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        <div class="progress" id="progress" style="width:100%;display:none;">
+                            <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" style="width:0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
 
                         <input type="hidden" id="uploadname" name="uploadname" value="">

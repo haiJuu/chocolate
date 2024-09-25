@@ -828,7 +828,6 @@ section#content .register span.error-tips::before {
 section#content .register span.valid-tips,
 section#content .register span.valid-tips::before {
     /* font-family: "Font Awesome 5 Free"; */
-    color: red;
     content: "\a　　　　　　";
     white-space: pre-wrap;
 }

@@ -37,10 +37,21 @@ while ($fetch_product2 = $product2->fetch()) { ?>
                     <img src="./images/product/<?php echo $fetch_product2['img_file']; ?>" class="card-img-top" alt="<?php echo $fetch_product2['p_name']; ?>" title="<?php echo $fetch_product2['p_intro']; ?>">
                 </div>
             </a>
+
             <div class="card-body">
                 <h5 class="card-title"><?php echo $fetch_product2['p_name']; ?></h5>
                 <p class="card-text">NT$ <?php echo $fetch_product2['p_price']; ?></p>
-                <button name="add_cart[]" id="add_cart" type="button" class="btn" onclick="addCart(<?php echo $fetch_product2['p_id']; ?>)" style="background-color:<?php echo btnColor($fetch_product2['b_id']); ?>">加入購物車</button>
+
+                <!-- <button name="add_cart[]" id="add_cart" type="button" class="btn" onclick="addCart(<?php echo $fetch_product2['p_id']; ?>)" style="background-color:<?php echo btnColor($fetch_product2['b_id']); ?>">加入購物車</button> -->
+
+                <button name="add_cart[]" id="add_cart" type="button" class="btn"
+                    onclick="<?php if (!isset($_SESSION['login'])) {
+                                    echo "window.location.href = './login.php?goToPath=class'";
+                                } else {
+                                    $p_id = $fetch_product2['p_id'];
+                                    echo "addCart($p_id);";
+                                } ?>"
+                    style="background-color:<?php echo btnColor($fetch_product2['b_id']); ?>">加入購物車</button>
             </div>
         </div>
 

@@ -3,18 +3,20 @@ header('Access-Control-Allow-Origin:*');
 header('Content-Type:application/json;charset=utf-8');
 
 require_once('./connections/conn_db.php');
+(!isset($_SESSION)) ? session_start() : "";
 
-if (isset($_GET['p_id']) && isset($_GET['qty'])) {
+if (isset($_GET['p_id']) && isset($_GET['qty']) && isset($_SESSION['email_id'])) {
     $p_id = $_GET['p_id'];
     $qty = $_GET['qty'];
     $ip = $_SERVER['REMOTE_ADDR'];
+    $email_id = $_SESSION['email_id'];
 
     $select_cart = "SELECT * FROM cart WHERE p_id=" . $p_id . " AND ip='" . $_SERVER['REMOTE_ADDR'] . "' AND order_id IS NULL";
     $cart = $link->query($select_cart);
 
     if ($cart) {
         if ($cart->rowCount() == 0) {
-            $manipulation_cart = "INSERT INTO cart(p_id,qty,ip) VALUES (" . $p_id . "," . $qty . ",'" . $ip . "');";
+            $manipulation_cart = "INSERT INTO cart(email_id,p_id,qty,ip) VALUES (" . $email_id . "," . $p_id . "," . $qty . ",'" . $ip . "');";
         } else {
             $fetch_cart = $cart->fetch();
             if ($fetch_cart['qty'] + $qty > 49) {
