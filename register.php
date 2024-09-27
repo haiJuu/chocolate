@@ -47,6 +47,7 @@ require_once("phpLib.php");
             $_SESSION['email_id'] = $email_id;
             $_SESSION['email'] = $email;
             $_SESSION['cname'] = $cname;
+            $_SESSION['mobile'] = $mobile;
             $_SESSION['member_img'] = $memberImg;
             echo "<script language='javascript'>alert('謝謝您，會員資料已完成註冊');location.href='./index.php'</script>";
         }
