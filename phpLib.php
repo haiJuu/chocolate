@@ -41,6 +41,7 @@ function locationCircle($now_brand, $now_class, $check_class)
 }
 
 // classContent
+// orderContent
 function buildNavigation($pageNum_Recordset1, $totalPages_Recordset1, $prev_Recordset1, $next_Recordset1, $separator = " | ", $sname, $max_links = 10, $show_page = true, $selmode = 1)
 {
 	$gmaxRows = "maxRows_" . $sname;

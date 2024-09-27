@@ -54,19 +54,13 @@
             },
             async saveMember() {
                 let valid = $('#member').valid();
-                console.log("Valid:", valid); // 確認 valid 的值
                 if (valid) {
-                    console.log("進入了 valid 區塊");
                     let imgfile = $('#uploadname').val();
-                    console.log("imgfile:", imgfile); // 檢查 imgfile 值
                     if (imgfile != '') {
                         this.member.member_img = imgfile;
                     }
 
-                    console.log("this.member:", this.member); // 確認 this.member 是否正確
-
                     try {
-                        console.log("開始 axios 請求");
                         const res = await axios.get('./ajaxMemberUpdate.php', {
                             params: {
                                 birthday: this.member.birthday,
@@ -84,13 +78,9 @@
                             console.log("2");
                         }
                     } catch (error) {
-                        console.log("請求失敗，進入 catch 區塊");
                         alert("目前無法連接到系統");
-                        console.log("3");
                     }
                 }
-
-                console.log("4"); // 程式最後執行
             },
             async savePW() {
                 let valid = $("#changePW").valid();

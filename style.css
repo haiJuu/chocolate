@@ -89,47 +89,7 @@ header .nav .dropend:hover>.dropdown-menu {
 }
 
 header .nav .dropend>.dropdown-menu {
-    --bs-dropdown-zindex: 1000;
-    --bs-dropdown-min-width: 10rem;
-    --bs-dropdown-padding-x: 0;
-    --bs-dropdown-padding-y: 0.5rem;
-    --bs-dropdown-spacer: 0.125rem;
-    --bs-dropdown-font-size: 1rem;
-    --bs-dropdown-color: #212529;
-    --bs-dropdown-bg: #fff;
-    --bs-dropdown-border-color: var(--bs-border-color-translucent);
     /* --bs-dropdown-border-radius: 0.375rem; */
-    --bs-dropdown-border-radius: none;
-    --bs-dropdown-border-width: 1px;
-    --bs-dropdown-inner-border-radius: calc(0.375rem - 1px);
-    --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
-    --bs-dropdown-divider-margin-y: 0.5rem;
-    --bs-dropdown-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    --bs-dropdown-link-color: #212529;
-    --bs-dropdown-link-hover-color: #1e2125;
-    --bs-dropdown-link-hover-bg: #e9ecef;
-    --bs-dropdown-link-active-color: #fff;
-    --bs-dropdown-link-active-bg: #0d6efd;
-    --bs-dropdown-link-disabled-color: #adb5bd;
-    --bs-dropdown-item-padding-x: 1rem;
-    --bs-dropdown-item-padding-y: 0.25rem;
-    --bs-dropdown-header-color: #6c757d;
-    --bs-dropdown-header-padding-x: 1rem;
-    --bs-dropdown-header-padding-y: 0.5rem;
-    position: absolute;
-    z-index: var(--bs-dropdown-zindex);
-    display: none;
-    min-width: var(--bs-dropdown-min-width);
-    padding: var(--bs-dropdown-padding-y) var(--bs-dropdown-padding-x);
-    margin: 0;
-    font-size: var(--bs-dropdown-font-size);
-    color: var(--bs-dropdown-color);
-    text-align: left;
-    list-style: none;
-    background-color: var(--bs-dropdown-bg);
-    background-clip: padding-box;
-    border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
-    border-radius: var(--bs-dropdown-border-radius);
     /* add */
     top: 0;
     left: 156px;
@@ -448,16 +408,16 @@ section#content .product .card .productInfo button {
 }
 
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+} */
 
 /* Firefox */
-input[type=number] {
+/* input[type=number] {
     -moz-appearance: textfield;
-}
+} */
 
 section#content .product .productMark div {
     border: 1px solid lightgray;
@@ -770,7 +730,8 @@ section#content .register {
     padding-bottom: 3rem;
 }
 
-section#content .register input {
+section#content .register input,
+section#content .member input {
     align-content: center;
     border: none;
     border-bottom: 1px solid black;
@@ -787,7 +748,8 @@ section#content .register select {
     outline: none;
 }
 
-section#content .register input[type="file"] {
+section#content .register input[type="file"],
+section#content .member input[type="file"] {
     border: none;
     border: 1px solid gray;
     padding: 5px;
@@ -803,7 +765,8 @@ section#content .register button[type="submit"] {
     font-size: 1rem;
 }
 
-section#content .register button.btn-light {
+section#content .register button.btn-light,
+section#content .member button.btn-light {
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -811,13 +774,16 @@ section#content .register button.btn-light {
     font-size: 1rem;
 }
 
-section#content .register button.btn-light:hover {
+section#content .register button.btn-light:hover,
+section#content .member button.btn-light:hover {
     background-color: lightgray;
     color: white;
 }
 
 section#content .register span.error-tips,
-section#content .register span.error-tips::before {
+section#content .register span.error-tips::before,
+section#content .member span.error-tips,
+section#content .member span.error-tips::before {
     /* font-family: "Font Awesome 5 Free"; */
     font-size: 14px;
     color: red;
@@ -825,12 +791,21 @@ section#content .register span.error-tips::before {
     white-space: pre-wrap;
 }
 
-section#content .register span.valid-tips,
-section#content .register span.valid-tips::before {
+section#content .member .modal span.error-tips,
+section#content .member .modal span.error-tips::before {
     /* font-family: "Font Awesome 5 Free"; */
-    content: "\a　　　　　　";
+    font-size: 14px;
+    color: red;
+    content: "\a";
     white-space: pre-wrap;
 }
+
+/* section#content .register span.valid-tips,
+section#content .register span.valid-tips::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\a";
+    white-space: pre-wrap;
+} */
 
 section#content .order {
     /* border: 1px solid black; */
@@ -842,6 +817,15 @@ section#content .member {
     /* border: 1px solid black; */
     margin-top: 5rem;
     padding-bottom: 3rem;
+}
+
+section#content .member button.btn-gray {
+    background-color: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: white !important;
+    color: black;
+    font-size: 1rem;
 }
 
 footer {

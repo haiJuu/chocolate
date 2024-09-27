@@ -73,14 +73,14 @@
                         </label><br>
 
                         <input type="file" id="memberImg" name="memberImg" class="form-control mb-1 w-75" title="請上傳相片圖示" accept="image/x-png,image/jpeg,image/gif,image/jpg" style="display:inline-block;">
-                        <button type="button" class="btn btn-light" id="uploadImg" name="uploadImg">上傳</button>
+                        <button type="button" class="btn btn-light btn-upload" id="uploadImg" name="uploadImg">上傳</button>
 
-                        <div class="progress" id="progress" style="width:100%;display:none;">
+                        <div class="progress" id="progress" style="width:75%;display:none;">
                             <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" style="width:0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
 
                         <input type="hidden" id="uploadname" name="uploadname" value="">
-                        <img src="" alt="photo" id="showImg" name="showImg" class="img-fluid" style="display:none;">
+                        <img src="" alt="photo" id="showImg" name="showImg" class="img-fluid w-75" style="display:none;">
                     </div>
 
                     <div class="col-md-6 col-sm-8 col-10 text-left mb-3">

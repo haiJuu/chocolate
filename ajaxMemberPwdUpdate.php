@@ -11,9 +11,9 @@ if (isset($_GET['email_id']) && $_GET['email_id'] != '') {
     $result = $link->query($query);
 
     if ($result) {
-        $retcode = array("c" => "1", "m" => "謝謝您!會員密碼已經更新");
+        $retcode = array("c" => "1", "m" => "會員密碼已經更新");
     } else {
-        $retcode = array("c" => "0", "m" => "抱歉!資料無法寫入後台資料庫，請聯絡管理員");
+        $retcode = array("c" => "0", "m" => "系統發生錯誤");
     }
 
     echo json_encode($retcode);

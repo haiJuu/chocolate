@@ -165,7 +165,7 @@
     </div>
 
     <div class="search col-md-3 col-sm-6 col-6 pe-4 pt-2">
-        <form action="./product.php" method="get" name="search" id="search" class="d-flex justify-content-end" role="search">
+        <form action="./class.php" method="get" name="search" id="search" class="d-flex justify-content-end" role="search">
             <input name="search_name" id="search_name" class="form-control me-2" type="search" placeholder="找商品" aria-label="Search" value="<?php echo (isset($_GET['search_name']) ? $_GET['search_name'] : '') ?>" required>
             <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>

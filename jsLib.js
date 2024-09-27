@@ -106,9 +106,39 @@ $(".cart input").change(function () {
 // registerContent
 // memberContent
 function getCaptcha() {
-    var inputTxt = document.getElementById("captcha");
-    inputTxt.value = captchaCode("can", 150, 50, "blue", "white", "28px", 5);
+    var inputText = document.getElementById("captcha");
+    inputText.value = captchaCode("can", 150, 50, "blue", "white", "28px", 5);
 }
+
+function progressHandler(event) {
+    let percent = Math.round((event.loaded / event.total) * 100);
+    $("#progress-bar").css("width", percent + "%");
+    $("#progress-bar").html(percent + "%");
+};
+
+function completeHandler(event) {
+    let data = JSON.parse(event.target.responseText);
+    if (data.success == "true") {
+        $("#uploadname").val(data.memberImgName);
+        $("#showImg").attr({
+            "src": "./images/member/" + data.memberImgName,
+            "style": "display:block;"
+        });
+        $("button.btn.btn-light.btn-upload").attr({
+            "style": "display:none;",
+        });
+    } else {
+        alert(data.error);
+    }
+};
+
+function errorHandler(event) {
+    alert("Upload Failed: 上傳發生錯誤");
+};
+
+function abortHandler(event) {
+    alert("Upload Aborted: 上傳作業取消");
+};
 
 $("#uploadImg").click(function (e) {
     var memberImgName = $("#memberImg").val();
@@ -132,37 +162,6 @@ $("#uploadImg").click(function (e) {
     }
 });
 
-function progressHandler(event) {
-    let percent = Math.round((event.loaded / event.total) * 100);
-    $("#progress-bar").css("width", percent + "%");
-    $("#progress-bar").html(percent + "%");
-};
-
-function completeHandler(event) {
-    let data = JSON.parse(event.target.responseText);
-    if (data.success == "true") {
-        $("#uploadname").val(data.memberImgName);
-        $("#showImg").attr({
-            "src": "./images/member/" + data.memberImgName,
-            "style": "display:block;"
-        });
-        $("button.btn.btn-light").attr({
-            "style": "display:none;",
-        });
-    } else {
-        alert(data.error);
-    }
-};
-
-function errorHandler(event) {
-    alert("Upload Failed: 上傳發生錯誤");
-};
-
-function abortHandler(event) {
-    alert("Upload Aborted: 上傳作業取消");
-};
-
-
 jQuery.validator.addMethod("tssnFormat", function (value, element, param) {
     var tssn = /^[a-zA-Z]{1}[1-2]{1}[0-9]{8}$/;
     return this.optional(element) || (tssn.test(value));
@@ -176,6 +175,7 @@ jQuery.validator.addMethod("phoneFormat", function (value, element, param) {
 jQuery.validator.addMethod("townRequired", function (value, element, param) {
     return (value !== "");
 });
+
 
 $("#register").validate({
     rules: {
@@ -331,6 +331,46 @@ $(function () {
     });
 });
 
+// memberContent
+$(function () {
+    $("#member").validate({
+        onfocusout: false,
+        rules: {
+            cname: {
+                required: true
+            },
+            tssn: {
+                required: false,
+                tssnFormat: true
+            },
+            birthday: {
+                required: true
+            },
+            recaptcha: {
+                required: true,
+                equalTo: "#captcha"
+            },
+        },
+
+        messages: {
+            cname: {
+                required: "必填"
+            },
+            tssn: {
+                required: "",
+                tssnFormat: "身份證ID格式有誤"
+            },
+            birthday: {
+                required: "必填"
+            },
+            recaptcha: {
+                required: "必填",
+                equalTo: "驗證碼需相同"
+            },
+        },
+
+    });
+});
 
 // checkoutContent
 $(function () {

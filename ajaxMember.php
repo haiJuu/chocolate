@@ -14,7 +14,7 @@ if (isset($_GET['email_id']) && $_GET['email_id'] != '') {
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $retcode = array("c" => "1", "m" => '', "d" => $data);
     } else {
-        $retcode = array("c" => 0, "m" => "抱歉!資料無法連結後台資料庫，請聯絡管理員");
+        $retcode = array("c" => 0, "m" => "系統發生錯誤");
     }
 
     echo json_encode($retcode);
