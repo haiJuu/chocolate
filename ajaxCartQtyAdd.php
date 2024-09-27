@@ -11,7 +11,7 @@ if (isset($_GET['p_id']) && isset($_GET['qty']) && isset($_SESSION['email_id']))
     $ip = $_SERVER['REMOTE_ADDR'];
     $email_id = $_SESSION['email_id'];
 
-    $select_cart = "SELECT * FROM cart WHERE p_id=" . $p_id . " AND ip='" . $_SERVER['REMOTE_ADDR'] . "' AND order_id IS NULL";
+    $select_cart = "SELECT * FROM cart WHERE p_id=" . $p_id . " AND email_id='" . $email_id . "' AND ip='" . $_SERVER['REMOTE_ADDR'] . "' AND order_id IS NULL";
     $cart = $link->query($select_cart);
 
     if ($cart) {
