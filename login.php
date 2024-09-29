@@ -88,6 +88,40 @@ if (isset($_SESSION['login'])) {
     </footer>
 
     <?php require_once("./jsFile.php") ?>
+
+    <script>
+        $(function() {
+            $("#loginForm").submit(function() {
+                const inputAccount = $("#inputAccount").val();
+                const inputPassword = MD5($("#inputPassword").val());
+
+                // $("#loading").show();
+
+                $.ajax({
+                    url: './ajaxMemberLogin.php',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        inputAccount: inputAccount,
+                        inputPassword: inputPassword,
+                    },
+                    success: function(data) {
+                        if (data.c == true) {
+                            alert(data.m);
+                            window.location.href = "<?php echo $goToPath; ?>";
+                        } else {
+                            alert(data.m);
+                        }
+                    },
+                    error: function(data) {
+                        alert("目前無法連接到系統");
+                    }
+
+                });
+            });
+
+        });
+    </script>
 </body>
 
 </html>
