@@ -56,9 +56,9 @@
                         <button type="button" class="btn btn-gray btn-lg me-2" @click="editMember" v-if="readonly">更新會員資料</button>
                         <button type="button" class="btn btn-gray btn-lg me-2" v-if="readonly" data-bs-toggle="modal" data-bs-target="#exampleModal">變更會員密碼</button>
                     </div>
-                    <div class="input-group mb-3 justify-content-end">
+                    <div class="input-group justify-content-end">
                         <button type="button" class="btn btn-light btn-lg me-2" @click="saveMember" v-if="!readonly">儲存資料</button>
-                        <button type=" button" class="btn btn-gray btn-lg" @click="readonly=true" v-if="!readonly">離開</button>
+                        <button type="button" class="btn btn-gray btn-lg" @click="readonly=true" v-if="!readonly">離開</button>
                     </div>
 
                 </form>

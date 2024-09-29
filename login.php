@@ -43,7 +43,11 @@ if (isset($_SESSION['login'])) {
                         <h3 id="profile-name" class="profile-name-card mb-5">已經是會員</h3>
                         <form action="" method="POST" id="loginForm">
                             <input type="email" id="inputAccount" name="inputAccount" class="mb-3 w-100" placeholder="請輸入電郵" required autofocus>
-                            <input type="password" id="inputPassword" name="inputPassword" class="mb-3 w-100" placeholder="請輸入密碼" required>
+
+                            <div class="w-100 mb-3" style="position: relative;">
+                                <input type="password" id="inputPassword" name="inputPassword" class="w-100" placeholder="請輸入密碼" requireds>
+                                <i id="checkEye" class="fas fa-eye"></i>
+                            </div>
                             <div class="forgetPassword">
                                 <a href="#" style="color:darkblue">忘記密碼 ?</a>
                             </div>
@@ -84,40 +88,6 @@ if (isset($_SESSION['login'])) {
     </footer>
 
     <?php require_once("./jsFile.php") ?>
-
-    <script>
-        $(function() {
-            $("#loginForm").submit(function() {
-                const inputAccount = $("#inputAccount").val();
-                const inputPassword = MD5($("#inputPassword").val());
-
-                // $("#loading").show();
-
-                $.ajax({
-                    url: './ajaxMemberLogin.php',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
-                        inputAccount: inputAccount,
-                        inputPassword: inputPassword,
-                    },
-                    success: function(data) {
-                        if (data.c == true) {
-                            alert(data.m);
-                            window.location.href = "<?php echo $goToPath; ?>";
-                        } else {
-                            alert(data.m);
-                        }
-                    },
-                    error: function(data) {
-                        alert("目前無法連接到系統");
-                    }
-
-                });
-            });
-        });
-    </script>
-
 </body>
 
 </html>

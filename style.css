@@ -701,6 +701,13 @@ section#content .login input:focus {
     color: #212529;
 }
 
+section#content .login #checkEye {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
 section#content .login .forgetPassword {
     font-size: 14px;
 }
